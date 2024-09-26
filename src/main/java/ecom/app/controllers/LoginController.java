@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
+	
 
 	@GetMapping("/homepage")
 	public String homepage() {
 		return "homepage";
 	}
 	@GetMapping("/")
-	public String openLoginPage() {
+	public String Login() {
 		return "login";
 	}
 	
@@ -28,9 +29,10 @@ public class LoginController {
 		return "Profile";
 	}
 	
-	
-	
-	
-	
+
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
 
 }
