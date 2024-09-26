@@ -1,5 +1,11 @@
 package ecom.app.entities;
 
+import java.sql.Date;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import ecom.app.entities.Role;
+
 public class User {
 	
 	private int userId;
@@ -11,9 +17,22 @@ public class User {
 	private String password;
 	private String passwordSalt;
 	private String passwordHash;
+	private Role role;
+	private String status;
+	private MultipartFile profileImage;
 	
+	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public User(int userId, String firstName, String lastName, String emailId, String mobileNo, String username,
-			String password, String passwordSalt, String passwordHash) {
+			String password, String passwordSalt, String passwordHash, ecom.app.entities.Role role, String status,
+			MultipartFile profileImage) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -24,10 +43,16 @@ public class User {
 		this.password = password;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
+		this.role = role;
+		this.status = status;
+		this.profileImage = profileImage;
 	}
 
+
+
 	public User(String firstName, String lastName, String emailId, String mobileNo, String username, String password,
-			String passwordSalt, String passwordHash) {
+			String passwordSalt, String passwordHash, ecom.app.entities.Role role, String status,
+			MultipartFile profileImage) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -37,87 +62,166 @@ public class User {
 		this.password = password;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
+		this.role = role;
+		this.status = status;
+		this.profileImage = profileImage;
 	}
+
+
 
 	public int getUserId() {
 		return userId;
 	}
 
+
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
 
 	public String getEmailId() {
 		return emailId;
 	}
 
+
+
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+
+
 
 	public String getMobileNo() {
 		return mobileNo;
 	}
 
+
+
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
+
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 	public String getPasswordSalt() {
 		return passwordSalt;
 	}
 
+
+
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
 	}
+
+
 
 	public String getPasswordHash() {
 		return passwordHash;
 	}
 
+
+
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
+
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public MultipartFile getProfileImage() {
+		return profileImage;
+	}
+
+
+
+	public void setProfileImage(MultipartFile profileImage) {
+		this.profileImage = profileImage;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
 				+ ", mobileNo=" + mobileNo + ", username=" + username + ", password=" + password + ", passwordSalt="
-				+ passwordSalt + ", passwordHash=" + passwordHash + "]";
+				+ passwordSalt + ", passwordHash=" + passwordHash + ", status=" + status + ", profileImage="
+				+ profileImage + "]";
 	}
 	
 	
-
+	
+	
 }
