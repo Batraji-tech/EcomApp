@@ -9,13 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 	
 
+	@GetMapping("/homepage")
+	public String homepage() {
+		return "homepage";
+	}
 	@GetMapping("/")
 	public String Login() {
 		return "login";
 	}
 	
+	
+	@GetMapping("/homepageuser")
+	public String homepageuser() {
+		return "homepageuser";
+	}
+	
+	@GetMapping("/profile")
+	public String Profile() {
+		return "Profile";
+	}
+	
+
 	@GetMapping("/register")
 	public String register() {
 		return "register";
 	}
+
 }
