@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
+	
 
 	@GetMapping("/")
-	public String openLoginPage() {
+	public String Login() {
 		return "login";
+	}
+	
+	@GetMapping("/register")
+	public String register() {
+		return "register";
 	}
 }
