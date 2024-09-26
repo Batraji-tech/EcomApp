@@ -8,8 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
-	@GetMapping("/")
-	public String openLoginPage() {
-		return "login";
+	@GetMapping("/homepage")
+	public String homepage() {
+		return "homepage";
 	}
+	
+	@GetMapping("/")
+	public String homepageuser() {
+		return "homepageuser";
+	}
+	
+	@GetMapping("/profile")
+	public String Profile() {
+		return "Profile";
+	}
+	
+	
+	
+	
+	
+
 }
