@@ -12,8 +12,13 @@ public class LoginController {
 	public String homepage() {
 		return "homepage";
 	}
-	
 	@GetMapping("/")
+	public String openLoginPage() {
+		return "login";
+	}
+	
+	
+	@GetMapping("/homepageuser")
 	public String homepageuser() {
 		return "homepageuser";
 	}
