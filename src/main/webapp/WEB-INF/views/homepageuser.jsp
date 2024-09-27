@@ -16,8 +16,8 @@
             <button class="search-button">🔍</button>
         </div>
         <nav class="nav-links">
-            <a href="/" class="nav-item">Home</a>
-			<a href="/profile" class="nav-item"> View Profile</a>
+            <a href="/" class="nav-item">Your Account</a>
+			<a href="/" class="nav-item"> Log out</a>
         </nav>
     </header>
 
