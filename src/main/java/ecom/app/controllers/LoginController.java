@@ -39,4 +39,16 @@ public class LoginController {
 	public String login_superadmin() {
 		return "login_superadmin";
 	}
+
+
+	@GetMapping("/superadmindashboard")
+	public String superAdminDashboard() {
+		return "superadmin_dashboard";
+	}
+	
+	@GetMapping("/resetPassword")
+	public String resetSuperAdminPassword() {
+		return "validate_password";
+	}
+
 }
