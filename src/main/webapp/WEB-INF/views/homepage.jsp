@@ -20,12 +20,11 @@
             <div class="dropdown">
                 <button class="dropbtn">Login</button>
                 <div class="dropdown-content">
-                    <a href="#">Login as Super Admin</a>
-                    <a href="#">Login as Sub Admin</a>
-                    <a href="#">Login as Customer</a>
+                    <a href="/login_superadmin">Login as Super Admin</a>
+                    <a href="/login">Login </a>
                 </div>
             </div>
-            <a href="#" class="nav-item">Sign Up</a>
+            <a href="/register_subadmin" class="nav-item">Register as Retailer</a>
         </nav>
     </header>
 
