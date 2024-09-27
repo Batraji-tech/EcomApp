@@ -5,13 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Profile</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
-</head>
+
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
+
+
+  </head>
 <body>
     <header class="header">
         <div class="logo">Shopology</div>
             </div>
     </header>
+
+                <input type="text" id="mobileno" value="+1234567890" placeholder="Enter Mobile No" readonly>
+ 
 
     <div class="container">
         <div class="profile-box">
@@ -31,6 +37,7 @@
 
                 <label for="mobileno">Mobile No:</label>
                 <input type="text" id="mobileno" value="+1234567890" placeholder="Enter Mobile No" readonly>
+
 
                 <label for="gender">Gender:</label>
                 <input type="text" id="gender" value="Male" placeholder="Enter Gender" readonly>
