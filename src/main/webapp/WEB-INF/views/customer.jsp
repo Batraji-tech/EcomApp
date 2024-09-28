@@ -11,7 +11,7 @@
 </head>
 <body>
 	
-	<h1>Sub Admin </h1>
+	<h1>Customer </h1>
 	<h2> Hii , I am waiting?<h2>
 	
 

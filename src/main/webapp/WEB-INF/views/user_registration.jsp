@@ -1,5 +1,8 @@
+<%@page import="ecom.app.entities.Role"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
@@ -9,28 +12,40 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
 	</head>
 	<body>
+		
+		<%!
+				String getUserFriendlyRoles(String technicalName){
+					if(technicalName.equals("sub_admin")) return "Retailer";
+					else return "Customer";
+				}
+			%>
+		
+			<%
+				List<Role> rolesList = (List<Role>) request.getAttribute("listOfRoles");
+				%>
+		
 	    <div class="container">
 	        <h2>Registration </h2>
-	        <form>
+			<form action="/user/register" method="post" enctype="multipart/form-data">
 	            <div class="form-group">
-	                <label for="firstname">First Name:</label>
-	                <input type="text" id="firstname" name="firstname" required>
+	                <label for="firstName">First Name:</label>
+	                <input type="text" id="firstname" name="firstName" required>
 	            </div>
 	            <div class="form-group">
-	                <label for="lastname">Last Name:</label>
-	                <input type="text" id="lastname" name="lastname" required>
+	                <label for="lastName">Last Name:</label>
+	                <input type="text" id="lastname" name="lastName" required>
 	            </div>
 	            <div class="form-group">
 	                <label for="mobile">Mobile No:</label>
-	                <input type="tel" id="mobile" name="mobile" required>
+	                <input type="tel" id="mobileNo" name="mobileNo" required>
 	            </div>
 	            <div class="form-group">
 	                <label for="email">Email:</label>
-	                <input type="email" id="email" name="email" required>
+	                <input type="email" id="email" name="emailId" required>
 	            </div>
 	            <div class="form-group">
 	                <label for="dob">Date of Birth:</label>
-	                <input type="date" id="dob" name="dob" required>
+	                <input type="date" id="dob" name="dateOfBirth" required>
 	            </div>
 				<div class="form-group">
 			    <label for="username">Username:</label>
@@ -40,16 +55,26 @@
 	                <label for="password">Password:</label>
 	                <input type="password" id="password" name="password" required>
 	            </div>
-	            
-	            <div class="form-group radio-group">
-	                <label>n
-	                    <input type="radio" name="userType" value="Customer" required> Customer
-	                </label>
-	                <label>
-	                    <input type="radio" name="userType" value="Retailer" required> Retailer
-	                </label>
-	            </div>
-			<button type="submit" class="register-button"onclick="window.location.href='/login'">Register</button>
+				<div>
+					
+				<input type="file" name="profileImage" accept=".jpg, .jpeg, .png, .pdf" required>
+
+				</div>
+						<% for (Role role : rolesList) {%>
+							<input type="radio" name="role.roleId" value="<%=role.getRoleId()%> " /><%= getUserFriendlyRoles(role.getRoleName())%>
+     
+							
+		<%
+			}
+				%>
+				
+		
+				
+								
+	       
+				<button type="submit" class="register-button"onclick="window.location.href='/openloginPage'">Register</button>
+   
+			   
 				
 	        </form>
 		

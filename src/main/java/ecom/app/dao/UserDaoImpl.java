@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ecom.app.dao.UserDao;
 import ecom.app.entities.User;
+import ecom.app.dao.UserRowMapper;
 import ecom.app.dao.RolesRowMapper;
 import ecom.app.entities.Role;
 
@@ -53,19 +55,38 @@ import ecom.app.entities.Role;
 			byte[] byteArr = image.getBytes();
 			Blob imageBlob = new SerialBlob(byteArr);
 			return imageBlob;
+		}	
+			
+		
+		@Override
+		public List<Role> fetchAllRoles() {
+			String sql = "SELECT * FROM roles WHERE role_id > 1 ORDER BY role_id";
+			return jdbcTemplate.query(sql, new RolesRowMapper());
 		}
 
-//		@Override
-//		public List<Role> fetchAllRoles() {
-//			String sql = "SELECT * FROM roles WHERE role_id > 1 ORDER BY role_id";
-//			return jdbcTemplate.query(sql, new RolesRowMapper());
-//			
-//		}	
-//			
+		@Override
+		public Map<String, Object> fetchPwds(String username) {
+			String sql = "SELECT passwordSalt, passwordHash, role_id, status FROM user WHERE username = ?";
+			return jdbcTemplate.queryForMap(sql, username);
+		}
+
+		@Override
+		public User fetchUser(String username) {
+			String sql = "SELECT * FROM user WHERE username = ?";
+			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+
+		}
+
+
+		
+		
+		
+	}
+
 			
 		
 	
-	}
+	
 		
 	
 
