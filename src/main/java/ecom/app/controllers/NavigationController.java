@@ -7,35 +7,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
  
 @Controller
-<<<<<<< HEAD:src/main/java/ecom/app/controllers/NavigationController.java
 public class NavigationController {
-=======
-public class LoginController {
->>>>>>> 958b0dda5d2a4b250206c332ff12d6ae2b6b0c5a:src/main/java/ecom/app/controllers/LoginController.java
 
- 
 	@GetMapping("/")
 	public String homepage() {
 		return "homepage";
 	}
-<<<<<<< HEAD:src/main/java/ecom/app/controllers/NavigationController.java
 	
-=======
 	@GetMapping("/login")
 	public String Login() {
 		return "login";
 	}
->>>>>>> 958b0dda5d2a4b250206c332ff12d6ae2b6b0c5a:src/main/java/ecom/app/controllers/LoginController.java
 
 	@GetMapping("/homepageuser")
 	public String homepageuser() {
 		return "homepageuser";
 	}
-<<<<<<< HEAD:src/main/java/ecom/app/controllers/NavigationController.java
 	
 	// Profile will mapped after the dashboard
 	@GetMapping("/profile")
-	public String Profile() {
+	public String profile() {
 		return "profile";
 	}
 
@@ -45,17 +36,6 @@ public class LoginController {
 		return "superadmin_login";
 	}
 	
-	
-		
-	
-	
-	
-=======
-	@GetMapping("/profile")
-	public String Profile() {
-		return "profile";
-	}
-
  
 	@GetMapping("/register")
 	public String register() {
@@ -63,9 +43,4 @@ public class LoginController {
 	}	
 	
 	
-	@GetMapping("/login_superadmin")
-	public String login_superadmin() {
-		return "login_superadmin";
-	}
->>>>>>> 958b0dda5d2a4b250206c332ff12d6ae2b6b0c5a:src/main/java/ecom/app/controllers/LoginController.java
 }
