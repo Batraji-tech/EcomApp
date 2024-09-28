@@ -116,7 +116,6 @@ public class UserController {
 			return "redirect:/user/login";
 		} else {
 			attributes.addFlashAttribute("message", "Registration Failed");
-			System.out.println("Data is coming");
 
 			return "redirect:/user/openRegistrationPage";
 		}

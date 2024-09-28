@@ -30,12 +30,12 @@ public class NavigationController {
 		return "profile";
 	}
 
-	
 	@GetMapping("/login_superadmin")
 	public String superadmin_login() {
 		return "login_superadmin";
 	}
 	
+
  
 	
 }
