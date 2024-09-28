@@ -13,6 +13,7 @@ public class User {
 	private String lastName;
 	private String emailId;
 	private String mobileNo;
+	private Date dateOfBirth;
 	private String username;
 	private String password;
 	private String passwordSalt;
@@ -29,9 +30,28 @@ public class User {
 	}
 
 
+	public User(String firstName, String lastName, String emailId, String mobileNo, Date dateOfBirth, String username,
+			String password, String passwordSalt, String passwordHash, Role role, String status,
+			MultipartFile profileImage) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.mobileNo = mobileNo;
+		this.dateOfBirth = dateOfBirth;
+		this.username = username;
+		this.password = password;
+		this.passwordSalt = passwordSalt;
+		this.passwordHash = passwordHash;
+		this.role = role;
+		this.status = status;
+		this.profileImage = profileImage;
+	}
 
-	public User(int userId, String firstName, String lastName, String emailId, String mobileNo, String username,
-			String password, String passwordSalt, String passwordHash, ecom.app.entities.Role role, String status,
+
+
+	public User(int userId, String firstName, String lastName, String emailId, String mobileNo, Date dateOfBirth,
+			String username, String password, String passwordSalt, String passwordHash, Role role, String status,
 			MultipartFile profileImage) {
 		super();
 		this.userId = userId;
@@ -39,6 +59,7 @@ public class User {
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
+		this.dateOfBirth = dateOfBirth;
 		this.username = username;
 		this.password = password;
 		this.passwordSalt = passwordSalt;
@@ -49,30 +70,12 @@ public class User {
 	}
 
 
-
-	public User(String firstName, String lastName, String emailId, String mobileNo, String username, String password,
-			String passwordSalt, String passwordHash, ecom.app.entities.Role role, String status,
-			MultipartFile profileImage) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.mobileNo = mobileNo;
-		this.username = username;
-		this.password = password;
-		this.passwordSalt = passwordSalt;
-		this.passwordHash = passwordHash;
-		this.role = role;
-		this.status = status;
-		this.profileImage = profileImage;
-	}
-
-
+	
+	
 
 	public int getUserId() {
 		return userId;
 	}
-
 
 
 	public void setUserId(int userId) {
@@ -80,11 +83,9 @@ public class User {
 	}
 
 
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 
 	public void setFirstName(String firstName) {
@@ -92,11 +93,9 @@ public class User {
 	}
 
 
-
 	public String getLastName() {
 		return lastName;
 	}
-
 
 
 	public void setLastName(String lastName) {
@@ -104,11 +103,9 @@ public class User {
 	}
 
 
-
 	public String getEmailId() {
 		return emailId;
 	}
-
 
 
 	public void setEmailId(String emailId) {
@@ -116,11 +113,9 @@ public class User {
 	}
 
 
-
 	public String getMobileNo() {
 		return mobileNo;
 	}
-
 
 
 	public void setMobileNo(String mobileNo) {
@@ -128,11 +123,19 @@ public class User {
 	}
 
 
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
 
 	public String getUsername() {
 		return username;
 	}
-
 
 
 	public void setUsername(String username) {
@@ -140,11 +143,9 @@ public class User {
 	}
 
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 
 	public void setPassword(String password) {
@@ -152,11 +153,9 @@ public class User {
 	}
 
 
-
 	public String getPasswordSalt() {
 		return passwordSalt;
 	}
-
 
 
 	public void setPasswordSalt(String passwordSalt) {
@@ -164,11 +163,9 @@ public class User {
 	}
 
 
-
 	public String getPasswordHash() {
 		return passwordHash;
 	}
-
 
 
 	public void setPasswordHash(String passwordHash) {
@@ -176,11 +173,9 @@ public class User {
 	}
 
 
-
 	public Role getRole() {
 		return role;
 	}
-
 
 
 	public void setRole(Role role) {
@@ -188,11 +183,9 @@ public class User {
 	}
 
 
-
 	public String getStatus() {
 		return status;
 	}
-
 
 
 	public void setStatus(String status) {
@@ -200,11 +193,9 @@ public class User {
 	}
 
 
-
 	public MultipartFile getProfileImage() {
 		return profileImage;
 	}
-
 
 
 	public void setProfileImage(MultipartFile profileImage) {
@@ -212,15 +203,15 @@ public class User {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ ", mobileNo=" + mobileNo + ", username=" + username + ", password=" + password + ", passwordSalt="
-				+ passwordSalt + ", passwordHash=" + passwordHash + ", status=" + status + ", profileImage="
-				+ profileImage + "]";
+				+ ", mobileNo=" + mobileNo + ", dateOfBirth=" + dateOfBirth + ", username=" + username + ", password="
+				+ password + ", passwordSalt=" + passwordSalt + ", passwordHash=" + passwordHash + ", role=" + role
+				+ ", status=" + status + ", profileImage=" + profileImage + "]";
 	}
-	
+
+
 	
 	
 	
