@@ -26,10 +26,15 @@
                 <label for="username">Username:</label>
                 <input type="text" id="username" value="johndoe" placeholder="Enter Username" readonly>
 
+                <label for="address">Address:</label>
+                <input type="text" id="address" value="123 Main St" placeholder="Enter Address" readonly>
+
                 <label for="mobileno">Mobile No:</label>
                 <input type="text" id="mobileno" value="+1234567890" placeholder="Enter Mobile No" readonly>
 
-                
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" value="Male" placeholder="Enter Gender" readonly>
+            </div>
         </div>
     </div>
 
