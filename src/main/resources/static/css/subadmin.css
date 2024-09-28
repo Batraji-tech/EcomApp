@@ -29,7 +29,7 @@ body {
 .nav-links {
     display: flex;
     gap: 20px; /* Space between links */
-    margin-left: auto; /* Pushes nav-links to the right */
+    margin-left: 1050px; /* Pushes nav-links to the right */
 }
 
 .nav-item {
