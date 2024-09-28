@@ -31,7 +31,7 @@
             <button type="submit" class="login-button">Login</button>
         </form>
 <p class="register-link">Don't have an account? <a href="/user/openRegistrationPage">Register here</a></p>
-<%@include file="message.jsp" %>
+
  
  
     </div>
