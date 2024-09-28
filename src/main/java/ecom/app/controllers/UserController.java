@@ -117,6 +117,7 @@ public class UserController {
 		} else {
 			attributes.addFlashAttribute("message", "Registration Failed");
 
+
 			return "redirect:/user/openRegistrationPage";
 		}
 		
