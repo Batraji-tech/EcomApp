@@ -43,10 +43,6 @@ public class NavigationController {
 	}	
 	
 	
-	@GetMapping("/login_superadmin")
-	public String login_superadmin() {
-		return "login_superadmin";
-	}
 	
 	@GetMapping("/subadmin")
 	public String subadmin() {
