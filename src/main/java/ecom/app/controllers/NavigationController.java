@@ -33,7 +33,7 @@ public class NavigationController {
 	
 	@GetMapping("/login_superadmin")
 	public String superadmin_login() {
-		return "superadmin_login";
+		return "login_superadmin";
 	}
 	
  
