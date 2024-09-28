@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
  
 @Controller
-public class LoginController {
+public class NavigationController {
 
- 
 	@GetMapping("/")
 	public String homepage() {
 		return "homepage";
 	}
+	
 	@GetMapping("/login")
 	public String Login() {
 		return "login";
@@ -23,11 +23,19 @@ public class LoginController {
 	public String homepageuser() {
 		return "homepageuser";
 	}
+	
+	// Profile will mapped after the dashboard
 	@GetMapping("/profile")
-	public String Profile() {
+	public String profile() {
 		return "profile";
 	}
 
+	
+	@GetMapping("/login_superadmin")
+	public String superadmin_login() {
+		return "login_superadmin";
+	}
+	
  
 	@GetMapping("/register")
 	public String register() {
@@ -35,8 +43,4 @@ public class LoginController {
 	}	
 	
 	
-	@GetMapping("/login_superadmin")
-	public String login_superadmin() {
-		return "login_superadmin";
-	}
 }
