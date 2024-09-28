@@ -39,4 +39,11 @@ public class LoginController {
 	public String login_superadmin() {
 		return "login_superadmin";
 	}
+	
+	@GetMapping("/subadmin")
+	public String subadmin() {
+		return "subadmin";
+	}
+	
+	
 }
