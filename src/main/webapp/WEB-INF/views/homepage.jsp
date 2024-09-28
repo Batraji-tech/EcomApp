@@ -21,7 +21,7 @@
                 <button class="dropbtn">Login</button>
                 <div class="dropdown-content">
                     <a href="/login_superadmin">Login as Super Admin</a>
-                    <a href="/login">Login </a>
+                    <a href="/user/login">Login </a>
                 </div>
             </div>
             <a href="/register_subadmin" class="nav-item">Register as Retailer</a>

@@ -11,7 +11,7 @@
 <body>
     <div class="login-container">
         <h2>Super Admin Login</h2>
-        <form action="login_superadmin.jsp" method="post">
+        <form action="superadmin_login.jsp" method="post">
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
