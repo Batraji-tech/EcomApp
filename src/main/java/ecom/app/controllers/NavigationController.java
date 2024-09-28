@@ -37,11 +37,6 @@ public class NavigationController {
 	}
 	
  
-	@GetMapping("/register")
-	public String register() {
-		return "register";
-	}	
-	
 	
 	
 	@GetMapping("/subadmin")

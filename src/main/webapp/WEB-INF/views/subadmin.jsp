@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,3 +127,29 @@
     </main>
 </body>
 </html>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ecom Application</title>
+<style>
+	h1, p {text-align: center;}
+</style>
+</head>
+<body>
+	
+	<h1>Sub Admin </h1>
+	<h2> Hii , I am waiting?<h2>
+	
+
+</body>
+</html>
+
+
+
+
+
+>>>>>>> 56c6e71fdc0efd2eec745b6abf5c0758d36b789f
