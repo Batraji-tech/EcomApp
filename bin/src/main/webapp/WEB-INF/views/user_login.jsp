@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
     <div class="container">
         <h2>Login</h2>
-<form action="/user/login" method="post">
+        <form>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -28,12 +28,10 @@
                     <input type="radio" name="userType" value="Retailer" required> Retailer
                 </label>
             </div>
+			
             <button type="submit" class="login-button">Login</button>
         </form>
-<p class="register-link">Don't have an account? <a href="/user/openRegistrationPage">Register here</a></p>
-<%@include file="message.jsp" %>
- 
- 
+		<p class="register-link">Don't have an account? <a href="/user/openRegistrationPage">Register here</a></p>
     </div>
 </body>
 </html>
