@@ -19,7 +19,6 @@ public class User {
 	private String passwordSalt;
 	private String passwordHash;
 	private Role role;
-	private String status;
 	private MultipartFile profileImage;
 	
 	
@@ -44,7 +43,6 @@ public class User {
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
 		this.role = role;
-		this.status = status;
 		this.profileImage = profileImage;
 	}
 
@@ -65,7 +63,6 @@ public class User {
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
 		this.role = role;
-		this.status = status;
 		this.profileImage = profileImage;
 	}
 
@@ -183,14 +180,6 @@ public class User {
 	}
 
 
-	public String getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 
 	public MultipartFile getProfileImage() {
@@ -208,7 +197,7 @@ public class User {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
 				+ ", mobileNo=" + mobileNo + ", dateOfBirth=" + dateOfBirth + ", username=" + username + ", password="
 				+ password + ", passwordSalt=" + passwordSalt + ", passwordHash=" + passwordHash + ", role=" + role
-				+ ", status=" + status + ", profileImage=" + profileImage + "]";
+				+  ", profileImage=" + profileImage + "]";
 	}
 
 

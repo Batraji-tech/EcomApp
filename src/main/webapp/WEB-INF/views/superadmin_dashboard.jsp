@@ -235,6 +235,10 @@
         <div id="viewprofile" class="section">
             <h1>My Profile</h1>
             <table class="profile-table">
+				<tr>
+				        <th>ID</th>
+				        <td>${superAdmin.id}</td>
+				         </tr>
                 <tr>
                     <th>First Name</th>
                     <td>${superAdmin.firstName}</td>

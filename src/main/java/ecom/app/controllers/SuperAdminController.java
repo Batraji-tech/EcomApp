@@ -37,7 +37,6 @@ public class SuperAdminController {
 	 
 	 @GetMapping("/logout")
 	    public String logout() {
-	       
 	        return "login_superadmin";
 	    }
 		

@@ -1,3 +1,4 @@
+
 package ecom.app.dao;
 
 import java.io.IOException;
@@ -12,7 +13,14 @@ import ecom.app.entities.User;
 
 public interface UserDao {
 	
-  
-	User fetchUser(String username);
+	int insertUser(User user) throws IOException, SerialException, SQLException;
+	
+	List<Role> fetchAllRoles();
 
+
+	User fetchUser(String username);
+		
+	
+	
+	
 }
