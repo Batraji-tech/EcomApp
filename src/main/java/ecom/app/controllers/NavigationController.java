@@ -44,7 +44,12 @@ public class NavigationController {
 	@GetMapping("/order_successful")
 	public String order_successful() {
 		return "order_successful";
-
-	
+		
 	}
+	
+	@GetMapping("/editprofile")
+	public String editprofile() {
+		return "editprofile";
+	}
+
 }
