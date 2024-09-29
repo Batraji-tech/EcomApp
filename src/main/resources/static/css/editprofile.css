@@ -25,23 +25,6 @@ body {
     padding: 20px;
     text-align: left; /* Center the text */
 }
-/* Edit Button */
-.edit-button {
-    position: absolute; /* Position it relative to the profile box */
-    top: 20px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    background-color: #00FF00; /* Green background */
-    color: black;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.edit-button:hover {
-    background-color: #009900; /* Darker green on hover */
-}
 
 /* Profile Box */
 .profile-box {
@@ -72,7 +55,7 @@ body {
 }
 
 .user-details input {
-    width: 100%; /* Full width input */
+    width: 200%; /* Full width input */
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #cccccc; /* Light gray border */
@@ -86,7 +69,19 @@ body {
     color: white;
 }
 
-
+/* Update Button */
+.update {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #00FF00; /* Green */
+    color: #003366; /* Dark Blue */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Footer */
 .footer {

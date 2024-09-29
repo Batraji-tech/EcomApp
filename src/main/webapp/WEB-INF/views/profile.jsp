@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="ecom.app.entities.User" %>
 
@@ -23,6 +24,7 @@
 					
 		
         <div class="profile-box">
+			<button type="submit" class="edit-button"onclick="window.location.href='/editprofile'">Edit</button>
             <div class="user-details">
                 <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" value="<%= user.getFirstName() %>" placeholder="Enter First Name" readonly>
