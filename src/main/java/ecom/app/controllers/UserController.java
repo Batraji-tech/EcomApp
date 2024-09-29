@@ -75,11 +75,13 @@ public class UserController {
 				int roleId = user.getRole().getRoleId();
 				if (roleId == 1) {
 					return "super_admin_dash";
+
 				} else if (roleId == 2) {
 					return "subadmin";
 				} else if (roleId == 3) {
 					return "customer";
 				}
+
 			} else {
 				attributes.addFlashAttribute("message", "Incorrect Password");
 			}
@@ -89,12 +91,11 @@ public class UserController {
 
 		return "redirect:/user/login";
 	}
+
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user, RedirectAttributes attributes)
 			throws IOException, SerialException, SQLException {
-
-
 
 		System.out.println("\n user : " + user);
 
@@ -117,14 +118,22 @@ public class UserController {
 		} else {
 			attributes.addFlashAttribute("message", "Registration Failed");
 
-
 			return "redirect:/user/openRegistrationPage";
 		}
-		
 
 	}
 	
 	
-	
+	//profile mapped
+	@GetMapping("/profile")
+	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) {
+	    User user = userDaoImpl.fetchUser(username);
+	   
+	    mView.setViewName("profile");
+	    mView.addObject("user", user);
+	    return mView;
+	}
+
+
 	
 }

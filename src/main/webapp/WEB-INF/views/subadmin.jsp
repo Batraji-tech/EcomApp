@@ -1,5 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="ecom.app.entities.User" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,22 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/subadmin.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="container">
-            <div class="logo">Shopology</div>
-            <div class="nav-links">
-                <a href="/profile" class="nav-item"> Profile</a>
-                <a href="/" class="nav-item">Logout</a>
-            </div>
-        </div>
-    </header>
+	<header class="navbar">
+	    <div class="container">
+	        
+
+			
+			<div class="logo">Shopology</div>
+	        <div class="nav-title">Retailer Dashboard</div>
+	        <div class="nav-links">
+				<a href="${pageContext.request.contextPath}/user/profile?username=${user.username}" class="nav-item">Profile</a>
+	            <a href="/" class="nav-item">Logout</a>
+	        </div>
+	    </div>
+	</header>
+
+	
+	
  
     <main class="container">
         <div class="dropdown-container">

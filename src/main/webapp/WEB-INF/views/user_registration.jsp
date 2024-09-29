@@ -73,9 +73,8 @@
 								
 	       
 				<button type="submit" class="register-button"onclick="window.location.href='/openloginPage'">Register</button>
-
-        
-        				<%@include file="message.jsp" %>
+   
+				<%@include file="message.jsp" %>
 
 				
 	        </form>

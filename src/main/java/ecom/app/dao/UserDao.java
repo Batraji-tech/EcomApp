@@ -15,7 +15,7 @@ public interface UserDao {
 	int insertUser(User user) throws IOException, SerialException, SQLException;
 	
 	List<Role> fetchAllRoles();
-	Map<String, Object> fetchPwds(String username);
+
 
 	User fetchUser(String username);
 		
