@@ -65,6 +65,7 @@ import ecom.app.entities.Role;
 		}
 
 
+
 		@Override
 		public User fetchUser(String username) {
 			String sql = "SELECT * FROM user WHERE username = ?";
@@ -72,8 +73,6 @@ import ecom.app.entities.Role;
 
 		}
 
-		
-		
 		
 	}
 
