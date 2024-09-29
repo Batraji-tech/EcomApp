@@ -47,4 +47,8 @@ public class NavigationController {
 
 	
 	}
+	@GetMapping("/editprofile")
+	public String editprofile() {
+		return "editprofile";
+	}
 }
