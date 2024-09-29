@@ -80,6 +80,7 @@ public class UserController {
 				} else if (roleId == 3) {
 					return "customer";
 				}
+				
 			} else {
 				attributes.addFlashAttribute("message", "Incorrect Password");
 			}
@@ -123,6 +124,7 @@ public class UserController {
 	}
 	
 	
+	//profile mapped
 	@GetMapping("/profile")
 	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) {
 	    User user = userDaoImpl.fetchUser(username);
