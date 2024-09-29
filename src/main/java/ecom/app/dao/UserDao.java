@@ -16,6 +16,7 @@ public interface UserDao {
 	
 	List<Role> fetchAllRoles();
 
+
 	User fetchUser(String username);
 		
 	

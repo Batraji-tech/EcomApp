@@ -55,7 +55,7 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
-			@RequestParam String password,  
+			@RequestParam String password, 
 			Model model, RedirectAttributes attributes) {
 
 
@@ -75,12 +75,13 @@ public class UserController {
 				int roleId = user.getRole().getRoleId();
 				if (roleId == 1) {
 					return "super_admin_dash";
-				} else if (roleId == 2 ) {
+
+				} else if (roleId == 2) {
 					return "subadmin";
 				} else if (roleId == 3) {
 					return "customer";
 				}
-				
+
 			} else {
 				attributes.addFlashAttribute("message", "Incorrect Password");
 			}
@@ -90,12 +91,11 @@ public class UserController {
 
 		return "redirect:/user/login";
 	}
+
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user, RedirectAttributes attributes)
 			throws IOException, SerialException, SQLException {
-
-
 
 		System.out.println("\n user : " + user);
 
@@ -134,10 +134,6 @@ public class UserController {
 	    return mView;
 	}
 
-	
-	
-	
-	
-	
+
 	
 }

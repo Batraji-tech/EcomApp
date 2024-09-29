@@ -64,7 +64,6 @@ import ecom.app.entities.Role;
 			return jdbcTemplate.query(sql, new RolesRowMapper());
 		}
 
-	
 
 		@Override
 		public User fetchUser(String username) {
@@ -72,8 +71,6 @@ import ecom.app.entities.Role;
 			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
 
 		}
-
-		
 
 		
 		
