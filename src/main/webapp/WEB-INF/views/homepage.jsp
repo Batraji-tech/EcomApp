@@ -26,7 +26,6 @@
 
                 </div>
             </div>
-            <a href="/register_subadmin" class="nav-item">Register as Retailer</a>
         </nav>
     </header>
  
