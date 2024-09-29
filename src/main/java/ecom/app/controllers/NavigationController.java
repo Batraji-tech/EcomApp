@@ -30,17 +30,21 @@ public class NavigationController {
 		return "profile";
 	}
 
-	
 	@GetMapping("/login_superadmin")
 	public String superadmin_login() {
 		return "login_superadmin";
 	}
 	
+
+	@GetMapping("/payments")
+	public String payments() {
+		return "payments";
+	}
  
-	@GetMapping("/register")
-	public String register() {
-		return "register";
-	}	
+	@GetMapping("/order_successful")
+	public String order_successful() {
+		return "order_successful";
+
 	
-	
+	}
 }
