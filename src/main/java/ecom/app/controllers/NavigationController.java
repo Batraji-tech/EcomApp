@@ -35,7 +35,14 @@ public class NavigationController {
 		return "login_superadmin";
 	}
 	
-
+	@GetMapping("/payments")
+	public String payments() {
+		return "payments";
+	}
  
+	@GetMapping("/order_successful")
+	public String order_successful() {
+		return "order_successful";
 	
+	}
 }
