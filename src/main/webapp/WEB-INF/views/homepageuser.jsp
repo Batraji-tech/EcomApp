@@ -13,14 +13,22 @@
         <div class="logo">Shopology</div>
         <div class="search-container">
             <input type="text" placeholder="Search products..." class="search-bar">
-            <button class="search-button">🔍</button>
+            <button class="search-button">��</button>
         </div>
         <nav class="nav-links">
             <a href="/" class="nav-item">Home</a>
 			<a href="/profile" class="nav-item"> View Profile</a>
+			<div class="dropdown">
+			<button class="dropbtn">My Account</button>
+			<div class="dropdown-content">
+		    <a href="/wishlist">Wishlist</a>
+		     <a href="/cart">Cart Items</a>
+			 <a href="/orders">Your Orders</a>
+			</div>
+			
         </nav>
     </header>
-
+ 
     <!-- Categories Bar -->
     <div class="categories-bar">
         <div class="category">
@@ -36,13 +44,13 @@
             <p>Laptops</p>
         </div>
     </div>
-
+ 
     <!-- Featured Products Section -->
     <div class="featured-products">
         <h1>Featured Products</h1>
         <h2>Check out our latest mobile phones that are trending this season!</h2>
     </div>
-
+ 
     <!-- Medium Image Row -->
     <div class="medium-image-row">
         <img src="https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-50-ultra.jpg" alt="Image 1">
@@ -53,7 +61,7 @@
         <img src="https://assets-prd.ignimgs.com/2022/11/07/samsung-1667848036739.png" alt="Image 6">
         <img src="https://api.technodom.kz/f3/api/v1/images/800/800/244122_1.jpg" alt="Image 7">
     </div>
-
+ 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
