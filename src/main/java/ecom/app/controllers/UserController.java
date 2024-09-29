@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ecom.app.dao.UserDaoImpl;
+import ecom.app.dao.SuperAdminDaoImpl;
 import ecom.app.entities.User;
+import ecom.app.utilities.Password;
 import ecom.app.entities.Role;
 
 @Controller
@@ -19,7 +23,7 @@ public class UserController {
 	private User user;
 
 	@Autowired
-	UserDaoImpl userDaoImpl;
+	SuperAdminDaoImpl userDaoImpl;
 
 	@GetMapping("/login")
 	public String Login() {
@@ -30,6 +34,7 @@ public class UserController {
 	public String openRegistrationPage() {
 		return "user_registration";
 	}
+	
 	
 	
 	

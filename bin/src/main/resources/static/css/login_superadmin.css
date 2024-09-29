@@ -1,6 +1,8 @@
+/* login_superadmin.css */
+ 
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: #003366;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,8 +10,6 @@ body {
     margin: 0;
 	
 }
-
-
  
 .login-container {
     
@@ -57,5 +57,6 @@ button {
 }
  
 button:hover {
-    background-color: white; /* Updated color */
+    background-color: #003366; /* Updated color */
 }
+ 

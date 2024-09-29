@@ -36,6 +36,11 @@ public class NavigationController {
 		return "login_superadmin";
 	}
 	
+	@GetMapping("/superadmindashboard")
+	public String superadmindashboard() {
+		return "superadmin_dashboard";
+	}
+	
  
 	@GetMapping("/register")
 	public String register() {

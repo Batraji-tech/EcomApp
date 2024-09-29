@@ -6,32 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superadmin Login Page</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login_superadmin.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login_superadmin.css">
 </head>
 <body>
     <div class="login-container">
         <h2>Super Admin Login</h2>
-
-        <!-- Display error message if exists -->
-        <c:if test="${not empty error}">
-            <div class="error">${error}</div>
-        </c:if>
-
-        <form action="/login" method="post" autocomplete="off">
+        <form action="login_superadmin.jsp" method="post">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required autocomplete="off">
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required autocomplete="off">
+                <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">Login</button>
         </form>
-        <br>
-        <div class="reset_password">
-            <a href="/reset_password">Forgot Password?</a>
-        </div>
+        
     </div>
 </body>
 </html>
+ 

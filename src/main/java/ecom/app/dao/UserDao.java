@@ -12,12 +12,7 @@ import ecom.app.entities.User;
 
 public interface UserDao {
 	
-	int insertUser(User user) throws IOException, SerialException, SQLException;
-	
-//	List<Role> fetchAllRoles();
+  
+	User fetchUser(String username);
 
-	
-	
-	
-	
 }
