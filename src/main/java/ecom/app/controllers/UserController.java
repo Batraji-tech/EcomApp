@@ -55,7 +55,7 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
-			@RequestParam String password, 
+			@RequestParam String password,  
 			Model model, RedirectAttributes attributes) {
 
 
@@ -75,7 +75,7 @@ public class UserController {
 				int roleId = user.getRole().getRoleId();
 				if (roleId == 1) {
 					return "super_admin_dash";
-				} else if (roleId == 2) {
+				} else if (roleId == 2 ) {
 					return "subadmin";
 				} else if (roleId == 3) {
 					return "customer";
@@ -119,9 +119,21 @@ public class UserController {
 
 			return "redirect:/user/openRegistrationPage";
 		}
-		
 
 	}
+	
+	
+	@GetMapping("/profile")
+	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) {
+	    User user = userDaoImpl.fetchUser(username);
+	   
+	    mView.setViewName("profile");
+	    mView.addObject("user", user);
+	    return mView;
+	}
+
+	
+	
 	
 	
 	

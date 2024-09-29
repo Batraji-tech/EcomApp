@@ -21,16 +21,17 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div class="form-group radio-group">
-                <label>
-                    <input type="radio" name="userType" value="Customer" required> Customer
-                </label>
-                <label>
-                    <input type="radio" name="userType" value="Retailer" required> Retailer
-                </label>
-            </div>
-			
+			<div>
+			<label for="role">Select Role:</label>
+			<select id="role" name="selectedRole">
+			    <option value="customer">Customer</option>
+			    <option value="retailer">Retailer</option>
+			</select>
+
+         <div>
+			<div>
             <button type="submit" class="login-button">Login</button>
+			<div>
         </form>
 		<p class="register-link">Don't have an account? <a href="/user/openRegistrationPage">Register here</a></p>
 		

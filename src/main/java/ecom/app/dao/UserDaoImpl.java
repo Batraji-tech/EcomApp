@@ -64,11 +64,7 @@ import ecom.app.entities.Role;
 			return jdbcTemplate.query(sql, new RolesRowMapper());
 		}
 
-		@Override
-		public Map<String, Object> fetchPwds(String username) {
-			String sql = "SELECT passwordSalt, passwordHash, role_id, status FROM user WHERE username = ?";
-			return jdbcTemplate.queryForMap(sql, username);
-		}
+	
 
 		@Override
 		public User fetchUser(String username) {
@@ -77,6 +73,7 @@ import ecom.app.entities.Role;
 
 		}
 
+		
 
 		
 		
