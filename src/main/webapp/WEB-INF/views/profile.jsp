@@ -18,6 +18,7 @@
 		
 		<%
 						User user = (User) request.getAttribute("user");
+						
 					%>
 					
 		
@@ -40,6 +41,7 @@
 				</div>
         </div>
     </div>
+	
 
     <footer class="footer">
         <p>&copy; 2024 Your E-Commerce Site | All Rights Reserved</p>
