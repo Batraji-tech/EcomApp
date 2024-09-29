@@ -51,4 +51,24 @@ public class NavigationController {
 	public String editprofile() {
 		return "editprofile";
 	}
+	
+	@GetMapping("/subadmin")
+	public String subadmin() {
+		return "subadmin";
+	}
+	
+	@GetMapping("/wishlist")
+	public String wishlist() {
+		return "wishlist";
+	}
+	@GetMapping("/cart")
+	public String cart() {
+		return "cart";
+	}
+	@GetMapping("/orders")
+	public String orders() {
+		return "orders";
+	}
+	
+	
 }
