@@ -12,7 +12,7 @@
         <div class="wishlist-item">
             <img src="product1.jpg" alt="Product 1">
             <div class="item-details">
-                <h2>Product 1</h2>
+                <h2>Product 2</h2>
 				<p>mobile</p>
                 <p>25000</p>
                 <button class="view-details-btn" onclick="openModal('product1')">View More Details</button>
