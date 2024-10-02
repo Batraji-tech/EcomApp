@@ -17,7 +17,7 @@
             <div class="error">${error}</div>
         </c:if>
 
-        <form action="/login" method="post" autocomplete="off">
+        <form action="/superadmin/login" method="post" autocomplete="off">
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required autocomplete="off">

@@ -3,7 +3,13 @@ package ecom.app.dao;
 import ecom.app.entities.SuperAdmin;
 
 public interface SuperAdminDao {
-    SuperAdmin findByUsername(String username);
-    public void updateSuperAdmin(SuperAdmin superAdmin);
-    // Add other methods as needed, e.g., save, update, delete
+	 // Fetch the super admin details by ID
+	SuperAdmin findByUsername(String username);
+
+    // Update super admin profile details
+	 SuperAdmin updateSuperAdminProfile(SuperAdmin superAdmin);
+
+    // Update password for super admin
+    int resetSuperAdminPassword(String username, String passwordHash, String passwordSalt);
+    
 }
