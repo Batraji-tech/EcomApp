@@ -19,6 +19,8 @@ public class NavigationController {
 		return "login";
 	}
 
+	//check
+	
 	@GetMapping("/homepageuser")
 	public String homepageuser() {
 		return "homepageuser";
