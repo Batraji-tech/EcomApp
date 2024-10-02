@@ -74,6 +74,8 @@ public class SuperAdminController {
         mView.addObject("superAdmin", superAdmin);
         return mView;
     }
+    
+    //
 
     @PostMapping("/updateProfile")
     public ModelAndView updateProfile(@ModelAttribute("superAdmin") User superAdmin, RedirectAttributes redirectAttributes) {
