@@ -1,137 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="ecom.app.entities.User" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subadmin Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/subadmin.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E6F9E6;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        header {
+            background-color: #003366; 
+            color: white;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 30px; 
+            width: 100%; /* Full width for the header */
+            position: absolute; /* Fix the header at the top */
+            top: 0; /* Align to top */
+			padding-right:15px;
+			
+			
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0; /* Remove margin to center it */
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-align: left; /* Align text to the left */
+        }
+        .tab {
+            text-align: center;
+        }
+        .link {
+            background-color: #00ff00; /* Bright green */
+            color: #003366; /* Dark blue text */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px;
+            padding: 15px 25px;
+            font-size: 16px;
+            margin: 10px;
+            display: inline-block; /* Make the link behave like a button */
+            transition: background-color 0.3s ease;
+        }
+        .link:hover {
+            background-color: #00cc00; /* Darker green on hover */
+        }
+        @media (max-width: 600px) {
+            .link {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-	<header class="navbar">
-	    <div class="container">
-	        
 
-			
-			<div class="logo">Shopology</div>
-	        <div class="nav-title">Retailer Dashboard</div>
-	        <div class="nav-links">
-				<a href="${pageContext.request.contextPath}/user/profile?username=${user.username}" class="nav-item">Profile</a>
-	            <a href="/" class="nav-item">Logout</a>
-	        </div>
-	    </div>
-	</header>
+    <header>
+        <h1>Sub-Admin Dashboard</h1>
+        <div class="profile-links">
+            <a href="profile.jsp" class="link">View Profile</a>
+            <a href="/" class="link">Logout</a>
+        </div>
+    </header>
 
-	
-	
- 
-    <main class="container">
-        <div class="dropdown-container">
-            <div class="dropdown">
-                <button class="dropbtn">View Category</button>
-                <div class="dropdown-content">
-                    <label for="view-type">View Type:</label>
-                    <select id="view-type">
-                        <option value="view-all">View All</option>
-                        <option value="alphabetically-asc">View Alphabetically Ascending</option>
-                        <option value="alphabetically-desc">View Alphabetically Descending</option>
-                    </select>
-                    <button class="view-results">View Results</button>
-                </div>
-            </div>
- 
-            <div class="dropdown">
-                <button class="dropbtn">Add Product</button>
-                <div class="dropdown-content">
-                    <form class="add-product-form" enctype="multipart/form-data">
-                        <label for="category">Select Category:</label>
-                        <select id="category" required>
-                            <option value="">Select Category</option>
-                            <option value="fridge">Fridge</option>
-                            <option value="mobiles">Mobiles</option>
-                            <option value="laptops">Laptops</option>
-                        </select>
-                        <input type="text" placeholder="Product Name" required>
-                        <textarea placeholder="Description" required></textarea>
-                        <input type="number" placeholder="Quantity" required>
-                        <input type="number" placeholder="Price" required>
-                        <input type="number" placeholder="Discount (%)" required>
-                        <input type="number" placeholder="Tax (%)" required>
-                        <input type="number" placeholder="Delivery Charges" required>
-                        <input type="number" placeholder="Total Amount" required>
-                        <label for="image">Upload Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" required>
-                        <button type="submit">Add</button>
-                    </form>
-                </div>
-            </div>
- 
-            <div class="dropdown">
-                <button class="dropbtn">Delete Product</button>
-                <div class="dropdown-content">
-                    <form class="delete-product-form">
-                        <input type="text" placeholder="Enter Product ID" required>
-                        <input type="text" placeholder="Product Name" required>
-                        <button type="submit">Delete</button>
-                    </form>
-                </div>
-            </div>
- 
-            <div class="dropdown">
-                <button class="dropbtn">Update Product</button>
-                <div class="dropdown-content">
-                    <form class="update-product-form" enctype="multipart/form-data">
-                        <label for="update-category">Select Category:</label>
-                        <select id="update-category" required>
-                            <option value="">Select Category</option>
-                            <option value="fridge">Fridge</option>
-                            <option value="mobiles">Mobiles</option>
-                            <option value="laptops">Laptops</option>
-                        </select>
-                        <input type="text" placeholder="Product Name" required>
-                        <textarea placeholder="Description" required></textarea>
-                        <input type="number" placeholder="Quantity" required>
-                        <input type="number" placeholder="Price" required>
-                        <input type="number" placeholder="Discount (%)" required>
-                        <input type="number" placeholder="Tax (%)" required>
-                        <input type="number" placeholder="Delivery Charges" required>
-                        <input type="number" placeholder="Total Amount" required>
-                        <label for="update-image">Upload New Image:</label>
-                        <input type="file" id="update-image" name="update-image" accept="image/*">
-                        <button type="submit">Update</button>
-                    </form>
-                </div>
-            </div>
- 
-            <div class="dropdown">
-                <button class="dropbtn">View Product</button>
-                <div class="dropdown-content">
-                    <form class="view-product-form">
-                        <label for="view-category">Select Category:</label>
-                        <select id="view-category" required>
-                            <option value="">Select Category</option>
-                            <option value="fridge">Fridge</option>
-                            <option value="mobiles">Mobiles</option>
-                            <option value="laptops">Laptops</option>
-                        </select>
-                        <label for="view-like">View Like:</label>
-                        <select id="view-like" required>
-                            <option value="view-all">View All</option>
-                            <option value="price-low-high">Price Low to High</option>
-                            <option value="price-high-low">Price High to Low</option>
-                        </select>
-                        <button type="submit">View Results</button>
-                    </form>
-                </div>
-            </div>
+    <div class="container">
+        <div class="tab">
+            <form>
+                <a href="/products" class="link">Add Products</a>
+                <a href="/update_table" class="link">Update Product</a>
+                <a href="/remove_product" class="link">Remove Product</a>
+                <a href="/view_product" class="link">View All Products</a>
+                <a href="/view_productbycategoryname" class="link">View by Category Name</a>
+            </form>
         </div>
- 
-        <div class="results-display">
-            <!-- Space for display of results -->
-            <h2>Results</h2>
-        </div>
-    </main>
+    </div>
+
 </body>
 </html>
