@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@
             </div>
 			<div>
 			<label for="role">Select Role:</label>
-			<select id="role" name="selectedRole">
+			<select id="role" name="role">
 			    <option value="customer">Customer</option>
 			    <option value="retailer">Retailer</option>
 			</select>
@@ -41,4 +42,3 @@
     </div>
 </body>
 </html>
- 
