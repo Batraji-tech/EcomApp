@@ -18,7 +18,9 @@ public interface UserDao {
 
 
 	User fetchUser(String username);
-		
+	List<User> findAllCustomers();
+    List<User> findAllSubAdmins();
+	
 	
 	
 	
