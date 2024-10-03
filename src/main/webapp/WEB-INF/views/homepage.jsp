@@ -21,9 +21,9 @@
                 <button class="dropbtn">Login</button>
                 <div class="dropdown-content">
                     <a href="/login_superadmin">Login as Super Admin</a>
-
+ 
 	                    <a href="/user/login">Login </a>
-
+ 
                 </div>
             </div>
         </nav>
@@ -40,7 +40,7 @@
             <p>Mobiles</p>
         </div>
         <div class="category">
-            <img src="https://img.lovepik.com/element/45012/8521.png_860.png" alt="Laptops">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f0gPxkniKMZ39z8_9mRNakRtpnmOitd1aA&s" alt="Laptops">
             <p>Laptops</p>
         </div>
     </div>
@@ -52,15 +52,21 @@
     </div>
  
     <!-- Medium Image Row -->
-    <div class="medium-image-row">
-        <img src="https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-50-ultra.jpg" alt="Image 1">
-        <img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-12-1.jpg" alt="Image 2">
-        <img src="https://cf-images.dustin.eu/cdn-cgi/image/format=auto,quality=75,width=828,,fit=contain/image/d2000012787115/apple-iphone-16-512gb-vit.jpg" alt="Image 3">
-        <img src="https://5.imimg.com/data5/SELLER/Default/2024/1/380260334/DB/ZV/JS/10650349/oneplus-mobile-phone.jpg" alt="Image 4">
-        <img src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8.jpg" alt="Image 5">
-        <img src="https://assets-prd.ignimgs.com/2022/11/07/samsung-1667848036739.png" alt="Image 6">
-        <img src="https://api.technodom.kz/f3/api/v1/images/800/800/244122_1.jpg" alt="Image 7">
-    </div>
+	<div class="slideshow-container">
+	     <div class="slides fade">
+	       <img src="https://5.imimg.com/data5/SELLER/Default/2023/8/339012359/NZ/CI/HL/22035967/ikall-s2-smartphone-6-8-inch-hd-display-6gb-ram-6gb-virtual-ram-128gb-storage-android-13-0-500x500.jpg"alt="Image 1" />
+	     </div>
+	     <div class="slides fade">
+	       <img src="https://static.digit.in/default/63043a830597c650a77e5b892de23c519eb5100e.jpeg"alt="Image 2"/>
+	     </div>
+	     <div class="slides fade">
+	       <img src="https://5.imimg.com/data5/EO/YH/XB/SELLER-2694128/haier-refrigetor.jpg"alt="Image 3"/>
+	     </div>
+ 
+	     <a class="prev" onclick="plusSlides(-1)">❮</a>
+	     <a class="next" onclick="plusSlides(1)">❯</a>
+	   </div>
+ 
  
     <!-- Footer -->
     <footer class="footer">
@@ -95,5 +101,33 @@
         </div>
         <p>&copy; 2024 Your E-Commerce Site | All Rights Reserved</p>
     </footer>
+	<script>	let slideIndex = 0;
+	showSlides();
+ 
+	function plusSlides(n) {
+	  slideIndex += n;
+	  showSlides();
+	}
+ 
+	function showSlides() {
+	  const slides = document.getElementsByClassName("slides");
+	  if (slideIndex >= slides.length) {
+	    slideIndex = 0; // Reset to first slide if at the end
+	  }
+	  if (slideIndex < 0) {
+	    slideIndex = slides.length - 1; // Go to last slide if at the start
+	  }
+	  for (let i = 0; i < slides.length; i++) {
+	    slides[i].style.display = "none"; // Hide all slides
+	  }
+	  slides[slideIndex].style.display = "block"; // Show the current slide
+	}
+ 
+	// Optional: Automatic slide show
+	setInterval(() => {
+	  plusSlides(1);
+	}, 20000); // Change slide every 3 seconds
+</script>
+		
 </body>
 </html>

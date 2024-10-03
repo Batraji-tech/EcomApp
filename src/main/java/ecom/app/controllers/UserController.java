@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ecom.app.dao.UserDaoImpl;
 import ecom.app.entities.User;
 import ecom.app.utility.Password;
+import jakarta.servlet.http.HttpSession;
 import ecom.app.entities.Role;
 
 @Controller
@@ -57,50 +58,56 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
-			@RequestParam String password, 
-			Model model, RedirectAttributes attributes) {
+	                    @RequestParam String password, 
+	                    @RequestParam String role,
+	                    Model model, 
+	                    RedirectAttributes attributes) {
 
+	    try {
+	        user = userDaoImpl.fetchUser(username);
+	        String pwdSalt = user.getPasswordSalt();
+	        String oldPwdHash = user.getPasswordHash();
+	        String newPassword = password + pwdSalt;
+	        String newPasswordHash = Password.generatePwdHash(newPassword);
 
-		try {
-			user = userDaoImpl.fetchUser(username);
+	        if (newPasswordHash.equals(oldPwdHash)) {
+	            model.addAttribute("user", user);
+	            int roleId = user.getRole().getRoleId();
+	            
+	            if (role.equalsIgnoreCase("Retailer")) {
+	                if (roleId == 2) {
+	                    return "redirect:/subadmin"; // Redirect to retailer page
+	                } else {
+	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
+	                }
+	            } else if (role.equalsIgnoreCase("Customer")) {
+	                if (roleId == 3) {
+	                    return "redirect:/homepageuser"; // Redirect to customer page
+	                } else {
+	                    attributes.addFlashAttribute("message", "No Customer found with this username");
+	                }
+	            }
+	        } else {
+	            attributes.addFlashAttribute("message", "Incorrect Password");
+	        }
+	    } catch (EmptyResultDataAccessException e) {
+	        attributes.addFlashAttribute("message", "Incorrect Username");
+	    }
 
-			String pwdSalt = user.getPasswordSalt();
-			String oldPwdHash = user.getPasswordHash();
-
-			String newPassword = password + pwdSalt;
-			String newPasswordHash = Password.generatePwdHash(newPassword);
-
-			if (newPasswordHash.equals(oldPwdHash)) {
-
-				model.addAttribute("user", user);
-
-				int roleId = user.getRole().getRoleId();
-				if (roleId == 1) {
-					return "super_admin_dash";
-
-				} else if (roleId == 2) {
-					return "subadmin";
-				} else if (roleId == 3) {
-					return "customer";
-				}
-
-			} else {
-				attributes.addFlashAttribute("message", "Incorrect Password");
-			}
-		} catch (EmptyResultDataAccessException e) {
-			attributes.addFlashAttribute("message", "Incorrect Username");
-		}
-
-		return "redirect:/user/login";
+	    return "redirect:/user/login"; // Redirect back to login on failure
 	}
+
 
 	
 	
 	@PostMapping("/register")
-	public String register(@ModelAttribute User user, RedirectAttributes attributes)
+	public String register(@ModelAttribute User user, RedirectAttributes attributes , HttpSession session )
 			throws IOException, SerialException, SQLException {
 
+		String roleName =userDaoImpl.getRoleName(2);
+		
 		System.out.println("\n user : " + user);
+		System.out.println("\n role : " + roleName);
 
 		// Password Encryption starts
 		String passwordSalt = Password.generatePwdSalt(10);
@@ -123,8 +130,8 @@ public class UserController {
 
 			return "redirect:/user/openRegistrationPage";
 		}
-
 	}
+	
 	
 	
 	//profile mapped
