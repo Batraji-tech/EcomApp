@@ -70,5 +70,41 @@ public class NavigationController {
 		return "orders";
 	}
 	
+	@GetMapping("/products")
+	public String products() {
+		return "products";
+	}
+	
+	@GetMapping("/update_table")
+	public String updatetable() {
+		return "update_table";
+	}
+	
+	@GetMapping("/remove_product")
+	public String removeproduct() {
+		return "remove_product";
+	}
+	
+	@GetMapping("/view_product")
+	public String viewproduct() {
+		return "view_product";
+	}
+	
+	
+	@GetMapping("/view_productbycategoryname")
+	public String viewproductbycategoryname() {
+		return "view_productbycategoryname";
+	}
+	
+	
+	
+	@GetMapping("/update_product")
+	public String updateproduct() {
+		return "update_product";
+	}
+	
+	
+	
+	
 	
 }
