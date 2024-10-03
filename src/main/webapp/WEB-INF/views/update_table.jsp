@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Products</title>
+    <title>Update Table</title>
     <style>
         body {
             background-color: #E6F9E6;
@@ -60,23 +60,24 @@
         .btn:hover {
             background-color: #00cc00; 
         }
-        th:nth-child(5), td:nth-child(5) { 
+        th:nth-child(5), td:nth-child(5) {
             width: 150px; 
         }
-        th:nth-child(7), td:nth-child(7) { /* Final Price column */
+        th:nth-child(7), td:nth-child(7) {
             width: 150px; 
         }
     </style>
 </head>
 <body>
 
-    <div class="message">All Products</div>
+    <div class="message">Product Table</div>
 
     <div class="container">
         <table>
             <thead>
                 <tr>
                     <th>Product ID</th>
+                    <th>Category Name</th>
                     <th>Product Image</th>
                     <th>Product Name</th>
                     <th>Description</th>
@@ -84,12 +85,13 @@
                     <th>Discount</th>
                     <th>Final Price</th>
                     <th>Stock</th>
-                    
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
+                    <td>Refrigerator</td>
                     <td>
                         <img src="path/to/product-image1.jpg" alt="Product" style="height: 150px; max-width: 180px;">
                     </td>
@@ -99,9 +101,13 @@
                     <td>100</td>
                     <td class="price">₹ 1,100.00</td>
                     <td>50</td>
+                    <td>
+                        <button type="button" class="btn" onclick="window.location.href='/update_product'">Update Product</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>2</td>
+                    <td>Mobile</td>
                     <td>
                         <img src="path/to/product-image2.jpg" alt="Product" style="height: 150px; max-width: 180px;">
                     </td>
@@ -111,9 +117,13 @@
                     <td>100</td>
                     <td class="price">₹ 1,400.00</td>
                     <td>30</td>
+                    <td>
+                        <button type="button" class="btn" onclick="window.location.href='/update_product'">Update Product</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>3</td>
+                    <td>Laptop</td>
                     <td>
                         <img src="path/to/product-image3.jpg" alt="Product" style="height: 150px; max-width: 180px;">
                     </td>
@@ -123,8 +133,10 @@
                     <td>200</td>
                     <td class="price">₹ 1,800.00</td>
                     <td>20</td>
+                    <td>
+                        <button type="button" class="btn" onclick="window.location.href='/update_product'">Update Product</button>
+                    </td>
                 </tr>
-                <!-- Add more product rows as needed -->
             </tbody>
         </table>
     </div>
