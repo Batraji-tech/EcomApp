@@ -43,6 +43,8 @@ public class UserController {
 
 
 		List<Role> listOfRoles = userDaoImpl.fetchAllRoles();
+		
+		System.out.println(listOfRoles );
 
 		modelAndView.addObject("listOfRoles", listOfRoles);
 		modelAndView.setViewName("user_registration");
@@ -93,6 +95,7 @@ public class UserController {
 	}
 
 	
+	
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user, RedirectAttributes attributes)
 			throws IOException, SerialException, SQLException {
@@ -133,7 +136,6 @@ public class UserController {
 	    mView.addObject("user", user);
 	    return mView;
 	}
-
 
 	
 }

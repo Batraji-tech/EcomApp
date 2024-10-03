@@ -19,6 +19,8 @@ public class NavigationController {
 		return "login";
 	}
 
+	//check
+	
 	@GetMapping("/homepageuser")
 	public String homepageuser() {
 		return "homepageuser";
@@ -47,4 +49,64 @@ public class NavigationController {
 
 	
 	}
+	@GetMapping("/editprofile")
+	public String editprofile() {
+		return "editprofile";
+	}
+	
+	@GetMapping("/subadmin")
+	public String subadmin() {
+		return "subadmin";
+	}
+	
+	@GetMapping("/wishlist")
+	public String wishlist() {
+		return "wishlist";
+	}
+	@GetMapping("/cart")
+	public String cart() {
+		return "cart";
+	}
+	@GetMapping("/orders")
+	public String orders() {
+		return "orders";
+	}
+	
+	@GetMapping("/products")
+	public String products() {
+		return "products";
+	}
+	
+	@GetMapping("/update_table")
+	public String updatetable() {
+		return "update_table";
+	}
+	
+	@GetMapping("/remove_product")
+	public String removeproduct() {
+		return "remove_product";
+	}
+	
+	@GetMapping("/view_product")
+	public String viewproduct() {
+		return "view_product";
+	}
+	
+	
+	@GetMapping("/view_productbycategoryname")
+	public String viewproductbycategoryname() {
+		return "view_productbycategoryname";
+	}
+	
+	
+	
+	@GetMapping("/update_product")
+	public String updateproduct() {
+		return "update_product";
+	}
+	
+	
+	
+	
+	
 }
