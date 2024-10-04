@@ -17,7 +17,7 @@
             <div class="error">${error}</div>
         </c:if>
          </br>
-        <form action="/superadmin/login" method="post" autocomplete="off">
+        <form action="/superAdmin/login" method="post" autocomplete="off">
 			
             <div class="input-group">
                 <label for="username">Username</label>
@@ -31,7 +31,7 @@
         </form>
         <br>
         <div class="reset_password">
-            <a href="/superadmin/forgotpassword">Forgot Password?</a>
+            <a href="/superAdmin/forgotpassword">Forgot Password?</a>
         </div>
 		
 		

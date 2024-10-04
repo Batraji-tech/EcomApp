@@ -42,15 +42,29 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+		.button-group {
+		            display: flex;
+		            justify-content: space-between;
+		        }
+		        button {
+		            width: 48%; /* Reduced width to fit two buttons */
+		            padding: 10px;
+		            background-color: #4CAF50;
+		            color: white;
+		            border: none;
+		            border-radius: 4px;
+		            cursor: pointer;
+		        }
+		        button:hover {
+		            background-color: #45a049;
+		        }
+		        .back-button {
+		            background-color: #ff6600; /* Different color for Back to Dashboard */
+		        }
+		        .back-button:hover {
+		            background-color: #ff3300; /* Darkened hover state for Back to Dashboard */
+		        }
+		
         button:hover {
             background-color: #45a049;
         }
@@ -69,15 +83,14 @@
 <body>
     <div class="container">
         <h1>Reset Password</h1>
-		<!-- Display error message if it exists -->
-		        <c:if test="${not empty error}">
-		            <div class="error">${error}</div>
-		        </c:if>
+
+		
 				
 
-        <form method="POST" action="/superadmin/resetPassword">
+
+        <form method="POST" action="/superAdmin/resetPassword">
             <div>
-				
+
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required/>
             </div>
@@ -88,10 +101,11 @@
             <div>
                 <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" name="confirmPassword" id="confirmPassword" required/>
-            </div>
-            <button type="submit">Reset Password</button>
-        </form>
-
+				<div class="button-group">
+				                <button type="submit">Reset Password</button>
+				                <button type="button" class="back-button" onclick="window.location.href='${pageContext.request.contextPath}/superAdmin/login'">Back to Dashboard</button>
+				            </div>
+				        </form>
 		
 
 		<c:if test="${not empty message}">
