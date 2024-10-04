@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="ecom.app.entities.User" %>
 
@@ -16,34 +15,45 @@
     </header>
 
     <div class="container">
-		
-		<%
-						User user = (User) request.getAttribute("user");
-						
-					%>
-					
-		
+        <% User user = (User) request.getAttribute("user"); %>
         <div class="profile-box">
-			<button type="submit" class="edit-button"onclick="window.location.href='/editprofile'">Edit</button>
+            <button type="button" class="edit-button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">Edit</button>
+
             <div class="user-details">
-                <label for="firstname">First Name:</label>
-                <input type="text" id="firstname" value="<%= user.getFirstName() %>" placeholder="Enter First Name" readonly>
+                <% String profileImage = (String) request.getAttribute("profileImage"); %>
+                <% if (profileImage != null && !profileImage.isEmpty()) { %>
+                    <img src="data:image/jpeg;base64,<%= profileImage %>" alt="Profile Image" />
+                <% } else { %>
+                    <p>No Profile Image</p>
+                <% } %>
 
-                <label for="lastname">Last Name:</label>
-                <input type="text" id="lastname" value="<%= user.getLastName() %>" placeholder="Enter Last Name" readonly>
+                <div class="field">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" value="<%= user.getFirstName() %>" readonly>
+                </div>
 
-                <label for="username">Username:</label>
-                <input type="text" id="username" value="<%= user.getUsername() %>" placeholder="Enter Username" readonly>
+                <div class="field">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" value="<%= user.getLastName() %>" readonly>
+                </div>
 
-                <label for="mobileno">Mobile No:</label>
-                <input type="text" id="mobileno" value="<%= user.getMobileNo() %>" placeholder="Enter Mobile No" readonly>
-            
-				<label for="emailId">Email Id:</label>
-		   <input type="text" id="emailId" value="<%= user.getEmailId() %>" placeholder="Enter Email Id" readonly>
-				</div>
+                <div class="field">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" value="<%= user.getUsername() %>" readonly>
+                </div>
+
+                <div class="field">
+                    <label for="mobileno">Mobile No:</label>
+                    <input type="text" id="mobileno" value="<%= user.getMobileNo() %>" readonly>
+                </div>
+
+                <div class="field">
+                    <label for="emailId">Email Id:</label>
+                    <input type="text" id="emailId" value="<%= user.getEmailId() %>" readonly>
+                </div>
+            </div>
         </div>
     </div>
-	
 
     <footer class="footer">
         <p>&copy; 2024 Your E-Commerce Site | All Rights Reserved</p>

@@ -2,6 +2,7 @@ package ecom.app.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
@@ -73,10 +74,12 @@ public class UserController {
 	        if (newPasswordHash.equals(oldPwdHash)) {
 	            model.addAttribute("user", user);
 	            int roleId = user.getRole().getRoleId();
+	            attributes.addFlashAttribute("user", user); // Pass the user object
+
 	            
 	            if (role.equalsIgnoreCase("Retailer")) {
 	                if (roleId == 2) {
-	                    return "redirect:/subadmin"; // Redirect to retailer page
+	                    return "subadmin"; 
 	                } else {
 	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
 	                }
@@ -134,13 +137,17 @@ public class UserController {
 	
 	
 	
-	//profile mapped
 	@GetMapping("/profile")
-	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) {
+	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) throws IOException, SQLException {
 	    User user = userDaoImpl.fetchUser(username);
-	   
+
+	    byte[] imageBytes = user.getProfileImage().getBytes();
+	    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
 	    mView.setViewName("profile");
 	    mView.addObject("user", user);
+	    mView.addObject("profileImage", base64Image); // Now it's Base64 encoded
+	    
 	    return mView;
 	}
 

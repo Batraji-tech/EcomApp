@@ -74,8 +74,13 @@
     <header>
         <h1>Sub-Admin Dashboard</h1>
         <div class="profile-links">
+
             <a href="/profile" class="link">View Profile</a>
             <a href="/" class="link">Logout</a>
+
+    <button type="button" class="button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">View Profile</button>          
+      <a href="/" class="link">Logout</a>
+
         </div>
     </header>
 
