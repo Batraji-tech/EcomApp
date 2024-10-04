@@ -23,14 +23,15 @@ body {
 /* Container */
 .container {
     padding: 20px;
-    text-align: left; /* Center the text */
+    text-align: center; /* Center align the container */
 }
+
 /* Edit Button */
 .edit-button {
-    position: absolute; /* Position it relative to the profile box */
-    top: 20px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    background-color: #00FF00; /* Green background */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #00FF00;
     color: black;
     border: none;
     padding: 10px 15px;
@@ -46,54 +47,57 @@ body {
 /* Profile Box */
 .profile-box {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the start (left) */
-    background-color: #003366; /* Light Color */
-    padding: 70px;
-    border: 1px solid #00FF00; /* Dark Blue border */
+    flex-direction: column;
+    align-items: center; /* Center the content */
+    background-color: #003366;
+    padding: 30px;
+    border: 1px solid #00FF00;
     border-radius: 10px;
     margin: 50px auto;
-    max-width: 400px; /* Increase max width for the box */
-    position: relative; /* Allow positioning of edit button */
-    text-align: left; /* Align text to the left */
+    max-width: 500px; /* Increased max-width for better layout */
+    position: relative;
+    text-align: left;
 }
-
 
 /* User Details */
 .user-details {
-    width: 100%; /* Full width for details */
+    width: 100%;
 }
 
-.user-details label {
+/* Field Styling */
+.field {
+    margin: 15px 0;
+}
+
+.field label {
     display: block;
-    margin: 10px 0 5px; /* Space above and below label */
     color: white;
-    text-align: left; /* Align labels to the left */
+    font-weight: bold;
 }
 
-.user-details input {
-    width: 100%; /* Full width input */
+.field input {
+    width: calc(100% - 20px); /* Adjust width considering padding */
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #cccccc; /* Light gray border */
+    border: 1px solid #cccccc;
 }
 
-
-/* Update Profile Heading */
-.profile-box h2 {
-    margin-top: 0; /* Remove default margin */
-    margin-bottom: 20px; /* Add space below heading */
-    color: white;
+/* Profile Image Styling */
+.profile-box img {
+    width: 150px; /* Adjust image size */
+    height: 150px; /* Maintain square ratio */
+    object-fit: cover; /* Crop the image to fit the box */
+    border-radius: 50%; /* Make it circular */
+    margin-bottom: 20px; /* Add space below the image */
+    border: 3px solid #00FF00; /* Add a border to the image */
 }
-
-
 
 /* Footer */
 .footer {
-    background-color: #003366; /* Dark Blue */
+    background-color: #003366;
     color: white;
     text-align: center;
-    padding: 10px 0; /* Reduced padding for a smaller footer */
+    padding: 10px 0;
     position: relative;
     bottom: 0;
     width: 100%;
