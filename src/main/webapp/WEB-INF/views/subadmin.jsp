@@ -74,7 +74,7 @@
     <header>
         <h1>Sub-Admin Dashboard</h1>
         <div class="profile-links">
-            <a href="profile.jsp" class="link">View Profile</a>
+            <a href="/profile" class="link">View Profile</a>
             <a href="/" class="link">Logout</a>
         </div>
     </header>
