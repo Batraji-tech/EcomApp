@@ -20,11 +20,11 @@
         <form action="/superadmin/login" method="post" autocomplete="off">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required autocomplete="off">
+                <input type="text" id="username" name="username" placeholder="Enter Username" required autocomplete="off">
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required autocomplete="off">
+                <input type="password" id="password" name="password" placeholder="Enter Password"  required autocomplete="off">
             </div>
             <button type="submit">Login</button>
         </form>

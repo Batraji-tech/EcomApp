@@ -4,21 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ecom Application</title>
-<style>
-	h1, p {text-align: center;}
-</style>
+<title>Insert title here</title>
 </head>
 <body>
-	
-	<h1>Customer </h1>
-	<h2> Hii , I am waiting?<h2>
-	
 
+
+<h1>
+
+harsh batra
+
+</h1>
 </body>
 </html>
-
-
-
-
-

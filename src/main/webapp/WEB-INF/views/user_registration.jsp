@@ -1,6 +1,6 @@
 <%@page import="ecom.app.entities.Role"%>
 <%@page import="java.util.List"%>
- 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<!DOCTYPE html>
@@ -10,6 +10,8 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>Registration Page</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
+	   <script src="../js/registerPageValidation.js"></script>
+	     
 	</head>
 	<body>
 		
@@ -26,7 +28,7 @@
 		
 	    <div class="container">
 	        <h2>Registration </h2>
-			<form action="/user/register" method="post" enctype="multipart/form-data">
+			<form action="/user/register" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
 	            <div class="form-group">
 	                <label for="firstName">First Name:</label>
 	                <input type="text" id="firstname" name="firstName" required>
@@ -58,7 +60,7 @@
 				<div>
 					
 				<input type="file" name="profileImage" accept=".jpg, .jpeg, .png, .pdf" required>
- 
+
 				</div>
 						<% for (Role role : rolesList) {%>
 							<input type="radio" name="role.roleId" value="<%=role.getRoleId()%> " /><%= getUserFriendlyRoles(role.getRoleName())%>
@@ -72,10 +74,10 @@
 				
 								
 	       
-				<button type="submit" class="register-button"onclick="window.location.href='/openloginPage'">Register</button>
+				<button type="submit" class="register-button">Register</button>
    
 				<%@include file="message.jsp" %>
- 
+
 				
 	        </form>
 		
