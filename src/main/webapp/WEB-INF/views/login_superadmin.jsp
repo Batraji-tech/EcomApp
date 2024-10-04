@@ -16,8 +16,9 @@
         <c:if test="${not empty error}">
             <div class="error">${error}</div>
         </c:if>
-
+         </br>
         <form action="/superadmin/login" method="post" autocomplete="off">
+			
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required autocomplete="off">
@@ -30,8 +31,10 @@
         </form>
         <br>
         <div class="reset_password">
-            <a href="/reset_password">Forgot Password?</a>
+            <a href="/superadmin/forgotpassword">Forgot Password?</a>
         </div>
+		
+		
     </div>
 </body>
 </html>

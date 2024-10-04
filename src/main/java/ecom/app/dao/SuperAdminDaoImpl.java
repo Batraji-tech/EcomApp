@@ -28,7 +28,17 @@ public class SuperAdminDaoImpl implements SuperAdminDao{
         return null; // Username not found
     }
     }
-
+    
+    @Override
+    public SuperAdmin findByEmail(String email) {
+    	try {
+        String sql = "SELECT * FROM super_admin WHERE email_id = ?";
+        return jdbcTemplate.queryForObject(sql, new SuperAdminRowMapper(),email);
+        
+    } catch (EmptyResultDataAccessException e) {
+        return null; // Username not found
+    }
+    }
     public SuperAdmin updateSuperAdminProfile(SuperAdmin superAdmin) {
         String sql1 = "UPDATE super_admin SET first_name = ?, last_name = ?, email_id = ?, mobile_no = ?, username = ? WHERE id = ?";
          jdbcTemplate.update(sql1, superAdmin.getFirstName(), superAdmin.getLastName(), superAdmin.getEmailId(),
@@ -41,6 +51,12 @@ public class SuperAdminDaoImpl implements SuperAdminDao{
     public  int resetSuperAdminPassword(String username, String passwordHash, String passwordSalt) {
         String sql = "UPDATE super_admin SET password_hash = ?, password_salt = ? WHERE username = ?";
         return jdbcTemplate.update(sql, passwordHash, passwordSalt, username);
+        
+        
+    }
+    public  int resetSuperAdminPassword(String passwordHash, String passwordSalt) {
+        String sql = "UPDATE super_admin SET password_hash = ?, password_salt = ? WHERE id = ?";
+        return jdbcTemplate.update(sql, passwordHash, passwordSalt,1);
         
         
     }

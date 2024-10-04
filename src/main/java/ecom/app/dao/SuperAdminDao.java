@@ -13,4 +13,5 @@ public interface SuperAdminDao {
 	    // Update password for super admin
 	    int resetSuperAdminPassword(String username, String passwordHash, String passwordSalt);
 	    
+	   SuperAdmin findByEmail(String email);
 }

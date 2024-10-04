@@ -69,8 +69,15 @@
 <body>
     <div class="container">
         <h1>Reset Password</h1>
+		<!-- Display error message if it exists -->
+		        <c:if test="${not empty error}">
+		            <div class="error">${error}</div>
+		        </c:if>
+				
+
         <form method="POST" action="/superadmin/resetPassword">
             <div>
+				
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required/>
             </div>

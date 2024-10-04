@@ -38,35 +38,39 @@ public class SuperAdminController {
 	UserDaoImpl userDaoImpl;
 
     @PostMapping("/login")
-	public String login(
-	        @RequestParam String username, 
-	        @RequestParam String password, Model model) {
-	    System.out.println("\n login request data: " + username + ", " + password);
+    public String login(
+            @RequestParam String username, 
+            @RequestParam String password, Model model) {
+        System.out.println("\n login request data: " + username + ", " + password);
 
-		// Fetch user details from the database
-	     superAdmin = superAdminDaoImpl.findByUsername(username);
-		System.out.println(superAdmin);
+        // Fetch user details from the database
+        superAdmin = superAdminDaoImpl.findByUsername(username);
+        System.out.println(superAdmin);
 
-	    if (superAdmin != null) {
-	        String pwdSalt = superAdmin.getPasswordSalt();
-	        String oldPwdHash = superAdmin.getPasswordHash();
-	        // Check credentials
-	        String newPassword = password + pwdSalt;
-	        String newPasswordHash = Password.generatePwdHash(newPassword);
-	        System.out.println("pwd Salt : " + pwdSalt);
-	        System.out.println("Old password : " + oldPwdHash);
-	        System.out.println("New password: " + newPasswordHash);
-	        if (newPasswordHash.equals(oldPwdHash)) {
-	            model.addAttribute("superAdmin", superAdmin);
-	            return "superadmin_dashboard";
-	        }
-	    }
+        if (superAdmin != null) {
+            String pwdSalt = superAdmin.getPasswordSalt();
+            String oldPwdHash = superAdmin.getPasswordHash();
+            
+            // Check credentials
+            String newPassword = password + pwdSalt;
+            String newPasswordHash = Password.generatePwdHash(newPassword);
+            System.out.println("pwd Salt : " + pwdSalt);
+            System.out.println("Old password : " + oldPwdHash);
+            System.out.println("New password: " + newPasswordHash);
 
-	    model.addAttribute("error", "Invalid username or password");
-	    return "login_superadmin";
-	  }
+            if (newPasswordHash.equals(oldPwdHash)) {
+                model.addAttribute("superAdmin", superAdmin);
+                return "superadmin_dashboard"; // Redirect to the super admin dashboard on success
+            } else {
+                model.addAttribute("error", "Incorrect password. Please try again."); // Password mismatch
+            }
+        } else {
+            model.addAttribute("error", "Username does not exist. Please check your username."); // Username not found
+        }
 
-    
+        return "login_superadmin"; // Redirect back to login page with error message
+    }
+
 
     @GetMapping("/viewProfile")
     public ModelAndView viewProfile(ModelAndView mView) {
@@ -130,12 +134,12 @@ public class SuperAdminController {
 	}
 
     
-    @GetMapping("resetPassword")
+    @GetMapping("/resetPassword")
     public String showResetPasswordForm(Model model) {
         return "reset_superadmin_password"; 
     }
 
-    @PostMapping("resetPassword")
+    @PostMapping("/resetPassword")
     public String resetPassword(@RequestParam("username") String username,
                                 @RequestParam("newPassword") String newPassword,
                                 @RequestParam("confirmPassword") String confirmPassword,
@@ -201,35 +205,7 @@ public class SuperAdminController {
         return "view_all_subadmins";
     }
     
-    @PostMapping("/register")
-	public String register(@ModelAttribute User user, RedirectAttributes attributes)
-			throws IOException, SerialException, SQLException {
-
-		System.out.println("\n user : " + user);
-
-		// Password Encryption starts
-		String passwordSalt = Password.generatePwdSalt(10);
-		user.setPasswordSalt(passwordSalt);
-
-		// temporary data => password+salt
-		String newPassword = user.getPassword() + passwordSalt; // 1234rdvyjtftyf
-
-		String passwordHash = Password.generatePwdHash(newPassword);
-		user.setPasswordHash(passwordHash);
-		// Password Encryption completes
-
-		int result =  userDaoImpl.insertUser(user);
-
-		if (result > 0) {
-			attributes.addFlashAttribute("message", "Registration Successful");
-			return "redirect:/user/login";
-		} else {
-			attributes.addFlashAttribute("message", "Registration Failed");
-
-			return "redirect:/user/openRegistrationPage";
-		}
-
-	}
+   
 	
 	
 	//profile mapped
@@ -242,6 +218,59 @@ public class SuperAdminController {
 	    return mView;
 	}
 
+
+	    // Handle the entire forgot password flow
+	 @GetMapping("/forgotpassword")
+	    public String showForgotPasswordPage() {
+	        return "forgot_password"; // JSP page for forgot password
+	    }
+
+	    // Step 2: Verify email
+	    @PostMapping("/verify_email")
+	    public String verifyEmail(@RequestParam("email") String email, Model model) {
+	        SuperAdmin superAdmin = superAdminDaoImpl.findByEmail(email);
+	        if (superAdmin != null) {
+	            model.addAttribute("emailVerified", true);
+	            model.addAttribute("email", email); // Keep email for password reset
+	            return "forgot_password"; // Redirect back to forgot password page with email verified
+	        } else {
+	            model.addAttribute("error", "Email not found. Please try again.");
+	            return "forgot_password"; // Stay on the same page to retry
+	        }
+	    }
+	    @PostMapping("/resetpassword")
+	    public String resetpassword(
+	            @RequestParam("newPassword") String newPassword,
+	            @RequestParam("confirmPassword") String confirmPassword,
+	        
+	            Model model) {
+
+	        if (!newPassword.equals(confirmPassword)) {
+	            model.addAttribute("error", "Passwords do not match.");
+	            return "forgot_password"; // Return to the reset password page
+	        }
+
+	        if (!isValidPassword(newPassword)) {
+	            model.addAttribute("error", "Invalid password. It should be 8-15 characters long without spaces.");
+	            return "forgot_password"; // Return to the reset password page
+	        }
+
+	        // Proceed with password reset if no errors
+	        String passwordSalt = Password.generatePwdSalt(10);
+	        String passwordHash1 = newPassword + passwordSalt;
+	        String passwordHash = Password.generatePwdHash(passwordHash1);
+
+	        int result = superAdminDaoImpl.resetSuperAdminPassword(passwordHash, passwordSalt);
+	        if (result > 0) {
+	            model.addAttribute("message", "New password set successfully.");
+	        } else {
+	            model.addAttribute("error", "Error updating password. Please try again.");
+	        }
+
+	        return "login_superadmin"; // Redirect to login page
+	    }
+
+	    
+
     
-	
 }
