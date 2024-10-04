@@ -48,7 +48,7 @@
     <!-- Featured Products Section -->
     <div class="featured-products">
         <h1>Featured Products</h1>
-        <h2>Check out our latest mobile phones that are trending this season!</h2>
+        <h2>Check out our latest products that are trending this season!</h2>
     </div>
  
     <!-- Medium Image Row -->

@@ -103,7 +103,7 @@
 
         <div class="dashboard-menu">
             <div class="menu-item">
-                <a href="/superadmin/viewProfile">View Profile</a>
+                <a href="/superadmin/profile">View Profile</a>
             </div>
             <div class="menu-item">
                 <a href="/superadmin/resetPassword">Reset Password</a>

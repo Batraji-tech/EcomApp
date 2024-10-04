@@ -16,17 +16,20 @@
             <button class="search-button">��</button>
         </div>
         <nav class="nav-links">
-            <a href="/" class="nav-item">Home</a>
-			<a href="/profile" class="nav-item"> View Profile</a>
-			<div class="dropdown">
-			<button class="dropbtn">My Account</button>
-			<div class="dropdown-content">
-		    <a href="/wishlist">Wishlist</a>
-		     <a href="/cart">Cart Items</a>
-			 <a href="/orders">Your Orders</a>
-			</div>
-			
-        </nav>
+    <a href="/" class="nav-item">Home</a>
+    <button type="button" class="button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">View Profile</button>
+    <a href="/" class="link">Logout</a>
+    
+    <div class="dropdown">
+        <button class="dropbtn">My Account</button>
+        <div class="dropdown-content">
+            <a href="/wishlist">Wishlist</a>
+            <a href="/cart">Cart Items</a>
+            <a href="/orders">Your Orders</a>
+        </div>
+    </div>
+</nav>
+
     </header>
  
     <!-- Categories Bar -->
