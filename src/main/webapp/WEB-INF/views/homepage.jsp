@@ -999,6 +999,7 @@ width: 30px;}
                     <div><button class="minus2">-</button></div>
                 </div>
             </div>
+
      </div>
  </div>
  </div>
@@ -1008,6 +1009,16 @@ width: 30px;}
         <div class="imgdiv">
           <div class="ic1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRkw4I720czVHLZTjTB4Q0K2ZIoFH4yfSSRp5P9xrnvtra2_r1j0fQZJIpJ24HwCYRnQI&usqp=CAU" height="40px" alt=""></div>
           <div class="mimg"><img class="hov" src="https://www.jiomart.com//images/product/original/491666528/lg-260-l-2-star-inverter-frost-free-double-door-refrigerator-gl-s292rpzy-shinny-steel-convertible-refrigerator-digital-o491666528-p590039617-0-202305161531.jpeg?im=Resize=(150,150)" width="120px" alt=""></div>
+
+        </nav>
+    </header>
+ 
+    <!-- Categories Bar -->
+    <div class="categories-bar">
+        <div class="category">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyEvwHlH4wWYWbzMREwGMExULUIjd0KGkhXw&s" alt="Refrigerators">
+            <a href="/products/display">Refrigerators</a>
+
         </div>
         <div class="name">LG 240 litres 2 Star Convertible Frost Free  Refrigerator</div>
         <div class="price">

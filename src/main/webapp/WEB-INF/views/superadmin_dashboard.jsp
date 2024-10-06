@@ -103,19 +103,23 @@
 
         <div class="dashboard-menu">
             <div class="menu-item">
-                <a href="/superadmin/profile">View Profile</a>
+
+                <a href="/superAdmin/viewProfile">View Profile</a>
+
+            
+
             </div>
             <div class="menu-item">
-                <a href="/superadmin/resetPassword">Reset Password</a>
+                <a href="/superAdmin/resetPassword">Reset Password</a>
             </div>
             <div class="menu-item">
-                <a href="/superadmin/viewAllSubAdmins">View All Sub Admins</a>
+                <a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a>
             </div>
             <div class="menu-item">
-                <a href="/superadmin/viewAllCustomers">View All Customers</a>
+                <a href="/superAdmin/viewAllCustomers">View All Customers</a>
             </div>
             <div class="menu-item">
-                <a href="/superadmin/analysisReport">Analysis Report</a>
+                <a href="/superAdmin/analysisReport">Analysis Report</a>
             </div>
         </div>
         
@@ -123,7 +127,7 @@
 		
 		
 		<!-- Logout Button -->
-		        <form action="/superadmin/logout" method="POST">
+		        <form action="/superAdmin/logout" method="POST">
 		            <button type="submit" class="logout-button">Logout</button>
 		        </form>
     </div>
