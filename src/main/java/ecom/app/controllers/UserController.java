@@ -62,7 +62,8 @@ public class UserController {
 	                    @RequestParam String password, 
 	                    @RequestParam String role,
 	                    Model model, 
-	                    RedirectAttributes attributes) {
+	                    RedirectAttributes attributes,
+	                    HttpSession session) {
 
 	    try {
 	        user = userDaoImpl.fetchUser(username);
@@ -75,6 +76,7 @@ public class UserController {
 	            model.addAttribute("user", user);
 	            int roleId = user.getRole().getRoleId();
 	            attributes.addFlashAttribute("user", user); // Pass the user object
+	          session.setAttribute("user", user); // Store user in session
 
 	            
 	            if (role.equalsIgnoreCase("Retailer")) {
@@ -139,8 +141,19 @@ public class UserController {
 	
 	
 	@GetMapping("/profile")
-	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username) throws IOException, SQLException {
+	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username , HttpSession session) throws IOException, SQLException {
 	    User user = userDaoImpl.fetchUser(username);
+        session.setAttribute("user", user); // Store user in session
+
+
+	    if (user.getProfileImage() != null) {
+	        byte[] imageBytes = user.getProfileImage().getBytes();
+	        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	        mView.addObject("profileImage", base64Image);
+	    } else {
+	        mView.addObject("profileImage", null);
+	    }
+	    
 
 	    byte[] imageBytes = user.getProfileImage().getBytes();
 	    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
@@ -151,6 +164,74 @@ public class UserController {
 	    
 	    return mView;
 	}
+	
+	@GetMapping("/editprofile")
+	public String editProfile(Model model, HttpSession session) {
+	    User user = (User) session.getAttribute("user");
+	    
+	    if (user == null) {
+	        return "redirect:/user/login";
+	    }
 
+	    // Pass the user object to the model
+	    model.addAttribute("user", user);
+	    
+	    // Check if the user has a profile image
+	    if (user.getProfileImage() != null && user.getProfileImage().getSize() > 0) {
+	        try {
+	            byte[] imageBytes = user.getProfileImage().getBytes();
+	            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	            model.addAttribute("profileImage", base64Image);
+	        } catch (IOException e) {
+	            // Handle the exception (log it, etc.)
+	            model.addAttribute("profileImage", null);
+	        }
+	    } else {
+	        model.addAttribute("profileImage", null);
+	    }
+
+	    return "editprofile"; // Return the edit profile view
+	}
+
+
+
+	@PostMapping("/updateProfile")
+	public String updateProfile(@ModelAttribute User updatedUser, RedirectAttributes attributes, HttpSession session) 
+	        throws SerialException, IOException, SQLException {
+	    
+	    // Get the current user from the session
+	    User currentUser = (User) session.getAttribute("user");
+
+	    // Make sure the username is present in updatedUser
+	    if (updatedUser.getUsername() == null || updatedUser.getUsername().isEmpty()) {
+	        updatedUser.setUsername(currentUser.getUsername());
+	    }
+
+	    // Check if a new image is uploaded
+	    if (updatedUser.getProfileImage() != null && updatedUser.getProfileImage().getSize() > 0) {
+	        // Use the new image
+	        updatedUser.setProfileImage(updatedUser.getProfileImage());
+	    } else {
+	        // Keep the existing image
+	        updatedUser.setProfileImage(currentUser.getProfileImage());
+	    }
+
+	    System.out.println("Username from request: " + updatedUser);
+
+	    try {
+	        userDaoImpl.modifyUser(updatedUser);
+	        attributes.addFlashAttribute("message", "Profile updated successfully");
+	    } catch (Exception e) {
+	        attributes.addFlashAttribute("message", "Updation failed. Please try again later");
+	    }
+
+	    // Use the username from the current user for redirection
+	    return "redirect:/user/profile?username=" + currentUser.getUsername(); 
+	}
+
+
+
+	
+	
 	
 }

@@ -104,9 +104,11 @@
         <div class="dashboard-menu">
             <div class="menu-item">
 
+
                 <a href="/superAdmin/viewProfile">View Profile</a>
 
             
+
 
             </div>
             <div class="menu-item">
