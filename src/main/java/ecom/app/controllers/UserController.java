@@ -103,6 +103,7 @@ public class UserController {
 
 	
 	
+	
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user, RedirectAttributes attributes , HttpSession session )
 			throws IOException, SerialException, SQLException {
