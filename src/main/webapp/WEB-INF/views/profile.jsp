@@ -17,7 +17,8 @@
     <div class="container">
         <% User user = (User) request.getAttribute("user"); %>
         <div class="profile-box">
-            <button type="button" class="edit-button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">Edit</button>
+
+            <button class="edit-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit Profile</button>
 
             <div class="user-details">
                 <% String profileImage = (String) request.getAttribute("profileImage"); %>

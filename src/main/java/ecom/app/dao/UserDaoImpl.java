@@ -92,6 +92,48 @@ import ecom.app.entities.Role;
 		    }
 		
 
+		    @Override
+		    public User modifyUser(User user) throws SerialException, IOException, SQLException {
+		            System.out.println();
+		    	
+		    	Blob profileImage = null;
+		        if (user.getProfileImage() != null) {
+		            profileImage = getBlob(user.getProfileImage());
+		        } else {
+		            // Handle the case where there is no new image (optional)
+		        }
+
+		        String query = "UPDATE user SET first_name = ?, last_name = ?, "
+		                     + "mobile_no = ?, date_of_birth = ?, profile_image = ? , username=? , email_id = ? WHERE username =? ";
+
+		        
+		        System.out.println("Updating user: " + user);
+
+		        
+		        
+		        try {
+		            int rowsAffected = jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), 
+		                                                   user.getMobileNo(), user.getDateOfBirth(), profileImage,  user.getUsername(),user.getEmailId(), user.getUsername());
+		            System.out.println("Rows affected: " + rowsAffected);
+		        } catch (Exception e) {
+		            e.printStackTrace(); // Log the exception for debugging
+		        }
+		        
+		        
+
+		        return getUserById(user.getUserId());
+		    }
+
+
+			
+
+			@Override
+			public User getUserById(int userId) {
+				String sql = "SELECT * FROM user WHERE user_id = ?";
+				return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userId);
+			}
+		    
+		    
 	}
 
 			
