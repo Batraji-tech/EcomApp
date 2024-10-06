@@ -86,7 +86,7 @@
     <div class="container">
         <h1>SuperAdmin Profile</h1>
         
-        <form:form method="POST" action="/superadmin/updateProfile" modelAttribute="superAdmin">
+        <form:form method="POST" action="/superAdmin/updateProfile" modelAttribute="superAdmin">
             <form:hidden path="id" />
             <table>
                 <tr>

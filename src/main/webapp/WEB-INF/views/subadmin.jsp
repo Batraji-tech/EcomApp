@@ -126,6 +126,7 @@
             <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">View Profile</button>
             <a href="/" class="link">Logout</a>
          
+
         </div>
     </header>
 

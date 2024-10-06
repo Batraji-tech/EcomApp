@@ -100,6 +100,6 @@
         <p class="no-customers">No customers found.</p>
     <% } %>
 
-    <a href="/superadmin/dashboard">Back to Dashboard</a>
+    <a href="/superAdmin/login">Back to Dashboard</a>
 </body>
 </html>

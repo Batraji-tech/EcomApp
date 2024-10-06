@@ -73,7 +73,7 @@ import ecom.app.entities.Role;
 			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
 
 		}
-		
+
 		 @Override
 		    public List<User> findAllCustomers() {
 		        String sql = "SELECT * FROM user WHERE role_id = 3";
@@ -85,6 +85,10 @@ import ecom.app.entities.Role;
 		        String sql = "SELECT * FROM user WHERE role_id = 2";
 		        return jdbcTemplate.query(sql, new UserRowMapper());
 		    }
+
+
+		
+		 
 
 		    public String getRoleName(int roleId) {
 		        String sql = "SELECT role_name FROM roles WHERE role_id = ?";

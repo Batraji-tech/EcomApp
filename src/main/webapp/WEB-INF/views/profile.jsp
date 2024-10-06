@@ -20,6 +20,7 @@
 
             <button class="edit-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit Profile</button>
 
+
             <div class="user-details">
                 <% String profileImage = (String) request.getAttribute("profileImage"); %>
                 <% if (profileImage != null && !profileImage.isEmpty()) { %>

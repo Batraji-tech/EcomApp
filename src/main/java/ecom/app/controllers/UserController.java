@@ -105,6 +105,7 @@ public class UserController {
 
 	
 	
+	
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user, RedirectAttributes attributes , HttpSession session )
 			throws IOException, SerialException, SQLException {
@@ -153,8 +154,14 @@ public class UserController {
 	        mView.addObject("profileImage", null);
 	    }
 	    
+
+	    byte[] imageBytes = user.getProfileImage().getBytes();
+	    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
 	    mView.setViewName("profile");
 	    mView.addObject("user", user);
+	    mView.addObject("profileImage", base64Image); // Now it's Base64 encoded
+	    
 	    return mView;
 	}
 	

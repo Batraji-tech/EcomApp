@@ -16,22 +16,25 @@
         <c:if test="${not empty error}">
             <div class="error">${error}</div>
         </c:if>
-
-        <form action="/superadmin/login" method="post" autocomplete="off">
+         </br>
+        <form action="/superAdmin/login" method="post" autocomplete="off">
+			
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter Username" required autocomplete="off">
+                <input type="text" id="username" name="username" required autocomplete="off">
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password"  required autocomplete="off">
+                <input type="password" id="password" name="password" required autocomplete="off">
             </div>
             <button type="submit">Login</button>
         </form>
         <br>
         <div class="reset_password">
-            <a href="/reset_password">Forgot Password?</a>
+            <a href="/superAdmin/forgotpassword">Forgot Password?</a>
         </div>
+		
+		
     </div>
 </body>
 </html>
