@@ -33,7 +33,7 @@
     <div class="categories-bar">
         <div class="category">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyEvwHlH4wWYWbzMREwGMExULUIjd0KGkhXw&s" alt="Refrigerators">
-            <p>Refrigerators</p>
+            <a href="/products/display">Refrigerators</a>
         </div>
         <div class="category">
             <img src="https://opsg-img-cdn-gl.heytapimg.com/epb/202407/26/TaMP5ogUFuQFtKFr.png" alt="Mobiles">
@@ -48,7 +48,7 @@
     <!-- Featured Products Section -->
     <div class="featured-products">
         <h1>Featured Products</h1>
-        <h2>Check out our latest mobile phones that are trending this season!</h2>
+        <h2>Check out our latest products that are trending this season!</h2>
     </div>
  
     <!-- Medium Image Row -->
