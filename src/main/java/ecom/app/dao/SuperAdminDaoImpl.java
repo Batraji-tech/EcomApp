@@ -54,12 +54,16 @@ public class SuperAdminDaoImpl implements SuperAdminDao{
         
         
     }
+    
     public  int resetSuperAdminPassword(String passwordHash, String passwordSalt) {
         String sql = "UPDATE super_admin SET password_hash = ?, password_salt = ? WHERE id = ?";
         return jdbcTemplate.update(sql, passwordHash, passwordSalt,1);
-        
-        
     }
+    
+    
+    
+    
+    
     private final class SuperAdminRowMapper implements RowMapper<SuperAdmin> {
         @Override
         public SuperAdmin mapRow(ResultSet rs, int rowNum) throws SQLException {

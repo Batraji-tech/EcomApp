@@ -229,7 +229,63 @@ public class UserController {
 	    return "redirect:/user/profile?username=" + currentUser.getUsername(); 
 	}
 
+	 
 
+	 
+	  @GetMapping("/resetPassword")
+	    public String showResetPasswordForm(Model model) {
+	        return "user_reset_pswd"; 
+	    }
+	 
+	  private boolean isValidUsername(String username) {
+	    	user = userDaoImpl.fetchUser(username);
+	        return username != null && !username.trim().isEmpty() && user.getUsername().equals(username);
+	    }
+	  
+	  private boolean isValidPassword(String password) {
+	        return password != null && password.length() >= 8 && password.length() <= 15 && !password.contains(" ");
+	    }
+	  
+	  @PostMapping("/resetPassword")
+	    public String resetPassword(@RequestParam("username") String username,
+	                                @RequestParam("newPassword") String newPassword,
+	                                @RequestParam("confirmPassword") String confirmPassword,
+	                                RedirectAttributes redirectAttributes) {
+	    	
+	    	  user = userDaoImpl.fetchUser(username);
+	    	    if (user == null) {
+	    	        redirectAttributes.addFlashAttribute("error", "Username does not exist.");
+	    	        return "redirect:/user/resetPassword";
+	    	    }
+	    	if (!isValidUsername(username)) {
+	            redirectAttributes.addFlashAttribute("error", "Invalid username. Username must match an existing one.");
+	            return "redirect:/user/resetPassword";
+	        }
+
+	        if (!newPassword.equals(confirmPassword)) {
+	            redirectAttributes.addFlashAttribute("error", "Passwords do not match.");
+	            return "redirect:/user/resetPassword";
+	        }
+
+	        if (!isValidPassword(newPassword)) {
+	            redirectAttributes.addFlashAttribute("error", "Invalid password. It should be 8-15 characters long without spaces.");
+	            return "redirect:/user/resetPassword";
+	        }
+
+	        String passwordSalt = Password.generatePwdSalt(10);
+	        String passwordHash1 = newPassword + passwordSalt;
+
+	        String passwordHash = Password.generatePwdHash(passwordHash1);
+	       
+	        int result = userDaoImpl.resetUserPassword(username,passwordHash,passwordSalt);
+	        if (result > 0) {
+	            redirectAttributes.addFlashAttribute("message", "New password set successfully.");
+	        } else {
+	            redirectAttributes.addFlashAttribute("error", "Username does not exist.");
+	        }
+	        
+	        return "subadmin";
+	    }
 
 	
 	
