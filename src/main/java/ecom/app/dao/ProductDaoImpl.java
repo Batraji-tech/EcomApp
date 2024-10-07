@@ -68,6 +68,7 @@ public class ProductDaoImpl implements ProductDao {
         return getProductById(product.getProduct_id());
     }
 	
+
 	// Get a list of all products
     @Override
     public List<Products> getAllProducts() {
@@ -75,9 +76,12 @@ public class ProductDaoImpl implements ProductDao {
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 	
+	
+
 	@Override
 	public Products getProductById(int productId) {
-		String sql = "SELECT * FROM product WHERE product_id = ?";
+		String sql = "SELECT * FROM user WHERE user_id = ?";
+
 		return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
 	}
 

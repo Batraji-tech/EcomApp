@@ -7,6 +7,9 @@ import java.util.Comparator;
 
 import ecom.app.entities.User;
 import ecom.app.utility.ByteArrayMultipartFile;
+import ecom.app.entities.User;
+import ecom.app.utility.ByteArrayMultipartFile;
+import ecom.app.utility.Password;
 import jakarta.servlet.http.HttpSession;
 import ecom.app.dao.ProductDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +33,7 @@ public class ProductController {
 	private ProductDaoImpl productDaoImpl;
 	public List<Products> products;
 	private Products product;
-    private CartItemsDaoImpl cartItemDaoImpl;
-
+ 
 	@PostMapping("/add")
 	public String addProduct(@ModelAttribute Products product, @RequestParam("product_image") MultipartFile file,
 			RedirectAttributes attributes) {
@@ -47,32 +49,32 @@ public class ProductController {
 		}
 		return "redirect:/subadmin"; // Adjust this to your actual view
 	}
-
+ 
 	@GetMapping("/view_product")
 	public String viewProducts(Model model) {
 		List<Products> listOfProducts = fetchAllProducts();
-
+ 
 		System.out.println("Fetched Products: " + listOfProducts);
 		model.addAttribute("products", listOfProducts);
 		return "view_product"; // Ensure this matches your JSP filename
 	}
-
+ 
 	
-
+ 
 	@GetMapping("/view_productbycategoryname")
 	public String viewProductsByCategory(Model model , @RequestParam(required = false) String category_id ) {
 		List<Products> listOfProducts = null;
-
+ 
 		if (category_id == null)
 			listOfProducts = fetchAllProducts();
 		else
 			listOfProducts = fetchProductsByCategory(Integer.parseInt(category_id));
-
+ 
 		System.out.println("Fetched Products: " + listOfProducts);
 		model.addAttribute("products", listOfProducts);
 		return "view_productbycategoryname"; // Ensure this matches your JSP filename
 	}
-
+ 
 	private List<Products> fetchAllProducts() {
 		List<Products> listOfProducts = null;
 		try {
@@ -83,13 +85,11 @@ public class ProductController {
 		}
 		return listOfProducts;
 	}
-	
-	
-	 
-	
 
+
+ 
 	private List<Products> fetchProductsByCategory(int category_id) {
-
+ 
 		List<Products> listOfProducts = null;
 		try {
 			listOfProducts = productDaoImpl.fetchProductsByCategory(category_id);
@@ -99,15 +99,15 @@ public class ProductController {
 		}
 		return listOfProducts;
 	}
-
+ 
 	
-
-
+ 
+ 
 	@GetMapping("/remove_product/{id}")
 	public String removeProduct(@PathVariable("id") int id, RedirectAttributes attributes) {
 	    try {
 	        System.out.println("Attempting to delete product with ID: " + id);
-
+ 
 	        productDaoImpl.deleteProduct(id);
 	        attributes.addFlashAttribute("message", "Product removed successfully!");
 	    } catch (Exception e) {
@@ -115,27 +115,23 @@ public class ProductController {
 	    }
 	    return "redirect:/products/remove_product"; // Redirect back to the list after removal
 	}
-	
 	@GetMapping("/remove_product")
 	public String removeProducts(Model model) {
 		List<Products> listOfProducts = fetchAllProducts();
-
+ 
 		model.addAttribute("products", listOfProducts);
 		return "remove_product"; // Ensure this matches your JSP filename
 	}
-	
-	
-	
+
 	@GetMapping("/view_product_update_table")
 	public String viewProductsUpdate(Model model , HttpSession session ) {
 		List<Products> listOfProducts = fetchAllProducts();
-
+ 
 		model.addAttribute("products", listOfProducts);
 		session.setAttribute("products", listOfProducts);
 		return "update_table"; // Ensure this matches your JSP filename
 	}
-	
-	
+
 	@GetMapping("/edit_product/{id}")
     public String editProduct(@PathVariable("id") int id, Model model) throws IOException {
         try {
@@ -147,24 +143,23 @@ public class ProductController {
             return "redirect:/update_table"; // Redirect to view product on error
         }
     }
-	
 	@PostMapping("/product_updation")
 	public String updateProduct(@ModelAttribute Products updatedProduct, RedirectAttributes attributes, HttpSession session) 
 	        throws SerialException, IOException, SQLException {
-
+ 
 	    // Retrieve the existing product from the database
 	    Products currentProduct = productDaoImpl.fetchProductById(updatedProduct.getProduct_id());
-
+ 
 	    if (currentProduct == null) {
 	        attributes.addFlashAttribute("error", "Product not found.");
 	        return "redirect:/products/update_table";
 	    }
-
+ 
 	    // Use the current product's image if none is provided in the updated product
 	    if (updatedProduct.getProduct_image() == null || updatedProduct.getProduct_image().isEmpty()) {
 	        updatedProduct.setProduct_image(currentProduct.getProduct_image());
 	    }
-
+ 
 	    try {
 	        productDaoImpl.updateProduct(updatedProduct);
 	        attributes.addFlashAttribute("message", "Product updated successfully");
@@ -172,14 +167,16 @@ public class ProductController {
 	        attributes.addFlashAttribute("message", "Updation failed. Please try again later");
 	    }
 		System.out.println("Fetched Products: " + currentProduct);
-
+ 
 		return "redirect:/products/view_product_update_table";	}
-
-
+ 
 	
-    
-
-    @GetMapping("/display1")
+	@GetMapping("/add1")
+	public String products() {
+		return "products";
+	}
+ 
+       @GetMapping("/display1")
     public String listProducts(Model model) {
         List<Products> productList = productDaoImpl.getAllProducts();
         model.addAttribute("products", productList);
@@ -203,14 +200,14 @@ public class ProductController {
     
     
     @GetMapping("/{id}")
-    public String viewProductDetails(@PathVariable("id") int productId, Model model) {
-        Products product = productDaoImpl.getProductById(productId);
+    public String viewProductDetails(@PathVariable("id") int productId, Model model) throws IOException, SQLException {
+        Products product = productDaoImpl.fetchProductById(productId);
         model.addAttribute("product", product);
         return "product_details"; // JSP page
     }
     
     
-   /* @GetMapping("/{productName}")
+    /*@GetMapping("/{productName}")
     public String viewProductDetails(@PathVariable("productName") String productName, Model model) {
         Products product = productDaoImpl.getProductByName(productName); // Fetch product by ID
         if (product != null) {
@@ -219,30 +216,7 @@ public class ProductController {
         } else {
             return "redirect:/product"; // Redirect if the product is not found
         }
-    }
-    */
-    // Method to add an item to the cart
-    @PostMapping("/cart/add")
-    public String addToCart(@RequestParam int productId, 
-                            @RequestParam String productName,
-                            @RequestParam String description,
-                            @RequestParam double price,
-                            @RequestParam int quantity,
-                            Model model) {
-        CartItems cartItem = new CartItems();
-        cartItem.setProductId(productId);
-        cartItem.setProductName(productName);
-        cartItem.setDescription(description);
-        cartItem.setPrice(price);
-        cartItem.setQuantity(quantity);
+    }*/
+    
 
-        // Add the item to the cart
-        cartItemDaoImpl.addCartItem(cartItem);
-
-        // Set success message
-        model.addAttribute("message", "Product added to cart successfully!");
-        
-        // Redirect to cart view (can also return to product detail view or any other page)
-        return "redirect:/cart"; 
-    }
 }

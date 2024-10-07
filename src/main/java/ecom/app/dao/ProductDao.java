@@ -23,8 +23,10 @@ public interface ProductDao {
 
 		Products getProductById(int productId);
 		
+
 		 List<Products> getAllProducts();
 		// Products getProductByName(String productName);
 		
+
 		
 }

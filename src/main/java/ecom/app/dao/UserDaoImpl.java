@@ -136,7 +136,20 @@ import ecom.app.entities.Role;
 				String sql = "SELECT * FROM user WHERE user_id = ?";
 				return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userId);
 			}
+
+		
 		    
+
+
+			 
+			@Override
+			 public  int resetUserPassword(String username, String passwordHash, String passwordSalt) {
+			        String sql = "UPDATE user SET passwordHash = ?, passwordSalt = ? WHERE username = ?";
+			        return jdbcTemplate.update(sql, passwordHash, passwordSalt, username);
+			        
+			        
+			    }
+
 		    
 	}
 

@@ -78,6 +78,12 @@ public class SuperAdminController {
     	return "superadmin_dashboard";
     }
 
+    
+    @GetMapping("/dashboard")
+    public String showDashboard(Model model) {
+        return "superadmin_dashboard"; 
+    }
+
 
     @GetMapping("/viewProfile")
     public ModelAndView viewProfile(ModelAndView mView) {

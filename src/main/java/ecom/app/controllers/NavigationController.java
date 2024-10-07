@@ -66,19 +66,15 @@ public class NavigationController {
 		return "orders";
 	}
 	
-	/*@GetMapping("/products")
-	public String products() {
-		return "products";
-	}*/
 	
 	
+	
+
 	
 	@GetMapping("/remove_product")
 	public String removeproduct() {
 		return "remove_product";
 	}
-
-	
 	
 	
 }
