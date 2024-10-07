@@ -107,8 +107,6 @@
 
                 <a href="/superAdmin/viewProfile">View Profile</a>
 
-            
-
 
             </div>
             <div class="menu-item">
@@ -121,17 +119,21 @@
                 <a href="/superAdmin/viewAllCustomers">View All Customers</a>
             </div>
             <div class="menu-item">
+                <a href="/category/add">Add Category</a>
+            </div>
+            <div class="menu-item">
                 <a href="/superAdmin/analysisReport">Analysis Report</a>
             </div>
         </div>
         
-
-		
+  
 		
 		<!-- Logout Button -->
 		        <form action="/superAdmin/logout" method="POST">
 		            <button type="submit" class="logout-button">Logout</button>
 		        </form>
+		        
+		        
     </div>
 
 </body>

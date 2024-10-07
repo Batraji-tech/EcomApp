@@ -137,6 +137,8 @@
             <a href="/products/remove_product" class="link">Remove Product</a>
             <a href="/products/view_product" class="link">View All Products</a>
             <a href="/products/view_productbycategoryname" class="link">View by Category Name</a>
+             <a href="/user/resetPassword" class ="link"'>Reset Password</a>
+           
         </div>
  
 

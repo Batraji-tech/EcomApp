@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.sql.rowset.serial.SerialException;
 
 import ecom.app.entities.Role;
+import ecom.app.entities.SuperAdmin;
 import ecom.app.entities.User;
 
 public interface UserDao {
@@ -25,7 +26,7 @@ public interface UserDao {
 
 	User getUserById(int userId);
 
-	
-	
+    int resetUserPassword(String username, String passwordHash, String passwordSalt);
+
 	
 }

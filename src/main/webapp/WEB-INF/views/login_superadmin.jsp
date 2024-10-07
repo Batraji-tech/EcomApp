@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,13 +10,20 @@
     <div class="login-container">
         <h2>Super Admin Login</h2>
 
-        <!-- Display error message if exists -->
-        <c:if test="${not empty error}">
-            <div class="error">${error}</div>
-        </c:if>
-         </br>
+        <!-- Display error message if it exists -->
+        <%
+            String errorMessage = (String) request.getAttribute("error");
+            if (errorMessage != null) {
+        %>
+            <div class="error" style="color: red;">
+                <%= errorMessage %>
+            </div>
+        <%
+            }
+        %>
+
+        <br>
         <form action="/superAdmin/login" method="post" autocomplete="off">
-			
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required autocomplete="off">
@@ -33,8 +38,10 @@
         <div class="reset_password">
             <a href="/superAdmin/forgotpassword">Forgot Password?</a>
         </div>
-		
-		
+        <br>
+        <div>
+            <a href="/superAdmin/dashboard">Super Admin Dashboard</a>
+        </div>
     </div>
 </body>
 </html>

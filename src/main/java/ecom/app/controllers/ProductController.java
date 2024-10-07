@@ -3,6 +3,7 @@ package ecom.app.controllers;
 import ecom.app.entities.Products;
 import ecom.app.entities.User;
 import ecom.app.utility.ByteArrayMultipartFile;
+import ecom.app.utility.Password;
 import jakarta.servlet.http.HttpSession;
 import ecom.app.dao.ProductDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
