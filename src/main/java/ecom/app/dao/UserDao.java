@@ -21,6 +21,10 @@ public interface UserDao {
 	List<User> findAllCustomers();
     List<User> findAllSubAdmins();
 	
+	User modifyUser(User updatedUser) throws SerialException, IOException, SQLException;
+
+	User getUserById(int userId);
+
 	
 	
 	

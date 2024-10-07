@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ecom.app.entities.Product" %>
+<%@ page import="ecom.app.entities.Products" %>
 <%@ page import="java.util.Base64" %> <!-- Import for Base64 encoding -->
 
 <html>
@@ -104,20 +104,19 @@
     <div class="product-container">
         <% 
             // Fetch the product object from the request scope
-            Product product = (Product) request.getAttribute("product");
+            Products product = (Products) request.getAttribute("product");
             
-            // Get the image bytes from the product
-            byte[] imageBytes = product.getProductImage();
+            // Get the Base64 encoded image string
+            String base64Image = product.getBase64ProductImage();
         %>
 
         <!-- Product Image Section -->
         <div class="product-image">
             <% 
                 // Display the product image if it exists
-                if (imageBytes != null && imageBytes.length > 0) { 
+                if (base64Image != null) { 
             %>
-                <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(imageBytes) %>" 
-                     alt="<%= product.getProductName() %>">
+                <img src="data:image/jpeg;base64,<%= base64Image %>" alt="<%= product.getProduct_name() %>">
             <% 
                 } else { 
             %>
@@ -129,22 +128,16 @@
 
         <!-- Product Details Section -->
         <div class="product-details">
-            <h1><%= product.getProductName() %></h1>
+            <h1><%= product.getProduct_name() %></h1>
 
             <!-- Display product fields -->
             <p><strong>Description:</strong> <%= product.getDescription() %></p>
             <p><strong>MRP:</strong> &#8377;<%= product.getMrp() %></p>
             <p><strong>Discount:</strong> <%= product.getDiscount() %> %</p>
-			<p><strong>Delivery Charges:</strong> &#8377;<%= product.getDeliveryCharge() %></p>
-            <p class="price-details">Final Price: &#8377;<%= product.getFinalPrice() %></p>
-			<% 
-			    // Check if the product status is 0 (Out of stock)
-			    if (product.getStatus() == 0) { 
-			%>
-			    <p class="product-status" style="color: red;"><strong>Status:</strong> Out of stock</p>
-			<% 
-			    } 
-			%>
+            <p><strong>Delivery Charges:</strong> &#8377;<%= product.getDelivery_charge() %></p>
+            <p class="price-details">Final Price: &#8377;<%= product.getFinal_price() %></p>
+            
+            
 
             <!-- Buttons for actions -->
             <div class="btn-container">

@@ -71,7 +71,7 @@
 
     <div class="container">
         <div class="row">
-            <form class="form-container" enctype="multipart/form-data" method="post" action="your-action-url-here">
+            <form class="form-container" enctype="multipart/form-data" method="post" action="/products/add">
                 <div class="text-center">
                     <h2>Product Addition</h2>
                     <p class="message">Enter the product details below.</p>
@@ -92,6 +92,11 @@
                     <label for="discount">Discount</label>
                     <input type="number" step="0.01" placeholder="Enter Discount" name="discount" class="form-control" id="discount">
                 </div>
+                
+                  <div class="form-group">
+                    <label for="delivery_charges">Delivery Charges</label>
+                    <input type="number" step="0.01" placeholder="Enter Delivery Charges" name="delivery_charge" class="form-control" id="delivery_charges">
+                </div>
                 <div class="form-group">
                     <label for="final_price">Final Price</label>
                     <input type="number" step="0.01" placeholder="Enter Final Price" name="final_price" class="form-control" id="final_price" required>
@@ -100,10 +105,7 @@
                     <label for="stock">Stock Quantity</label>
                     <input type="number" placeholder="Enter Stock Quantity" name="stock" class="form-control" id="stock" required>
                 </div>
-                <div class="form-group">
-                    <label for="delivery_charges">Delivery Charges</label>
-                    <input type="number" step="0.01" placeholder="Enter Delivery Charges" name="delivery_charges" class="form-control" id="delivery_charges">
-                </div>
+              
                 <div class="form-group">
                     <label for="category_id">Category</label>
                     <select name="category_id" id="category_id" class="form-control" required>
