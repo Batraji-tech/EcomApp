@@ -15,14 +15,14 @@
             <th>Price</th>
             <th>More Details</th>
         </tr>
-
+ 
         <%
             // Fetch the product list from the request scope
             List<Product> products = (List<Product>) request.getAttribute("products");
-
+ 
             if (products != null && !products.isEmpty()) {
                 for (Product product : products) {
-                    byte[] imageBytes = product.getProductImage(); 
+                    byte[] imageBytes = product.getProductImage();
                     
                     // Debugging output to check the image byte length
                     int imageLength = (imageBytes != null) ? imageBytes.length : 0;
@@ -31,7 +31,7 @@
                     <tr>
                         <td>
                             <% if (imageBytes != null && imageLength > 0) { %>
-                                <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(imageBytes) %>" 
+                                <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(imageBytes) %>"
                                      alt="<%= product.getProductName() %>" style="width:100px;height:auto;"/>
                             <% } else { %>
                                 <span>No Image Available</span>
@@ -54,3 +54,5 @@
     </table>
 </body>
 </html>
+ 
+has context menu

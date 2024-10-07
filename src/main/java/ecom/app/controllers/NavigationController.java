@@ -63,10 +63,7 @@ public class NavigationController {
 	public String wishlist() {
 		return "wishlist";
 	}
-	@GetMapping("/cart")
-	public String cart() {
-		return "cart";
-	}
+	
 	@GetMapping("/orders")
 	public String orders() {
 		return "orders";

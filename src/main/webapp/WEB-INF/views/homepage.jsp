@@ -33,15 +33,15 @@
     <div class="categories-bar">
         <div class="category">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyEvwHlH4wWYWbzMREwGMExULUIjd0KGkhXw&s" alt="Refrigerators">
-            <a href="/products/display">Refrigerators</a>
+            <a href="/product/display">Refrigerators</a>
         </div>
         <div class="category">
             <img src="https://opsg-img-cdn-gl.heytapimg.com/epb/202407/26/TaMP5ogUFuQFtKFr.png" alt="Mobiles">
-            <p>Mobiles</p>
+            <a href="/product/display">Mobiles</a>
         </div>
         <div class="category">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f0gPxkniKMZ39z8_9mRNakRtpnmOitd1aA&s" alt="Laptops">
-            <p>Laptops</p>
+             <a href="/product/display1">Laptops</a>
         </div>
     </div>
  

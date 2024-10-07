@@ -1,76 +1,77 @@
 package ecom.app.entities;
-
+ 
+import java.util.Arrays;
+ 
 public class CartItems {
-
-	private int cartItemId;
-	private int cartId;
+	
 	private int productId;
-	private int quantity;
+	private String productName;
+    private String description;
+    private byte[] productImage;
+    private double price;
+    private int quantity;
 	
-	public CartItems(int cartItemId, int cartId, int productId, int quantity) {
+    public CartItems() {
 		super();
-		this.cartItemId = cartItemId;
-		this.cartId = cartId;
-		this.productId = productId;
-		this.quantity = quantity;
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-
-	public int getCartItemId() {
-		return cartItemId;
-	}
-
-
-
-	public void setCartItemId(int cartItemId) {
-		this.cartItemId = cartItemId;
-	}
-
-
-
-	public int getCartId() {
-		return cartId;
-	}
-
-
-
-	public void setCardtId(int cartId) {
-		this.cartId = cartId;
-	}
-
-
 
 	public int getProductId() {
 		return productId;
 	}
 
-
-
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
 
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public byte[] getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(byte[] productImage) {
+		this.productImage = productImage;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public int getQuantity() {
 		return quantity;
 	}
 
-
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "CartItems [cartItemId=" + cartItemId + ", cartId=" + cartId + ", productId=" + productId
-				+ ", quantity=" + quantity + "]";
+		return "CartItems [productId=" + productId + ", productName=" + productName + ", description=" + description
+				+ ", productImage=" + Arrays.toString(productImage) + ", price=" + price + ", quantity=" + quantity
+				+ "]";
 	}
 	
+   
 	
 	
 }
