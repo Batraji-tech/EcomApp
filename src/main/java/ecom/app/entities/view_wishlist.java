@@ -1,24 +1,23 @@
 package ecom.app.entities;
- 
+
+
 import java.util.Arrays;
- 
-public class CartItems {	
-	private String productName;
+
+public class view_wishlist {
+    private String productName;
     private String description;
     private int price;
     private byte[] productImage;
-    private int quantity;
-	public CartItems() {
+	public view_wishlist() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public CartItems(String productName, String description, int price, byte[] productImage, int quantity) {
+	public view_wishlist(String productName, String description, int price, byte[] productImage) {
 		super();
 		this.productName = productName;
 		this.description = description;
 		this.price = price;
 		this.productImage = productImage;
-		this.quantity = quantity;
 	}
 	public String getProductName() {
 		return productName;
@@ -44,22 +43,14 @@ public class CartItems {
 	public void setProductImage(byte[] productImage) {
 		this.productImage = productImage;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 	@Override
 	public String toString() {
-		return "CartItems [productName=" + productName + ", description=" + description + ", price=" + price
-				+ ", productImage=" + Arrays.toString(productImage) + ", quantity=" + quantity + "]";
+		return "Wishlist [productName=" + productName + ", description=" + description + ", price=" + price
+				+ ", productImage=" + Arrays.toString(productImage) + "]";
 	}
- 
- 
 	
-	
-	
+    
+    
+    
+    
 }
- 
- 

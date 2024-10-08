@@ -23,7 +23,7 @@
     <div class="dropdown">
         <button class="dropbtn">My Account</button>
         <div class="dropdown-content">
-            <a href="/wishlist">Wishlist</a>
+            <a href="/wishlist/view">Wishlist</a>
             <a href="/cart">Cart Items</a>
             <a href="/orders">Your Orders</a>
         </div>

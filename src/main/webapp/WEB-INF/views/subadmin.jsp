@@ -132,7 +132,7 @@
 
     <div class="container">
         <div class="tab">
-            <a href="/products" class="link">Add Products</a>
+            <a href="/products/add1" class="link">Add Products</a>
             <a href="/products/view_product_update_table" class="link">Update Product</a>
             <a href="/products/remove_product" class="link">Remove Product</a>
             <a href="/products/view_product" class="link">View All Products</a>
