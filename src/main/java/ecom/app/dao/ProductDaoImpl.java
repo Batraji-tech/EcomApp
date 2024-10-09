@@ -116,8 +116,50 @@ import ecom.app.entities.Products;
 		   String sql = "SELECT * FROM product WHERE product_id = ?";
 		    return jdbcTemplate.queryForObject(sql, new ProductRowMapper(),product_id);
 		}
-	 
+
 		
+		@Override
+		public List<Products> getAllDiscountProducts1() {
+			 String sql = "SELECT * FROM product where tag = 'Best Discount' ";
+			    List<Products> productsList2 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList2;
+		}
+
+		@Override
+		public List<Products> getAllBestBrandProducts1() {
+			String sql = "SELECT * FROM product where tag = 'Best Brand' ";
+		    List<Products> productsList3 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList3;
+		}
+	 
+		@Override
+		public List<Products> getAllNewArrivalProducts1() {
+			 String sql = "SELECT * FROM product where tag = 'New Arrivals' ";
+			    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList1;
+		}
+		
+		@Override
+		public List<Products> getAllNewArrivalProducts() {
+			 String sql = "SELECT * FROM product where tag = 'New Arrivals' LIMIT 3";
+			    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList1;
+		}
+
+
+		@Override
+		public List<Products> getAllDiscountProducts() {
+			 String sql = "SELECT * FROM product where tag = 'Best Discount' LIMIT 3 ";
+			    List<Products> productsList2 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList2;
+		}
+    
+		@Override
+		public List<Products> getAllBestBrandProducts() {
+			String sql = "SELECT * FROM product where tag = 'Best Brand' LIMIT 3 ";
+		    List<Products> productsList3 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList3;
+		}
 	   
 		
 		}

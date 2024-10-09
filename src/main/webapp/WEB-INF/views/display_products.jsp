@@ -152,17 +152,6 @@
             window.location.href = "<%= request.getContextPath() %>/products?sort=" + sortOption;
         }
  
-        function addToWishlist(productId) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "<%= request.getContextPath() %>/products/addToWishlist", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert(xhr.responseText);
-                }
-            };
-            xhr.send("id=" + productId);
-        }
     </script>
 </head>
 <body>
@@ -199,8 +188,11 @@
                     <h3><%= product.getProduct_name() %></h3>
                     <p>Price: &#8377;<%= product.getFinal_price() %></p>
                     <div class="button-container">
-                        <a href="<%= request.getContextPath() %>/products/<%= product.getProduct_id() %>" class="details-btn">More Details</a>
-                        <a href="javascript:void(0);" class="wishlist-btn" onclick="addToWishlist(<%= product.getProduct_id() %>)">Add to Wishlist</a>
+                     <center>  
+                     
+                      <a href="<%= request.getContextPath() %>/products/<%= product.getProduct_id() %>" class="details-btn">More Details</a>
+                     
+                     </center> 
                     </div>
                 </div>
     <%

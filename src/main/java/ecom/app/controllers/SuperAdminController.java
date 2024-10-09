@@ -36,6 +36,9 @@ public class SuperAdminController {
     
     @Autowired
 	UserDaoImpl userDaoImpl;
+    
+   
+    
 
     @PostMapping("/login")
     public String login(
@@ -71,13 +74,11 @@ public class SuperAdminController {
         return "login_superadmin"; // Redirect back to login page with error message
     }
     
-    
     @GetMapping("/login")
     public String Login()
     {
-    	return "superadmin_dashboard";
+    	return "login_superadmin";
     }
-
     
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {

@@ -39,9 +39,7 @@
             <a href="/superAdmin/forgotpassword">Forgot Password?</a>
         </div>
         <br>
-        <div>
-            <a href="/superAdmin/dashboard">Super Admin Dashboard</a>
-        </div>
+       
     </div>
 </body>
 </html>
