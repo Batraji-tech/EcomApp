@@ -1,61 +1,64 @@
 package ecom.app.dao;
 
+import ecom.app.entities.Wishlist;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import ecom.app.entities.view_wishlist;
 @Repository
-public class WishlistDaoImpl implements WishlistDao{
-
+public class WishlistDaoImpl implements WishlistDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addWishlistItem(view_wishlist wishlist) {
-        String sql = "INSERT INTO wishlist (product_name, description, price, product_image) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, wishlist.getProductName(), wishlist.getDescription(), wishlist.getPrice(), wishlist.getProductImage());
+    public void addToWishlist(Wishlist wishlist) {
+        String sql = "INSERT INTO wishlist (user_id, product_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, wishlist.getUserId(), wishlist.getProductId());
     }
 
     @Override
-    public void updateWishlistItem(view_wishlist wishlist) {
-        String sql = "UPDATE wishlist SET description = ?, price = ?, product_image = ? WHERE product_name = ?";
-        jdbcTemplate.update(sql, wishlist.getDescription(), wishlist.getPrice(), wishlist.getProductImage(), wishlist.getProductName());
-    }
-
-    @Override
-    public void deleteWishlistItem(String productName) {
-        String sql = "DELETE FROM wishlist WHERE product_name = ?";
-        jdbcTemplate.update(sql, productName);
-    }
-
-    @Override
-    public List<view_wishlist> getAllWishlistItems() {
-        String sql = "SELECT * FROM wishlist";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            view_wishlist wishlist = new view_wishlist();
-            wishlist.setProductName(rs.getString("product_name"));
-            wishlist.setDescription(rs.getString("description"));
-            wishlist.setPrice(rs.getInt("price"));
-            wishlist.setProductImage(rs.getBytes("product_image"));
-            return wishlist;
+    public List<Wishlist> getUserWishlist(int userId) {
+        String sql = "SELECT * FROM wishlist WHERE user_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{userId}, new RowMapper<Wishlist>() {
+            @Override
+            public Wishlist mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Wishlist wishlist = new Wishlist();
+                wishlist.setWishlistId(rs.getInt("wishlist_id"));
+                wishlist.setUserId(rs.getInt("user_id"));
+                wishlist.setProductId(rs.getInt("product_id"));
+                return wishlist;
+            }
         });
     }
 
+
     @Override
-    public view_wishlist getWishlistItem(String productName) {
-        String sql = "SELECT * FROM wishlist WHERE product_name = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{productName}, (rs, rowNum) -> {
-            view_wishlist wishlist = new view_wishlist();
-            wishlist.setProductName(rs.getString("product_name"));
-            wishlist.setDescription(rs.getString("description"));
-            wishlist.setPrice(rs.getInt("price"));
-            wishlist.setProductImage(rs.getBytes("product_image"));
-            return wishlist;
-        });
+    public void removeFromWishlist(int wishlistId) {
+        String sql = "DELETE FROM wishlist WHERE wishlist_id = ?";
+        jdbcTemplate.update(sql, wishlistId);
     }
+
+    public Wishlist getUserWishlistItem(int wishlistId) {
+        String sql = "SELECT * FROM wishlist WHERE wishlist_id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{wishlistId}, (rs, rowNum) -> {
+                Wishlist wishlist = new Wishlist();
+                wishlist.setWishlistId(rs.getInt("wishlist_id"));
+                wishlist.setUserId(rs.getInt("user_id"));
+                wishlist.setProductId(rs.getInt("product_id"));
+                return wishlist;
+            });
+        } catch (EmptyResultDataAccessException e) {
+            return null; // Handle the case when no wishlist item is found
+        }
+    }
+
+
 }
-

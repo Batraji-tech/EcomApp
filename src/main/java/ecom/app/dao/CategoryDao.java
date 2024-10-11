@@ -9,7 +9,7 @@ import ecom.app.entities.Products;
 public interface CategoryDao {
 
 	  int insertCategory(Category category) throws IOException, SQLException;
-
+     
 	
 	
 	 
