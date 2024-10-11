@@ -101,15 +101,31 @@
 </head>
 <body>
  
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="ecom.app.entities.Products" %>
+<%@ page import="java.util.Base64" %> <!-- Import for Base64 encoding -->
+ 
+<html>
+<head>
+    <title>Product Details</title>
+    <style>
+        /* Your existing CSS styles */
+    </style>
+</head>
+<body>
+ 
     <div class="product-container">
         <%
-            // Fetch the product object from the request scope
             Products product = (Products) request.getAttribute("product");
-            
-            // Get the Base64 encoded image string
+            String message = (String) request.getAttribute("message"); // Get the message
             String base64Image = product.getBase64ProductImage();
         %>
- 
+
+        <!-- Message Display -->
+        <c:if test="${not empty message}">
+            <p style="font-weight:bold; color:green">${message}</p>
+        </c:if>
+
         <!-- Product Image Section -->
         <div class="product-image">
             <%
@@ -136,14 +152,19 @@
             <p><strong>Discount:</strong> <%= product.getDiscount() %> %</p>
             <p><strong>Delivery Charges:</strong> &#8377;<%= product.getDelivery_charge() %></p>
             <p class="price-details">Final Price: &#8377;<%= product.getFinal_price() %></p>
-            
-            
- 
+
             <!-- Buttons for actions -->
             <div class="btn-container">
-                <a href="/cart/add" class="add-to-cart">Add to Cart</a>
-                <a href="#" class="buy-now">Buy Now</a>
-                <a href="<%= request.getContextPath() %>/product/display1" class="back-button">Back to Products</a>
+                <form action="${pageContext.request.contextPath}/cart/add" method="POST">
+                    <input type="hidden" name="productId" value="${product.getProduct_id()}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+
+                <form action="${pageContext.request.contextPath}/cart/buynow" method="GET">
+                    <input type="hidden" name="productId" value="${product.getProduct_id()}">
+                    <button type="submit" class="buy-now">Buy Now</button>
+                </form>
+                <a href="<%= request.getContextPath() %>/products/display1" class="back-button">Back to Products</a>
             </div>
         </div>
     </div>

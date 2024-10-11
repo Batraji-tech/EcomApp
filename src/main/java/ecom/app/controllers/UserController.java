@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ecom.app.dao.CartDaoImpl;
 import ecom.app.dao.UserDaoImpl;
 import ecom.app.entities.User;
 import ecom.app.utility.Password;
 import jakarta.servlet.http.HttpSession;
+import ecom.app.entities.Cart;
 import ecom.app.entities.Role;
 
 @Controller
@@ -34,6 +36,11 @@ public class UserController {
 	@Autowired
 	UserDaoImpl userDaoImpl;
 
+
+    @Autowired
+    private CartDaoImpl cartDaoImpl;
+
+	
 	@GetMapping("/login")
 	public String Login() {
 		return "user_login";
@@ -41,21 +48,21 @@ public class UserController {
 	
 	
 	@GetMapping("/openRegistrationPage")
-	public ModelAndView openRegistrationPage(ModelAndView modelAndView) {
+	public ModelAndView openRegistrationPage(ModelAndView modelAndView ) {
 
 
 		List<Role> listOfRoles = userDaoImpl.fetchAllRoles();
 		
 		System.out.println(listOfRoles );
 
+		   
+		
 		modelAndView.addObject("listOfRoles", listOfRoles);
 		modelAndView.setViewName("user_registration");
 
 		System.out.println("User is regitered");
 		return modelAndView;
 	}
-	
-	
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
@@ -67,6 +74,8 @@ public class UserController {
 
 	    try {
 	        user = userDaoImpl.fetchUser(username);
+	        
+	        System.out.println("user in login controller " + user);
 	        String pwdSalt = user.getPasswordSalt();
 	        String oldPwdHash = user.getPasswordHash();
 	        String newPassword = password + pwdSalt;
@@ -103,7 +112,7 @@ public class UserController {
 	}
 
 
-	
+
 	
 	
 	@PostMapping("/register")
@@ -127,8 +136,9 @@ public class UserController {
 		// Password Encryption completes
 
 		int result =  userDaoImpl.insertUser(user);
+		
 
-		if (result > 0) {
+		if (result == 2) {
 			attributes.addFlashAttribute("message", "Registration Successful");
 			return "redirect:/user/login";
 		} else {
@@ -143,6 +153,7 @@ public class UserController {
 	@GetMapping("/profile")
 	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username , HttpSession session) throws IOException, SQLException {
 	    User user = userDaoImpl.fetchUser(username);
+	    System.out.println(user);
         session.setAttribute("user", user); // Store user in session
 
 

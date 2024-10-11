@@ -38,6 +38,9 @@ public class NavigationController {
 	public String payments() {
 		return "payments";
 	}
+	
+	
+	
 	@GetMapping("/order_successful")
 	public String order_successful() {
 		return "order_successful";

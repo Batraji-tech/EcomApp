@@ -3,7 +3,8 @@ import ecom.app.entities.Products;
 	import ecom.app.entities.User;
 	 
 	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 	import org.springframework.stereotype.Repository;
 	import org.springframework.web.multipart.MultipartFile;
 	 
@@ -77,14 +78,22 @@ import ecom.app.entities.Products;
 		
 		
 	 
-		@Override
-		public Products getProductById(int productId) {
-			String sql = "SELECT * FROM user WHERE user_id = ?";
+//		@Override
+//		public Products getProductById(int productId) {
+//			String sql = "SELECT * FROM user WHERE user_id = ?";
+//	 
+//			return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
+//		}
 	 
-			return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
-		}
-	 
-		
+		public Products getProductById(int product_id) {
+	        String sql = "SELECT * FROM product WHERE product_id = ?";
+	        try {
+	            return jdbcTemplate.queryForObject(sql, new Object[]{product_id}, new ProductRowMapper());
+	        } catch (EmptyResultDataAccessException e) {
+	            System.out.println("Product not found for ID: " + product_id); // Log the missing product
+	            return null; // Return null or handle it as needed
+	        }
+	    }
 	 
 		@Override
 		public void deleteProduct(int productId) throws IOException, SQLException {
