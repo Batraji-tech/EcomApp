@@ -293,9 +293,9 @@
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar.style.right === '0px') {
-                sidebar.style.right = '-250px'; // Hide sidebar
+                sidebar.style.right = '-250px'; 
             } else {
-                sidebar.style.right = '0px'; // Show sidebar
+                sidebar.style.right = '0px'; 
             }
         }
 
@@ -307,7 +307,7 @@
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex - 1].style.display = "block";  
-            setTimeout(showSlides, 3000); // Change image every 3 seconds
+            setTimeout(showSlides, 3000); 
         }
 
         function plusSlides(n) {
