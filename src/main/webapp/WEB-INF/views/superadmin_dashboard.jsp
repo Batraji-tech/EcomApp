@@ -207,9 +207,9 @@
             <li><a href="/category/add">Add Category</a></li>
             <li><a href="/superAdmin/analysisReport">Analysis Report</a></li>
             <li class="logout">
-                <form action="/superAdmin/logout" method="POST" style="margin: 0;">
-                    <button type="submit" class="logout-btn">Logout</button>
-                </form>
+                <form  method="POST" style="margin: 0;">
+                               <li><a href="/">Logout</a></li>
+                                   </form>
             </li>
         </ul>
     </div>

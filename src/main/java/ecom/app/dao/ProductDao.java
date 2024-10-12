@@ -27,6 +27,13 @@ public interface ProductDao {
 		 List<Products> getAllProducts();
 		// Products getProductByName(String productName);
 		
+		 List<Products> getAllNewArrivalProducts();
+		 List<Products> getAllDiscountProducts();
+		 List<Products> getAllBestBrandProducts();
+		
+		 List<Products> getAllNewArrivalProducts1();
+		 List<Products> getAllDiscountProducts1();
+		 List<Products> getAllBestBrandProducts1();
  
 		
 }

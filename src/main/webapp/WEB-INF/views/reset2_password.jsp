@@ -72,18 +72,22 @@
             <div class="error"><%= request.getAttribute("error1") %></div>
         <% } %>
 
-        <form action="${pageContext.request.contextPath}/user/resetpassword" method="post">
-            <input type="hidden" name="email" value="${email}" />
-            <div class="input-group">
-                <label for="newPassword"><b>New Password</b></label>
-                <input type="password" id="newPassword" name="newPassword" required placeholder="Enter new password">
-            </div>
-            <div class="input-group">
-                <label for="confirmPassword"><b>Confirm Password</b></label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm new password">
-            </div>
-            <button type="submit">Reset Password</button>
-        </form>
+        <form action="${pageContext.request.contextPath}/user/resetpassword1" method="post">
+    <input type="hidden" name="email" value="${email}" />
+    <div>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+    </div>
+    <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <button type="submit">Reset Password</button>
+    <% if (request.getAttribute("error1") != null) { %>
+        <div class="error"><%= request.getAttribute("error1") %></div>
+    <% } %>
+</form>
+
     </div>
 </body>
 </html>

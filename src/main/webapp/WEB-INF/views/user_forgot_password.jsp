@@ -83,13 +83,17 @@
             <div class="error"><%= request.getAttribute("error") %></div>
         <% } %>
 
-        <form action="${pageContext.request.contextPath}/user/verifyemail" method="post">
-            <div class="input-group">
-                <label for="email">Enter your email</label>
-                <input type="email" id="email" name="email" required placeholder="example@gmail.com">
-            </div>
-            <button type="submit">Verify Email</button>
-        </form>
+       <form action="${pageContext.request.contextPath}/user/verifyemail" method="post">
+    <div>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit">Verify Email</button>
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="error"><%= request.getAttribute("error") %></div>
+    <% } %>
+</form>
+
     </div>
 </body>
 </html>

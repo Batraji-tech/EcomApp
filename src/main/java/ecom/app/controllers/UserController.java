@@ -317,6 +317,13 @@ public class UserController {
 	            return "user_forgot_password"; // Stay on the same page with error message
 	        }
 	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 
 	    @PostMapping("/resetpassword1")
 	    public String resetPassword(
@@ -325,6 +332,7 @@ public class UserController {
 	            @RequestParam("email") String email,
 	            Model model) {
 
+	        // Validate passwords
 	        if (!newPassword.equals(confirmPassword)) {
 	            model.addAttribute("error1", "Passwords do not match.");
 	            model.addAttribute("email", email); // Keep email in case of error
@@ -337,12 +345,12 @@ public class UserController {
 	            return "reset2_password"; // Return to reset password page with error
 	        }
 
-	        // Proceed with password reset if no errors
+	        // Proceed with password reset
 	        String passwordSalt = Password.generatePwdSalt(10);
-	        String passwordHash1 = newPassword + passwordSalt;
-	        String passwordHash = Password.generatePwdHash(passwordHash1);
+	        String passwordHash = Password.generatePwdHash(newPassword + passwordSalt);
 
-	        int result = userDaoImpl.resetUserPassword(passwordHash, passwordSalt);
+	        // Update the password in the database
+	        int result = userDaoImpl.forgotUserPassword(email, passwordHash, passwordSalt);
 	        if (result > 0) {
 	            model.addAttribute("message", "New password set successfully.");
 	            return "user_login"; // Redirect to login page after success
@@ -352,5 +360,6 @@ public class UserController {
 	            return "reset2_password"; // Return to reset password page with error
 	        }
 	    }
+
 	  
 }
