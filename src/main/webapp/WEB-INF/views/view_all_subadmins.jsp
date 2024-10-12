@@ -7,14 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #F2EED7;
             margin: 0;
             padding: 20px;
         }
 
         h2 {
             text-align: center;
-            color: #333;
+            color: #FF9874; 
         }
 
         table {
@@ -28,11 +28,11 @@
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            background-color: #fff;
+            background-color: white;
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: #295F98; 
             color: white;
         }
 
@@ -46,14 +46,14 @@
             margin: 20px auto;
             text-align: center;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #295F98;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
 
         a:hover {
-            background-color: #45a049;
+            background-color: #1a3a6e;
         }
 
         .no-customers {
@@ -73,25 +73,25 @@
         <table>
             <thead>
                 <tr>
-					                     <th>ID</th>
-					                   <th>First Name</th>
-					                   <th>Last Name</th>
-					                   <th>Email</th>
-					                   <th>Mobile No</th>
-					                   <th>Date of Birth</th>
-					                   <th>Username</th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>Date of Birth</th>
+                    <th>Username</th>
                 </tr>
             </thead>
             <tbody>
                 <% for (User subadmin : subadmins) { %>
                     <tr>
-						<td><%=  subadmin.getUserId() %></td>
-						                       <td><%= subadmin.getFirstName() %></td>
-						                       <td><%= subadmin.getLastName() %></td>
-						                       <td><%= subadmin.getEmailId() %></td>
-						                       <td><%= subadmin.getMobileNo() %></td>
-						                       <td><%= subadmin.getDateOfBirth() != null ?  subadmin.getDateOfBirth().toString() : "N/A" %></td>
-						                       <td><%=  subadmin.getUsername() %></td>
+                        <td><%=  subadmin.getUserId() %></td>
+                        <td><%= subadmin.getFirstName() %></td>
+                        <td><%= subadmin.getLastName() %></td>
+                        <td><%= subadmin.getEmailId() %></td>
+                        <td><%= subadmin.getMobileNo() %></td>
+                        <td><%= subadmin.getDateOfBirth() != null ?  subadmin.getDateOfBirth().toString() : "N/A" %></td>
+                        <td><%=  subadmin.getUsername() %></td>
                     </tr>
                 <% } %>
             </tbody>

@@ -10,14 +10,14 @@
 <title>View Products</title>
 <style>
 body {
-	background-color: #E6F9E6;
+	background-color: #F2EED7; /* Soft background */
 	font-family: Arial, sans-serif;
 	margin: 0;
 }
 
 .message {
-	color: #003366;
-	font-size: 16px;
+	color: #FF9874; /* Soft orange */
+	font-size: 30px;
 	font-weight: bold;
 	text-align: left;
 	margin: 20px;
@@ -38,39 +38,39 @@ table {
 }
 
 th, td {
-	border: 1px solid #003366;
+	border: 1px solid #295F98; /* Dark blue */
 	padding: 10px;
 	text-align: left;
 }
 
 th {
-	background-color: #003366;
+	background-color: #295F98; /* Dark blue */
 	color: white;
 }
 
 .productname {
 	font-weight: bold;
-	color: #003366;
+	color: #295F98; /* Dark blue */
 }
 
 .price {
-	color: #00ff00;
+	color: #295F98;
 	font-weight: bold;
 }
 
 .btn {
 	padding: 10px 15px;
 	border-radius: 5px;
-	color: #003366;
+	color: white;
 	border: none;
 	cursor: pointer;
-	background-color: #00ff00;
+	background-color: #295F98; /* Dark blue */
 	transition: background-color 0.3s;
 	margin: 5px;
 }
 
 .btn:hover {
-	background-color: #00cc00;
+	background-color: #1a3a6e; /* Darker blue */
 }
 
 th:nth-child(5), td:nth-child(5) {
@@ -120,7 +120,6 @@ th:nth-child(7), td:nth-child(7) {
 							method="get">
 							<button type="submit" class="btn">Remove</button>
 						</form>
-
 					</td>
 				</tr>
 				<%

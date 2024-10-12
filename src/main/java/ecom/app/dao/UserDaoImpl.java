@@ -10,15 +10,16 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-
 import ecom.app.dao.UserDao;
 import ecom.app.entities.User;
 import ecom.app.dao.UserRowMapper;
 import ecom.app.dao.RolesRowMapper;
 import ecom.app.entities.Role;
+import ecom.app.entities.SuperAdmin;
 
 
 
@@ -144,12 +145,8 @@ import ecom.app.entities.Role;
 				String sql = "SELECT * FROM user WHERE user_id = ?";
 				return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userId);
 			}
-
-		
-		    
-
-
-			 
+			
+			
 			@Override
 			 public  int resetUserPassword(String username, String passwordHash, String passwordSalt) {
 			        String sql = "UPDATE user SET passwordHash = ?, passwordSalt = ? WHERE username = ?";
@@ -157,8 +154,28 @@ import ecom.app.entities.Role;
 			        
 			        
 			    }
-		    
-	}
+
+			 @Override
+				    public User findByEmail(String email) {
+				    	try {
+				        String sql = "SELECT * FROM user WHERE email_id = ?";
+				        return jdbcTemplate.queryForObject(sql, new UserRowMapper(),email);
+				        
+				    } catch (EmptyResultDataAccessException e) {
+				        return null; // Username not found
+				    }
+				    }
+			 public   int resetUserPassword(String passwordHash, String passwordSalt) {
+			        String sql = "UPDATE user SET passwordHash = ?, passwordSalt = ? WHERE user_id = ?";
+			        return jdbcTemplate.update(sql, passwordHash, passwordSalt,1);
+			    }
+			 
+			 
+			 
+			    
+			}
+
+	
 
 			
 		
