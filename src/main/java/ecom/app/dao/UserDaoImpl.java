@@ -165,10 +165,13 @@ import ecom.app.entities.SuperAdmin;
 				        return null; // Username not found
 				    }
 				    }
-			 public   int resetUserPassword(String passwordHash, String passwordSalt) {
-			        String sql = "UPDATE user SET passwordHash = ?, passwordSalt = ? WHERE user_id = ?";
-			        return jdbcTemplate.update(sql, passwordHash, passwordSalt,1);
-			    }
+			 
+			 @Override
+			 public int forgotUserPassword(String email, String passwordHash, String passwordSalt) {
+			     String sql = "UPDATE user SET passwordHash = ?, passwordSalt = ? WHERE email_id = ?";
+			     return jdbcTemplate.update(sql, passwordHash, passwordSalt, email);
+			 }
+
 			 
 			 
 			 

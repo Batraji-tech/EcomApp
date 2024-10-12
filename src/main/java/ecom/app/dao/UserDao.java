@@ -31,7 +31,8 @@ public interface UserDao {
    
     User findByEmail(String email);
     
-    int resetUserPassword(String passwordHash, String passwordSalt);
+
+	int forgotUserPassword(String email, String passwordHash, String passwordSalt);
 
 	
 }

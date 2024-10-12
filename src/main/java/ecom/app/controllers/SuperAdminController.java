@@ -144,11 +144,7 @@ public class SuperAdminController {
 
 
 
-    @PostMapping("/logout")
-	public String logout() {
-		
-		return "login_superadmin" ;
-	}
+  
 
     
     @GetMapping("/resetPassword")
