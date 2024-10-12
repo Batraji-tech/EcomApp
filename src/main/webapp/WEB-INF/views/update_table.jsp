@@ -1,4 +1,3 @@
-
 <%@ page import="ecom.app.entities.Products"%>
 <%@ page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -13,12 +12,12 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #F2EED7; 
         }
         .message {
             font-size: 24px;
             font-weight: bold;
-            color: #333;
+            color: #FF9874; 
             margin-bottom: 20px;
         }
         .container {
@@ -34,7 +33,7 @@
             border-collapse: collapse;
         }
         thead {
-            background-color: #003366; /* Dark Blue */
+            background-color: #295F98; 
             color: white;
         }
         th, td {
@@ -46,10 +45,10 @@
             font-weight: bold;
         }
         tbody tr:hover {
-            background-color: #f1f1f1; /* Light Gray on hover */
+            background-color: #f1f1f1; 
         }
         .btn-update {
-            background-color: #00ff00; 
+            background-color: #295F98; 
             border: none;
             padding: 5px 10px;
             border-radius: 5px;
@@ -57,13 +56,7 @@
             cursor: pointer;
         }
         .btn-update:hover {
-            background-color: #00cc00; /* Darker green */
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #003366; /* Dark blue */
+            background-color: #1a3a6e; 
         }
     </style>
 </head>
@@ -102,10 +95,10 @@
                                 <td><%= product.getMrp() %></td>
                                 <td><%= product.getDiscount() %></td>
                                 <td><%= product.getFinal_price() %></td>
-                                 <td><%= product.getDelivery_charge() %></td>
+                                <td><%= product.getDelivery_charge() %></td>
                                 <td><%= product.getStock() %></td>
                                 <td>
-                                    <form action="/products/edit_product/<%= product.getProduct_id() %>"" method="get">
+                                    <form action="/products/edit_product/<%= product.getProduct_id() %>" method="get">
                                         <input type="hidden" name="pid" value="<%= product.getProduct_id() %>">
                                         <button type="submit" class="btn-update">Update</button>
                                     </form>
@@ -116,7 +109,7 @@
                     } else {
                 %>
                     <tr>
-                        <td colspan="9">No products found.</td>
+                        <td colspan="10">No products found.</td>
                     </tr>
                 <%
                     }
@@ -125,10 +118,5 @@
         </table>
     </div>
 
-    <div class="footer">
-        © 2024 Shopology. All rights reserved.
-    </div>
-
 </body>
 </html>
-

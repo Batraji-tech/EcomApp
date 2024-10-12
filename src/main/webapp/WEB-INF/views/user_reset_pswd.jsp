@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e9ecef; /* Light background for better contrast */
+            background-color: #F2EED7;
             margin: 0;
             padding: 0;
             display: flex;
@@ -21,64 +20,64 @@
         }
         .container {
             width: 100%;
-            max-width: 400px; /* Set a max width for the container */
+            max-width: 400px;
             background: white;
-            padding: 30px; /* Increased padding for better spacing */
-            border-radius: 10px; /* Softer corners */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Slightly heavier shadow for depth */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333; /* Darker text for better readability */
+            color: #FF9874;
         }
         label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold; /* Make labels stand out */
-            color: #555; /* Soft gray for label text */
+            font-weight: bold;
+            color: #555;
         }
         input {
-            width: 100%;
-            padding: 12px; /* Increased padding for input fields */
+            width: 94%;
+            padding: 12px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 2px solid #295F98; 
             border-radius: 4px;
-            font-size: 14px; /* Set a standard font size for input text */
-            transition: border-color 0.3s; /* Smooth transition for border color */
+            font-size: 14px;
+            transition: border-color 0.3s;
         }
         input:focus {
-            border-color: #4CAF50; /* Highlight border color on focus */
-            outline: none; /* Remove default outline */
+            border-color: #295F98;
+            outline: none;
         }
         .button-group {
             display: flex;
             justify-content: space-between;
         }
         button {
-            width: 48%; /* Reduced width to fit two buttons */
-            padding: 12px; /* Increased padding for buttons */
-            background-color: #4CAF50;
+            width: 48%;
+            padding: 12px;
+            background-color: #295F98;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px; /* Increased font size for better readability */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #1a3a6e;
         }
         .back-button {
-            background-color: #ff6600; /* Different color for Back to Dashboard */
+            background-color: #295F98;
         }
         .back-button:hover {
-            background-color: #ff3300; /* Darkened hover state for Back to Dashboard */
+            background-color: #1a3a6e;
         }
         .success, .error {
             text-align: center;
             margin-top: 20px;
-            font-weight: bold; /* Bold for success/error messages */
+            font-weight: bold;
         }
         .success {
             color: green;

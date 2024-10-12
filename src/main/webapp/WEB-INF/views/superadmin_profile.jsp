@@ -13,26 +13,32 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #F2EED7; 
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
         }
         h1 {
             text-align: center;
             margin-top: 20px;
-            color: #333;
+            color: #FF9874 ; 
         }
         .container {
-            width: 40%; /* Reduced width */
-            max-width: 500px; /* Maximum width for larger screens */
+            width: 100%; 
+            max-width: 480px;
+            height: auto; 
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column; 
+            align-items: left; 
+            justify-content: center; 
+			margin-top:50px;
         }
         table {
             width: 100%;
@@ -44,41 +50,58 @@
         }
         .form-group {
             margin-bottom: 15px;
+            width: 100%;
+			margin-right:20px; 
         }
         label {
             font-weight: bold;
-            color: #555;
+            color:#295F98 ; 
         }
         input[type="text"],
         input[type="email"] {
-            width: 100%;
+            width: 93%; 
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 2px solid #295F98;
             border-radius: 4px;
+            color: black;
         }
         button {
-            width: 100%;
+            width: 94%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #295F98 ; 
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            margin-left: 10px; 
         }
         button:hover {
-            background-color: #45a049;
+            background-color:#1a3a6e; 
         }
-		.success, .error {
-		            text-align: center;
-		            margin-top: 20px;
-		        }
-		        .success {
-		            color: green;
-		        }
-		        .error {
-		            color: red;
-		        }
+        .success, .error {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 0px;
+        }
+        .alert.error {
+            color: #ff0000;
+        }
+        .alert.success {
+            color: #008000;
+        }
     </style>
 </head>
 <body>
@@ -113,31 +136,31 @@
                         <form:input path="mobileNo" cssClass="form-control" id="mobileNo"/>
                     </td>
                 </tr>
-				<tr>
-				                   <td class="form-group">
-				                       <label for="username">Username</label>
-				                       <form:input path="username" cssClass="form-control" id="username"/>
-				                   </td>
-				               </tr>
+                <tr>
+                    <td class="form-group">
+                        <label for="username">Username</label>
+                        <form:input path="username" cssClass="form-control" id="username"/>
+                    </td>
+                </tr>
             </table>
             <button type="submit">Save Changes</button>
         </form:form>
 		
-		<c:if test="${not empty errors}">
-		    <div class="alert error">
-		        <ul>
-		            <c:forEach var="error" items="${errors}">
-		                ${errors}
-		            </c:forEach>
-		        </ul>
-		    </div>
-		</c:if>
+        <c:if test="${not empty errors}">
+            <div class="alert error">
+                <ul>
+                    <c:forEach var="error" items="${errors}">
+                        <li>${error}</li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </c:if>
 
-		<c:if test="${not empty message}">
-		    <div class="alert success">
-		        ${message}
-		    </div>
-		</c:if>
+        <c:if test="${not empty message}">
+            <div class="alert success">
+                ${message}
+            </div>
+        </c:if>
 
     </div>
 

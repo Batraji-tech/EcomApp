@@ -12,14 +12,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #F2EED7; /* Soft background */
 }
 
 /* Message */
 .message {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: #FF9874; /* Soft orange */
     margin-bottom: 20px;
 }
 
@@ -40,7 +40,7 @@ table {
 }
 
 thead {
-    background-color: #003366; /* Dark Blue */
+    background-color: #295F98; /* Dark blue */
     color: white;
 }
 
@@ -83,23 +83,23 @@ img {
 </style>
 </head>
 <body>
-	<div class="message">All Products</div>
+    <div class="message">All Products</div>
 
-	<div class="container">
-		<table>
-			<thead>
-				<tr>
-					<th>Product ID</th>
-					<th>Product Image</th>
-					<th>Product Name</th>
-					<th>Description</th>
-					<th>MRP</th>
-					<th>Discount</th>
-					<th>Final Price</th>
-					<th>Stock</th>
-				</tr>
-			</thead>
-			<tbody>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>MRP</th>
+                    <th>Discount</th>
+                    <th>Final Price</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
     <%
         List<Products> products = (List<Products>) request.getAttribute("products");
         if (products != null) {
@@ -127,9 +127,8 @@ img {
     <%
         }
     %>
-</tbody>
-
-		</table>
-	</div>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

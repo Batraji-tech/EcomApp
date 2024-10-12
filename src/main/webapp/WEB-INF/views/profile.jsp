@@ -7,19 +7,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Profile</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2EED7; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        .logo {
+            font-size: 1.5em; 
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; 
+            padding: 20px;
+        }
+
+        .profile-box {
+            background-color: white; 
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px; 
+        }
+
+        .edit-button {
+            background-color: #295F98; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px; 
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #1a3a6e;
+        }
+
+        .user-details {
+            margin-top: 20px;
+        }
+
+        .field {
+            margin-bottom: 15px; 
+            margin-top: 10px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            color: #295F98; 
+        }
+
+        .field input {
+            width: 95%;
+            padding: 10px;
+            border: 2px solid #295F98; 
+            border-radius: 5px;
+            background-color: #f9f9f9; 
+            color: #333;
+            font-size: 14px;
+        }
+
+        img {
+            max-width: 150px; 
+            border-radius: 50%; 
+            margin-bottom: 20px; 
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">Shopology</div>
-    </header>
 
     <div class="container">
         <% User user = (User) request.getAttribute("user"); %>
         <div class="profile-box">
-
             <button class="edit-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit Profile</button>
-
 
             <div class="user-details">
                 <% String profileImage = (String) request.getAttribute("profileImage"); %>
@@ -56,9 +130,5 @@
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2024 Your E-Commerce Site | All Rights Reserved</p>
-    </footer>
 </body>
 </html>

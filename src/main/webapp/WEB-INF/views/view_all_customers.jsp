@@ -7,14 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #F2EED7; 
             margin: 0;
             padding: 20px;
         }
 
         h2 {
             text-align: center;
-            color: #333;
+            color: #FF9874; 
         }
 
         table {
@@ -32,7 +32,7 @@
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: #295F98; 
             color: white;
         }
 
@@ -46,14 +46,14 @@
             margin: 20px auto;
             text-align: center;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #295F98; 
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
 
         a:hover {
-            background-color: #45a049;
+            background-color: #1a3a6e; 
         }
 
         .no-customers {

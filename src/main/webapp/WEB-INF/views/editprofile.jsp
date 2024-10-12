@@ -8,15 +8,16 @@
     <title>Edit Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #F2EED7; 
             margin: 0;
             padding: 20px;
         }
 
         h2 {
-            color: #333;
+            color: #FF9874; 
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .container {
@@ -24,8 +25,8 @@
             margin: 0 auto;
             background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         img {
@@ -38,9 +39,9 @@
 
         label {
             display: block;
-            margin-top: 10px;
+            margin-top: 15px;
             font-weight: bold;
-            color: #555;
+            color: #555; 
         }
 
         input[type="text"],
@@ -48,27 +49,36 @@
         input[type="date"],
         input[type="file"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 5px 0 20px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 2px solid #295F98; 
+            border-radius: 6px;
             box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #28a745;
+            padding: 12px;
+            background-color: #295F98; 
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #1a3a6e; 
         }
 
         .error-message {
@@ -78,6 +88,15 @@
             margin-top: 10px;
         }
 
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
