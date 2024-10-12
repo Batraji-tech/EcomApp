@@ -114,11 +114,14 @@
                 <p>   Scan to pay</p>
             </div>
             <div class="payment-card">
-                <h3>COD Available</h3>
-				<img src="${pageContext.request.contextPath}/assets/cashon Delivery img.jpg" alt="Cash On Delivery">
-                 
-				<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/order_successful'">Cash on Delivery</button>
-            </div>
+    <h3>COD Available</h3>
+    <img src="${pageContext.request.contextPath}/assets/cashon Delivery img.jpg" alt="Cash On Delivery">
+    <form action="${pageContext.request.contextPath}/order/confirm" method="post">
+        <input type="hidden" name="paymentMethod" value="Cash on Delivery">
+        <button type="submit">Cash on Delivery</button>
+    </form>
+</div>
+
         </div>
     </div>
 </body>

@@ -24,8 +24,8 @@
         <button class="dropbtn">My Account</button>
         <div class="dropdown-content">
             <a href="/wishlist/view">Wishlist</a>
-            <a href="/cart">Cart Items</a>
-            <a href="/orders">Your Orders</a>
+            <a href="/cart/view">Cart Items</a>
+            <a href="/order/displayOrders">Your Orders</a>
         </div>
     </div>
 </nav>

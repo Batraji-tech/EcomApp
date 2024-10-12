@@ -43,13 +43,20 @@ import ecom.app.entities.SuperAdmin;
 
 			Blob profileImage = getBlob(user.getProfileImage());
 	
-			String query = "INSERT INTO user " + "(`first_name`, `last_name`, `email_id`, `mobile_no`, "
+			String queryForInsertUser = "INSERT INTO user " + "(`first_name`, `last_name`, `email_id`, `mobile_no`, "
 					+ "`date_of_birth`, `username`, `passwordSalt`, `passwordHash`, "
 					+ "`role_id`, `profile_image`) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-			return jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), user.getEmailId(),
+			String queryForCreateCart = "INSERT INTO cart (user_id) VALUES (LAST_INSERT_ID())";
+			
+			int res1 = jdbcTemplate.update(queryForInsertUser, user.getFirstName(), user.getLastName(), user.getEmailId(),
 					user.getMobileNo(), user.getDateOfBirth(), user.getUsername(), user.getPasswordSalt(),
 					user.getPasswordHash(),  user.getRole().getRoleId(), profileImage);
+			
+			int res2 = jdbcTemplate.update(queryForCreateCart);
+			
+			return res1 + res2;
+			
 		}
 		
 		private Blob getBlob(MultipartFile image) throws IOException, SerialException, SQLException {
@@ -74,6 +81,7 @@ import ecom.app.entities.SuperAdmin;
 			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
 
 		}
+		
 
 		 @Override
 		    public List<User> findAllCustomers() {
