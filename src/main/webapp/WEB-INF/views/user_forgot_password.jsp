@@ -83,7 +83,7 @@
             <div class="error"><%= request.getAttribute("error") %></div>
         <% } %>
 
-        <form action="${pageContext.request.contextPath}/superAdmin/verify_email" method="post">
+        <form action="${pageContext.request.contextPath}/user/verifyemail" method="post">
             <div class="input-group">
                 <label for="email">Enter your email</label>
                 <input type="email" id="email" name="email" required placeholder="example@gmail.com">

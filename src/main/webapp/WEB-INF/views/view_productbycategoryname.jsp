@@ -9,12 +9,12 @@
     <title>Search by Category Name</title>
     <style>
         body {
-            background-color: #E6F9E6; /* Light green background */
+            background-color: #F2EED7; /* Soft background */
             font-family: 'Arial', sans-serif;
             padding: 20px;
         }
         .search-container {
-            border: 1px solid #003366; /* Dark blue border */
+            border: 1px solid #295F98; /* Dark blue border */
             border-radius: 10px;
             background-color: #ffffff; /* White background for the search form */
             padding: 40px;
@@ -23,28 +23,29 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         h2 {
-            color: #003366; /* Dark blue */
+            color: #FF9874; /* Soft orange */
             margin-bottom: 20px;
             text-align: center;
         }
         .btn-search {
-            background-color: #00ff00; /* Bright green */
-            border-color: #00ff00;
-            color: #003366; /* Dark blue text */
+            background-color: #295F98; /* Dark blue */
+            border-color: #295F98;
+            color: white; /* White text */
             font-size: 16px;
             width: 100%;
             border-radius: 5px;
             margin-top: 20px;
+            cursor: pointer;
         }
         .btn-search:hover {
-            background-color: #00cc00; /* Darker green */
-            border-color: #00cc00;
+            background-color: #1a3a6e; /* Darker blue */
+            border-color: #1a3a6e;
         }
         .footer {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: #003366; /* Dark blue */
+            color: #295F98; /* Dark blue */
         }
         table {
             width: 100%;
@@ -57,7 +58,7 @@
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #003366; /* Dark blue */
+            background-color: #295F98; /* Dark blue */
             color: white;
         }
         tbody tr:hover {

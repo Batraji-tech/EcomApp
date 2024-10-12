@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #F2EED7; 
             margin: 0;
             padding: 20px;
         }
@@ -21,15 +21,18 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            color: #333;
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF9874;
+            margin-bottom: 20px;
             text-align: center;
         }
         label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
-            color: #555;
+            color: #295F98;
         }
         input[type="text"],
         input[type="number"],
@@ -38,14 +41,14 @@
             width: 100%;
             padding: 10px;
             margin: 5px 0 20px 0;
-            border: 1px solid #ccc;
+            border: 2px solid #295F98; 
             border-radius: 4px;
             box-sizing: border-box;
         }
         button {
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: #295F98;
             color: white;
             border: none;
             border-radius: 4px;
@@ -54,14 +57,7 @@
             transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #218838;
-        }
-        .message {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
+            background-color: #1a3a6e;
         }
         .error-message {
             color: red;
@@ -76,7 +72,6 @@
         <div class="message">Update Product</div>
 
         <% 
-            // Assuming product details are stored in request attribute "product"
             Products product = (Products) request.getAttribute("product"); 
             if (product != null) {
         %>
@@ -95,9 +90,9 @@
                 <label for="discount">Discount in Percentage:</label>
                 <input type="number" id="discount" name="discount" value="<%= product.getDiscount() %>" required />
 
-                   <label for="delivery_charge">Delivery Charge:</label>
+                <label for="delivery_charge">Delivery Charge:</label>
                 <input type="number" id="delivery_charge" name="delivery_charge" value="<%= product.getDelivery_charge() %>" required />
-             
+
                 <label for="final_price">Final Price:</label>
                 <input type="number" id="final_price" name="final_price" value="<%= product.getFinal_price() %>" required />
 

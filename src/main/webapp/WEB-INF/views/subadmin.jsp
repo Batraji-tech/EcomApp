@@ -1,146 +1,330 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="ecom.app.entities.User" %>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub-Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-size: cover;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-image: url('https://miro.medium.com/v2/resize:fit:1200/1*b8WS2iEvZCQYlXq46gKpqw.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
         }
 
-        header {
-            background-color: rgba(0, 51, 102, 0.8);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            width: 100%;
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(242, 238, 215, 0.7);
+            z-index: 1;
         }
 
-        .profile-links {
+        .navbar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            margin: auto; /* Center the profile links */
+            background-color: #295F98;
+            color: white;
+            padding: 10px 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        .container {
-            width: 80%;
-            max-width: 800px;
-            margin-top: 100px; /* Space for the fixed header */
+        .logo {
+            color: #FF9874;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .header {
+            text-align: center;
+            flex-grow: 1;
+            font-size: 20px;
+            margin-right: 70px;
+        }
+
+        .toggle-btn {
+            cursor: pointer;
+            font-size: 24px;
+            background-color: #295F98;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            background-color: #295F98;
+            transition: right 0.7s ease;
+            z-index: 3;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar ul li.logout {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+        }
+
+        .content {
+            margin-left: 20px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
+        .slideshow-container {
+            width: 70%;
+            position: relative;
+            margin: 0 auto;
+            padding: 0;
+            z-index: 1;
+        }
+
+        .mySlides {
+            display: none;
+            height: 350px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            z-index: 4;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .registration-steps {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            max-width: 250px;
+            margin: 20px;
             text-align: left;
         }
 
-        .greeting {
-            font-size: 1.2em;
-            margin-left: 15px; /* Space between the greeting and buttons */
+        .step img {
+            width: 100%;
+            height: auto;
         }
 
-        .tab {
+        .step h3 {
             text-align: center;
         }
 
-        .link {
-            background-color: #00ff00;
-            color: #003366;
-            text-decoration: none;
-            border-radius: 5px;
-            padding: 15px 25px;
-            font-size: 16px;
-            margin: 10px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
+        /* FAQ styles */
+        .faq-section {
+            text-align: center;
+            margin-top: 40px;
+			width:97%;
         }
 
-        .link:hover {
-            background-color: #00cc00;
-        }
-
-        .profile-links button {
-            background-color: #007BFF; /* Bootstrap primary color */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
+        .faq-question {
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 0 10px; /* Add some margin to space out buttons */
-        }
-
-        .profile-links button:hover {
-            background-color: #0056b3; /* Darker blue */
-        }
-
-        @media (max-width: 600px) {
-            .link {
-                width: 100%;
-                margin: 5px 0;
-            }
-        }
-
-        .marquee {
-            font-size: 1.5em;
-            color: white;
-            background-color: rgba(0, 51, 102, 0.8);
+            margin: 15px 0;
+            background-color: #FF9874;
+            color: black;
             padding: 10px;
             border-radius: 5px;
-            width: 100%;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
+            transition: background-color 0.3s;
+			text-align:left;
+        }
+
+        .faq-question:hover {
+            background-color:#FF9874 ;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-top: 5px;
+			text-align:left;
         }
     </style>
 </head>
-
 <body>
+    <div class="overlay"></div>
 
-    <header>
-        <h1>Sub-Admin Dashboard</h1>
-        <div class="profile-links">
-            <% User user = (User) request.getAttribute("user"); %>
-            <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">View Profile</button>
-            <a href="/" class="link">Logout</a>
-         
+    <div class="navbar">
+        <div class="logo">Shopology</div>
+        <h1 class="header">WELCOME TO SUB ADMIN DASHBOARD</h1>
+        <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">☰</button> <!-- Toggle Button in Navbar -->
+    </div>
+    
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">✖</button>
+        <ul>
+            <li><a href="${pageContext.request.contextPath}/user/profile?username=${user.username}">View Profile</a></li>
+            <li><a href="/user/resetPassword">Reset Password</a></li>
+            <li><a href="/products/add1">Add Products</a></li>
+            <li><a href="/products/view_product_update_table">Update Product</a></li>
+            <li><a href="/products/remove_product">Remove Product</a></li>
+            <li><a href="/products/view_product">View All Products</a></li>
+            <li><a href="/products/view_productbycategoryname">View by Category Name</a></li>
+            <li><a href="/user/login">Logout</a></li>
+        </ul>
+    </div>
 
+    <div class="content">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="https://www.instorindia.com/wp-content/uploads/2021/08/Blog-img8.jpg" alt="Slide 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="https://www.zegashop.com/web/wp-content/uploads/2021/05/Group-229.png" alt="Slide 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="https://fastercapital.com/i/Online-shopping--The-Rise-of-E-commerce-in-Mass-Market-Retail--The-Benefits-of-E-commerce-for-Retailers.webp" alt="Slide 3">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-    </header>
 
-    <div class="container">
-        <div class="tab">
-            <a href="/products/add1" class="link">Add Products</a>
-            <a href="/products/view_product_update_table" class="link">Update Product</a>
-            <a href="/products/remove_product" class="link">Remove Product</a>
-            <a href="/products/view_product" class="link">View All Products</a>
-            <a href="/products/view_productbycategoryname" class="link">View by Category Name</a>
-             <a href="/user/resetPassword" class ="link"'>Reset Password</a>
-           
+        <div class="registration-steps">
+            <h2>Steps to Register Your Seller Account</h2>
+            <div class="step-container">
+                <div class="step">
+                    <img src="https://media.istockphoto.com/id/1658170979/vector/hand01.jpg?s=612x612&w=0&k=20&c=C9xLL2Qd6nkJ2wCJqPtubRCzBYFvD-6-b1ZfJEiurpk=" alt="Step 1 Image">
+                    <h3>1: Steps to start selling your products</h3>
+                    <p>Create a seller account on Shopology.in</p>
+                </div>
+                <div class="step">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU_BUZvarX2BmZNWjyCaUqfKJLCQyx09aFkQ&s" alt="Step 2 Image">
+                    <h3>2: List Your Products</h3>
+                    <p>List your products with photos and description</p>
+                </div>
+                <div class="step">
+                    <img src="https://img.freepik.com/premium-vector/people-delivery-products_318923-61.jpg" alt="Step 3 Image">
+                    <h3>3: Complete Orders </h3>
+                    <p>Deliver orders to customers within 7 days </p>
+                </div>
+            </div>
         </div>
- 
 
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-question" onclick="toggleAnswer('faq1')">
+                How do I sell on Shopology.in? 
+            </div>
+            <div class="faq-answer" id="faq1">
+                <p>1.Register yourself with a request to super-admin to become a retailer </p>
+				<p>2.Add your products which you want to sell </p>
+				<p>3.Complete your order within 7 days </p>
+            </div>
+            <div class="faq-question" onclick="toggleAnswer('faq3')">
+                How to create a seller account on Shopology.in? 
+            </div>
+            <div class="faq-answer" id="faq3">
+                <p>Go to the Shopology retailer registration page and fill out the required form.</p>
+            </div>
+            <div class="faq-question" onclick="toggleAnswer('faq4')">
+                Is there a fee to create a seller account on Shopology.in? 
+            </div>
+            <div class="faq-answer" id="faq4">
+                <p>Creating an account is absoluately free.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.right === '0px') {
+                sidebar.style.right = '-250px'; // Hide sidebar
+            } else {
+                sidebar.style.right = '0px'; // Show sidebar
+            }
+        }
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex - 1].style.display = "block";  
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+        function plusSlides(n) {
+            slideIndex += n;
+            const slides = document.getElementsByClassName("mySlides");
+            if (slideIndex > slides.length) {slideIndex = 1}
+            if (slideIndex < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex - 1].style.display = "block";  
+        }
+
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            answer.style.display = answer.style.display === "block" ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
