@@ -120,10 +120,12 @@
             </div>
             <div class="form-group role-select">
                 <label for="role">Select Role:</label>
-                <select id="role" name="role">
-                    <option value="customer">Customer</option>
-                    <option value="retailer">Retailer</option>
-                </select>
+               <select id="role" name="role">
+    <option value="">Select a role</option>
+    <option value="customer">Customer</option>
+    <option value="retailer">Retailer</option>
+</select>
+
             </div>
             <div>
                 <button type="submit" class="login-button">Login</button>

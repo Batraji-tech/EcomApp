@@ -65,6 +65,164 @@ public class UserController {
 		return modelAndView;
 	}
 	
+//	@PostMapping("/login")
+//	public String login(@RequestParam String username, 
+//	                    @RequestParam String password, 
+//	                    @RequestParam String role,
+//	                    Model model, 
+//	                    RedirectAttributes attributes,
+//	                    HttpSession session) {
+//
+//	    try {
+//	        user = userDaoImpl.fetchUser(username);
+//
+//	        // Check if user exists
+//	        if (user == null) {
+//	            attributes.addFlashAttribute("message", "Incorrect Username");
+//	            return "redirect:/user/login"; // Redirect back to login on failure
+//	        }
+//
+//	        // Check user status
+//	        if (!"ACTIVE".equals(user.getStatus())) {
+//	            attributes.addFlashAttribute("message", "Your account is not active. Status: " + user.getStatus());
+//	            return "redirect:/user/login"; // Redirect back to login on failure
+//	        }
+//
+//	        // Password validation
+//	        String pwdSalt = user.getPasswordSalt();
+//	        String oldPwdHash = user.getPasswordHash();
+//	        String newPassword = password + pwdSalt;
+//	        String newPasswordHash = Password.generatePwdHash(newPassword);
+//
+//	        if (newPasswordHash.equals(oldPwdHash)) {
+//	            model.addAttribute("user", user);
+//	            attributes.addFlashAttribute("user", user); // Pass the user object
+//	            session.setAttribute("user", user); // Store user in session
+//
+//	            int roleId = user.getRole().getRoleId();
+//	            if (role.equalsIgnoreCase("Retailer")) {
+//	                if (roleId == 2) {
+//	                    return "subadmin"; 
+//	                } else {
+//	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
+//	                }
+//	            } else if (role.equalsIgnoreCase("Customer")) {
+//	                if (roleId == 3) {
+//	                    return "redirect:/homepageuser"; // Redirect to customer page
+//	                } else {
+//	                    attributes.addFlashAttribute("message", "No Customer found with this username");
+//	                }
+//	            }
+//	        } else {
+//	            attributes.addFlashAttribute("message", "Incorrect Password");
+//	        }
+//	    } catch (EmptyResultDataAccessException e) {
+//	        attributes.addFlashAttribute("message", "Incorrect Username");
+//	    }
+//
+//	    return "redirect:/user/login"; // Redirect back to login on failure
+//	}
+
+
+
+//	@PostMapping("/login")
+//	public String login(@RequestParam String username, 
+//	                    @RequestParam String password, 
+//	                    @RequestParam String role,
+//	                    Model model, 
+//	                    RedirectAttributes attributes,
+//	                    HttpSession session) {
+//
+//	    try {
+//	        user = userDaoImpl.fetchUser(username);
+//	        
+//	        System.out.println("user in login controller " + user);
+//	        String pwdSalt = user.getPasswordSalt();
+//	        String oldPwdHash = user.getPasswordHash();
+//	        String newPassword = password + pwdSalt;
+//	        String newPasswordHash = Password.generatePwdHash(newPassword);
+//
+//	        if (newPasswordHash.equals(oldPwdHash)) {
+//	            model.addAttribute("user", user);
+//	            int roleId = user.getRole().getRoleId();
+//	            attributes.addFlashAttribute("user", user); // Pass the user object
+//	          session.setAttribute("user", user); // Store user in session
+//
+//	            
+//	            if (role.equalsIgnoreCase("Retailer")) {
+//	                if (roleId == 2) {
+//	                    return "subadmin"; 
+//	                } else {
+//	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
+//	                }
+//	            } else if (role.equalsIgnoreCase("Customer")) {
+//	                if (roleId == 3) {
+//	                    return "redirect:/homepageuser"; // Redirect to customer page
+//	                } else {
+//	                    attributes.addFlashAttribute("message", "No Customer found with this username");
+//	                }
+//	            }
+//	        } else {
+//	            attributes.addFlashAttribute("message", "Incorrect Password");
+//	        }
+//	    } catch (EmptyResultDataAccessException e) {
+//	        attributes.addFlashAttribute("message", "Incorrect Username");
+//	    }
+//
+//	    return "redirect:/user/login"; // Redirect back to login on failure
+//	}
+
+
+//	@PostMapping("/login")
+//	public String login(@RequestParam String username, 
+//	                    @RequestParam String password, 
+//	                    @RequestParam String role,
+//	                    RedirectAttributes attributes,
+//	                    HttpSession session) {
+//
+//	    try {
+//	        user = userDaoImpl.fetchUser(username);
+//	        
+//	        if (user == null) {
+//	            attributes.addFlashAttribute("message", "Incorrect Username");
+//	            return "redirect:/user/login";
+//	        }
+//
+//	        if (!"ACTIVE".equals(user.getStatus())) {
+//	            attributes.addFlashAttribute("message", "Your account is not active. Status: " + user.getStatus());
+//	            return "redirect:/user/login";
+//	        }
+//
+//	        String pwdSalt = user.getPasswordSalt();
+//	        String newPasswordHash = Password.generatePwdHash(password + pwdSalt);
+//
+//	        if (newPasswordHash.equals(user.getPasswordHash())) {
+//	            session.setAttribute("user", user);
+//	            return handleRoleRedirect(user, role, attributes);
+//	        } else {
+//	            attributes.addFlashAttribute("message", "Incorrect Password");
+//	        }
+//	    } catch (EmptyResultDataAccessException e) {
+//	        attributes.addFlashAttribute("message", "Incorrect Username");
+//	    }
+//
+//	    return "redirect:/user/login";
+//	}
+//
+//	private String handleRoleRedirect(User user, String role, RedirectAttributes attributes) {
+//	    int roleId = user.getRole().getRoleId();
+//	    if (role.equalsIgnoreCase("Retailer") && roleId == 2) {
+//	        return "subadmin"; 
+//	    } else if (role.equalsIgnoreCase("Customer") && roleId == 3) {
+//	        return "redirect:/homepageuser";
+//	    } else {
+//	        attributes.addFlashAttribute("message", "No user found with this username and role.");
+//	        return "redirect:/user/login";
+//	    }
+//	}
+
+
+
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
 	                    @RequestParam String password, 
@@ -75,6 +233,13 @@ public class UserController {
 
 	    try {
 	        user = userDaoImpl.fetchUser(username);
+	        
+	        System.out.println("user ststus" + user.getStatus());
+	        if (!"ACTIVE".equals(user.getStatus())) {
+	            attributes.addFlashAttribute("message", "Your account is not active. Status: " + user.getStatus());
+	            return "redirect:/user/login";
+        }
+
 	        
 	        System.out.println("user in login controller " + user);
 	        String pwdSalt = user.getPasswordSalt();
@@ -113,43 +278,52 @@ public class UserController {
 	}
 
 
-
-	
 	
 	@PostMapping("/register")
-	public String register(@ModelAttribute User user, RedirectAttributes attributes , HttpSession session )
-			throws IOException, SerialException, SQLException {
+	public String register(@ModelAttribute User user, @RequestParam("roleId") int roleId, RedirectAttributes attributes, HttpSession session)
+	        throws IOException, SQLException {
 
-		String roleName =userDaoImpl.getRoleName(2);
-		
-		System.out.println("\n user : " + user);
-		System.out.println("\n role : " + roleName);
+	    System.out.println("Selected Role ID: " + roleId);
 
-		// Password Encryption starts
-		String passwordSalt = Password.generatePwdSalt(10);
-		user.setPasswordSalt(passwordSalt);
+	    
+	    // Fetch role based on roleId and set it to user
+	    Role selectedRole = userDaoImpl.fetchRoleById(roleId); // Create this method in your UserDaoImpl
+	    user.setRole(selectedRole);
 
-		// temporary data => password+salt
-		String newPassword = user.getPassword() + passwordSalt; // 1234rdvyjtftyf
+	    System.out.println("Selected Role: " + selectedRole);
 
-		String passwordHash = Password.generatePwdHash(newPassword);
-		user.setPasswordHash(passwordHash);
-		// Password Encryption completes
+	    // Password Encryption
+	    String passwordSalt = Password.generatePwdSalt(10);
+	    user.setPasswordSalt(passwordSalt);
+	    String newPassword = user.getPassword() + passwordSalt;
+	    String passwordHash = Password.generatePwdHash(newPassword);
+	    user.setPasswordHash(passwordHash);
 
-		int result =  userDaoImpl.insertUser(user);
-		
+	    // Set status based on role
+	    if (selectedRole != null) {
+	        int selectedRoleId = selectedRole.getRoleId();
+	        if (selectedRoleId == 2) { // Retailer
+	            user.setStatus("PENDING"); // Set status to pending for retailers
+	        } else if (selectedRoleId == 3) { // Assuming roleId 3 is for Customers
+	            user.setStatus("ACTIVE"); // Set status to active for customers
+	        }
+	    } else {
+	        attributes.addFlashAttribute("message", "Please select a role.");
+	        return "redirect:/user/openRegistrationPage";
+	    }
 
-		if (result == 2) {
-			attributes.addFlashAttribute("message", "Registration Successful");
-			return "redirect:/user/login";
-		} else {
-			attributes.addFlashAttribute("message", "Registration Failed");
+	    int result = userDaoImpl.insertUser(user);
 
-			return "redirect:/user/openRegistrationPage";
-		}
+	    if (result > 0) {
+	        attributes.addFlashAttribute("message", "Registration Successful");
+	        return "redirect:/user/login";
+	    } else {
+	        attributes.addFlashAttribute("message", "Registration Failed");
+	        return "redirect:/user/openRegistrationPage";
+	    }
 	}
-	
-	
+
+
 	
 	@GetMapping("/profile")
 	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username , HttpSession session) throws IOException, SQLException {
@@ -317,12 +491,6 @@ public class UserController {
 	            return "user_forgot_password"; // Stay on the same page with error message
 	        }
 	    }
-	    
-	    
-	    
-	    
-	    
-	    
 	    
 
 	    @PostMapping("/resetpassword1")

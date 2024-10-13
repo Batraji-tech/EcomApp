@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecom.app.dao.SuperAdminDaoImpl;
 import ecom.app.dao.UserDaoImpl;
+import ecom.app.entities.Role;
 import ecom.app.entities.SuperAdmin;
 import ecom.app.entities.User;
 import ecom.app.utility.Password;
@@ -75,15 +76,58 @@ public class SuperAdminController {
     @GetMapping("/login")
     public String Login()
     {
-    	return "superadmin_dashboard";
+    	return "login_superadmin";
     }
 
     
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        return "superadmin_dashboard"; 
+        List<User> userList = userDaoImpl.findAllUsers();
+        List<Role> rolesList = userDaoImpl.fetchAllRoles();
+        model.addAttribute("userList", userList);
+        model.addAttribute("rolesList", rolesList);
+        return "superadmin_dashboard";
+    }
+    
+
+
+//    
+//    @GetMapping("/viewSubadminRequests")
+//    public String viewPendingSubadminRequests(Model model) {
+//        System.out.println("Entering viewPendingSubadminRequests method"); // Debug log
+//        List<User> pendingUsers = userDaoImpl.getPendingSubadminRequests();
+//        model.addAttribute("userList", pendingUsers);
+//       System.out.println("Pending user check:" + pendingUsers);
+//        return "view_subadmin_requests";
+//    }
+
+    @GetMapping("/viewSubadminRequests")
+    public String viewPendingSubadminRequests(Model model) {
+        List<User> pendingUsers = userDaoImpl.getPendingSubadminRequests(); // Use your method to get pending users
+        List<Role> rolesList = userDaoImpl.fetchAllRoles(); // Fetch roles if needed
+        model.addAttribute("userList", pendingUsers);
+        model.addAttribute("rolesList", rolesList);
+        System.out.println("pending users :" + pendingUsers);
+        return "view_subadmin_requests"; // Return the correct view name
     }
 
+    @PostMapping("/approveUser")
+    public String approveUser(@RequestParam int userId) {
+        userDaoImpl.updateUserStatus(userId, "ACTIVE"); // Change status to ACTIVE
+        return "redirect:/superAdmin/viewSubadminRequests"; // Redirect back to the requests view
+    }
+
+
+@PostMapping("/deleteUser")
+public String deleteUser(@RequestParam int userId) {
+    userDaoImpl.updateUserStatus(userId, "INACTIVE");
+    return "redirect:/superAdmin/viewSubadminRequests";
+}
+
+
+    
+    
+    
     @GetMapping("/viewProfile")
     public ModelAndView viewProfile(ModelAndView mView) {
         mView.setViewName("superadmin_profile");
