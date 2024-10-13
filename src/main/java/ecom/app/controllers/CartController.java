@@ -39,7 +39,7 @@ public class CartController {
 	    if (user == null) {
 	        return "redirect:/user/login"; // Ensure user is logged in
 	    }
-	    
+
 	    int userId = user.getUserId();
 	    int cartId = 0;
 
@@ -56,6 +56,18 @@ public class CartController {
 	        try {
 	            int res = cartDaoImpl.addItemToCart(cartId, new CartItems(product_id, 1));
 	            model.addAttribute("message", "Product added to cart successfully!");
+
+	            // Check stock after adding the item
+	            if (product.getStock() < 1) {
+	                // Store out-of-stock message in session
+	                List<String> outOfStockMessages = (List<String>) session.getAttribute("outOfStockMessages");
+	                if (outOfStockMessages == null) {
+	                    outOfStockMessages = new ArrayList<>();
+	                }
+	                outOfStockMessages.add(product.getProduct_name() + " is out of stock.");
+	                session.setAttribute("outOfStockMessages", outOfStockMessages);
+	            }
+
 	        } catch (IOException | SQLException e) {
 	            e.printStackTrace();
 	            model.addAttribute("message", "Error adding product to cart. Please try again.");
@@ -80,6 +92,7 @@ public class CartController {
 			List<CartItems> cartItems = cartDaoImpl.getCartItemsByUserId(userId);
 			System.out.println(cartItems);
 			session.setAttribute("cartItems", cartItems);
+			  model.addAttribute("cartItems", cartItems); 
 			return "cart";
 
 		} catch (IOException e) {
@@ -156,18 +169,40 @@ public class CartController {
 	@GetMapping("/checkout")
 	public String checkout(HttpSession session, Model model) {
 	    List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
+	    List<CartItems> buyNowItems = (List<CartItems>) session.getAttribute("buyNowItems");
 	    
-	    // Show all items from the cart for checkout
-	    if (cartItems != null && !cartItems.isEmpty()) {
-	        model.addAttribute("cartItems", cartItems);
-	        double deliveryCharge = calculateDeliveryCharge(cartItems);
-	        model.addAttribute("deliveryCharge", deliveryCharge);
-	        return "checkout"; // Return the checkout view
+	    List<String> outOfStockMessages = new ArrayList<>();
+
+	    // Determine which items to use
+	    List<CartItems> itemsToCheckout = (buyNowItems != null && !buyNowItems.isEmpty()) ? buyNowItems : cartItems;
+
+	    if (itemsToCheckout == null || itemsToCheckout.isEmpty()) {
+	        model.addAttribute("error", "Your cart is empty.");
+	        return "cart"; // Redirect to cart if no items
 	    }
 
-	    model.addAttribute("error", "Your cart is empty.");
-	    return "cart"; // Redirect to cart if no items
+	    // Check stock for all items in the cart
+	    for (CartItems item : itemsToCheckout) {
+	        Products product = productDaoImpl.getProductById(item.getProductId());
+	        if (product.getStock() < item.getQuantity()) { // Check stock
+	            outOfStockMessages.add(product.getProduct_name() + " is out of stock.");
+	        }
+	    }
+
+	    // Store out-of-stock messages in the session
+	    session.setAttribute("outOfStockMessages", outOfStockMessages);
+
+	    model.addAttribute("cartItems", itemsToCheckout);
+	    double deliveryCharge = calculateDeliveryCharge(itemsToCheckout);
+	    model.addAttribute("deliveryCharge", deliveryCharge);
+	    
+	    String deliveryAddress = (String) session.getAttribute("deliveryAddress");
+	    model.addAttribute("deliveryAddress", deliveryAddress);
+
+	    return "checkout"; // Return the checkout view
 	}
+
+
 
 
 	private double calculateDeliveryCharge(List<CartItems> cartItems) {
@@ -189,14 +224,24 @@ public class CartController {
 	    Products product = productDaoImpl.getProductById(productId); // Fetch the product details
 
 	    if (product != null) {
-	        // Create a CartItem for this product
-	        CartItems cartItem = new CartItems(productId, product.getProduct_name(), product.getDescription(),
-	                                             product.getFinal_price(), 1, product.getDelivery_charge());
+	        // Check stock before adding to the cart
+	        if (product.getStock() < 1) {
+	            List<String> outOfStockMessages = (List<String>) session.getAttribute("outOfStockMessages");
+	            if (outOfStockMessages == null) {
+	                outOfStockMessages = new ArrayList<>();
+	            }
+	            outOfStockMessages.add(product.getProduct_name() + " is out of stock.");
+	            session.setAttribute("outOfStockMessages", outOfStockMessages);
+	        } else {
+	            // Create a CartItem for this product
+	            CartItems cartItem = new CartItems(productId, product.getProduct_name(), product.getDescription(),
+	                                                 product.getFinal_price(), 1, product.getDelivery_charge());
 
-	        // Store this item in a separate session attribute for "Buy Now"
-	        session.setAttribute("buyNowItems", List.of(cartItem));
+	            // Store this item in a separate session attribute for "Buy Now"
+	            session.setAttribute("buyNowItems", List.of(cartItem));
+	        }
 	        
-	        model.addAttribute("cartItems", List.of(cartItem)); // Prepare the model for checkout
+	        model.addAttribute("cartItems", session.getAttribute("buyNowItems")); // Prepare the model for checkout
 	        model.addAttribute("deliveryCharge", product.getDelivery_charge()); // Include delivery charge if necessary
 
 	        return "checkout"; // Return the checkout view
@@ -204,5 +249,34 @@ public class CartController {
 
 	    return "redirect:/products/display1"; // Redirect if product is not found
 	}
+
+	
+	
+//	@PostMapping("/confirmOrder")
+//	public String confirmOrder(HttpSession session, RedirectAttributes attributes) {
+//	    List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
+//
+//	    if (cartItems != null && !cartItems.isEmpty()) {
+//	        try {
+//	            for (CartItems item : cartItems) {
+//	                // Update the product stock using JdbcTemplate
+//	                productDaoImpl.updateProductStock(item.getProductId(), item.getQuantity());
+//	            }
+//	            // Optionally, clear the cart or update as necessary
+//	            session.removeAttribute("cartItems");
+//	            attributes.addFlashAttribute("message", "Order placed successfully!");
+//	        } catch (Exception e) {
+//	            e.printStackTrace();
+//	            attributes.addFlashAttribute("message", "Error placing order. Please try again.");
+//	        }
+//	    } else {
+//	        attributes.addFlashAttribute("message", "Your cart is empty.");
+//	    }
+//
+//	    return "redirect:/orders"; // Redirect to orders page
+//	}
+
+	
+	
 	
 }
