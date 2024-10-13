@@ -84,12 +84,20 @@ import ecom.app.entities.SuperAdmin;
 
 
 	
+		 public List<User> getInactiveSubadminRequests() {
+			    String sql = "SELECT * FROM user WHERE status = 'INACTIVE'"; // Adjust your query as needed
+			    return jdbcTemplate.query(sql, new UserRowMapper());
+			}
+
 		 public void updateUserStatus(int userId, String status) {
 			    String sql = "UPDATE user SET status = ? WHERE user_id = ?";
 			    jdbcTemplate.update(sql, status, userId);
 			}
 
+		
 
+
+		 
 		@Override
 		public User fetchUser(String username) {
 			String sql = "SELECT * FROM user WHERE username = ?";
@@ -113,11 +121,12 @@ import ecom.app.entities.SuperAdmin;
 		        return jdbcTemplate.query(sql, new UserRowMapper());
 		    }
 
-		    @Override
-		    public List<User> findAllSubAdmins() {
-		        String sql = "SELECT * FROM user WHERE role_id = 2";
-		        return jdbcTemplate.query(sql, new UserRowMapper());
-		    }
+		 @Override
+		 public List<User> findAllSubAdmins() {
+		     String sql = "SELECT * FROM user WHERE role_id = 2 AND status = 'ACTIVE'"; // Only active subadmins
+		     return jdbcTemplate.query(sql, new UserRowMapper());
+		 }
+
 
 
 		

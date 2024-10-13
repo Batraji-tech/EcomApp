@@ -171,4 +171,35 @@ import org.springframework.jdbc.core.JdbcTemplate;
 		}
 	   
 		
+		public boolean updateProductStock(int productId, int quantity) {
+		    if (!hasSufficientStock(productId, quantity)) {
+		        System.out.println("Insufficient stock for product ID: " + productId);
+		        return false; // Not enough stock to fulfill the request
+		    }
+
+		    String updateQuery = "UPDATE product SET stock = stock - ? WHERE product_id = ?";
+		    jdbcTemplate.update(updateQuery, quantity, productId);
+		    return true; // Stock updated successfully
+		}
+
+		
+		
+		
+		public boolean hasSufficientStock(int productId, int quantity) {
+		    String stockQuery = "SELECT stock FROM product WHERE product_id = ?";
+		    Integer currentStock;
+
+		    try {
+		        currentStock = jdbcTemplate.queryForObject(stockQuery, new Object[]{productId}, Integer.class);
+		    } catch (EmptyResultDataAccessException e) {
+		        System.out.println("Product not found for ID: " + productId);
+		        return false; // Product doesn't exist
+		    }
+
+		    // Check if there is enough stock
+		    return currentStock != null && currentStock >= quantity;
+		}
+
+
+		
 		}
