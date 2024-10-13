@@ -7,7 +7,7 @@ function validateRegisterForm() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const profileImage = document.querySelector('input[name="profileImage"]').files[0];
-    const roleSelected = document.querySelector('input[name="role.roleId"]:checked');
+    const roleSelected = document.querySelector('input[name="roleId"]:checked');
 
     let isValid = true;
 

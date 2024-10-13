@@ -116,13 +116,6 @@
     </style>
 </head>
 <body>
-    <%!
-        String getUserFriendlyRoles(String technicalName) {
-            if (technicalName.equals("sub_admin")) return "Retailer";
-            else return "Customer";
-        }
-    %>
-
     <%
         List<Role> rolesList = (List<Role>) request.getAttribute("listOfRoles");
     %>
@@ -159,13 +152,15 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="file-input-group">
-                <input type="file" id="profileImage" name="profileImage" accept=".jpg, .jpeg, .png, .pdf" required>
+                <label for="profileImage">Profile Image:</label>
+                <input type="file" id="profileImage" name="profileImage" accept=".jpg, .jpeg, .png" required>
             </div>
             <div class="radio-group">
+                <label>Select Role:</label>
                 <% for (Role role : rolesList) { %>
                     <label>
-                        <input type="radio" name="role.roleId" value="<%=role.getRoleId()%>" />
-                        <%= getUserFriendlyRoles(role.getRoleName()) %>
+                        <input type="radio" name="roleId" value="<%=role.getRoleId()%>" />
+                        <%= role.getRoleName() %>
                     </label>
                 <% } %>
             </div>

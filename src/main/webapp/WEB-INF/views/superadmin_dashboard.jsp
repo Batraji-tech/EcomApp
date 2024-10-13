@@ -197,22 +197,24 @@
         <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">☰</button>
     </div>
     
-    <div class="sidebar" id="sidebar">
-        <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">✖</button>
-        <ul>
-            <li><a href="/superAdmin/viewProfile">View Profile</a></li>
-            <li><a href="/superAdmin/resetPassword">Reset Password</a></li>
-            <li><a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a></li>
-            <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
-            <li><a href="/category/add">Add Category</a></li>
-            <li><a href="/superAdmin/analysisReport">Analysis Report</a></li>
-            <li class="logout">
-                <form  method="POST" style="margin: 0;">
-                               <li><a href="/">Logout</a></li>
-                                   </form>
-            </li>
-        </ul>
-    </div>
+   <div class="sidebar" id="sidebar">
+    <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">✖</button>
+    <ul>
+        <li><a href="/superAdmin/viewProfile">View Profile</a></li>
+        <li><a href="/superAdmin/resetPassword">Reset Password</a></li>
+        <li><a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a></li>
+        <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
+        <li><a href="/category/add">Add Category</a></li>
+        <li><a href="/superAdmin/analysisReport">Analysis Report</a></li>
+        <li><a href="/superAdmin/viewSubadminRequests">View Subadmin Requests</a></li> <!-- Added button -->
+        <li class="logout">
+            <form method="POST" style="margin: 0;">
+                <li><a href="/">Logout</a></li>
+            </form>
+        </li>
+    </ul>
+</div>
+
 
     <div class="content">
         <div class="slideshow-container">

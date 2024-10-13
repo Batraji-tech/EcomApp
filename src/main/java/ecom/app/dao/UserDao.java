@@ -34,5 +34,7 @@ public interface UserDao {
 
 	int forgotUserPassword(String email, String passwordHash, String passwordSalt);
 
+	List<User> getPendingSubadminRequests();
+
 	
 }

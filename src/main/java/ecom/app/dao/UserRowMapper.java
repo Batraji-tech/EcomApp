@@ -20,6 +20,7 @@ public class UserRowMapper implements RowMapper<User> {
 		User user = new User();
 
 		user.setUserId(rs.getInt("user_id"));
+		user.setStatus(rs.getString("status"));
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmailId(rs.getString("email_id"));

@@ -11,6 +11,7 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,24 +41,24 @@ import ecom.app.entities.SuperAdmin;
 	
 		@Override
 		public int insertUser(User user) throws IOException, SerialException, SQLException {
+		    Blob profileImage = getBlob(user.getProfileImage());
 
-			Blob profileImage = getBlob(user.getProfileImage());
-	
-			String queryForInsertUser = "INSERT INTO user " + "(`first_name`, `last_name`, `email_id`, `mobile_no`, "
-					+ "`date_of_birth`, `username`, `passwordSalt`, `passwordHash`, "
-					+ "`role_id`, `profile_image`) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		    String queryForInsertUser = "INSERT INTO user (first_name, last_name, email_id, mobile_no, "
+		            + "date_of_birth, username, passwordSalt, passwordHash, role_id, profile_image, status) "
+		            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-			String queryForCreateCart = "INSERT INTO cart (user_id) VALUES (LAST_INSERT_ID())";
-			
-			int res1 = jdbcTemplate.update(queryForInsertUser, user.getFirstName(), user.getLastName(), user.getEmailId(),
-					user.getMobileNo(), user.getDateOfBirth(), user.getUsername(), user.getPasswordSalt(),
-					user.getPasswordHash(),  user.getRole().getRoleId(), profileImage);
-			
-			int res2 = jdbcTemplate.update(queryForCreateCart);
-			
-			return res1 + res2;
-			
+		    String queryForCreateCart = "INSERT INTO cart (user_id) VALUES (LAST_INSERT_ID())";
+
+		    int res1 = jdbcTemplate.update(queryForInsertUser, user.getFirstName(), user.getLastName(), 
+		            user.getEmailId(), user.getMobileNo(), user.getDateOfBirth(), user.getUsername(), 
+		            user.getPasswordSalt(), user.getPasswordHash(), user.getRole().getRoleId(), 
+		            profileImage, user.getStatus()); // Ensure status is included
+
+		    int res2 = jdbcTemplate.update(queryForCreateCart);
+		    
+		    return res1 + res2;
 		}
+
 		
 		private Blob getBlob(MultipartFile image) throws IOException, SerialException, SQLException {
 			byte[] byteArr = image.getBytes();
@@ -73,6 +74,20 @@ import ecom.app.entities.SuperAdmin;
 		}
 
 
+		 @Override
+		    public List<User> getPendingSubadminRequests() {
+		        String sql = "SELECT * FROM user WHERE status = 'PENDING' AND role_id = 2"; // Ensure correct query
+		        List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
+		        System.out.println("Pending Users: " + users); // Log the retrieved users
+		        return users;
+		    }
+
+
+	
+		 public void updateUserStatus(int userId, String status) {
+			    String sql = "UPDATE user SET status = ? WHERE user_id = ?";
+			    jdbcTemplate.update(sql, status, userId);
+			}
 
 
 		@Override
@@ -81,6 +96,15 @@ import ecom.app.entities.SuperAdmin;
 			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
 
 		}
+		 
+//		 
+//		 public User fetchUser(String username) {
+//			    String sql = "SELECT * FROM user WHERE username = ?";
+//			    User user = jdbcTemplate.queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
+//			    System.out.println("Fetched user: " + user); // Debugging output
+//			    return user;
+//			}
+
 		
 
 		 @Override
@@ -97,7 +121,11 @@ import ecom.app.entities.SuperAdmin;
 
 
 		
-		 
+		    public Role fetchRoleById(int roleId) {
+		        String sql = "SELECT * FROM roles WHERE role_id = ?";
+		        return jdbcTemplate.queryForObject(sql, new RolesRowMapper(), roleId);
+		    }
+
 
 		    public String getRoleName(int roleId) {
 		        String sql = "SELECT role_name FROM roles WHERE role_id = ?";
@@ -173,7 +201,13 @@ import ecom.app.entities.SuperAdmin;
 			 }
 
 			 
-			 
+			 public List<User> findAllUsers() {
+				    String sql = "SELECT * FROM user"; // Adjust as necessary
+				    return jdbcTemplate.query(sql, new UserRowMapper());
+				}
+
+			
+				
 			 
 			    
 			}
