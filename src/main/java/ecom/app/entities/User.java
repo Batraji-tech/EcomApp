@@ -1,6 +1,7 @@
 package ecom.app.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -108,8 +109,8 @@ public class User {
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+		this.dateOfBirth = dateOfBirth;
+	}
 
     public String getUsername() {
         return username;
