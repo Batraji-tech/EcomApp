@@ -1,4 +1,5 @@
  package ecom.app.dao;   
+import ecom.app.entities.Category;
 import ecom.app.entities.Products;
 	import ecom.app.entities.User;
 	 
@@ -77,13 +78,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 	    }
 		
 		
-	 
-//		@Override
-//		public Products getProductById(int productId) {
-//			String sql = "SELECT * FROM user WHERE user_id = ?";
-//	 
-//			return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
-//		}
+
 	 
 		public Products getProductById(int product_id) {
 	        String sql = "SELECT * FROM product WHERE product_id = ?";
@@ -200,6 +195,38 @@ import org.springframework.jdbc.core.JdbcTemplate;
 		    return currentStock != null && currentStock >= quantity;
 		}
 
-
+		@Override
+		public List<Products> getAllNewTrendingProducts() {
+			String sql = "SELECT * FROM product where tag = 'Trends'  LIMIT 3 ";
+		    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList1;
+		}
+ 
+		@Override
+		public List<Products> getAllNewTrendingProducts1() {
+			String sql = "SELECT * FROM product where tag = 'Trends'";
+		    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList1;
+			
+		}
+ 
+		@Override
+		public List<Category> getAllProductsByCategory() {
+			String sql = "SELECT * FROM category LIMIT 3 ";
+		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
+		    return categoryList;
+		}
+	   
+		@Override
+		public List<Category> getAllProductsByCategory1() {
+			String sql = "SELECT * FROM category";
+		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
+		    return categoryList;
+		}
+		@Override
+		public List<Category> getAllCategories() {
+		    String sql = "SELECT * FROM category";
+		    return jdbcTemplate.query(sql, new CategoryRowMapper()); // Adjust as per your implementation
+		}
 		
 		}
