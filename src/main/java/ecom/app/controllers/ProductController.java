@@ -230,6 +230,13 @@ public class ProductController {
     }
 
     
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("query") String query, Model model) {
+        List<Products> searchResults = productDaoImpl.searchProducts(query);
+        model.addAttribute("searchResults", searchResults);
+        return "search_results";  // JSP page to display the search results
+    }
+    
     
     /*@GetMapping("/{productName}")
     public String viewProductDetails(@PathVariable("productName") String productName, Model model) {

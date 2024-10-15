@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ecom.app.dao.OrderDaoImpl;
 import ecom.app.dao.SuperAdminDaoImpl;
 import ecom.app.dao.UserDaoImpl;
+import ecom.app.entities.Order;
 import ecom.app.entities.Role;
 import ecom.app.entities.SuperAdmin;
 import ecom.app.entities.User;
@@ -36,6 +38,9 @@ public class SuperAdminController {
 
 	@Autowired
 	UserDaoImpl userDaoImpl;
+	
+	  @Autowired
+	   OrderDaoImpl orderDaoImpl;
 
 	@PostMapping("/login")
 	public String login(@RequestParam String username, @RequestParam String password, Model model) {
@@ -291,5 +296,73 @@ public class SuperAdminController {
 			return "reset1_password"; // Return to reset password page with error
 		}
 	}
+	
+	// this is for display all the product sales
+    @GetMapping("/salesPerformance")
+    public String generateSalesReport(Model model) {
+        try {
+            List<Order> orders = orderDaoImpl.getAllOrders();
+            model.addAttribute("orders", orders);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Could not fetch orders.");
+        }
+        return "sales_performance"; 
+    }
 
+    
+    // this is for display all the sales according to date
+    @PostMapping("/salesPerformance/getSalesData")
+    public String getSalesData(@RequestParam("startDate") String startDate, 
+                                @RequestParam("endDate") String endDate, 
+                                Model model) {
+    	List<Order> salesData = new ArrayList<>();
+		try {
+			salesData = orderDaoImpl.getSalesDataByDateRange(startDate, endDate);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        double totalSales = salesData.stream().mapToDouble(Order::getTotalAmount).sum();
+
+        model.addAttribute("orders", salesData);
+        model.addAttribute("totalSales", totalSales);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        
+        return "sales_performance"; 
+    }
+
+//    @GetMapping("/salesByCategory")
+//    public String getSalesByCategory(@RequestParam int categoryId, Model model) {
+//        try {
+//            List<Order> orders = orderDaoImpl.getSalesDataByCategory(categoryId);
+//            model.addAttribute("orders", orders);
+//            return "categorywise_sales_performance"; // Change to your actual view name
+//        } catch (SQLException e) {
+//            model.addAttribute("error", "Error fetching sales data by category.");
+//            return "error"; // Change to your actual error view
+//        }
+//    }
+    
+    @GetMapping("/salesByCategory")
+    public String getSalesByCategory(@RequestParam(required = false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("error", "Category ID is required.");
+            return "error"; // Redirect to an error page or return to the same page with error message
+        }
+
+        try {
+            List<Order> orders = orderDaoImpl.getSalesDataByCategory(categoryId);
+            model.addAttribute("orders", orders);
+            return "categorywise_sales_performance"; // Return the name of the JSP for the view
+        } catch (SQLException e) {
+            model.addAttribute("error", "Error fetching sales data for the category.");
+            return "error"; // Redirect to error page if necessary
+        }
+    }
+
+
+    
+    
 }

@@ -229,4 +229,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 		    return jdbcTemplate.query(sql, new CategoryRowMapper()); // Adjust as per your implementation
 		}
 		
+		@Override
+	    public List<Products> searchProducts(String query) {
+	        String sql = "SELECT * FROM product WHERE product_name LIKE ? OR description LIKE ?";
+	        String searchPattern = "%" + query + "%";
+	        return jdbcTemplate.query(sql, new Object[]{searchPattern, searchPattern}, new ProductRowMapper());
+	    }
 		}

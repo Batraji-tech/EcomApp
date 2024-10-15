@@ -63,18 +63,4 @@ public class FeedbackController {
 
 
 
-//    @GetMapping("/{productId}")
-//    public String viewFeedback(@PathVariable("productId") int productId, Model model) {
-//        Products product = productDaoImpl.getProductById(productId);
-//        if (product == null) {
-//            model.addAttribute("error", "Product not found.");
-//            return "error_page"; // Ensure this error_page exists
-//        }
-//        model.addAttribute("product", product);
-//        return "product_details"; // Ensure this matches your JSP filename
-//    }
-
-
-
-
 }
