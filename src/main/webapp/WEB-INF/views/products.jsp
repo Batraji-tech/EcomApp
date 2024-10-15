@@ -7,12 +7,12 @@
     <title>Add Product</title>
     <style>
         body {
-            background-color: #E6F9E6; /* Light grey background */
+            background-color: #F2EED7; /* Soft background */
             font-family: Arial, sans-serif;
             padding: 20px;
         }
         .form-container {
-            border: 1px solid #003366; /* Dark blue border */
+            border: 2px solid #ffffff; /* Dark blue border */
             border-radius: 10px;
             background-color: #ffffff; /* White background for the form */
             padding: 40px;
@@ -21,30 +21,33 @@
             max-width: 800px; /* Increased max width */
         }
         h2 {
-            color: #003366; /* Dark blue */
+            color: #FF9874; /* Soft orange */
             margin-bottom: 20px;
             text-align: center; /* Centered heading */
         }
         .message {
-            color: #003366; /* Dark blue */
+            color: #295F98; /* Dark blue */
             margin-bottom: 20px;
             text-align: center;
         }
         label {
             font-weight: bold;
-            color: #003366; /* Dark blue */
+            color: #295F98; /* Dark blue */
         }
         .form-control {
             border-radius: 5px;
-            border: 1px solid #cccccc;
-            transition: border-color 0.3s;
-            width: 100%; /* Full width for input fields */
+            border: 1px solid #295F98; /* Dark blue border */
+            width: 97%; /* Full width for input fields */
             margin-bottom: 15px; /* Space between inputs */
             padding: 10px; /* Padding for input fields */
         }
         .form-control:focus {
-            border-color: #00ff00; /* Green on focus */
-            box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            border-color: #295F98 ; /* Green on focus */
+            box-shadow: 0 0 5px #295F98;
+        }
+        .category-dropdown {
+            width: 500%; /* Default width, can be adjusted */
+            max-width: 800px; /* Max width can be set */
         }
         .btn {
             border-radius: 5px;
@@ -52,18 +55,13 @@
             margin-top: 10px; /* Space above buttons */
             padding: 10px; /* Padding for buttons */
             width: 100%; /* Full width for buttons */
+            background-color: #295F98; /* Dark blue */
+            border: none;
+            color: white; /* White text for buttons */
+            cursor: pointer;
         }
-        .btn-danger {
-            background-color: #00ff00; 
-            border-color: #00ff00;
-        }
-        .btn-success {
-            background-color: #00ff00; 
-            border-color: #00ff00;
-        }
-        .btn-danger:hover, .btn-success:hover {
-            background-color: #00cc00; /* Darker green on hover */
-            border-color: #00cc00;
+        .btn:hover {
+            background-color: #1a3a6e; /* Darker blue on hover */
         }
     </style>
 </head>
@@ -74,7 +72,6 @@
             <form class="form-container" enctype="multipart/form-data" method="post" action="/products/add">
                 <div class="text-center">
                     <h2>Product Addition</h2>
-                    <p class="message">Enter the product details below.</p>
                 </div>
                 <div class="form-group">
                     <label for="name">Product Name</label>
@@ -92,8 +89,7 @@
                     <label for="discount">Discount</label>
                     <input type="number" step="0.01" placeholder="Enter Discount" name="discount" class="form-control" id="discount">
                 </div>
-                
-                  <div class="form-group">
+                <div class="form-group">
                     <label for="delivery_charges">Delivery Charges</label>
                     <input type="number" step="0.01" placeholder="Enter Delivery Charges" name="delivery_charge" class="form-control" id="delivery_charges">
                 </div>
@@ -105,10 +101,9 @@
                     <label for="stock">Stock Quantity</label>
                     <input type="number" placeholder="Enter Stock Quantity" name="stock" class="form-control" id="stock" required>
                 </div>
-              
                 <div class="form-group">
                     <label for="category_id">Category</label>
-                    <select name="category_id" id="category_id" class="form-control" required>
+                    <select name="category_id" id="category_id" class="form-control category-dropdown" required>
                         <option value="1">REFRIGERATOR</option>
                         <option value="2">MOBILES</option>
                         <option value="3">LAPTOPS</option>
@@ -120,10 +115,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <button type="reset" class="btn">Reset</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-success">Add Product</button>
+                        <button type="submit" class="btn">Add Product</button>
                     </div>
                 </div>
             </form>

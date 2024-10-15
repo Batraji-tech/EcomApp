@@ -61,10 +61,26 @@
             color: #555;
             font-size: 1.2em;
         }
+
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            padding: 10px;
+            width: 390px; /* Adjust as needed */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
     <h2>Customer List</h2>
+
+    <div class="search-container">
+        <input type="text" id="search" class="search-bar" placeholder="Search by Name or Email..." />
+    </div>
 
     <%
         List<User> customers = (List<User>) request.getAttribute("customers");
@@ -82,9 +98,12 @@
                     <th>Username</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="customer-table-body">
                 <% for (User customer : customers) { %>
-                    <tr>
+                    <tr class="customer-row" 
+                        data-first-name="<%= customer.getFirstName().toLowerCase() %>"
+                        data-last-name="<%= customer.getLastName().toLowerCase() %>"
+                        data-email="<%= customer.getEmailId().toLowerCase() %>">
                         <td><%= customer.getUserId() %></td>
                         <td><%= customer.getFirstName() %></td>
                         <td><%= customer.getLastName() %></td>
@@ -101,5 +120,23 @@
     <% } %>
 
     <a href="/superAdmin/login">Back to Dashboard</a>
+
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.customer-row');
+
+            rows.forEach(row => {
+                const firstName = row.dataset.firstName;
+                const lastName = row.dataset.lastName;
+                const email = row.dataset.email;
+
+                // Check if any of the fields include the search value
+                const matches = firstName.includes(searchValue) || lastName.includes(searchValue) || email.includes(searchValue);
+                
+                row.style.display = matches ? '' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
