@@ -1,6 +1,7 @@
 package ecom.app.controllers;
 
 import ecom.app.entities.Category;
+import ecom.app.entities.Feedback;
 import ecom.app.entities.Products;
 import java.util.Comparator;
 
@@ -10,6 +11,7 @@ import ecom.app.entities.User;
 import ecom.app.utility.ByteArrayMultipartFile;
 import ecom.app.utility.Password;
 import jakarta.servlet.http.HttpSession;
+import ecom.app.dao.FeedbackDaoImpl;
 import ecom.app.dao.ProductDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductDaoImpl productDaoImpl;
+	
+	@Autowired
+	private FeedbackDaoImpl feedbackDaoImpl;
 	public List<Products> products;
 	private Products product;
 
@@ -199,9 +204,13 @@ public class ProductController {
     
     
     @GetMapping("/{id}")
-    public String viewProductDetails(@PathVariable("id") int productId, Model model) throws IOException, SQLException {
+    public String viewProductDetails(@PathVariable("id") int productId, HttpSession session) throws IOException, SQLException {
         Products product = productDaoImpl.fetchProductById(productId);
-        model.addAttribute("product", product);
+        session.setAttribute("product", product);
+        List<Feedback> feedbackList = feedbackDaoImpl.getFeedbackByProductId(productId);
+        System.out.println("Feedbacklist " + feedbackList);
+       session.setAttribute("feedbackList", feedbackList);
+
         return "product_details"; // JSP page
     }
     
