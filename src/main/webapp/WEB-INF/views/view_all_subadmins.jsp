@@ -17,6 +17,19 @@
             color: #FF9874; 
         }
 
+        .search-bar-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar {
+            padding: 10px;
+            width: 50%; /* Adjust width */
+            max-width: 400px; /* Max width for larger screens */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -66,11 +79,16 @@
 <body>
     <h2>SubAdmins List</h2>
 
+    <!-- Centered Search Bar -->
+    <div class="search-bar-container">
+        <input type="text" id="filter" class="search-bar" placeholder="Search by name or email..." />
+    </div>
+
     <%
         List<User> subadmins = (List<User>) request.getAttribute("subadmins");
         if (subadmins != null && !subadmins.isEmpty()) {
     %>
-        <table>
+        <table id="subadmin-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -84,7 +102,7 @@
             </thead>
             <tbody>
                 <% for (User subadmin : subadmins) { %>
-                    <tr>
+                    <tr class="subadmin-row" data-name="<%= subadmin.getFirstName().toLowerCase() + " " + subadmin.getLastName().toLowerCase() %>" data-email="<%= subadmin.getEmailId().toLowerCase() %>">
                         <td><%=  subadmin.getUserId() %></td>
                         <td><%= subadmin.getFirstName() %></td>
                         <td><%= subadmin.getLastName() %></td>
@@ -101,5 +119,21 @@
     <% } %>
 
     <a href="/superAdmin/login">Back to Dashboard</a>
+
+    <script>
+        function filterSubAdmins() {
+            const filterValue = document.getElementById('filter').value.toLowerCase();
+            const rows = document.querySelectorAll('.subadmin-row');
+
+            rows.forEach(row => {
+                const name = row.dataset.name;
+                const email = row.dataset.email;
+                const isMatch = name.includes(filterValue) || email.includes(filterValue);
+                row.style.display = isMatch ? '' : 'none';
+            });
+        }
+
+        document.getElementById('filter').addEventListener('input', filterSubAdmins);
+    </script>
 </body>
 </html>

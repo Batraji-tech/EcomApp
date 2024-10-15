@@ -240,12 +240,12 @@
         </div>
 
         <div class="registration-steps">
-            <h2>Steps to Register Your Seller Account</h2>
+            <h2>Steps to start selling your products</h2>
             <div class="step-container">
                 <div class="step">
                     <img src="https://media.istockphoto.com/id/1658170979/vector/hand01.jpg?s=612x612&w=0&k=20&c=C9xLL2Qd6nkJ2wCJqPtubRCzBYFvD-6-b1ZfJEiurpk=" alt="Step 1 Image">
-                    <h3>1: Steps to start selling your products</h3>
-                    <p>Create a seller account on Shopology.in</p>
+                    <h3>1: Create account</h3>
+                    <p>Account creation in Shopology.in</p>
                 </div>
                 <div class="step">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU_BUZvarX2BmZNWjyCaUqfKJLCQyx09aFkQ&s" alt="Step 2 Image">
