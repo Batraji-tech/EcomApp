@@ -1,91 +1,60 @@
 package ecom.app.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Feedback {
+    private int feedbackId;
+    private int productId;
+    private int userId;
+    private String feedbackText;
+    private Date feedbackDate;
 
-	private int feedbackId;
-	private int customerId;
-	private int subAdminId;
-	private int productId;
-	private int rating;
-	private String review;
-	private Date submissionDate;
-	
-	public Feedback(int feedbackId, int customerId, int subAdminId, int productId, int rating, String review,
-			Date submissionDate) {
-		super();
-		this.feedbackId = feedbackId;
-		this.customerId = customerId;
-		this.subAdminId = subAdminId;
-		this.productId = productId;
-		this.rating = rating;
-		this.review = review;
-		this.submissionDate = submissionDate;
-	}
+    // Getters and Setters
+    public int getFeedbackId() {
+        return feedbackId;
+    }
 
-	public int getFeedbackId() {
-		return feedbackId;
-	}
+    public void setFeedbackId(int feedbackId) {
+        this.feedbackId = feedbackId;
+    }
 
-	public void setFeedbackId(int feedbackId) {
-		this.feedbackId = feedbackId;
-	}
+    public int getProductId() {
+        return productId;
+    }
 
-	public int getCustomerId() {
-		return customerId;
-	}
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public int getSubAdminId() {
-		return subAdminId;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setSubAdminId(int subAdminId) {
-		this.subAdminId = subAdminId;
-	}
+    public String getFeedbackText() {
+        return feedbackText;
+    }
 
-	public int getProductId() {
-		return productId;
-	}
+    public void setFeedbackText(String feedbackText) {
+        this.feedbackText = feedbackText;
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+    public Date getFeedbackDate() {
+        return feedbackDate;
+    }
 
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public String getReview() {
-		return review;
-	}
-
-	public void setReview(String review) {
-		this.review = review;
-	}
-
-	public Date getSubmissionDate() {
-		return submissionDate;
-	}
-
-	public void setSubmissionDate(Date submissionDate) {
-		this.submissionDate = submissionDate;
-	}
+    public void setFeedbackDate(Date feedbackDate) {
+        this.feedbackDate = feedbackDate;
+    }
 
 	@Override
 	public String toString() {
-		return "Feedback [feedbackId=" + feedbackId + ", customerId=" + customerId + ", subAdminId=" + subAdminId
-				+ ", productId=" + productId + ", rating=" + rating + ", review=" + review + ", submissionDate="
-				+ submissionDate + "]";
+		return "\n Feedback [feedbackId=" + feedbackId + ", productId=" + productId + ", userId=" + userId
+				+ ", feedbackText=" + feedbackText + ", feedbackDate=" + feedbackDate + "]";
 	}
-	
-	
+    
+    
 }
