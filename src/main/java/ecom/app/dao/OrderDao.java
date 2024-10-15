@@ -15,4 +15,8 @@ public interface OrderDao {
 
 	void removeCartProducts(int userId) throws SQLException;
 
+	List<Order> getSalesDataByDateRange(String startDate, String endDate) throws SQLException;
+
+	List<Order> getSalesDataByCategory(int categoryId) throws SQLException;
+
 }

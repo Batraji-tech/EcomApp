@@ -214,7 +214,7 @@ nav ul li .dropdown-content a:hover {
     <!-- Search Bar in Center -->
     <div class="nav-container">
         <div class="search-bar">
-            <form action="${pageContext.request.contextPath}/search" method="get">
+            <form action="${pageContext.request.contextPath}/products/search" method="get">
                 <input type="text" name="query" placeholder="Search for specific products..." required>
                 <button type="submit">
                     <i class="fas fa-search"></i> <!-- Lens icon -->
@@ -320,7 +320,7 @@ nav ul li .dropdown-content a:hover {
                     Products product = discountProducts.get(i);
             %>
                 <div class="product">
-                  <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
+                  <a href="${pageContext.request.contextPath}/products<%= product.getProduct_id() %>">
                     <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
                 </a> <p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>

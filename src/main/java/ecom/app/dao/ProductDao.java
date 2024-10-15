@@ -41,4 +41,5 @@ public interface ProductDao {
 		 List<Products> getAllProducts();
 		 List<Category> getAllCategories();
 		
+		 List<Products> searchProducts(String query);
 }

@@ -189,7 +189,7 @@
         <!-- Search Bar in Center -->
         <div class="nav-container">
             <div class="search-bar">
-                <form action="${pageContext.request.contextPath}/search" method="get">
+                <form action="${pageContext.request.contextPath}/products/search" method="get">
                     <input type="text" name="query" placeholder="Search for specific products..." required>
                     <button type="submit">
                         <i class="fas fa-search"></i> <!-- Lens icon -->

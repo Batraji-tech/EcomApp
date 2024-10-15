@@ -146,13 +146,13 @@
         }
     </style>
  
-    <script>
-        function sortProducts() {
+         <script>
+           function sortProducts() {
             var sortOption = document.getElementById("sortDropdown").value;
             window.location.href = "<%= request.getContextPath() %>/products?sort=" + sortOption;
         }
  
-    </script>
+        </script>
 </head>
 <body>
  
@@ -169,15 +169,15 @@
             <option value="priceDesc">High to Low</option>
         </select>
     </div>
-    <a href="<%= request.getContextPath() %>/homepageuser" class="back-home">Back to Home</a>
+    <a href="<%= request.getContextPath() %>/" class="back-home">Back to Home</a>
 </div>
  
 <div class="container">
     <%
-        List<Products> products = (List<Products>) request.getAttribute("products");
+        List<Products> searchResults = (List<Products>) request.getAttribute("searchResults");
  
-        if (products != null && !products.isEmpty()) {
-            for (Products product : products) {
+        if (searchResults != null && !searchResults.isEmpty()) {
+            for (Products product : searchResults) {
     %>
                 <div class="product-card">
                     <%
@@ -192,7 +192,7 @@
                      
                       <a href="<%= request.getContextPath() %>/products/<%= product.getProduct_id() %>" class="details-btn">More Details</a>
                      
-                     </center> 
+                     </center>
                     </div>
                 </div>
     <%
@@ -206,4 +206,3 @@
 </div>
 </body>
 </html>
- 

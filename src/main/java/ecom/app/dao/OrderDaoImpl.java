@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -80,7 +81,61 @@ public class OrderDaoImpl implements OrderDao {
             return new CartItems(product_id, product.getProduct_name(), product.getDescription(), product.getFinal_price(), quantity, product.getDelivery_charge());
         });
     }
+    
+    
+    public List<Order> getAllOrders() throws SQLException {
+        String sql = "SELECT * FROM orders";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            int orderId = rs.getInt("order_id");
+            int userId = rs.getInt("user_id");
+            double totalAmount = rs.getDouble("total_amount");
+            String paymentMethod = rs.getString("payment_method");
+            String status = rs.getString("status");
+            Timestamp orderDate = rs.getTimestamp("order_date");
+            List<CartItems> orderItems = getOrderItems(orderId);
+            return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
+        });
+    }
 
+    @Override
+    public List<Order> getSalesDataByDateRange(String startDate, String endDate) throws SQLException {
+        String sql = "SELECT * FROM orders WHERE order_date >= ? AND order_date < DATE_ADD(?, INTERVAL 1 DAY)";
+        return jdbcTemplate.query(sql, new Object[]{Date.valueOf(startDate), Date.valueOf(endDate)}, (rs, rowNum) -> {
+            int orderId = rs.getInt("order_id");
+            int userId = rs.getInt("user_id");
+            double totalAmount = rs.getDouble("total_amount");
+            String paymentMethod = rs.getString("payment_method");
+            String status = rs.getString("status");
+            Timestamp orderDate = rs.getTimestamp("order_date");
+
+            // Fetch order items for this order
+            List<CartItems> orderItems = getOrderItems(orderId);
+            return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
+        });
+    }
+
+    @Override
+    public List<Order> getSalesDataByCategory(int categoryId) throws SQLException {
+        String sql = "SELECT o.order_id, o.user_id, o.total_amount, o.payment_method, o.status, o.order_date " +
+                     "FROM orders o " +
+                     "JOIN order_items oi ON o.order_id = oi.order_id " +
+                     "WHERE oi.product_id IN (SELECT p.product_id FROM products p WHERE p.category_id = ?)";
+
+        return jdbcTemplate.query(sql, new Object[]{categoryId}, (rs, rowNum) -> {
+            int orderId = rs.getInt("order_id");
+            int userId = rs.getInt("user_id");
+            double totalAmount = rs.getDouble("total_amount");
+            String paymentMethod = rs.getString("payment_method");
+            String status = rs.getString("status");
+            Timestamp orderDate = rs.getTimestamp("order_date");
+
+            // Fetch order items for this order
+            List<CartItems> orderItems = getOrderItems(orderId);
+            return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
+        });
+    }
+
+    
     public void clearCart(HttpSession session) {
         session.setAttribute("cartItems", new ArrayList<CartItems>()); // Reset cart to empty list
     }
@@ -102,6 +157,7 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    
 
 
 }
