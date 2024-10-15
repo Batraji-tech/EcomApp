@@ -13,39 +13,35 @@
             font-family: 'Arial', sans-serif;
             padding: 20px;
         }
-        .search-container {
-            border: 1px solid #295F98; /* Dark blue border */
-            border-radius: 10px;
-            background-color: #ffffff; /* White background for the search form */
-            padding: 40px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            max-width: 500px; /* Maximum width */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Space between containers */
         }
         h2 {
             color: #FF9874; /* Soft orange */
             margin-bottom: 20px;
             text-align: center;
         }
+        .search-container {
+            padding: 40px;
+            text-align: center; /* Center align text */
+        }
         .btn-search {
             background-color: #295F98; /* Dark blue */
-            border-color: #295F98;
             color: white; /* White text */
             font-size: 16px;
-            width: 100%;
+            width: 20%;
             border-radius: 5px;
             margin-top: 20px;
             cursor: pointer;
         }
         .btn-search:hover {
             background-color: #1a3a6e; /* Darker blue */
-            border-color: #1a3a6e;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #295F98; /* Dark blue */
         }
         table {
             width: 100%;
@@ -68,6 +64,20 @@
             width: 50px; /* Set the width of images */
             height: auto; /* Maintain aspect ratio */
             border-radius: 4px;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            background-color: #295F98; /* Dark blue */
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background-color: #1a3a6e; /* Darker blue */
         }
     </style>
 </head>
@@ -136,10 +146,12 @@
                 %>
             </tbody>
         </table>
+
+        <!-- Back to Dashboard Button -->
+        <a href="/subadmin" class="btn-back">Back to Dashboard</a>
     </div>
     
     <div class="footer">
-        © 2024 Shopology. All rights reserved.
     </div>
 
 </body>
