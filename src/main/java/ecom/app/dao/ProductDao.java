@@ -3,6 +3,8 @@ package ecom.app.dao;
 import java.util.List;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import ecom.app.entities.Category;
 import ecom.app.entities.Products;
 import ecom.app.entities.User;
  
@@ -24,9 +26,19 @@ public interface ProductDao {
 		Products getProductById(int productId);
 		
  
+		 List<Products> getAllNewArrivalProducts();
+		 List<Products> getAllDiscountProducts();
+		 List<Products> getAllBestBrandProducts();
+		 List<Products> getAllNewTrendingProducts();
+		 
+		 List<Products> getAllNewArrivalProducts1();
+		 List<Products> getAllDiscountProducts1();
+		 List<Products> getAllBestBrandProducts1();
+		 List<Products> getAllNewTrendingProducts1();
+		 
+		 List<Category> getAllProductsByCategory();
+		 List<Category> getAllProductsByCategory1();
 		 List<Products> getAllProducts();
-		// Products getProductByName(String productName);
-		
- 
+		 List<Category> getAllCategories();
 		
 }

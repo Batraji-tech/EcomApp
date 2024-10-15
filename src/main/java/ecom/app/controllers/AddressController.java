@@ -2,8 +2,12 @@ package ecom.app.controllers;
 
 import ecom.app.dao.AddressDao;
 import ecom.app.dao.AddressDaoImpl;
+import ecom.app.entities.CartItems;
 import ecom.app.entities.User;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +29,7 @@ public class AddressController {
         User user = (User) session.getAttribute("user");
         
         if (user == null) {
-            return "redirect:/user/login"; // Redirect to login if user is not logged in
+            return "reAdirect:/user/login"; // Redirect to login if user is not logged in
         }
         
         Integer userId = user.getUserId(); // Get user ID from the User object
@@ -42,6 +46,15 @@ public class AddressController {
         session.setAttribute("deliveryAddress", deliveryAddress);
            System.out.println("Deivery address" + deliveryAddress);
         
+           
+           List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
+           if (cartItems != null) {
+               session.setAttribute("cartItems", cartItems); // Reinforce cart items in the session
+           }
+           
+           System.out.println("Cart items before redirect: " + session.getAttribute("cartItems"));
+
+           
         return "redirect:/cart/checkout"; // Redirect back to the checkout page
     }
 }

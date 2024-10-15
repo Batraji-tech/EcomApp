@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="ecom.app.entities.Category" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,6 +111,18 @@
                         <option value="3">LAPTOPS</option>
                     </select>
                 </div>
+             <label for="category_id">Category</label>
+                <select name="category_id" id="category_id" class="form-control" required>
+                <%
+                        List<Category> categories = (List<Category>) request.getAttribute("categories");
+                      for (Category category : categories) {
+                %>
+                <option value="<%= category.getCategory_id() %>"><%= category.getCategory_name() %></option>
+              <%
+                 }
+              %>
+             </select>
+                 </div>
                 <div class="form-group">
                     <label for="image">Product Image</label>
                     <input type="file" name="product_image" class="form-control" id="image" required>

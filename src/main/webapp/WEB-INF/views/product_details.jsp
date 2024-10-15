@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ecom.app.entities.Products" %>
-<%@ page import="java.util.Base64" %> <!-- Import for Base64 encoding -->
- 
+<%@ page import="ecom.app.entities.Feedback" %>
+<%@ page import="java.util.List" %>
+
 <html>
 <head>
     <title>Product Details</title>
@@ -43,35 +44,24 @@
             margin-bottom: 20px;
             color: #444;
         }
-        .product-details p {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #666;
-        }
         .price-details {
             font-size: 26px;
             color: #ff5722;
             font-weight: bold;
             margin-bottom: 20px;
         }
-        .product-status {
-            font-size: 16px;
-            color: #28a745;
-        }
         .btn-container {
             display: flex;
             gap: 20px;
             margin-top: 30px;
         }
-        .btn-container a {
-            text-decoration: none;
+        .btn-container button {
             padding: 12px 25px;
             border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s ease;
-            text-align: center;
-            width: 140px;
+            cursor: pointer;
         }
         .add-to-cart {
             background-color: #28a745;
@@ -92,33 +82,46 @@
         .back-button {
             background-color: #007bff;
             color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
         .back-button:hover {
             background-color: #0069d9;
-            transform: translateY(-2px);
+        }
+        .feedback-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .feedback-section h2 {
+            margin-bottom: 10px;
+        }
+        #feedback-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #feedback-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
- 
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ecom.app.entities.Products" %>
-<%@ page import="java.util.Base64" %> <!-- Import for Base64 encoding -->
- 
-<html>
-<head>
-    <title>Product Details</title>
-    <style>
-        /* Your existing CSS styles */
-    </style>
-</head>
-<body>
- 
+
     <div class="product-container">
         <%
-            Products product = (Products) request.getAttribute("product");
-            String message = (String) request.getAttribute("message"); // Get the message
-            String base64Image = product.getBase64ProductImage();
+            Products product = (Products) session.getAttribute("product");
+            String message = (String) request.getAttribute("message");
+            List<Feedback> feedbackList = (List<Feedback>) session.getAttribute("feedbackList");
+            String base64Image = product.getBase64ProductImage(); // Get the product image
         %>
 
         <!-- Message Display -->
@@ -129,7 +132,6 @@
         <!-- Product Image Section -->
         <div class="product-image">
             <%
-                // Display the product image if it exists
                 if (base64Image != null) {
             %>
                 <img src="data:image/jpeg;base64,<%= base64Image %>" alt="<%= product.getProduct_name() %>">
@@ -141,33 +143,66 @@
                 }
             %>
         </div>
- 
+
         <!-- Product Details Section -->
         <div class="product-details">
             <h1><%= product.getProduct_name() %></h1>
- 
-            <!-- Display product fields -->
             <p><strong>Description:</strong> <%= product.getDescription() %></p>
             <p><strong>MRP:</strong> &#8377;<%= product.getMrp() %></p>
-            <p><strong>Discount:</strong> <%= product.getDiscount() %> %</p>
-            <p><strong>Delivery Charges:</strong> &#8377;<%= product.getDelivery_charge() %></p>
+            <p><strong>Discount:</strong> <%= product.getDiscount() %>%</p>
+            <p><strong>Stock:</strong> <%= product.getStock() > 0 ? product.getStock() + " available" : "Out of Stock" %></p> <!-- Stock Info -->
             <p class="price-details">Final Price: &#8377;<%= product.getFinal_price() %></p>
 
             <!-- Buttons for actions -->
             <div class="btn-container">
                 <form action="${pageContext.request.contextPath}/cart/add" method="POST">
-                    <input type="hidden" name="productId" value="${product.getProduct_id()}">
-                    <button type="submit">Add to Cart</button>
+                    <input type="hidden" name="productId" value="<%= product.getProduct_id() %>">
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
                 </form>
 
                 <form action="${pageContext.request.contextPath}/cart/buynow" method="GET">
-                    <input type="hidden" name="productId" value="${product.getProduct_id()}">
+                    <input type="hidden" name="productId" value="<%= product.getProduct_id() %>">
                     <button type="submit" class="buy-now">Buy Now</button>
                 </form>
-                <a href="<%= request.getContextPath() %>/products/display1" class="back-button">Back to Products</a>
             </div>
+
+            <!-- Back to Products Button -->
+            <form action="${pageContext.request.contextPath}/homepageuser" method="GET" style="margin-top: 20px;">
+                <button type="submit" class="back-button">Back to Products</button>
+            </form>
         </div>
     </div>
- 
+
+    <!-- Feedback Section -->
+    <div class="feedback-section">
+        <h2>Leave Feedback</h2>
+        <form action="${pageContext.request.contextPath}/feedback/submit" method="POST">
+            <textarea name="feedbackText" placeholder="Enter your feedback..." required></textarea>
+            <input type="hidden" name="productId" value="<%= product.getProduct_id() %>">
+            <input type="hidden" name="userId" value="<%= session.getAttribute("userId") != null ? session.getAttribute("userId") : 0 %>">
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <h3>User Feedback</h3>
+        <ul id="feedback-list">
+            <%
+                if (feedbackList != null) {
+                    for (Feedback feedback : feedbackList) {
+            %>
+                <li>
+                    <strong>User <%= feedback.getUserId() %>:</strong> <%= feedback.getFeedbackText() %>
+                    <br><small><%= feedback.getFeedbackDate() %></small>
+                </li>
+            <%
+                    }
+                } else {
+            %>
+                <li>No feedback available yet.</li>
+            <%
+                }
+            %>
+        </ul>
+    </div>
+
 </body>
 </html>

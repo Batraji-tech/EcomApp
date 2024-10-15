@@ -219,7 +219,7 @@
             <li><a href="/products/remove_product">Remove Product</a></li>
             <li><a href="/products/view_product">View All Products</a></li>
             <li><a href="/products/view_productbycategoryname">View by Category Name</a></li>
-            <li><a href="/user/login">Logout</a></li>
+            <li><a href="/">Logout</a></li>
         </ul>
     </div>
 

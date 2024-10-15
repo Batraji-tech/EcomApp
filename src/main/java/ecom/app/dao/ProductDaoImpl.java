@@ -1,4 +1,5 @@
  package ecom.app.dao;   
+import ecom.app.entities.Category;
 import ecom.app.entities.Products;
 	import ecom.app.entities.User;
 	 
@@ -77,13 +78,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 	    }
 		
 		
-	 
-//		@Override
-//		public Products getProductById(int productId) {
-//			String sql = "SELECT * FROM user WHERE user_id = ?";
-//	 
-//			return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
-//		}
+
 	 
 		public Products getProductById(int product_id) {
 	        String sql = "SELECT * FROM product WHERE product_id = ?";
@@ -127,6 +122,111 @@ import org.springframework.jdbc.core.JdbcTemplate;
 		}
 	 
 		
+		@Override
+		public List<Products> getAllDiscountProducts1() {
+			 String sql = "SELECT * FROM product where tag = 'Best Discount' ";
+			    List<Products> productsList2 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList2;
+		}
+ 
+		@Override
+		public List<Products> getAllBestBrandProducts1() {
+			String sql = "SELECT * FROM product where tag = 'Best Brand' ";
+		    List<Products> productsList3 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList3;
+		}
+	
+		@Override
+		public List<Products> getAllNewArrivalProducts1() {
+			 String sql = "SELECT * FROM product where tag = 'New Arrivals' ";
+			    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList1;
+		}
+		
+		@Override
+		public List<Products> getAllNewArrivalProducts() {
+			 String sql = "SELECT * FROM product where tag = 'New Arrivals' LIMIT 3";
+			    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList1;
+		}
+ 
+ 
+		@Override
+		public List<Products> getAllDiscountProducts() {
+			 String sql = "SELECT * FROM product where tag = 'Best Discount' LIMIT 3 ";
+			    List<Products> productsList2 = jdbcTemplate.query(sql, new ProductRowMapper());
+			    return productsList2;
+		}
+    
+		@Override
+		public List<Products> getAllBestBrandProducts() {
+			String sql = "SELECT * FROM product where tag = 'Best Brand' LIMIT 3 ";
+		    List<Products> productsList3 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList3;
+		}
 	   
+		
+		public boolean updateProductStock(int productId, int quantity) {
+		    if (!hasSufficientStock(productId, quantity)) {
+		        System.out.println("Insufficient stock for product ID: " + productId);
+		        return false; // Not enough stock to fulfill the request
+		    }
+
+		    String updateQuery = "UPDATE product SET stock = stock - ? WHERE product_id = ?";
+		    jdbcTemplate.update(updateQuery, quantity, productId);
+		    return true; // Stock updated successfully
+		}
+
+		
+		
+		
+		public boolean hasSufficientStock(int productId, int quantity) {
+		    String stockQuery = "SELECT stock FROM product WHERE product_id = ?";
+		    Integer currentStock;
+
+		    try {
+		        currentStock = jdbcTemplate.queryForObject(stockQuery, new Object[]{productId}, Integer.class);
+		    } catch (EmptyResultDataAccessException e) {
+		        System.out.println("Product not found for ID: " + productId);
+		        return false; // Product doesn't exist
+		    }
+
+		    // Check if there is enough stock
+		    return currentStock != null && currentStock >= quantity;
+		}
+
+		@Override
+		public List<Products> getAllNewTrendingProducts() {
+			String sql = "SELECT * FROM product where tag = 'Trends'  LIMIT 3 ";
+		    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList1;
+		}
+ 
+		@Override
+		public List<Products> getAllNewTrendingProducts1() {
+			String sql = "SELECT * FROM product where tag = 'Trends'";
+		    List<Products> productsList1 = jdbcTemplate.query(sql, new ProductRowMapper());
+		    return productsList1;
+			
+		}
+ 
+		@Override
+		public List<Category> getAllProductsByCategory() {
+			String sql = "SELECT * FROM category LIMIT 3 ";
+		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
+		    return categoryList;
+		}
+	   
+		@Override
+		public List<Category> getAllProductsByCategory1() {
+			String sql = "SELECT * FROM category";
+		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
+		    return categoryList;
+		}
+		@Override
+		public List<Category> getAllCategories() {
+		    String sql = "SELECT * FROM category";
+		    return jdbcTemplate.query(sql, new CategoryRowMapper()); // Adjust as per your implementation
+		}
 		
 		}

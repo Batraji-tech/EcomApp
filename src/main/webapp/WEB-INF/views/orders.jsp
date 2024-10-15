@@ -78,7 +78,7 @@
                     <div class="order-item">
                         <div class="item-details">
                             <h3><%= item.getProductName() %></h3>
-                            <p>Price: $<%= item.getPrice() %></p>
+                            <p>Price: ₹<%= item.getPrice() %></p>
                             <p>Quantity: <%= item.getQuantity() %></p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     }
                 %>
                 <div class="order-total">
-                    Total: $<%= order.getTotalAmount() %>
+                    Total: ₹<%= order.getTotalAmount() %>
                 </div>
             </div>
 <%

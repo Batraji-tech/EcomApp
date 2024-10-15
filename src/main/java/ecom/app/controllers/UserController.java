@@ -65,6 +65,10 @@ public class UserController {
 		return modelAndView;
 	}
 	
+
+
+
+
 	@PostMapping("/login")
 	public String login(@RequestParam String username, 
 	                    @RequestParam String password, 
@@ -75,6 +79,13 @@ public class UserController {
 
 	    try {
 	        user = userDaoImpl.fetchUser(username);
+	        
+	        System.out.println("user ststus" + user.getStatus());
+	        if (!"ACTIVE".equals(user.getStatus())) {
+	            attributes.addFlashAttribute("message", "Your account is not active. Status: " + user.getStatus());
+	            return "redirect:/user/login";
+        }
+
 	        
 	        System.out.println("user in login controller " + user);
 	        String pwdSalt = user.getPasswordSalt();
@@ -113,43 +124,52 @@ public class UserController {
 	}
 
 
-
-	
 	
 	@PostMapping("/register")
-	public String register(@ModelAttribute User user, RedirectAttributes attributes , HttpSession session )
-			throws IOException, SerialException, SQLException {
+	public String register(@ModelAttribute User user, @RequestParam("roleId") int roleId, RedirectAttributes attributes, HttpSession session)
+	        throws IOException, SQLException {
 
-		String roleName =userDaoImpl.getRoleName(2);
-		
-		System.out.println("\n user : " + user);
-		System.out.println("\n role : " + roleName);
+	    System.out.println("Selected Role ID: " + roleId);
 
-		// Password Encryption starts
-		String passwordSalt = Password.generatePwdSalt(10);
-		user.setPasswordSalt(passwordSalt);
+	    
+	    // Fetch role based on roleId and set it to user
+	    Role selectedRole = userDaoImpl.fetchRoleById(roleId); // Create this method in your UserDaoImpl
+	    user.setRole(selectedRole);
 
-		// temporary data => password+salt
-		String newPassword = user.getPassword() + passwordSalt; // 1234rdvyjtftyf
+	    System.out.println("Selected Role: " + selectedRole);
 
-		String passwordHash = Password.generatePwdHash(newPassword);
-		user.setPasswordHash(passwordHash);
-		// Password Encryption completes
+	    // Password Encryption
+	    String passwordSalt = Password.generatePwdSalt(10);
+	    user.setPasswordSalt(passwordSalt);
+	    String newPassword = user.getPassword() + passwordSalt;
+	    String passwordHash = Password.generatePwdHash(newPassword);
+	    user.setPasswordHash(passwordHash);
 
-		int result =  userDaoImpl.insertUser(user);
-		
+	    // Set status based on role
+	    if (selectedRole != null) {
+	        int selectedRoleId = selectedRole.getRoleId();
+	        if (selectedRoleId == 2) { // Retailer
+	            user.setStatus("PENDING"); // Set status to pending for retailers
+	        } else if (selectedRoleId == 3) { // Assuming roleId 3 is for Customers
+	            user.setStatus("ACTIVE"); // Set status to active for customers
+	        }
+	    } else {
+	        attributes.addFlashAttribute("message", "Please select a role.");
+	        return "redirect:/user/openRegistrationPage";
+	    }
 
-		if (result == 2) {
-			attributes.addFlashAttribute("message", "Registration Successful");
-			return "redirect:/user/login";
-		} else {
-			attributes.addFlashAttribute("message", "Registration Failed");
+	    int result = userDaoImpl.insertUser(user);
 
-			return "redirect:/user/openRegistrationPage";
-		}
+	    if (result > 0) {
+	        attributes.addFlashAttribute("message", "Registration Successful");
+	        return "redirect:/user/login";
+	    } else {
+	        attributes.addFlashAttribute("message", "Registration Failed");
+	        return "redirect:/user/openRegistrationPage";
+	    }
 	}
-	
-	
+
+
 	
 	@GetMapping("/profile")
 	public ModelAndView viewProfile(ModelAndView mView, @RequestParam String username , HttpSession session) throws IOException, SQLException {
@@ -317,6 +337,7 @@ public class UserController {
 	            return "user_forgot_password"; // Stay on the same page with error message
 	        }
 	    }
+	    
 
 	    @PostMapping("/resetpassword1")
 	    public String resetPassword(
@@ -325,6 +346,7 @@ public class UserController {
 	            @RequestParam("email") String email,
 	            Model model) {
 
+	        // Validate passwords
 	        if (!newPassword.equals(confirmPassword)) {
 	            model.addAttribute("error1", "Passwords do not match.");
 	            model.addAttribute("email", email); // Keep email in case of error
@@ -337,12 +359,12 @@ public class UserController {
 	            return "reset2_password"; // Return to reset password page with error
 	        }
 
-	        // Proceed with password reset if no errors
+	        // Proceed with password reset
 	        String passwordSalt = Password.generatePwdSalt(10);
-	        String passwordHash1 = newPassword + passwordSalt;
-	        String passwordHash = Password.generatePwdHash(passwordHash1);
+	        String passwordHash = Password.generatePwdHash(newPassword + passwordSalt);
 
-	        int result = userDaoImpl.resetUserPassword(passwordHash, passwordSalt);
+	        // Update the password in the database
+	        int result = userDaoImpl.forgotUserPassword(email, passwordHash, passwordSalt);
 	        if (result > 0) {
 	            model.addAttribute("message", "New password set successfully.");
 	            return "user_login"; // Redirect to login page after success
@@ -352,5 +374,6 @@ public class UserController {
 	            return "reset2_password"; // Return to reset password page with error
 	        }
 	    }
+
 	  
 }

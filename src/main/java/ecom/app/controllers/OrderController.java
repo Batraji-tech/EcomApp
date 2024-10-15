@@ -5,8 +5,11 @@ import ecom.app.entities.CartItems;
 import ecom.app.entities.User;
 import ecom.app.dao.CartDaoImpl;
 import ecom.app.dao.OrderDaoImpl;
+import ecom.app.dao.ProductDaoImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,51 +32,55 @@ public class OrderController {
   
 	@Autowired
 	private CartDaoImpl cartDaoImpl;
+	@Autowired
+	private ProductDaoImpl productDaoImpl;
 	
 	
 	@PostMapping("/confirm")
+	@Transactional
 	public String confirmOrder(HttpSession session, Model model, @RequestParam String paymentMethod) {
-		User user = (User) session.getAttribute("user");
+	    User user = (User) session.getAttribute("user");
+	    List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
+	    List<CartItems> buyNowItems = (List<CartItems>) session.getAttribute("buyNowItems");
 
-		// Fetch cart items and buy now items
-		List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
-		List<CartItems> buyNowItems = (List<CartItems>) session.getAttribute("buyNowItems");
+	    List<CartItems> itemsToProcess = (buyNowItems != null && !buyNowItems.isEmpty()) ? buyNowItems : cartItems;
 
-		// Handle order based on what items are present
-		if (buyNowItems != null && !buyNowItems.isEmpty()) {
-			// Process "Buy Now" items
-			double totalAmount = buyNowItems.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
-			Order order = new Order(user.getUserId(), buyNowItems, totalAmount, paymentMethod);
+	    if (itemsToProcess == null || itemsToProcess.isEmpty()) {
+	        model.addAttribute("error", "Your cart is empty.");
+	        return "checkout"; // Redirect back to checkout if no items are found
+	    }
 
-			try {
-				orderDaoImpl.saveOrder(order); // Save the order in the database
-				session.removeAttribute("buyNowItems"); // Clear buy now items after successful order
-				return "order_successful"; // Redirect to order success page
-			} catch (IOException | SQLException e) {
-				e.printStackTrace();
-				model.addAttribute("error", "Error processing your order. Please try again.");
-				return "checkout"; // Redirect back to checkout if there's an error
-			}
-		} else if (cartItems != null && !cartItems.isEmpty()) {
-			// Process cart items if no buy now items are present
-			double totalAmount = cartItems.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
-			Order order = new Order(user.getUserId(), cartItems, totalAmount, paymentMethod);
+	    double totalAmount = itemsToProcess.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+	    Order order = new Order(user.getUserId(), itemsToProcess, totalAmount, paymentMethod);
 
-			try {
-				orderDaoImpl.saveOrder(order); // Save the order in the database
-	            cartDaoImpl.removeCartProducts(user.getUserId());
-				session.setAttribute("cartItems", new ArrayList<CartItems>());
-				return "order_successful"; // Redirect to order success page
-			} catch (IOException | SQLException e) {
-				e.printStackTrace();
-				model.addAttribute("error", "Error processing your order. Please try again.");
-				return "checkout"; // Redirect back to checkout if there's an error
-			}
-		} else {
-			model.addAttribute("error", "Your cart is empty. Cannot proceed with the order.");
-			return "checkout"; // Redirect back to checkout if no items are found
-		}
+	    try {
+	        // Check stock availability
+	    	for (CartItems item : itemsToProcess) {
+	    	    if (!productDaoImpl.hasSufficientStock(item.getProductId(), item.getQuantity())) {
+	    	        model.addAttribute("error", "Insufficient stock for product: " + item.getProductName());
+	    	        return "checkout"; // Return to checkout without saving order
+	    	    }
+	    	}
+
+	        // Save the order in the database
+	        orderDaoImpl.saveOrder(order);
+
+	        // Update stock for items
+	        for (CartItems item : itemsToProcess) {
+	            productDaoImpl.updateProductStock(item.getProductId(), item.getQuantity());
+	        }
+
+	        // Clear session attributes for successful order
+	        session.removeAttribute("buyNowItems");
+	        session.setAttribute("cartItems", new ArrayList<CartItems>()); // Clear cart items if necessary
+
+	        return "order_successful"; // Redirect to order success page
+	    } catch (Exception e) {
+	        model.addAttribute("error", "Error processing your order. Please try again.");
+	        return "checkout"; // Redirect back to checkout if there's an error
+	    }
 	}
+
 
 	@GetMapping("/displayOrders")
 	public String viewOrders(HttpSession session, Model model) {
