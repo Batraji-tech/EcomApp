@@ -104,7 +104,7 @@
             </div>
             <div class="button-group">
                 <button type="submit">Reset Password</button>
-                <button type="button" class="back-button" onclick="window.location.href='${pageContext.request.contextPath}/superadmin'">Back to Dashboard</button>
+                <button type="button" class="back-button" onclick="window.location.href='${pageContext.request.contextPath}/superAdmin/login'">Back to Dashboard</button>
             </div>
         </form>
 

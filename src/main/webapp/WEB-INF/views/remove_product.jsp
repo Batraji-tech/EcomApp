@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ecom.app.entities.Products"%>
 <!DOCTYPE html>
@@ -6,14 +7,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Remove Products</title>
+    <title>View Products</title>
     <style>
         body {
             background-color: #F2EED7; /* Soft background */
             font-family: Arial, sans-serif;
             margin: 0;
         }
-
         .message {
             color: #FF9874; /* Soft orange */
             font-size: 30px;
@@ -21,7 +21,6 @@
             text-align: left;
             margin: 20px;
         }
-
         .container {
             width: 80%;
             margin: auto;
@@ -30,48 +29,38 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             background: white;
         }
-
         .search-bar-container {
-            display: flex;
-            justify-content: center; /* Center the items horizontally */
-            margin: 20px 0; /* Add some margin for spacing */
+            text-align: center; /* Center the search bar */
+            margin-bottom: 20px;
         }
-
         .search-bar {
-            width: 300px; /* Adjust width as needed */
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            outline: none;
-            font-size: 16px;
+            width: 50%; /* Adjust width */
+            max-width: 400px; /* Max width for larger screens */
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
         }
-
         th, td {
             border: 1px solid #295F98; /* Dark blue */
             padding: 10px;
             text-align: left;
         }
-
         th {
             background-color: #295F98; /* Dark blue */
             color: white;
         }
-
         .productname {
             font-weight: bold;
             color: #295F98; /* Dark blue */
         }
-
         .price {
             color: #295F98;
             font-weight: bold;
         }
-
         .btn {
             padding: 10px 15px;
             border-radius: 5px;
@@ -82,41 +71,36 @@
             transition: background-color 0.3s;
             margin: 5px;
         }
-
         .btn:hover {
             background-color: #1a3a6e; /* Darker blue */
         }
-
+        .back-button {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            background-color: #295F98; /* Dark blue */
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #1a3a6e; /* Darker blue */
+        }
         th:nth-child(5), td:nth-child(5) {
             width: 150px;
         }
-
         th:nth-child(7), td:nth-child(7) {
             width: 150px;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #295F98;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .back-button:hover {
-            background-color: #1a3a6e;
         }
     </style>
 </head>
 <body>
 
-    <a class="back-button" href="/subadmin">Back to Dashboard</a>
-
     <div class="message">All Products</div>
+
     <div class="container">
+        <!-- Centered Search Bar -->
         <div class="search-bar-container">
             <input type="text" id="filter" class="search-bar" placeholder="Search for products..." />
         </div>
@@ -171,7 +155,8 @@
             </tbody>
         </table>
 
-        
+        <!-- Back to Dashboard Button -->
+        <a href="/subadmin" class="back-button">Back to Dashboard</a>
     </div>
 
     <script>

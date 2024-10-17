@@ -13,7 +13,6 @@
             margin: 0;
             padding: 20px;
             background-color: #F2EED7; 
-            position: relative;
         }
         .message {
             font-size: 24px;
@@ -23,12 +22,11 @@
         }
         .container {
             max-width: 1200px;
-            margin-top: 60px;
+            margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			margin-left:40px;
         }
         table {
             width: 100%;
@@ -63,32 +61,16 @@
         /* Search Bar Styles */
         .search-bar {
             padding: 10px;
-            margin: 0 auto 20px; 
+            margin: 0 auto 20px; /* Centering with bottom margin for gap */
             border-radius: 5px;
             border: 1px solid #ccc;
-            width: 80%; 
-            max-width: 600px; 
-            display: block; 
-        }
-        .back-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #295F98;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .back-button:hover {
-            background-color: #1a3a6e;
+            width: 80%; /* Adjust width */
+            max-width: 600px; /* Max width */
+            display: block; /* Ensures it behaves as a block element */
         }
     </style>
 </head>
 <body>
-
-    <a class="back-button" href="/subadmin">Back to Dashboard</a>
 
     <div class="container">
         <div class="message">Manage Products</div>
@@ -104,9 +86,9 @@
                     <th>Product Name</th>
                     <th>Description</th>
                     <th>MRP</th>
-                    <th>Discount in %</th>
+                    <th>Discount in % </th>
                     <th>Final Price</th>
-                    <th>Delivery Charge</th>
+                    <th>Delivery Charge </th>
                     <th>Stock</th>
                     <th>Action</th>
                 </tr>

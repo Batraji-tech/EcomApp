@@ -29,7 +29,6 @@
             align-items: center;
             flex: 1; 
             padding: 20px;
-            position: relative; /* Added for positioning the button */
         }
 
         .profile-box {
@@ -41,7 +40,7 @@
             max-width: 600px; 
         }
 
-        .edit-button, .back-button {
+        .edit-button {
             background-color: #295F98; 
             color: white;
             border: none;
@@ -53,7 +52,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .edit-button:hover, .back-button:hover {
+        .edit-button:hover {
             background-color: #1a3a6e;
         }
 
@@ -87,18 +86,11 @@
             border-radius: 50%; 
             margin-bottom: 20px; 
         }
-
-        .back-button {
-            position: absolute; /* Position it absolutely */
-            top: 20px; /* Adjust top position */
-            right: 20px; /* Adjust right position */
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <button class="back-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/superadmin'">Back to Dashboard</button>
         <% User user = (User) request.getAttribute("user"); %>
         <div class="profile-box">
             <button class="edit-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit Profile</button>
