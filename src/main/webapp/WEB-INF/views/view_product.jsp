@@ -14,12 +14,16 @@
             padding: 20px;
             background-color: #F2EED7; /* Soft background */
         }
+
+        /* Message */
         .message {
             font-size: 24px;
             font-weight: bold;
             color: #FF9874; /* Soft orange */
             margin-bottom: 20px;
         }
+
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -28,63 +32,81 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        /* Centering the search bar */
+
+        /* Search Bar */
         .search-container {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: center; /* Center the items horizontally */
+            margin-bottom: 20px; /* Add margin for spacing */
         }
+
         .search-bar {
+            width: 300px; /* Adjust width as needed */
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            width: 80%; /* Adjust width */
-            max-width: 600px; /* Max width */
-            display: inline-block; /* Center alignment */
+            outline: none;
+            font-size: 16px;
         }
+
+        /* Table Styles */
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         thead {
             background-color: #295F98; /* Dark blue */
             color: white;
         }
+
         th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+
+        th {
+            font-weight: bold;
+        }
+
         tbody tr:hover {
             background-color: #f1f1f1; /* Light Gray on hover */
         }
+
+        /* Image Styling */
         img {
             border-radius: 4px;
             object-fit: cover; 
         }
-        .btn {
-            padding: 10px 15px;
-            border-radius: 5px;
+
+        /* Button Styles */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #295F98;
             color: white;
-            background-color: #295F98; /* Dark blue */
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
+            padding: 10px 15px;
             text-decoration: none;
-            display: inline-block;
+            border-radius: 5px;
         }
-        .btn:hover {
-            background-color: #1a3a6e; /* Darker blue */
+
+        .back-button:hover {
+            background-color: #1a3a6e;
         }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             th, td {
                 padding: 8px;
                 font-size: 14px;
             }
+
             .message {
                 font-size: 20px;
             }
+
             img {
                 width: 40px; 
                 height: 40px;
@@ -93,6 +115,9 @@
     </style>
 </head>
 <body>
+
+    <a class="back-button" href="/subadmin">Back to Dashboard</a>
+
     <div class="message">All Products</div>
 
     <div class="container">
@@ -115,11 +140,11 @@
                 </tr>
             </thead>
             <tbody id="product-table-body">
-    <%
-        List<Products> products = (List<Products>) request.getAttribute("products");
-        if (products != null) {
-            for (Products product : products) {
-    %>
+                <%
+                List<Products> products = (List<Products>) request.getAttribute("products");
+                if (products != null) {
+                    for (Products product : products) {
+                %>
                 <tr class="product-row" 
                     data-id="<%= product.getProduct_id() %>"
                     data-name="<%= product.getProduct_name().toLowerCase() %>"
@@ -139,21 +164,20 @@
                     <td><%= product.getFinal_price() %></td>
                     <td><%= product.getStock() %></td>
                 </tr>
-    <%
-            }
-        } else {
-    %>
+                <%
+                    }
+                } else {
+                %>
                 <tr>
                     <td colspan="8">No products found.</td>
                 </tr>
-    <%
-        }
-    %>
+                <%
+                }
+                %>
             </tbody>
         </table>
+
         
-        <!-- Back to Dashboard Button -->
-        <a href="/subadmin" class="btn">Back to Dashboard</a>
     </div>
 
     <script>

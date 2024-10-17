@@ -4,54 +4,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/checkout.css">
-<style>
-.address-section {
-	margin-bottom: 20px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css">
+    <style>
+        body {
+            background-color: #F2EED7; /* Soft background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-.address-input {
-	width: 100%;
-	height: 100px;
-	padding: 10px;
-	font-size: 16px;
-	box-sizing: border-box;
-}
+        h1, h2 {
+            color: #FF9874; /* Soft orange */
+        }
 
-.address-actions {
-	margin-top: 10px;
-}
+        .address-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.proceed-button, .edit-button {
-	padding: 10px 20px;
-	font-size: 16px;
-	margin-right: 10px;
-	cursor: pointer;
-}
-</style>
-<script>
-	function makeAddressReadOnly() {
-		document.getElementById('deliveryAddress').readOnly = true;
-	}
+        .address-input {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-	function makeAddressEditable() {
-		document.getElementById('deliveryAddress').readOnly = false;
-		document.getElementById('deliveryAddress').focus();
-	}
+        .address-actions {
+            margin-top: 10px;
+        }
 
-	function handleDeliveryButtonClick() {
-		const deliveryAddress = document.getElementById('deliveryAddress').value;
-		if (!deliveryAddress.trim()) {
-			alert("Please enter your delivery address.");
-			return;
-		}
-		document.getElementById('addressForm').submit();
-	}
-</script>
+        .proceed-button, .edit-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #295F98; /* Dark blue */
+            color: white; /* White text */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            transition: background-color 0.3s;
+        }
+
+        .proceed-button:hover, .edit-button:hover {
+            background-color: #1a3a6e; /* Darker blue on hover */
+        }
+
+        .order-summary {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Collapse borders */
+            margin-top: 20px; /* Space above the table */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Light border for table cells */
+            padding: 12px; /* Padding inside table cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #295F98; /* Dark blue for header */
+            color: white; /* White text for header */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternate row color */
+        }
+
+        tr:hover {
+            background-color: #ddd; /* Highlight on hover */
+        }
+
+        button {
+            background-color: #295F98; /* Dark blue for buttons */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            padding: 10px 15px; /* Button padding */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+            transition: background-color 0.3s ease; /* Smooth transition */
+            margin-top: 20px; /* Space above button */
+        }
+
+        button:hover {
+            background-color: #1a3a6e; /* Darker blue on hover */
+        }
+
+        .alert {
+            padding: 15px;
+            background-color: #f9e8c7; /* Light background for alerts */
+            color: #856404; /* Darker text color for alerts */
+            border: 1px solid #ffeeba; /* Alert border */
+            border-radius: 4px;
+            margin-bottom: 20px; /* Space below alert */
+        }
+    </style>
+    <script>
+        function makeAddressReadOnly() {
+            document.getElementById('deliveryAddress').readOnly = true;
+        }
+
+        function makeAddressEditable() {
+            document.getElementById('deliveryAddress').readOnly = false;
+            document.getElementById('deliveryAddress').focus();
+        }
+
+        function handleDeliveryButtonClick() {
+            const deliveryAddress = document.getElementById('deliveryAddress').value;
+            if (!deliveryAddress.trim()) {
+                alert("Please enter your delivery address.");
+                return;
+            }
+            document.getElementById('addressForm').submit();
+        }
+    </script>
 </head>
 <body>
     <h1>Checkout</h1>
@@ -62,7 +143,7 @@
         String deliveryAddress = (String) session.getAttribute("deliveryAddress");
         %>
         <form id="addressForm" action="${pageContext.request.contextPath}/address/saveAddress" method="post">
-            <label for="deliveryAddress">Delivery Address:</label> 
+            <label for="deliveryAddress">Delivery Address:</label>
             <input type="text" id="deliveryAddress" name="deliveryAddress" class="address-input" required
                 value="<%=deliveryAddress != null ? deliveryAddress : ""%>"
                 <%=deliveryAddress != null && !deliveryAddress.isEmpty() ? "readOnly" : ""%>>
@@ -73,30 +154,30 @@
         </form>
     </div>
 
-<div class="order-summary">
-    <h2>Order Summary</h2>
+    <div class="order-summary">
+        <h2>Order Summary</h2>
 
-    <%
-    List<String> outOfStockMessages = (List<String>) session.getAttribute("outOfStockMessages");
-    if (outOfStockMessages != null && !outOfStockMessages.isEmpty()) {
-        %>
-        <div class="alert alert-warning">
-            <h3>Out of Stock Items:</h3>
-            <ul>
-                <%
-                for (String message : outOfStockMessages) {
-                    %>
-                    <li><%= message %></li>
-                    <%
-                }
-                %>
-            </ul>
-        </div>
         <%
-        // Clear the messages from session after displaying them
-        session.removeAttribute("outOfStockMessages");
-    }
-    %>
+        List<String> outOfStockMessages = (List<String>) session.getAttribute("outOfStockMessages");
+        if (outOfStockMessages != null && !outOfStockMessages.isEmpty()) {
+            %>
+            <div class="alert alert-warning">
+                <h3>Out of Stock Items:</h3>
+                <ul>
+                    <%
+                    for (String message : outOfStockMessages) {
+                        %>
+                        <li><%= message %></li>
+                        <%
+                    }
+                    %>
+                </ul>
+            </div>
+            <%
+            // Clear the messages from session after displaying them
+            session.removeAttribute("outOfStockMessages");
+        }
+        %>
 
         <table>
             <thead>
@@ -122,8 +203,8 @@
                 <tr>
                     <td><%=item.getProductName()%></td>
                     <td><%=item.getQuantity()%></td>
-                    <td><%=String.format("%.2f", item.getPrice())%></td>
-                    <td><%=String.format("%.2f", itemTotal)%></td>
+                    <td>&#8377;<%=String.format("%.2f", item.getPrice())%></td>
+                    <td>&#8377;<%=String.format("%.2f", itemTotal)%></td>
                 </tr>
                 <%
                     }
@@ -131,11 +212,11 @@
                 %>
                 <tr>
                     <td colspan="3" class="total">Delivery Charge</td>
-                    <td><%=String.format("%.2f", deliveryCharge)%></td>
+                    <td>&#8377;<%=String.format("%.2f", deliveryCharge)%></td>
                 </tr>
                 <tr>
                     <td colspan="3" class="total">Total</td>
-                    <td><%=String.format("%.2f", total)%></td>
+                    <td>&#8377;<%=String.format("%.2f", total)%></td>
                 </tr>
                 <%
                 } else {
@@ -152,6 +233,4 @@
         <button onclick="window.location.href='/payments'">Confirm Order</button>
     </div>
 </body>
-
-
 </html>
