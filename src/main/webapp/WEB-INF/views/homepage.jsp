@@ -18,59 +18,76 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+            background-color: #F2EED7; /* Soft background */
+            background-image: url('https://img.freepik.com/free-vector/blank-blue-halftone-background_53876-114592.jpg'); /* Add your background image path */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9; /* Adjust the transparency */
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
-            color: white;
-            padding: 15px;
+            background-color: #295F98; /* Dark blue */
+            color: #FF9874; /* Soft orange */
+            padding: 10px 15px;
+            position: relative;
+            z-index: 10;
         }
 
         .nav-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            flex-grow: 1;
+            margin: 0 20px;
         }
 
         nav .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            margin-right: 20px;
+            color: #FF9874; /* Soft orange */
         }
 
         nav .search-bar {
             flex-grow: 1;
-            margin: 0 20px;
-            position: relative; /* Position for icon */
+            position: relative;
             text-align: center;
         }
 
         nav .search-bar form {
-            display: inline-block;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0; /* Remove margin to merge elements */
         }
 
         nav .search-bar input {
             width: 400px;
-            padding: 8px 40px 8px 15px; /* Add padding for the search icon */
-            border-radius: 5px;
-            border: none;
-            text-align: left;
+            padding: 8px 15px;
+            border-radius: 5px 0 0 5px; 
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 16px;
         }
 
         nav .search-bar button {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
+            background-color: white; /* White background for the button */
+            color: black; /* Black icon color */
+            border: 1px solid #ccc; /* Match the input border */
+            padding: 2px; /* Padding for the button */
+            border-radius: 0 5px 5px 0; /* Rounded right corners */
             cursor: pointer;
-            color: #333;
+            display: flex;
+            align-items: center;
+            margin-left: -3px; /* Overlap the button with the input */
+        }
+
+        nav .search-bar button img {
+            width: 30px; /* Set icon width */
+            height: 30px; /* Set icon height */
         }
 
         nav ul {
@@ -78,10 +95,10 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            gap: 15px;
         }
 
         nav ul li {
-            margin-left: 20px;
             position: relative;
         }
 
@@ -90,16 +107,16 @@
             text-decoration: none;
             padding: 10px;
             display: block;
+            line-height: 1.5;
         }
 
-        /* Dropdown menu for login */
         nav ul li .dropdown-content {
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 160px;
+            min-width: 172px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            z-index: 20;
         }
 
         nav ul li:hover .dropdown-content {
@@ -108,13 +125,31 @@
 
         nav ul li .dropdown-content a {
             color: black;
+            font-size: 16px;
             text-decoration: none;
             display: block;
-            padding: 12px 16px;
+            padding: 10px;
         }
 
         nav ul li .dropdown-content a:hover {
             background-color: #ddd;
+        }
+
+        .explore-all-products {
+            background-color: #295F98; /* Dark blue */
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .explore-all-products:hover {
+            background-color: #1a3a6e; /* Darker blue on hover */
         }
 
         section {
@@ -123,6 +158,7 @@
         }
 
         h1 {
+            color: #FF9874; /* Soft orange */
             margin: 20px 0;
             font-size: 28px;
         }
@@ -130,8 +166,8 @@
         h2 {
             margin: 20px 0;
             font-size: 24px;
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
+            color: #FF9874; /* Soft orange */
+            border-bottom: 2px solid #295F98; /* Dark blue */
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -155,13 +191,13 @@
         img {
             width: auto;
             height: 200px;
-            object-fit: cover;
+            object-fit: contain; /* Change to contain */
             border-radius: 5px;
         }
 
         .explore-button {
-            background-color: lightgray;
-            color: black;
+            background-color: #295F98;
+            color: white;
             border: none;
             padding: 15px;
             border-radius: 5px;
@@ -175,8 +211,12 @@
         }
 
         .explore-button:hover {
-            background-color: black;
+            background-color:  #1a3a6e;
             color: white;
+        }
+
+        .login-dropdown {
+            margin-right: 100px;
         }
     </style>
 </head>
@@ -185,50 +225,41 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">ElectroMart</div>
-
-        <!-- Search Bar in Center -->
         <div class="nav-container">
             <div class="search-bar">
-                <form action="${pageContext.request.contextPath}/products/search" method="get">
+                <form action="/search" method="get">
                     <input type="text" name="query" placeholder="Search for specific products..." required>
-                    <button type="submit">
-                        <i class="fas fa-search"></i> <!-- Lens icon -->
+                    <button type="submit" class="search-button">
+                        <img src="https://www.shutterstock.com/image-vector/magnify-icon-vector-eps10-260nw-1220721013.jpg" alt="Search"/>
                     </button>
                 </form>
             </div>
         </div>
-
-        <!-- Navigation Links -->
         <ul>
-            <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-            
-            <!-- Login Dropdown -->
-            <li class="login-dropdown">
-                <a href="#">Login</a>
-                <ul class="dropdown-content">
-                    <li><a href="/superAdmin/login" onclick="submitLoginForm('super_admin')">Login as Super Admin</a></li>
-                    <li><a href="/user/login" onclick="submitLoginForm('retailer')">Login</a></li>
-               
-                </ul>
-            </li>
-
-            <!-- Shop Dropdown -->
             <li class="shop-dropdown">
                 <a href="#">Shop</a>
                 <ul class="dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/explore-all-categories">Shop by Category</a></li>
-                    <li><a href="${pageContext.request.contextPath}/products/display1">All Products</a></li>
+                    <li><a href="/explore-all-categories">Shop by Category</a></li>
+                    <li><a href="/products/display1">All Products</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li class="login-dropdown">
+                <a href="#">Login</a>
+                <ul class="dropdown-content">
+                    <li><a href="/superAdmin/login">Login as Owner</a></li>
+                    <li><a href="/user/login">Login</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
-
+    
     <!-- Welcome Section -->
     <section>
-        <h1>Welcome to the Electronic Universe</h1>
-        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'">Explore All Products</button>
+        <div class="explore-all-products" onclick="window.location.href='${pageContext.request.contextPath}/products/display1'">Explore All Products</div>
     </section>
-   
+
     <!-- Trends Section -->
     <section>
         <h2>New Trends</h2>
@@ -254,8 +285,6 @@
         </div>
     </section>
      
-   
-
     <!-- New Arrivals Section -->
     <section>
         <h2>New Arrivals</h2>
@@ -280,93 +309,93 @@
             %>
         </div>
     </section>
+	 <!-- Discount Products Section -->
+	    <section>
+	        <h2>Discount Products</h2>
+	        <div class="products-row">
+	            <%
+	                List<Products> discountProducts = (List<Products>) request.getAttribute("discountProducts");
+	                for (int i = 0; i < discountProducts.size(); i++) {
+	                    Products product = discountProducts.get(i);
+	            %>
+	                <div class="product">
+	                  <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
+	                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+	                </a> <p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
+	                </div>
+	            <%
+	                if ((i + 1) % 3 == 0) {
+	            %>
+	                <div class="explore-button" onclick="window.location.href='${pageContext.request.contextPath}/explore-discount-products'">Explore All</div>
+	            <%
+	                }
+	            }
+	            %>
+	        </div>
+	    </section>
 
-    <!-- Discount Products Section -->
-    <section>
-        <h2>Discount Products</h2>
-        <div class="products-row">
-            <%
-                List<Products> discountProducts = (List<Products>) request.getAttribute("discountProducts");
-                for (int i = 0; i < discountProducts.size(); i++) {
-                    Products product = discountProducts.get(i);
-            %>
-                <div class="product">
-                  <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                </a> <p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
-                </div>
-            <%
-                if ((i + 1) % 3 == 0) {
-            %>
-                <div class="explore-button" onclick="window.location.href='${pageContext.request.contextPath}/explore-discount-products'">Explore All</div>
-            <%
-                }
-            }
-            %>
-        </div>
-    </section>
-
-    <!-- Best Brands Section -->
-    <section>
-        <h2>Best Brands</h2>
-        <div class="products-row">
-            <%
-                List<Products> bestBrands = (List<Products>) request.getAttribute("bestBrands");
-                for (int i = 0; i < bestBrands.size(); i++) {
-                    Products product = bestBrands.get(i);
-            %>
-                <div class="product">
-                   <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                </a><p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
-                </div>
-            <%
-                if ((i + 1) % 3 == 0) {
-            %>
-                <div class="explore-button" onclick="window.location.href='${pageContext.request.contextPath}/explore-best-brands'">Explore All</div>
-            <%
-                }
-            }
-            %>
-        </div>
-    </section>
-    
-     <!-- Category Section -->
-<section>
-    <h2>Shop By Category</h2>
-    <div class="products-row">
-        <%
-            List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
-            for (int i = 0; i < categoryList.size(); i++) {
-                Category category = categoryList.get(i);
-        %>
-            <div class="product">
-                <!-- Link to the products of the selected category -->
-                <a href="<%= request.getContextPath() %>/products/category/<%= category.getCategory_id() %>">
-                    <!-- Display the category image -->
-                    <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>" style="width:200px;height:200px;">
-                </a>
-                <!-- Display the category name -->
-                <p><%= category.getCategory_name() %></p>
-            </div>
-        <%
-            if ((i + 1) % 3 == 0) {
-        %>
-            <!-- Explore All button after every 3 categories -->
-            <div class="explore-button" onclick="window.location.href='<%= request.getContextPath() %>/explore-all-categories'">Explore All</div>
-        <%
-            }
-        }
-        %>
-    </div>
-</section>
+	    <!-- Best Brands Section -->
+	    <section>
+	        <h2>Best Brands</h2>
+	        <div class="products-row">
+	            <%
+	                List<Products> bestBrands = (List<Products>) request.getAttribute("bestBrands");
+	                for (int i = 0; i < bestBrands.size(); i++) {
+	                    Products product = bestBrands.get(i);
+	            %>
+	                <div class="product">
+	                   <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
+	                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+	                </a><p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
+	                </div>
+	            <%
+	                if ((i + 1) % 3 == 0) {
+	            %>
+	                <div class="explore-button" onclick="window.location.href='${pageContext.request.contextPath}/explore-best-brands'">Explore All</div>
+	            <%
+	                }
+	            }
+	            %>
+	        </div>
+	    </section>
+	    
+	     <!-- Category Section -->
+	<section>
+	    <h2>Shop By Category</h2>
+	    <div class="products-row">
+	        <%
+	            List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
+	            for (int i = 0; i < categoryList.size(); i++) {
+	                Category category = categoryList.get(i);
+	        %>
+	            <div class="product">
+	                <!-- Link to the products of the selected category -->
+	                <a href="<%= request.getContextPath() %>/products/category/<%= category.getCategory_id() %>">
+	                    <!-- Display the category image -->
+	                    <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>" style="width:200px;height:200px;">
+	                </a>
+	                <!-- Display the category name -->
+	                <p><%= category.getCategory_name() %></p>
+	            </div>
+	        <%
+	            if ((i + 1) % 3 == 0) {
+	        %>
+	            <!-- Explore All button after every 3 categories -->
+	            <div class="explore-button" onclick="window.location.href='<%= request.getContextPath() %>/explore-all-categories'">Explore All</div>
+	        <%
+	            }
+	        }
+	        %>
+	    </div>
+	</section>
 
 
-    <script>
-        // JavaScript function for handling login dropdown selection
-        function submitLoginForm(role) {
-            window.location.href = '${pageContext.request.contextPath}/login?role=' + role;
-        }
-    </script>
+	    <script>
+	        // JavaScript function for handling login dropdown selection
+	        function submitLoginForm(role) {
+	            window.location.href = '${pageContext.request.contextPath}/login?role=' + role;
+	        }
+	    </script>
+
 </body>
 </html>

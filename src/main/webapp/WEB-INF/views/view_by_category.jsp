@@ -6,29 +6,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Best Brands - ElectroMart</title>
+    <title>View by category - ElectroMart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #F2EED7; /* Soft background */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #FF9874; /* Soft orange */
+            text-align: center;
+            margin-bottom: 30px;
         }
         .products-row {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: space-between; /* Evenly distributes space between items */
+            flex-wrap: wrap; /* Allows wrapping to next line */
+            max-width: 1200px; /* Maximum width of the product container */
+            margin: 0 auto; /* Center the container */
         }
         .product {
-            margin: 20px;
             background: white;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 15px;
             text-align: center;
-            max-width: 250px;
+            flex: 0 0 30%; /* Set flex-basis to 30% for equal size */
+            margin: 10px; /* Margin around each product */
+            box-sizing: border-box; /* Ensures padding and border are included in the width */
         }
         img {
             width: 100%;
-            height: auto;
-            object-fit: cover;
+            height: 150px; /* Fixed height for equal sizing */
+            object-fit: contain; /* Maintains aspect ratio */
             border-radius: 5px;
         }
     </style>
@@ -40,14 +51,14 @@
     <div class="products-row">
         <%
             List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
-            for (Category product : categoryList) {
+            for (Category category : categoryList) {
         %>
-             <div class="product">
-                    <a href="${pageContext.request.contextPath}/products/category/<%= product.getCategory_id() %>">
-                    <img src="data:image/jpeg;base64,<%= product.getBase64CategoryImage() %>" alt="<%= product.getCategory_name() %>">
-                </a><p><%= product.getCategory_name() %> 
-                </div>
-            
+            <div class="product">
+                <a href="${pageContext.request.contextPath}/products/category/<%= category.getCategory_id() %>">
+                    <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>">
+                </a>
+                <p><%= category.getCategory_name() %></p>
+            </div>
         <%
             }
         %>
