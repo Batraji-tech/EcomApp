@@ -11,6 +11,7 @@ function validateRegisterForm() {
 
     let isValid = true;
     let errors = [];
+	
 
     // First Name validation
     const nameRegex = /^[A-Za-z]+$/; // Only letters allowed
