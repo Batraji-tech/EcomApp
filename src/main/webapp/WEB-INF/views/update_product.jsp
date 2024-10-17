@@ -75,10 +75,11 @@
             Products product = (Products) request.getAttribute("product"); 
             if (product != null) {
         %>
-            <form action="${pageContext.request.contextPath}/products/product_updation" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/products/product_updation" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
 
-                
+                  <label for="product_name"></label>
+                <input type="hidden" id="product_name" name="product_name" value="<%= product.getProduct_name() %>" required />
 
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required><%= product.getDescription() %></textarea>
