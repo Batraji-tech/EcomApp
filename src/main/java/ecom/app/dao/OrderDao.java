@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface OrderDao {
-    void saveOrder(Order order) throws IOException, SQLException;
 
 	List<Order> getOrdersByUserId(int userId) throws SQLException, IOException;
 	List<CartItems> getOrderItems(int orderId) throws SQLException, IOException;
@@ -16,6 +15,8 @@ public interface OrderDao {
 	void removeCartProducts(int userId) throws SQLException;
 
 	List<Order> getSalesDataByDateRange(String startDate, String endDate) throws SQLException;
+
+	void saveOrder(Order order, boolean truncateCart) throws IOException, SQLException;
 
 
 }

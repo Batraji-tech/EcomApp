@@ -192,6 +192,7 @@
                      
                       <a href="<%= request.getContextPath() %>/products/<%= product.getProduct_id() %>" class="details-btn">More Details</a>
                      
+                     
                      </center> 
                     </div>
                 </div>

@@ -71,7 +71,7 @@ public class WishlistController {
 	        boolean alreadyExists = existingWishlist.stream().anyMatch(item -> item.getProductId() == productId);
 
 	        if (alreadyExists) {
-	            attributes.addFlashAttribute("error", "Product is already present in your wishlist.");
+	            attributes.addFlashAttribute("message", "Product is already present in your wishlist.");
 	        } else {
 	            Wishlist wishlist = new Wishlist();
 	            wishlist.setUserId(user.getUserId());

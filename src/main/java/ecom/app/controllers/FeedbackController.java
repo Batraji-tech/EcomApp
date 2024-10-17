@@ -53,6 +53,7 @@ public class FeedbackController {
 
             
             attributes.addFlashAttribute("message", "Feedback submitted successfully!");
+            return "redirect:/products/"+productId;
         } catch (NumberFormatException e) {
             attributes.addFlashAttribute("error", "Invalid product ID or user ID.");
         } catch (Exception e) {

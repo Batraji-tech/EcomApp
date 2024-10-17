@@ -103,7 +103,7 @@ public class CartController {
 			e.printStackTrace();
 		}
 
-		return "cart"; // Ensure this corresponds to your JSP or Thymeleaf template
+		return "cart"; 
 	}
 
 	@PostMapping("/remove")
@@ -116,15 +116,19 @@ public class CartController {
 			try {
 				cartDaoImpl.removeItemFromCart(cartId, product_id); // You need to implement this method in CartDaoImpl
 				attributes.addFlashAttribute("message", "Item removed from cart successfully.");
+			     return "redirect:/cart/view";
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
 				attributes.addFlashAttribute("message", "Error removing item from cart. Please try again.");
+			     return "redirect:/cart/view";
+
 			}
 		} else {
 			attributes.addFlashAttribute("message", "Your cart is not initialized. Please log in.");
+		     return "redirect:/user/login";
+
 		}
 
-		return "redirect:/cart/view"; // Redirect to the view cart page
 	}
 	
 	
