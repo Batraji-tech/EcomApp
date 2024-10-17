@@ -35,6 +35,12 @@ public class Order {
         this.orderDate = orderDate.toLocalDateTime(); // Convert Timestamp to LocalDateTime
     }
 
+    
+
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getOrderId() {
 		return orderId;
 	}

@@ -153,7 +153,7 @@
         }
 
         img {
-            width: 270px;
+            width: auto;
             height: 200px;
             object-fit: cover;
             border-radius: 5px;

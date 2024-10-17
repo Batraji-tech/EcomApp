@@ -17,6 +17,5 @@ public interface OrderDao {
 
 	List<Order> getSalesDataByDateRange(String startDate, String endDate) throws SQLException;
 
-	List<Order> getSalesDataByCategory(int categoryId) throws SQLException;
 
 }

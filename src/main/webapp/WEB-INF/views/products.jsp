@@ -103,14 +103,7 @@
                     <label for="stock">Stock Quantity</label>
                     <input type="number" placeholder="Enter Stock Quantity" name="stock" class="form-control" id="stock" required>
                 </div>
-                <div class="form-group">
-                    <label for="category_id">Category</label>
-                    <select name="category_id" id="category_id" class="form-control category-dropdown" required>
-                        <option value="1">REFRIGERATOR</option>
-                        <option value="2">MOBILES</option>
-                        <option value="3">LAPTOPS</option>
-                    </select>
-                </div>
+            
              <label for="category_id">Category</label>
                 <select name="category_id" id="category_id" class="form-control" required>
                 <%

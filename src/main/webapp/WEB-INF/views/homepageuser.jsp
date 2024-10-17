@@ -178,7 +178,7 @@ nav ul li .dropdown-content a:hover {
         }
 
         img {
-            width: 270px;
+            width: auto;
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
@@ -320,7 +320,7 @@ nav ul li .dropdown-content a:hover {
                     Products product = discountProducts.get(i);
             %>
                 <div class="product">
-                  <a href="${pageContext.request.contextPath}/products<%= product.getProduct_id() %>">
+                  <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
                     <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
                 </a> <p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>
