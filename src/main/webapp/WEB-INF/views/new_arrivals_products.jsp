@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ecom.app.entities.Products" %>
 
@@ -15,22 +15,24 @@
             padding: 20px;
         }
         h1 {
-            color: #FF9874; /* Soft orange */
             text-align: center;
-            margin-bottom: 30px;
+            color: #FF9874;
+            margin: 20px 0;
         }
         .products-row {
             display: flex;
-            justify-content: space-between; /* Evenly distributes space between items */
-            flex-wrap: wrap; /* Allows wrapping to next line */
-            max-width: 1200px; /* Maximum width of the product container */
+            justify-content: center;
+            flex-wrap: wrap;
             margin: 0 auto; /* Center the container */
+            padding: 0 15px; /* Add padding to prevent horizontal scroll */
+            max-width: 1200px; /* Set a max width for the container */
         }
         .product {
-            background: white;
+            margin: 15px; /* Margin for spacing */
+            background: rgba(255, 255, 255, 0.8); /* White background with transparency */
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             flex: 0 0 30%; /* Set flex-basis to 30% for equal size */
             margin: 10px; /* Margin around each product */
@@ -38,8 +40,8 @@
         }
         img {
             width: 100%;
-            height: 150px; /* Fixed height for equal sizing */
-            object-fit: contain; /* Maintains aspect ratio */
+            height: 200px; /* Set a fixed height for consistency */
+            object-fit: contain; /* Ensures full image visibility */
             border-radius: 5px;
         }
     </style>
