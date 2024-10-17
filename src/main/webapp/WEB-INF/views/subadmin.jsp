@@ -5,13 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retailer Dashboard</title>
+    <title>Sub-Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://st3.depositphotos.com/13349494/32624/i/450/depositphotos_326241450-stock-photo-beautiful-abstract-background-blue-purple.jpg');
+            background-image: url('https://miro.medium.com/v2/resize:fit:1200/1*b8WS2iEvZCQYlXq46gKpqw.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -24,7 +24,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(242, 238, 215, 0.2);
+            background-color: rgba(242, 238, 215, 0.7);
             z-index: 1;
         }
 
@@ -204,8 +204,8 @@
     <div class="overlay"></div>
 
     <div class="navbar">
-        <div class="logo">ElectroMart</div>
-        <h1 class="header">WELCOME TO RETAILER DASHBOARD</h1>
+        <div class="logo">Shopology</div>
+        <h1 class="header">WELCOME TO SUB ADMIN DASHBOARD</h1>
         <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">☰</button> <!-- Toggle Button in Navbar -->
     </div>
     
@@ -244,8 +244,8 @@
             <div class="step-container">
                 <div class="step">
                     <img src="https://media.istockphoto.com/id/1658170979/vector/hand01.jpg?s=612x612&w=0&k=20&c=C9xLL2Qd6nkJ2wCJqPtubRCzBYFvD-6-b1ZfJEiurpk=" alt="Step 1 Image">
-                    <h3>1: Create Account </h3>
-                    <p>Create a retailer account on ElectroMart.in</p>
+                    <h3>1: Create account</h3>
+                    <p>Account creation in Shopology.in</p>
                 </div>
                 <div class="step">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU_BUZvarX2BmZNWjyCaUqfKJLCQyx09aFkQ&s" alt="Step 2 Image">
@@ -264,21 +264,21 @@
         <div class="faq-section">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-question" onclick="toggleAnswer('faq1')">
-                How do I sell on ElectroMart.in? 
+                How do I sell on Shopology.in? 
             </div>
             <div class="faq-answer" id="faq1">
-                <p>1.Register yourself with a request to owner to become a retailer </p>
+                <p>1.Register yourself with a request to super-admin to become a retailer </p>
 				<p>2.Add your products which you want to sell </p>
 				<p>3.Complete your order within 7 days </p>
             </div>
             <div class="faq-question" onclick="toggleAnswer('faq3')">
-                How to create a retailer account on ElectroMart.in? 
+                How to create a seller account on Shopology.in? 
             </div>
             <div class="faq-answer" id="faq3">
-                <p>Go to the ElectroMart retailer registration page and fill out the required form.</p>
+                <p>Go to the Shopology retailer registration page and fill out the required form.</p>
             </div>
             <div class="faq-question" onclick="toggleAnswer('faq4')">
-                Is there a fee to create a retailer account on ElectroMart.in? 
+                Is there a fee to create a seller account on Shopology.in? 
             </div>
             <div class="faq-answer" id="faq4">
                 <p>Creating an account is absoluately free.</p>

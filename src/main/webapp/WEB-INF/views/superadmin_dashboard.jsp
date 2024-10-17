@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner Dashboard</title>
+    <title>Super Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -192,8 +192,8 @@
     <div class="overlay"></div>
 
     <div class="navbar">
-        <div class="logo">ElectroMart</div>
-        <h1 class="header">WELCOME TO OWNER DASHBOARD</h1>
+        <div class="logo">Shopology</div>
+        <h1 class="header">WELCOME TO SUPER ADMIN DASHBOARD</h1>
         <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">☰</button>
     </div>
     
@@ -202,7 +202,7 @@
     <ul>
         <li><a href="/superAdmin/viewProfile">View Profile</a></li>
         <li><a href="/superAdmin/resetPassword">Reset Password</a></li>
-        <li><a href="/superAdmin/viewAllSubAdmins">View All Retailers</a></li>
+        <li><a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a></li>
         <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
         <li><a href="/category/add">Add Category</a></li>
           <li><a href="/superAdmin/salesPerformance">Total Sales Report</a></li>
@@ -234,7 +234,7 @@
         </div>
 
         <div class="why-sell">
-            <h2>Why Sell on ElectroMart?</h2>
+            <h2>Why Sell on Shopology?</h2>
             <div class="grid-container">
                 <div class="grid-item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXcsCXTEys0kprkovC-Ufc4aHX7ldsXvq1Fw&s" alt="Sell Across India">
@@ -244,7 +244,7 @@
                 <div class="grid-item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbyffbyoEQ5FsEgxOjqkuTearET45VMRVDpoOdLJ11GZZRzaxhwi7pWupBQrnhaPnaot0&usqp=CAU" alt="Higher Profits">
                     <h3>Higher Profits</h3>
-                    <p>With some commission*, you take maximum profits with you</p>
+                    <p>With 0% commission*, you take 100% profits with you</p>
                 </div>
                 <div class="grid-item">
                     <img src="https://i.pinimg.com/564x/8d/ff/49/8dff49985d0d8afa53751d9ba8907aed.jpg" alt="Account Management">
