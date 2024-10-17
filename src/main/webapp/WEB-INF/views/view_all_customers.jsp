@@ -10,6 +10,7 @@
             background-color: #F2EED7; 
             margin: 0;
             padding: 20px;
+            position: relative; /* Allow absolute positioning of child elements */
         }
 
         h2 {
@@ -61,17 +62,34 @@
             color: #555;
             font-size: 1.2em;
         }
-
+        
         /* Search Bar Styles */
         .search-container {
             text-align: center;
             margin-bottom: 20px;
         }
+        
         .search-bar {
             padding: 10px;
             width: 390px; /* Adjust as needed */
             border-radius: 5px;
             border: 1px solid #ccc;
+        }
+        
+        .back-button {
+            position: absolute; /* Position it absolutely */
+            top: 20px; /* Adjust top position */
+            right: 20px; /* Adjust right position */
+            padding: 10px; /* Add padding */
+            background-color: #295F98; 
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #1a3a6e; 
         }
     </style>
 </head>
@@ -81,6 +99,8 @@
     <div class="search-container">
         <input type="text" id="search" class="search-bar" placeholder="Search by Name or Email..." />
     </div>
+
+    <a class="back-button" href="/superadmin">Back to Dashboard</a>
 
     <%
         List<User> customers = (List<User>) request.getAttribute("customers");
@@ -118,8 +138,6 @@
     <% } else { %>
         <p class="no-customers">No customers found.</p>
     <% } %>
-
-    <a href="/superAdmin/login">Back to Dashboard</a>
 
     <script>
         document.getElementById('search').addEventListener('input', function() {

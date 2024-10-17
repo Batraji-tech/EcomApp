@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #cce0f5;
+            background-color: #F2EED7;
             margin: 0;
             padding: 20px;
         }
@@ -27,7 +27,7 @@
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #FF9874;
         }
 
         .payment-options {
@@ -41,7 +41,7 @@
 		    border: 2px solid #ccc;
 		    border-radius: 8px;
 			padding: 15px;
-		    background: #2E4053;
+		    background: gray;
 			transition: transform 0.2s;
 					}
 					
@@ -52,7 +52,7 @@
 
         .payment-card img {
             max-width: 150px;
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         form {
@@ -63,22 +63,23 @@
 
 		input {
 		    padding: 5px;
-		    border: 1px solid #ccc;
+		    border: 1px solid white;
 		    border-radius: 4px;
-		    width: 100%;
-		    max-width: 150px;
+		    width: 90%;
+		    max-width: 140px;
 		}
         button {
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background-color: #28a745;
+            background-color:  #295F98;
             color: white;
             cursor: pointer;
+			margin-top:10px;
         }
 
         button:hover {
-            background-color: #218838;
+            background-color:  #1a3a6e;
         }
     </style>
 </head>

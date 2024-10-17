@@ -3,13 +3,14 @@
 <%@ page import="ecom.app.entities.User" %>
 <html>
 <head>
-    <title>All SubAdmins</title>
+    <title>All Retailers</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #F2EED7;
             margin: 0;
             padding: 20px;
+            position: relative; /* Allow absolute positioning of child elements */
         }
 
         h2 {
@@ -74,10 +75,18 @@
             color: #555;
             font-size: 1.2em;
         }
+
+        .back-button {
+            position: absolute;
+            top: -3px;
+            right: 20px;
+        }
     </style>
 </head>
 <body>
-    <h2>SubAdmins List</h2>
+    <h2>Retailers List</h2>
+
+    <a class="back-button" href="/superadmin">Back to Dashboard</a>
 
     <!-- Centered Search Bar -->
     <div class="search-bar-container">
@@ -102,14 +111,15 @@
             </thead>
             <tbody>
                 <% for (User subadmin : subadmins) { %>
+
                     <tr class="subadmin-row" data-name="<%= subadmin.getFirstName().toLowerCase() + " " + subadmin.getLastName().toLowerCase() %>" data-email="<%= subadmin.getEmailId().toLowerCase() %>">
                         <td><%=  subadmin.getUserId() %></td>
                         <td><%= subadmin.getFirstName() %></td>
                         <td><%= subadmin.getLastName() %></td>
                         <td><%= subadmin.getEmailId() %></td>
                         <td><%= subadmin.getMobileNo() %></td>
-                        <td><%= subadmin.getDateOfBirth() != null ?  subadmin.getDateOfBirth().toString() : "N/A" %></td>
-                        <td><%=  subadmin.getUsername() %></td>
+                        <td><%= subadmin.getDateOfBirth() != null ? subadmin.getDateOfBirth().toString() : "N/A" %></td>
+                        <td><%= subadmin.getUsername() %></td>
                     </tr>
                 <% } %>
             </tbody>
@@ -117,9 +127,6 @@
     <% } else { %>
         <p class="no-customers">No customers found.</p>
     <% } %>
-
-    <a href="/superAdmin/login">Back to Dashboard</a>
-
     <script>
         function filterSubAdmins() {
             const filterValue = document.getElementById('filter').value.toLowerCase();
