@@ -21,7 +21,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px; /* Space between containers */
-            position: relative; /* For positioning the button */
         }
         h2 {
             color: #FF9874; /* Soft orange */
@@ -67,15 +66,15 @@
             border-radius: 4px;
         }
         .btn-back {
-            position: absolute; /* Positioning the button */
-            top: 20px;
-            right: 20px;
+            display: inline-block;
             padding: 10px 15px;
             border-radius: 5px;
             color: white;
             background-color: #295F98; /* Dark blue */
             text-decoration: none;
             transition: background-color 0.3s;
+            margin-top: 20px;
+            text-align: center;
         }
         .btn-back:hover {
             background-color: #1a3a6e; /* Darker blue */
@@ -85,7 +84,6 @@
 <body>
 
     <div class="container">
-        <a href="/subadmin" class="btn-back">Back to Dashboard</a> <!-- Moved to the top right -->
         <div class="search-container">
             <h2>Search by Category Name</h2>
 
@@ -148,6 +146,9 @@
                 %>
             </tbody>
         </table>
+
+        <!-- Back to Dashboard Button -->
+        <a href="/subadmin" class="btn-back">Back to Dashboard</a>
     </div>
     
     <div class="footer">
