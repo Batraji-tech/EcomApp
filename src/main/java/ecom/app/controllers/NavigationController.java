@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ecom.app.dao.ProductDaoImpl;
 import ecom.app.entities.Category;
 import ecom.app.entities.Products;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class NavigationController {
 	@Autowired
 	private ProductDaoImpl productDaoImpl;
 	public List<Products> products;
-
+   
+	@Autowired
+	private HttpSession session;
+	
 	@GetMapping("/")
 	public String homepage(Model model) {
 
@@ -36,6 +40,13 @@ public class NavigationController {
 		model.addAttribute("categoryList", categoryList);
 
 		return "homepage"; // JSP page
+	}
+	
+	
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 	@GetMapping("/expore-all")

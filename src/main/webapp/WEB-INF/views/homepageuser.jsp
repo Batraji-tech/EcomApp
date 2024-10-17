@@ -247,7 +247,7 @@ nav ul li .dropdown-content a:hover {
                 <li><a href="${pageContext.request.contextPath}/wishlist/view">Wishlist</a></li>
                 <li><a href="${pageContext.request.contextPath}/cart/view">Cart Items</a></li>
                 <li><a href="${pageContext.request.contextPath}/order/displayOrders">Orders</a></li>
-                <li><a href="${pageContext.request.contextPath}/">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
