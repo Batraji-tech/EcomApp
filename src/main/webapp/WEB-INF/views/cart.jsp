@@ -293,6 +293,11 @@
     <%
     }
     %>
+    
+    <a href="<%=request.getContextPath() + "/homepageuser"%>">Back to
+		Home</a>
+	<%@include file="message.jsp"%>
+    
 
 </body>
 </html>

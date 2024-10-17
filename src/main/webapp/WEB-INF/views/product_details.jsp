@@ -2,6 +2,8 @@
 <%@ page import="ecom.app.entities.Products" %>
 <%@ page import="ecom.app.entities.Feedback" %>
 <%@ page import="java.util.List" %>
+<%@ page import="ecom.app.entities.User" %>
+
 
 <html>
 <head>
@@ -352,6 +354,7 @@
     </nav>
     <div class="product-container">
         <%
+             User user =  (User)session.getAttribute("user");  
             Products product = (Products) session.getAttribute("product");
             String message = (String) request.getAttribute("message");
             List<Feedback> feedbackList = (List<Feedback>) session.getAttribute("feedbackList");
@@ -402,10 +405,24 @@
                     <input type="hidden" name="productId" value="<%= product.getProduct_id() %>">
                     <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
                 </form>
-
-                <form action="${pageContext.request.contextPath}/homepageuser" method="GET">
+               
+                      
+                     <% if(user!=null){  %>                      
+                      <form action="${pageContext.request.contextPath}/homepageuser" method="GET">
                     <button type="submit" class="back-button">Back to Products</button>
                 </form>
+                     <%} 
+                      else{   %>     
+                      <form action="${pageContext.request.contextPath}/" method="GET">
+                    <button type="submit" class="back-button">Back to Products</button>
+                </form>
+                     <%} %> 
+                      
+                      
+                      
+                      
+                      
+                
             </div>
         </div>
     </div>
