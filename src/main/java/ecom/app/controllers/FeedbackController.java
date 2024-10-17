@@ -58,9 +58,10 @@ public class FeedbackController {
         } catch (Exception e) {
             attributes.addFlashAttribute("error", "Error submitting feedback: " + e.getMessage());
         }
-        return "product_details"; // Redirect back to the product details
+        return "product_details"; 
     }
 
+    
 
 
 }

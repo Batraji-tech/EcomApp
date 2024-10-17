@@ -206,12 +206,11 @@
         <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
         <li><a href="/category/add">Add Category</a></li>
           <li><a href="/superAdmin/salesPerformance">Total Sales Report</a></li>
-        <li><a href="/superAdmin/salesByCategory">Category wise Sales Report</a></li>
-          
+          <li> <a href="/superAdmin/commissions">View Commission</a></li>
         <li><a href="/superAdmin/viewSubadminRequests">View Subadmin Requests</a></li> 
         <li class="logout">
             <form method="POST" style="margin: 0;">
-                <li><a href="/">Logout</a></li>
+                <li><a href="/superAdmin/logout">Logout</a></li>
             </form>
         </li>
     </ul>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecom.app.dao.CategoryDao;
 import ecom.app.entities.Category;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/category")
@@ -32,23 +33,31 @@ public class CategoryController {
     @PostMapping("/add")
     public String addCategory(@ModelAttribute Category category, 
                               @RequestParam("category_image") MultipartFile file,
-                              RedirectAttributes attributes) {
+                              RedirectAttributes attributes, 
+                              HttpSession session) { // Inject HttpSession
         try {
             if (!file.isEmpty()) {
                 category.setCategory_image(file);
             }
-            categoryDao.insertCategory(category);
+            // Insert category and get the generated ID
+            int generatedCategoryId = categoryDao.insertCategory(category);
+            
+            // Store the category ID in the session
+            session.setAttribute("categoryId", generatedCategoryId);
+            
             attributes.addFlashAttribute("message", "Category added successfully!");
         } catch (IOException | SQLException e) {
             attributes.addFlashAttribute("error", "Error adding Category: " + e.getMessage());
         }
-        return "superadmin_dashboard"; // Adjust this to your actual view
+        return "redirect:/category/dashboard"; // Redirect to the dashboard after adding
     }
     
     @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
+    public String showDashboard(Model model, HttpSession session) {
+        // You can access the categoryId from the session here if needed
+        Integer categoryId = (Integer) session.getAttribute("categoryId");
+        session.setAttribute("categoryId", categoryId); // Add it to the model if needed
+        
         return "superadmin_dashboard"; 
     }
-    
-    
 }

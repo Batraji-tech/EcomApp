@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import ecom.app.entities.Role;
 import ecom.app.entities.SuperAdmin;
 import ecom.app.entities.User;
 import ecom.app.utility.Password;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/superAdmin")
@@ -38,12 +40,25 @@ public class SuperAdminController {
 
 	@Autowired
 	UserDaoImpl userDaoImpl;
+
+	@Autowired
+	OrderDaoImpl orderDaoImpl;
+
+	@GetMapping("/dashboard")
+	public String dashboard(HttpSession session) {
+
+		   if (session.getAttribute("superAdmin")== null) {
+			   return "redirect:/";
+		   }
+		   
+		return "superadmin_dashboard";
+
+	}
 	
-	  @Autowired
-	   OrderDaoImpl orderDaoImpl;
 
 	@PostMapping("/login")
-	public String login(@RequestParam String username, @RequestParam String password, Model model) {
+	public String login(@RequestParam String username, @RequestParam String password, Model model,
+			HttpSession session) {
 		System.out.println("\n login request data: " + username + ", " + password);
 
 		// Fetch user details from the database
@@ -63,7 +78,8 @@ public class SuperAdminController {
 
 			if (newPasswordHash.equals(oldPwdHash)) {
 				model.addAttribute("superAdmin", superAdmin);
-				return "superadmin_dashboard"; // Redirect to the super admin dashboard on success
+				session.setAttribute("superAdmin", superAdmin);
+				return "redirect:/superAdmin/dashboard"; // Redirect to the super admin dashboard on success
 			} else {
 				model.addAttribute("error", "Incorrect password. Please try again."); // Password mismatch
 			}
@@ -79,6 +95,14 @@ public class SuperAdminController {
 		return "login_superadmin";
 	}
 
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+
+		session.removeAttribute("superAdmin");
+
+		return "redirect:/";
+
+	}
 
 	@GetMapping("/viewSubadminRequests")
 	public String viewPendingSubadminRequests(Model model) {
@@ -86,17 +110,14 @@ public class SuperAdminController {
 		List<User> inactiveUsers = userDaoImpl.getInactiveSubadminRequests(); // Fetch inactive users
 		List<User> activeUserList = userDaoImpl.findAllSubAdmins(); // Fetch active users
 
-		
 		model.addAttribute("userList", pendingUsers);
 		model.addAttribute("inactiveUserList", inactiveUsers); // Add inactive users to the model
 		model.addAttribute("activeUserList", activeUserList); // Add active users
 
-		
 		System.out.println("Pending users: " + pendingUsers);
 		System.out.println("Inactive users: " + inactiveUsers);
 		System.out.println("Active users: " + activeUserList);
 
-		
 		return "view_subadmin_requests"; // Return the correct view name
 	}
 
@@ -296,73 +317,74 @@ public class SuperAdminController {
 			return "reset1_password"; // Return to reset password page with error
 		}
 	}
-	
-	// this is for display all the product sales
-    @GetMapping("/salesPerformance")
-    public String generateSalesReport(Model model) {
-        try {
-            List<Order> orders = orderDaoImpl.getAllOrders();
-            model.addAttribute("orders", orders);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            model.addAttribute("error", "Could not fetch orders.");
-        }
-        return "sales_performance"; 
-    }
 
-    
-    // this is for display all the sales according to date
-    @PostMapping("/salesPerformance/getSalesData")
-    public String getSalesData(@RequestParam("startDate") String startDate, 
-                                @RequestParam("endDate") String endDate, 
-                                Model model) {
-    	List<Order> salesData = new ArrayList<>();
+	// this is for display all the product sales
+	@GetMapping("/salesPerformance")
+	public String generateSalesReport(Model model) {
+		try {
+			List<Order> orders = orderDaoImpl.getAllOrders();
+			model.addAttribute("orders", orders);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			model.addAttribute("error", "Could not fetch orders.");
+		}
+		return "sales_performance";
+	}
+
+	// this is for display all the sales according to date
+	@PostMapping("/salesPerformance/getSalesData")
+	public String getSalesData(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+			Model model) {
+		List<Order> salesData = new ArrayList<>();
 		try {
 			salesData = orderDaoImpl.getSalesDataByDateRange(startDate, endDate);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        double totalSales = salesData.stream().mapToDouble(Order::getTotalAmount).sum();
+		double totalSales = salesData.stream().mapToDouble(Order::getTotalAmount).sum();
 
-        model.addAttribute("orders", salesData);
-        model.addAttribute("totalSales", totalSales);
-        model.addAttribute("startDate", startDate);
-        model.addAttribute("endDate", endDate);
-        
-        return "sales_performance"; 
-    }
+		model.addAttribute("orders", salesData);
+		model.addAttribute("totalSales", totalSales);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 
-//    @GetMapping("/salesByCategory")
-//    public String getSalesByCategory(@RequestParam int categoryId, Model model) {
-//        try {
-//            List<Order> orders = orderDaoImpl.getSalesDataByCategory(categoryId);
-//            model.addAttribute("orders", orders);
-//            return "categorywise_sales_performance"; // Change to your actual view name
-//        } catch (SQLException e) {
-//            model.addAttribute("error", "Error fetching sales data by category.");
-//            return "error"; // Change to your actual error view
-//        }
-//    }
-    
-    @GetMapping("/salesByCategory")
-    public String getSalesByCategory(@RequestParam(required = false) Integer categoryId, Model model) {
-        if (categoryId == null) {
-            model.addAttribute("error", "Category ID is required.");
-            return "error"; // Redirect to an error page or return to the same page with error message
-        }
+		return "sales_performance";
+	}
 
-        try {
-            List<Order> orders = orderDaoImpl.getSalesDataByCategory(categoryId);
-            model.addAttribute("orders", orders);
-            return "categorywise_sales_performance"; // Return the name of the JSP for the view
-        } catch (SQLException e) {
-            model.addAttribute("error", "Error fetching sales data for the category.");
-            return "error"; // Redirect to error page if necessary
-        }
-    }
+	@GetMapping("/commissions")
+	public String displayCommissions(Model model) {
+		try {
+			List<Order> orders = orderDaoImpl.getAllOrders(); // Adjust as necessary
+			model.addAttribute("orders", orders);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			model.addAttribute("error", "Could not fetch orders.");
+		}
+		return "superadmin_commission";
+	}
 
+	@PostMapping("/commissions/getCommissionsData")
+	public String getCommissionsData(@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate, Model model) {
+		List<Order> commissionsData = new ArrayList<>();
+		double totalCommissions = 0;
 
-    
-    
+		try {
+			commissionsData = orderDaoImpl.getOrdersByDateRange(startDate, endDate);
+			totalCommissions = commissionsData.stream().mapToDouble(order -> order.getTotalAmount() * 0.01).sum(); // Calculate
+																													// total
+																													// commissions
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("orders", commissionsData);
+		model.addAttribute("totalCommissions", totalCommissions);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+
+		return "superadmin_commission";
+	}
+
 }
