@@ -168,5 +168,10 @@ public class NavigationController {
 	public String removeproduct() {
 		return "remove_product";
 	}
+	
+	@GetMapping("/superadmin")
+	public String superadmin() {
+		return "superadmin_dashboard";
+	}
 
 }

@@ -6,36 +6,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Best Brands - ElectroMart</title>
+    <title>New Trends - ElectroMart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #F2EED7; /* Soft background */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #FF9874; /* Soft orange */
+            text-align: center;
+            margin-bottom: 30px;
         }
         .products-row {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            margin: 0 auto; /* Center the container */
+            padding: 0 15px; /* Add padding to avoid horizontal scroll */
+            max-width: 1200px; /* Set a max width for the container */
         }
         .product {
-            margin: 20px;
-            background: white;
+            margin: 15px; /* Margin for spacing */
+            background: rgba(255, 255, 255, 0.8); /* White background with transparency */
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            max-width: 250px;
+            flex: 0 0 30%; /* Set flex-basis to 30% for equal size */
+            margin: 10px; /* Margin around each product */
+            box-sizing: border-box; /* Ensures padding and border are included in the width */
         }
         img {
             width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 5px;
+            height: 150px; /* Fixed height for equal sizing */
+            object-fit: contain; /* Maintains aspect ratio */
+            flex: 0 0 calc(33.33% - 30px); /* Three products per row, adjusted for margin */
+            box-sizing: border-box; /* Includes padding and border in the width */
+            backdrop-filter: blur(10px); /* Optional: Adds a blur effect behind the product cards */
         }
     </style>
 </head>
 <body>
 
-    <h1>Best Brands</h1>
+    <h1>New Trends</h1>
 
     <div class="products-row">
         <%
@@ -45,7 +60,8 @@
             <div class="product">
                 <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
                     <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                </a><h3><%= product.getProduct_name() %></h3>
+                </a>
+                <h3><%= product.getProduct_name() %></h3>
                 <p>&#8377;<%= product.getFinal_price() %></p>
             </div>
         <%
