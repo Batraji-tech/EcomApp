@@ -3,7 +3,7 @@
 <%@ page import="ecom.app.entities.User" %>
 <html>
 <head>
-    <title>All Retailer</title>
+    <title>All SubAdmins</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,7 +53,7 @@
             background-color: #f1f1f1;
         }
 
-        .back-button {
+        a {
             display: block;
             width: 200px;
             margin: 20px auto;
@@ -63,12 +63,9 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            position: absolute; /* Positioning */
-            top: 20px; /* Distance from top */
-            right: 20px; /* Distance from right */
         }
 
-        .back-button:hover {
+        a:hover {
             background-color: #1a3a6e;
         }
 
@@ -80,9 +77,7 @@
     </style>
 </head>
 <body>
-    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a> <!-- Positioned at top right -->
-    
-    <h2>Retailer List</h2>
+    <h2>SubAdmins List</h2>
 
     <!-- Centered Search Bar -->
     <div class="search-bar-container">
@@ -122,6 +117,8 @@
     <% } else { %>
         <p class="no-customers">No customers found.</p>
     <% } %>
+
+    <a href="/superAdmin/login">Back to Dashboard</a>
 
     <script>
         function filterSubAdmins() {

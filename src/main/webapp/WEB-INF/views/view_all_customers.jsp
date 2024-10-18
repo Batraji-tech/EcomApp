@@ -10,7 +10,6 @@
             background-color: #F2EED7; 
             margin: 0;
             padding: 20px;
-            position: relative; /* Allow positioning of child elements */
         }
 
         h2 {
@@ -41,7 +40,7 @@
             background-color: #f1f1f1;
         }
 
-        .back-button {
+        a {
             display: block;
             width: 200px;
             margin: 20px auto;
@@ -51,12 +50,9 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            position: absolute; /* Positioning */
-            top: 20px; /* Distance from top */
-            right: 20px; /* Distance from right */
         }
 
-        .back-button:hover {
+        a:hover {
             background-color: #1a3a6e; 
         }
 
@@ -80,8 +76,6 @@
     </style>
 </head>
 <body>
-    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a> <!-- Positioned at top right -->
-    
     <h2>Customer List</h2>
 
     <div class="search-container">
@@ -124,6 +118,8 @@
     <% } else { %>
         <p class="no-customers">No customers found.</p>
     <% } %>
+
+    <a href="/superAdmin/login">Back to Dashboard</a>
 
     <script>
         document.getElementById('search').addEventListener('input', function() {
