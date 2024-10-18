@@ -4,17 +4,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css">
-    <style>
-        .address-section { margin-bottom: 20px; }
-        .address-input { width: 100%; height: 100px; padding: 10px; font-size: 16px; box-sizing: border-box; }
-        .address-actions { margin-top: 10px; }
-        .proceed-button, .edit-button { padding: 10px 20px; font-size: 16px; margin-right: 10px; cursor: pointer; }
-    </style>
-    <script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/checkout.css">
+<style>
+	body {
+	    background-color: #F2EED7; /* Soft background */
+	    font-family: Arial, sans-serif;
+	    margin: 0;
+	    padding: 20px; /* Added padding for a better layout */
+	}
+
+	h1, h2 {
+	    color: #FF9874; /* Soft orange */
+	    text-align: center; /* Center-align headings */
+	    margin: 10px 0; /* Space around headings */
+	}
+
+	.address-section, .order-summary {
+	    background-color: white; /* White background for sections */
+	    padding: 20px; /* Padding around content */
+	    border-radius: 8px; /* Rounded corners */
+	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+	    margin-bottom: 20px; /* Space between sections */
+	}
+
+	.address-input {
+	    width: 100%;
+	    height: 40px; /* Adjusted height for better appearance */
+	    padding: 10px;
+	    font-size: 16px;
+	    box-sizing: border-box;
+	    border: 1px solid #ccc; /* Light border for input */
+	    border-radius: 4px; /* Rounded corners */
+	}
+
+	.address-actions {
+	    margin-top: 10px;
+	    text-align: center; /* Center-align buttons */
+	}
+
+	.proceed-button, .edit-button {
+	    background-color: #295F98; /* Dark blue */
+	    color: white; /* Text color */
+	    border: none; /* No border */
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    border-radius: 5px; /* Rounded corners */
+	    cursor: pointer;
+	    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+	    margin-right: 10px; /* Space between buttons */
+	}
+
+	.proceed-button:hover, .edit-button:hover {
+	    background-color: #1a3a6e; /* Darker blue */
+	    transform: scale(1.05); /* Slightly enlarge on hover */
+	}
+
+	.order-summary table {
+	    width: 100%;
+	    border-collapse: collapse;
+	    margin-top: 20px; /* Space above table */
+	}
+
+	thead {
+	    background-color: #295F98; /* Dark blue */
+	    color: white; /* Text color */
+	}
+
+	th, td {
+	    padding: 12px; /* Space within cells */
+	    text-align: left;
+	    border-bottom: 1px solid #ddd; /* Light bottom border */
+	}
+
+	tbody tr:hover {
+	    background-color: #f1f1f1; /* Light hover effect */
+	}
+
+	.total {
+	    font-weight: bold; /* Bold for totals */
+	}
+
+	button {
+	    background-color: #295F98; /* Dark blue */
+	    color: white; /* Text color */
+	    border: none; /* No border */
+	    padding: 10px 15px;
+	    border-radius: 5px; /* Rounded corners */
+	    cursor: pointer;
+	    margin-top: 20px; /* Space above button */
+	    transition: background-color 0.3s; /* Transition effect */
+	}
+
+	button:hover {
+	    background-color: #1a3a6e; /* Darker blue */
+	}
+
+</style>
+<script>
 	function makeAddressReadOnly() {
 		document.getElementById('deliveryAddress').readOnly = true;
 	}
@@ -129,10 +219,10 @@
                 %>
             </tbody>
         </table>
-        <form action="/payment/openPaymentPage" method="get">
-            <input type="hidden" name="totalAmount" value="<%= total %>">
-            <button type="submit">Confirm Order</button>
-        </form>
+
+        <button onclick="window.location.href='/payments'">Confirm Order</button>
     </div>
 </body>
+
+
 </html>
