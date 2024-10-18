@@ -8,8 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperAdmin Profile</title>
-    <link href="../css/styles.css" rel="stylesheet"/>
+    <title>Owner Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,11 +19,28 @@
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
+            position: relative; /* Allow positioning of button */
         }
         h1 {
             text-align: center;
             margin-top: 20px;
-            color: #FF9874 ; 
+            color: #FF9874; 
+        }
+        .back-button {
+            background-color: #295F98; /* Dark blue */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #1a3a6e; /* Darker blue */
         }
         .container {
             width: 100%; 
@@ -38,7 +54,7 @@
             flex-direction: column; 
             align-items: left; 
             justify-content: center; 
-			margin-top:50px;
+            margin-top: 50px;
         }
         table {
             width: 100%;
@@ -51,11 +67,11 @@
         .form-group {
             margin-bottom: 15px;
             width: 100%;
-			margin-right:20px; 
+            margin-right: 20px; 
         }
         label {
             font-weight: bold;
-            color:#295F98 ; 
+            color: #295F98; 
         }
         input[type="text"],
         input[type="email"] {
@@ -68,7 +84,7 @@
         button {
             width: 94%;
             padding: 10px;
-            background-color: #295F98 ; 
+            background-color: #295F98; 
             color: white;
             border: none;
             border-radius: 4px;
@@ -79,7 +95,7 @@
             margin-left: 10px; 
         }
         button:hover {
-            background-color:#1a3a6e; 
+            background-color: #1a3a6e; 
         }
         .success, .error {
             text-align: center;
@@ -106,8 +122,10 @@
 </head>
 <body>
 
+    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
+
     <div class="container">
-        <h1>SuperAdmin Profile</h1>
+        <h1>Owner Profile</h1>
         
         <form:form method="POST" action="/superAdmin/updateProfile" modelAttribute="superAdmin">
             <form:hidden path="id" />
@@ -145,7 +163,7 @@
             </table>
             <button type="submit">Save Changes</button>
         </form:form>
-		
+        
         <c:if test="${not empty errors}">
             <div class="alert error">
                 <ul>
