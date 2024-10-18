@@ -18,14 +18,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+			background-image: url('https://img.freepik.com/free-vector/winter-light-blue-gradient-vector-background_53876-126054.jpg');
+			background-size: cover; /* Ensures the image covers the entire background */
+			background-position: center;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
+            background-color: #295F98;
             color: white;
             padding: 15px;
         }
@@ -40,6 +42,7 @@
         nav .logo {
             font-size: 24px;
             font-weight: bold;
+			color:#FF9874;
         }
 
         nav .search-bar {
@@ -81,7 +84,7 @@
         }
 
         nav ul li {
-            margin-left: 20px;
+            margin-left: 0px;
             position: relative;
         }
 
@@ -116,6 +119,13 @@
         nav ul li .dropdown-content a:hover {
             background-color: #ddd;
         }
+		.login-dropdown{
+			margin-right:10px;
+		}
+		
+		.shop-dropdown{
+			margin-right:100px;
+		}
 
         section {
             margin: 20px;
@@ -130,11 +140,30 @@
         h2 {
             margin: 20px 0;
             font-size: 24px;
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
+            color: #FF9874;
+            border-bottom: 2px solid #295F98;
             display: inline-block;
             padding-bottom: 5px;
         }
+		.exp-btn{
+			background-color: #295F98;
+			            color: white;
+			            border: none;
+			            padding: 10px;
+			            border-radius: 5px;
+			            text-align: center;
+			            cursor: pointer;
+			            display: flex;
+			            align-items: center;
+			            justify-content: center;
+			            font-size: 16px;
+			            transition: background-color 0.3s ease;
+						margin-left:570px;
+		}
+		.exp-btn:hover {
+		            background-color: #1a3a6e;
+		            color: white;
+		        }
 
         .products-row {
             display: flex;
@@ -160,8 +189,8 @@
         }
 
         .explore-button {
-            background-color: lightgray;
-            color: black;
+            background-color: #295F98;
+            color: white;
             border: none;
             padding: 15px;
             border-radius: 5px;
@@ -175,7 +204,7 @@
         }
 
         .explore-button:hover {
-            background-color: black;
+            background-color: #1a3a6e;
             color: white;
         }
     </style>
@@ -200,8 +229,6 @@
 
         <!-- Navigation Links -->
         <ul>
-            <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-            
             <!-- Login Dropdown -->
             <li class="login-dropdown">
                 <a href="#">Login</a>
@@ -225,8 +252,7 @@
 
     <!-- Welcome Section -->
     <section>
-        <h1>Welcome to the Electronic Universe</h1>
-        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'">Explore All Products</button>
+        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'"class="exp-btn">Explore All Products</button>
     </section>
    
     <!-- Trends Section -->

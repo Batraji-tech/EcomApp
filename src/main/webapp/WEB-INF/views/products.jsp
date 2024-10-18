@@ -44,23 +44,19 @@
             padding: 10px; /* Padding for input fields */
         }
         .form-control:focus {
-            border-color: #295F98 ; /* Green on focus */
+            border-color: #295F98 ; /* Dark blue on focus */
             box-shadow: 0 0 5px #295F98;
-        }
-        .category-dropdown {
-            width: 500%; /* Default width, can be adjusted */
-            max-width: 800px; /* Max width can be set */
         }
         .btn {
             border-radius: 5px;
             font-size: 16px;
-            margin-top: 10px; /* Space above buttons */
             padding: 10px; /* Padding for buttons */
             width: 100%; /* Full width for buttons */
             background-color: #295F98; /* Dark blue */
             border: none;
             color: white; /* White text for buttons */
             cursor: pointer;
+            margin-top: 15px; /* Space above buttons */
         }
         .btn:hover {
             background-color: #1a3a6e; /* Darker blue on hover */
@@ -103,30 +99,26 @@
                     <label for="stock">Stock Quantity</label>
                     <input type="number" placeholder="Enter Stock Quantity" name="stock" class="form-control" id="stock" required>
                 </div>
-            
-             <label for="category_id">Category</label>
-                <select name="category_id" id="category_id" class="form-control" required>
-                <%
+                <div class="form-group">
+                    <label for="category_id">Category</label>
+                    <select name="category_id" id="category_id" class="form-control" required>
+                    <%
                         List<Category> categories = (List<Category>) request.getAttribute("categories");
-                      for (Category category : categories) {
-                %>
-                <option value="<%= category.getCategory_id() %>"><%= category.getCategory_name() %></option>
-              <%
-                 }
-              %>
-             </select>
-                 </div>
+                        for (Category category : categories) {
+                    %>
+                    <option value="<%= category.getCategory_id() %>"><%= category.getCategory_name() %></option>
+                    <%
+                        }
+                    %>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="image">Product Image</label>
                     <input type="file" name="product_image" class="form-control" id="image" required>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <button type="reset" class="btn">Reset</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn">Add Product</button>
-                    </div>
+                    <button type="reset" class="btn">Reset</button>
+                    <button type="submit" class="btn">Add Product</button>
                 </div>
             </form>
         </div>
