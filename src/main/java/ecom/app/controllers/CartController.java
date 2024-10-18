@@ -253,34 +253,5 @@ public class CartController {
 
 	    return "redirect:/products/display1"; // Redirect if product is not found
 	}
-
-	
-	
-//	@PostMapping("/confirmOrder")
-//	public String confirmOrder(HttpSession session, RedirectAttributes attributes) {
-//	    List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
-//
-//	    if (cartItems != null && !cartItems.isEmpty()) {
-//	        try {
-//	            for (CartItems item : cartItems) {
-//	                // Update the product stock using JdbcTemplate
-//	                productDaoImpl.updateProductStock(item.getProductId(), item.getQuantity());
-//	            }
-//	            // Optionally, clear the cart or update as necessary
-//	            session.removeAttribute("cartItems");
-//	            attributes.addFlashAttribute("message", "Order placed successfully!");
-//	        } catch (Exception e) {
-//	            e.printStackTrace();
-//	            attributes.addFlashAttribute("message", "Error placing order. Please try again.");
-//	        }
-//	    } else {
-//	        attributes.addFlashAttribute("message", "Your cart is empty.");
-//	    }
-//
-//	    return "redirect:/orders"; // Redirect to orders page
-//	}
-
-	
-	
-	
 }
+	

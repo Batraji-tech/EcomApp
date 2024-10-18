@@ -1,10 +1,13 @@
 package ecom.app.controllers;
 
 import ecom.app.entities.Order;
+import ecom.app.entities.Payment;
 import ecom.app.entities.CartItems;
 import ecom.app.entities.User;
 import ecom.app.dao.CartDaoImpl;
 import ecom.app.dao.OrderDaoImpl;
+import ecom.app.dao.PaymentDao;
+import ecom.app.dao.PaymentDaoImpl;
 import ecom.app.dao.ProductDaoImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/order")
@@ -35,24 +39,30 @@ public class OrderController {
 
     @Autowired
     private ProductDaoImpl productDaoImpl;
+    
+    @Autowired
+    private PaymentDaoImpl paymentDaoImpl;
+    
 
     @PostMapping("/confirm")
     @Transactional
-    public String confirmOrder(HttpSession session, Model model, @RequestParam String paymentMethod) {
+    public String confirmOrder(HttpSession session, Model model,
+                               @RequestParam String paymentMethod,
+                               @RequestParam(required = false) String bankName,
+                               @RequestParam(required = false) String accountNumber,
+                               @RequestParam(required = false) String ifscCode,
+                               @RequestParam(required = false) String upiId,
+                               @RequestParam(required = false) String cardNumber,
+                               @RequestParam(required = false) String expiryDate,
+                               @RequestParam(required = false) String cardHolderName) {
         User user = (User) session.getAttribute("user");
         List<CartItems> cartItems = (List<CartItems>) session.getAttribute("cartItems");
         List<CartItems> buyNowItems = (List<CartItems>) session.getAttribute("buyNowItems");
 
         // Determine which items to process
-        List<CartItems> itemsToProcess;
-        boolean isBuyNow = (buyNowItems != null && !buyNowItems.isEmpty());
+        List<CartItems> itemsToProcess = (buyNowItems != null && !buyNowItems.isEmpty()) ? buyNowItems : cartItems;
 
-        if (isBuyNow) {
-            itemsToProcess = buyNowItems; // Use Buy Now items
-        } else {
-            itemsToProcess = cartItems; // Use Cart items
-        }
-
+        // Check if there are items to process
         if (itemsToProcess == null || itemsToProcess.isEmpty()) {
             model.addAttribute("error", "Your cart is empty.");
             return "checkout"; // Redirect back to checkout if no items are found
@@ -71,7 +81,15 @@ public class OrderController {
             }
 
             // Save the order in the database
+            boolean isBuyNow = (buyNowItems != null && !buyNowItems.isEmpty());
             orderDaoImpl.saveOrder(order, !isBuyNow); // Truncate cart only if it's not Buy Now
+
+            // Create and save the payment details
+            String transactionId = UUID.randomUUID().toString();
+            Payment payment = new Payment(transactionId, paymentMethod, bankName, accountNumber,
+                                           ifscCode, upiId, cardNumber, expiryDate,
+                                           cardHolderName, totalAmount, "Pending");
+            paymentDaoImpl.savePayment(payment); // Assuming you have an instance of PaymentDao
 
             // Update stock for items
             for (CartItems item : itemsToProcess) {
@@ -91,6 +109,9 @@ public class OrderController {
         }
     }
 
+
+
+    
     @GetMapping("/displayOrders")
     public String viewOrders(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
