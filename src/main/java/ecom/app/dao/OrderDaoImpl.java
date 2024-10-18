@@ -90,6 +90,7 @@ public class OrderDaoImpl implements OrderDao {
 					product.getFinal_price(), quantity, product.getDelivery_charge());
 		});
 	}
+	
 
 	@Override
 	public List<Order> getSalesDataByDateRange(String startDate, String endDate) throws SQLException {
@@ -164,6 +165,49 @@ public class OrderDaoImpl implements OrderDao {
 					return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
 				});
 	}
+	
+	@Override
+    public List<Order> getSalesDataByCategory(int categoryId) throws SQLException {
+        String sql = "SELECT o.order_id, o.user_id, o.total_amount, o.payment_method, o.status, o.order_date " +
+                     "FROM orders o " +
+                     "JOIN order_items oi ON o.order_id = oi.order_id " +
+                     "WHERE oi.product_id IN (SELECT p.product_id FROM products p WHERE p.category_id = ?)";
+
+        return jdbcTemplate.query(sql, new Object[]{categoryId}, (rs, rowNum) -> {
+            int orderId = rs.getInt("order_id");
+            int userId = rs.getInt("user_id");
+            double totalAmount = rs.getDouble("total_amount");
+            String paymentMethod = rs.getString("payment_method");
+            String status = rs.getString("status");
+            Timestamp orderDate = rs.getTimestamp("order_date");
+
+            // Fetch order items for this order
+            List<CartItems> orderItems = getOrderItems(orderId);
+            return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
+        });
+    }
+
+ 
+
+ 
+
+    public List<Order> getSalesDataBySubAdminProducts(int subAdminId, String startDate, String endDate) throws SQLException {
+        String sql = "SELECT o.* FROM orders o " +
+                     "JOIN order_items oi ON o.order_id = oi.order_id " +
+                     "JOIN product p ON oi.product_id = p.product_id " +
+                     "WHERE p.user_id = ? AND o.order_date >= ? AND o.order_date < DATE_ADD(?, INTERVAL 1 DAY)";
+
+        return jdbcTemplate.query(sql, new Object[]{subAdminId, Date.valueOf(startDate), Date.valueOf(endDate)}, (rs, rowNum) -> {
+            int orderId = rs.getInt("order_id");
+            int userId = rs.getInt("user_id");
+            double totalAmount = rs.getDouble("total_amount");
+            String paymentMethod = rs.getString("payment_method");
+            String status = rs.getString("status");
+            Timestamp orderDate = rs.getTimestamp("order_date");
+            List<CartItems> orderItems = getOrderItems(orderId);
+            return new Order(orderId, userId, orderItems, totalAmount, paymentMethod, status, orderDate);
+        });
+    }
 
 	
 

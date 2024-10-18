@@ -71,6 +71,8 @@
         <% if (request.getAttribute("error1") != null) { %>
             <div class="error"><%= request.getAttribute("error1") %></div>
         <% } %>
+        
+        </br>
 
         <form action="${pageContext.request.contextPath}/user/resetpassword1" method="post">
     <input type="hidden" name="email" value="${email}" />
@@ -83,9 +85,7 @@
         <input type="password" id="confirmPassword" name="confirmPassword" required>
     </div>
     <button type="submit">Reset Password</button>
-    <% if (request.getAttribute("error1") != null) { %>
-        <div class="error"><%= request.getAttribute("error1") %></div>
-    <% } %>
+    
 </form>
 
     </div>

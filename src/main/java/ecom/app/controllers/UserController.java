@@ -2,6 +2,7 @@ package ecom.app.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecom.app.dao.CartDaoImpl;
+import ecom.app.dao.OrderDaoImpl;
 import ecom.app.dao.UserDaoImpl;
 import ecom.app.entities.User;
 import ecom.app.utility.Password;
 import jakarta.servlet.http.HttpSession;
 import ecom.app.entities.Cart;
+import ecom.app.entities.Order;
 import ecom.app.entities.Role;
 import ecom.app.entities.SuperAdmin;
 
@@ -40,6 +44,9 @@ public class UserController {
 
     @Autowired
     private CartDaoImpl cartDaoImpl;
+    
+    @Autowired
+	private OrderDaoImpl orderDaoImpl;
 
 	
 	@GetMapping("/login")
@@ -103,6 +110,7 @@ public class UserController {
 	            
 	            if (role.equalsIgnoreCase("Retailer")) {
 	                if (roleId == 2) {
+	                	session.setAttribute("subAdminId", user.getUserId());
 	                    return "subadmin"; 
 	                } else {
 	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
@@ -376,5 +384,43 @@ public class UserController {
 	        }
 	    }
 
-	  
+	 // Display all product sales for a specific sub-admin
+	    @GetMapping("/salesPerformance/subAdmin/{subAdminId}")
+	    public String generateSubAdminSalesReport(@PathVariable("subAdminId") int subAdminId, Model model) {
+	        try {
+	            // Fetch orders for the specific sub-admin's products
+	            List<Order> orders = orderDaoImpl.getSalesDataBySubAdminProducts(subAdminId, "1970-01-01", "9999-12-31"); // Use a broad date range or adjust as needed
+	            model.addAttribute("orders", orders);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            model.addAttribute("error", "Could not fetch orders.");
+	        }
+	        return "subadmin_sales_performance";  // Use the JSP for displaying the sub-admin's sales performance
+	    }
+
+	    @PostMapping("/salesPerformance/subAdmin/{subAdminId}/getSalesData")
+	    public String getSalesDataForSubAdmin(@PathVariable("subAdminId") int subAdminId, 
+	                                          @RequestParam("startDate") String startDate, 
+	                                          @RequestParam("endDate") String endDate, 
+	                                          Model model) {
+	        List<Order> salesData = new ArrayList<>();
+	        try {
+	            // Fetch orders for the products added by the specific sub-admin
+	            salesData = orderDaoImpl.getSalesDataBySubAdminProducts(subAdminId, startDate, endDate);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        // Calculate total sales for the sub-admin
+	        double totalSales = salesData.stream().mapToDouble(Order::getTotalAmount).sum();
+
+	        model.addAttribute("orders", salesData);
+	        model.addAttribute("totalSales", totalSales);
+	        model.addAttribute("startDate", startDate);
+	        model.addAttribute("endDate", endDate);
+	        
+	        return "subadmin_sales_performance"; // Return to sub-admin's sales report page
+	    }
+
+
 }

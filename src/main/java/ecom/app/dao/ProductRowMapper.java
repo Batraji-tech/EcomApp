@@ -22,6 +22,7 @@ public class ProductRowMapper implements RowMapper<Products> {
 	        product.setDelivery_charge(rs.getDouble("delivery_charge"));
 	        product.setFinal_price(rs.getDouble("final_price"));
 	        product.setStock(rs.getInt("stock"));
+	        product.setSubAdminId(rs.getInt("user_id"));
 
 	     // Convert BLOB to MultipartFile
 	        Blob imageBlob = rs.getBlob("product_image");

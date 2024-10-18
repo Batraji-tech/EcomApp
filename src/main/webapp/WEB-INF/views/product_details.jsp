@@ -336,6 +336,8 @@ nav {
 		String base64Image = product.getBase64ProductImage(); // Get the product image
 		%>
 
+
+        
 		<!-- Message Display -->
 		<c:if test="${not empty message}">
 			<p style="font-weight: bold; color: green">${message}</p>

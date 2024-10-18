@@ -105,6 +105,7 @@
             border-color: #1a3a6e; 
         }
 
+       
         .back-button {
             position: absolute;
             top: 20px;
@@ -124,7 +125,7 @@
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="window.location.href='/'">Back to Dashboard</button>
+    <button class="back-button" onclick="window.location.href='/'">Back to home</button>
     <div class="container">
         <h2>Login</h2>
         

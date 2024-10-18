@@ -18,5 +18,7 @@ public interface OrderDao {
 
 	void saveOrder(Order order, boolean truncateCart) throws IOException, SQLException;
 
-
+    List<Order> getSalesDataByCategory(int categoryId) throws SQLException;
+	
+	
 }

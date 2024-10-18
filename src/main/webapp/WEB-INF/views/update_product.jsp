@@ -66,6 +66,89 @@
             margin-top: 10px;
         }
     </style>
+    <script>
+        // Validation Functions
+        function validateProductName() {
+            const productName = document.getElementById('product_name');
+            const nameError = document.getElementById('nameError');
+            const pattern = /^[^\d].*/; // Should not start with a number
+
+            if (!pattern.test(productName.value)) {
+                nameError.textContent = 'Product name should not start with a number.';
+            } else {
+                nameError.textContent = '';
+            }
+        }
+
+        function validateMRP() {
+            const mrp = document.getElementById('mrp');
+            const mrpError = document.getElementById('mrpError');
+            const min = 0;
+            const max = 9999999.99;
+
+            if (mrp.value < min || mrp.value > max) {
+                mrpError.textContent = 'MRP must be between 0 and 9999999.99.';
+            } else {
+                mrpError.textContent = '';
+            }
+        }
+
+        function validateDiscount() {
+            const discount = document.getElementById('discount');
+            const discountError = document.getElementById('discountError');
+            const min = 0;
+            const max = 99.9;
+
+            if (discount.value < min || discount.value > max) {
+                discountError.textContent = 'Discount must be between 0 and 99.9.';
+            } else {
+                discountError.textContent = '';
+            }
+        }
+
+        function validateDeliveryCharge() {
+            const deliveryCharge = document.getElementById('delivery_charge');
+            const deliveryChargeError = document.getElementById('deliveryChargeError');
+            const min = 0;
+            const max = 999.9;
+
+            if (deliveryCharge.value < min || deliveryCharge.value > max) {
+                deliveryChargeError.textContent = 'Delivery Charge must be between 0 and 999.9.';
+            } else {
+                deliveryChargeError.textContent = '';
+            }
+        }
+
+        function validateStock() {
+            const stock = document.getElementById('stock');
+            const stockError = document.getElementById('stockError');
+            const min = 1;
+
+            if (stock.value < min) {
+                stockError.textContent = 'Stock quantity must be at least 1.';
+            } else {
+                stockError.textContent = '';
+            }
+        }
+
+     // Validate Image File Type
+        function validateImageFile() {
+            const imageFile = document.getElementById('image').files[0];
+            const imageError = document.getElementById('imageError');
+
+            if (imageFile) {
+                const fileExtension = imageFile.name.split('.').pop().toLowerCase();
+                const validExtensions = ['jpg', 'jpeg', 'png'];
+
+                if (!validExtensions.includes(fileExtension)) {
+                    imageError.textContent = 'Invalid file type. Please upload a JPG, JPEG, or PNG image.';
+                    document.getElementById('image').value = ''; // Clear the input
+                } else {
+                    imageError.textContent = ''; // Clear any previous error messages
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -75,32 +158,39 @@
             Products product = (Products) request.getAttribute("product"); 
             if (product != null) {
         %>
-                <form action="${pageContext.request.contextPath}/products/product_updation" method="post" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/products/product_updation" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
 
-                  <label for="product_name"></label>
-                <input type="hidden" id="product_name" name="product_name" value="<%= product.getProduct_name() %>" required />
+                <label for="product_name">Product Name:</label>
+                <input type="text" id="product_name" name="product_name" value="<%= product.getProduct_name() %>" required oninput="validateProductName()" />
+                <span id="nameError" class="error-message"></span>
 
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required><%= product.getDescription() %></textarea>
 
                 <label for="mrp">MRP:</label>
-                <input type="number" id="mrp" name="mrp" value="<%= product.getMrp() %>" required />
+                <input type="number" id="mrp" name="mrp" value="<%= product.getMrp() %>" required oninput="validateMRP()" />
+                <span id="mrpError" class="error-message"></span>
 
                 <label for="discount">Discount in Percentage:</label>
-                <input type="number" id="discount" name="discount" value="<%= product.getDiscount() %>" required />
+                <input type="number" id="discount" name="discount" value="<%= product.getDiscount() %>" required oninput="validateDiscount()" />
+                <span id="discountError" class="error-message"></span>
 
                 <label for="delivery_charge">Delivery Charge:</label>
-                <input type="number" id="delivery_charge" name="delivery_charge" value="<%= product.getDelivery_charge() %>" required />
+                <input type="number" id="delivery_charge" name="delivery_charge" value="<%= product.getDelivery_charge() %>" required oninput="validateDeliveryCharge()" />
+                <span id="deliveryChargeError" class="error-message"></span>
 
                 <label for="final_price">Final Price:</label>
                 <input type="number" id="final_price" name="final_price" value="<%= product.getFinal_price() %>" required />
 
                 <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock" value="<%= product.getStock() %>" required />
+                <input type="number" id="stock" name="stock" value="<%= product.getStock() %>" required oninput="validateStock()" />
+                <span id="stockError" class="error-message"></span>
 
-                <label for="product_image">Product Image:</label>
-                <input type="file" id="product_image" name="product_image" />
+                <label for="image">Product Image</label>
+    <input type="file" name="product_image" class="form-control" id="image" required accept="image/*" 
+           title="Only JPG, JPEG, PNG formats are allowed." onchange="validateImageFile()">
+    <span id="imageError" style="color:red" class="error"></span>
 
                 <button type="submit">Update Product</button>
             </form>

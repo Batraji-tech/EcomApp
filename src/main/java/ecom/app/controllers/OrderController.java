@@ -130,4 +130,10 @@ public class OrderController {
 
         return "orders"; // Return to the my_orders.jsp page
     }
+    
+ // Method to get the current sub-admin ID from the session
+    private int getCurrentSubAdminId(HttpSession session) {
+        Integer subAdminId = (Integer) session.getAttribute("subAdminId");
+        return (subAdminId != null) ? subAdminId : -1; // Return -1 or throw an exception if not found
+    }
 }

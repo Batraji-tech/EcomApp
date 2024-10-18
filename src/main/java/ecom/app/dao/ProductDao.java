@@ -10,18 +10,23 @@ import ecom.app.entities.User;
  
 public interface ProductDao {
  
-	  int insertProduct(Products product) throws IOException, SQLException;
+	 // int insertProduct(Products product) throws IOException, SQLException;
  
 	   Products updateProduct(Products product) throws IOException, SQLException;
   
  
+	    List<Products> fetchProductsBySubAdminId(int subAdminId) throws IOException, SQLException;
+	    
 	    List<Products> fetchAllProducts() throws IOException, SQLException;
+	    
+	    List<Products> fetchProductsByCategory(int categoryId) throws IOException, SQLException;
+	    
 	
 	    void deleteProduct(int productId) throws IOException, SQLException;
  
-	    List<Products> fetchProductsByCategory(int category_id) throws IOException, SQLException;
+	    List<Products> fetchProductsByCategoryAndSubAdminId(int categoryId, int subAdminId) throws IOException, SQLException;
  
-	    Products fetchProductById(int id) throws IOException, SQLException;
+	    Products fetchProductById(int id,int subAdminId) throws IOException, SQLException;
  
 		Products getProductById(int productId);
 		
@@ -42,4 +47,5 @@ public interface ProductDao {
 		 List<Category> getAllCategories();
 		
 		 List<Products> searchProducts(String query);
+		 int insertProduct(Products product, int subAdminId) throws IOException,SQLException; 
 }
