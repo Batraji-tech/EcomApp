@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Admin Dashboard</title>
+    <title>Owner Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -192,8 +192,8 @@
     <div class="overlay"></div>
 
     <div class="navbar">
-        <div class="logo">Shopology</div>
-        <h1 class="header">WELCOME TO SUPER ADMIN DASHBOARD</h1>
+        <div class="logo">ElectroMart</div>
+        <h1 class="header">WELCOME TO OWNER DASHBOARD</h1>
         <button class="toggle-btn" onclick="toggleMenu()" style="color: #FF9874;">☰</button>
     </div>
     
@@ -234,7 +234,7 @@
         </div>
 
         <div class="why-sell">
-            <h2>Why Sell on Shopology?</h2>
+            <h2>Why Sell on ElectroMart?</h2>
             <div class="grid-container">
                 <div class="grid-item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXcsCXTEys0kprkovC-Ufc4aHX7ldsXvq1Fw&s" alt="Sell Across India">
@@ -244,12 +244,12 @@
                 <div class="grid-item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbyffbyoEQ5FsEgxOjqkuTearET45VMRVDpoOdLJ11GZZRzaxhwi7pWupBQrnhaPnaot0&usqp=CAU" alt="Higher Profits">
                     <h3>Higher Profits</h3>
-                    <p>With 0% commission*, you take 100% profits with you</p>
+                    <p>With small commission*, you take maximum profits with you</p>
                 </div>
                 <div class="grid-item">
                     <img src="https://i.pinimg.com/564x/8d/ff/49/8dff49985d0d8afa53751d9ba8907aed.jpg" alt="Account Management">
                     <h3>Account Management</h3>
-                    <p>Our retailer dashboard will help your business on Shopology</p>
+                    <p>Our retailer dashboard will help your business on ElectroMart</p>
                 </div>
                 <div class="grid-item">
                     <img src="https://media.istockphoto.com/id/1411957271/vector/indian-rupee-decrease-icon-sticker-on-gray-background.jpg?s=612x612&w=0&k=20&c=UbDGAYEVGCEurxFtqmy49sOufz9Gixj73DOUFjuvvfo=" alt="Lower Return Charges">
