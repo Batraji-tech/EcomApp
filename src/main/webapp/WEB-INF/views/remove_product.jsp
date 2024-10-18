@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ecom.app.entities.Products"%>
 <!DOCTYPE html>
@@ -7,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Products</title>
+    <title>Remove Products</title>
     <style>
         body {
             background-color: #F2EED7; /* Soft background */
@@ -28,6 +27,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             background: white;
+            position: relative; /* For absolute positioning of the button */
         }
         .search-bar-container {
             text-align: center; /* Center the search bar */
@@ -75,17 +75,18 @@
             background-color: #1a3a6e; /* Darker blue */
         }
         .back-button {
-            display: inline-block;
+            position: absolute; /* Position it in the top right */
+            right: 20px;
+            top: 20px;
             padding: 10px 15px;
             border-radius: 5px;
             color: white;
-            background-color: #295F98; /* Dark blue */
+            background-color: #295F98; /* Soft orange */
             text-decoration: none;
             transition: background-color 0.3s;
-            margin-top: 20px;
         }
         .back-button:hover {
-            background-color: #1a3a6e; /* Darker blue */
+            background-color: #1a3a6e; /* Darker orange on hover */
         }
         th:nth-child(5), td:nth-child(5) {
             width: 150px;
@@ -97,9 +98,12 @@
 </head>
 <body>
 
-    <div class="message">All Products</div>
+    <div class="message">Manage Products</div>
 
     <div class="container">
+        <!-- Back to Dashboard Button -->
+        <a href="/subadmin" class="back-button">Back to Dashboard</a>
+
         <!-- Centered Search Bar -->
         <div class="search-bar-container">
             <input type="text" id="filter" class="search-bar" placeholder="Search for products..." />
@@ -154,9 +158,6 @@
                 %>
             </tbody>
         </table>
-
-        <!-- Back to Dashboard Button -->
-        <a href="/subadmin" class="back-button">Back to Dashboard</a>
     </div>
 
     <script>
