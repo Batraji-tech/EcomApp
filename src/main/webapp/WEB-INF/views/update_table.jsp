@@ -27,6 +27,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Position relative for button positioning */
         }
         table {
             width: 100%;
@@ -58,6 +59,21 @@
         .btn-update:hover {
             background-color: #1a3a6e; 
         }
+        .btn-dashboard {
+            position: absolute; /* Position absolute for top right */
+            right: 20px;
+            top: 20px;
+            background-color: #295F98; /* Soft orange */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-dashboard:hover {
+            background-color: #1a3a6e; /* Darker orange on hover */
+        }
         /* Search Bar Styles */
         .search-bar {
             padding: 10px;
@@ -73,6 +89,7 @@
 <body>
 
     <div class="container">
+        <button class="btn-dashboard" onclick="window.location.href='/subadmin';">Back to Dashboard</button>
         <div class="message">Manage Products</div>
 
         <!-- Search Bar -->

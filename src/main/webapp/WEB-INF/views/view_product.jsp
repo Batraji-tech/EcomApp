@@ -27,6 +27,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* For absolute positioning of the button */
         }
         /* Centering the search bar */
         .search-container {
@@ -76,6 +77,20 @@
         .btn:hover {
             background-color: #1a3a6e; /* Darker blue */
         }
+        .back-button {
+            position: absolute; /* Position it in the top right */
+            right: 20px;
+            top: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            background-color: #295F98; /* Dark blue */
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #1a3a6e; /* Darker blue on hover */
+        }
         /* Responsive Styles */
         @media (max-width: 768px) {
             th, td {
@@ -96,6 +111,9 @@
     <div class="message">All Products</div>
 
     <div class="container">
+        <!-- Back to Dashboard Button -->
+        <a href="/subadmin" class="back-button">Back to Dashboard</a>
+
         <!-- Search Bar Centered in the Container -->
         <div class="search-container">
             <input type="text" id="filter" class="search-bar" placeholder="Search for products..." />
@@ -151,9 +169,6 @@
     %>
             </tbody>
         </table>
-        
-        <!-- Back to Dashboard Button -->
-        <a href="/subadmin" class="btn">Back to Dashboard</a>
     </div>
 
     <script>
