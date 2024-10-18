@@ -10,7 +10,6 @@
             background-color: #F2EED7;
             font-family: Arial, sans-serif;
             padding: 20px;
-            position: relative; /* Allow positioning of button */
         }
         .form-container {
             border: 1px solid #295F98;
@@ -68,27 +67,9 @@
         .col-md-6 {
             flex: 0 0 48%;
         }
-        .back-button {
-            background-color: #295F98; /* Dark blue */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            text-decoration: none; /* Remove underline */
-            transition: background-color 0.3s;
-        }
-        .back-button:hover {
-            background-color: #1a3a6e; /* Darker blue */
-        }
     </style>
 </head>
 <body>
-
-    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
 
     <div class="container">
         <div class="row">
