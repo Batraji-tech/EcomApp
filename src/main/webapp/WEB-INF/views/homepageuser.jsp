@@ -17,14 +17,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+			background-image: url('https://img.freepik.com/free-vector/winter-light-blue-gradient-vector-background_53876-126054.jpg');
+			background-size: cover; /* Ensures the image covers the entire background */
+			background-position: center;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
+            background-color: #295F98;
             color: white;
             padding: 15px;
         }
@@ -80,7 +82,7 @@
         }
 
         nav ul li {
-            margin-left: 20px;
+            margin-left: 0px;
             position: relative;
         }
 
@@ -140,6 +142,34 @@ nav ul li .dropdown-content a {
 nav ul li .dropdown-content a:hover {
     background-color: #ddd;
 }
+.exp-btn{
+			background-color: #295F98;
+			            color: white;
+			            border: none;
+			            padding: 10px;
+			            border-radius: 5px;
+			            text-align: center;
+			            cursor: pointer;
+			            display: flex;
+			            align-items: center;
+			            justify-content: center;
+			            font-size: 16px;
+			            transition: background-color 0.3s ease;
+						margin-left:570px;
+		}
+		.exp-btn:hover {
+		            background-color: #1a3a6e;
+		            color: white;
+		        }
+						.shop-dropdown{
+							margin-right:10px;
+							margin-top:10px;
+						}
+			.account-dropdown{
+				margin-right:100px;
+				
+			}
+
         
 
         section {
@@ -155,8 +185,8 @@ nav ul li .dropdown-content a:hover {
         h2 {
             margin: 20px 0;
             font-size: 24px;
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
+            color: #FF9874;
+            border-bottom: 2px solid #295F98;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -185,8 +215,8 @@ nav ul li .dropdown-content a:hover {
         }
 
         .explore-button {
-            background-color: lightgray;
-            color: black;
+            background-color: #295F98;
+            color: white;
             border: none;
             padding: 15px;
             border-radius: 5px;
@@ -200,7 +230,7 @@ nav ul li .dropdown-content a:hover {
         }
 
         .explore-button:hover {
-            background-color: black;
+            background-color: #1a3a6e;
             color: white;
         }
     </style>
@@ -225,9 +255,6 @@ nav ul li .dropdown-content a:hover {
 
     <!-- Navigation Links -->
     <ul>
-        <!-- Home Link -->
-        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-        
          <!-- Shop Dropdown -->
             <li class="shop-dropdown">
                 <a href="#">Shop</a>
@@ -236,10 +263,6 @@ nav ul li .dropdown-content a:hover {
                     <li><a href="${pageContext.request.contextPath}/products/display1">All Products</a></li>
                 </ul>
             </li>
-
-        <!-- View Profile Link -->
-    <button type="button" class="button" onclick="window.location.href='${pageContext.request.contextPath}/user/profile?username=${user.username}'">View Profile</button>
-
         <!-- My Account Dropdown -->
         <li class="account-dropdown">
             <a href="#">My Account</a>
@@ -247,6 +270,7 @@ nav ul li .dropdown-content a:hover {
                 <li><a href="${pageContext.request.contextPath}/wishlist/view">Wishlist</a></li>
                 <li><a href="${pageContext.request.contextPath}/cart/view">Cart Items</a></li>
                 <li><a href="${pageContext.request.contextPath}/order/displayOrders">Orders</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/profile?username=${user.username}">View Profile</a></li>
                 <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
             </ul>
         </li>
@@ -256,8 +280,7 @@ nav ul li .dropdown-content a:hover {
 
     <!-- Welcome Section -->
     <section>
-        <h1>Welcome to the Electronic Universe</h1>
-        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'">Explore All Products</button>
+        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'"class=exp-btn>Explore All Products</button>
     </section>
     
     <!-- Trends Section -->

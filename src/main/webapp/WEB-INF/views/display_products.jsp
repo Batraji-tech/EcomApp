@@ -4,27 +4,117 @@
 <html>
 <head>
     <title>Products Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #F2EED7;
             margin: 0;
             padding: 0;
         }
- 
-        .dashboard-header {
-            background-color: #0073e6;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
- 
-        .dashboard-header h1 {
-            font-size: 40px;
-            font-weight: bold;
-            margin: 0;
-        }
+ 	
+		nav {
+		           display: flex;
+		           justify-content: space-between;
+		           align-items: center;
+		           background-color: #295F98;
+		           color: white;
+		           padding: 8px;
+		       }
+
+		       .nav-container {
+		           display: flex;
+		           justify-content: center;
+		           align-items: center;
+		           width: 100%;
+		       }
+
+		       nav .logo {
+		           font-size: 24px;
+		           font-weight: bold;
+				color:#FF9874;
+		       }
+
+		       nav .search-bar {
+		           flex-grow: 1;
+		           margin: 0 20px;
+		           position: relative; /* Position for icon */
+		           text-align: center;
+				   margin-top:5px;
+		       }
+
+		       nav .search-bar form {
+		           display: inline-block;
+		           position: relative;
+		       }
+
+		       nav .search-bar input {
+		           width: 400px;
+		           padding: 8px 40px 8px 15px; /* Add padding for the search icon */
+		           border-radius: 5px;
+		           border: none;
+		           text-align: left;
+		       }
+
+		       nav .search-bar button {
+		           position: absolute;
+		           right: 5px;
+		           top: 50%;
+		           transform: translateY(-50%);
+		           background: none;
+		           border: none;
+		           cursor: pointer;
+		           color: #333;
+		       }
+
+		       nav ul {
+		           display: flex;
+		           list-style-type: none;
+		           padding: 0;
+		           margin: 0;
+		       }
+
+		       nav ul li {
+		           margin-left: 0px;
+		           position: relative;
+		       }
+
+		       nav ul li a {
+		           color: white;
+		           text-decoration: none;
+		           padding: 10px;
+		           display: block;
+		       }
+
+		       /* Dropdown menu for login */
+		       nav ul li .dropdown-content {
+		           display: none;
+		           position: absolute;
+		           background-color: white;
+		           min-width: 160px;
+		           box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+		           z-index: 1;
+		       }
+
+		       nav ul li:hover .dropdown-content {
+		           display: block;
+		       }
+
+		       nav ul li .dropdown-content a {
+		           color: black;
+		           text-decoration: none;
+		           display: block;
+		           padding: 12px 16px;
+		       }
+
+		       nav ul li .dropdown-content a:hover {
+		           background-color: #ddd;
+		       }
+			
+			.shop-dropdown{
+				margin-right:100px;
+			}
+
  
         .controls {
             display: flex;
@@ -123,11 +213,11 @@
         }
  
         .product-card .details-btn {
-            background-color: #0073e6;
+            background-color: #295F98;
         }
  
         .product-card .details-btn:hover {
-            background-color: #005bb5;
+            background-color:  #1a3a6e;
         }
  
         .product-card .wishlist-btn {
@@ -155,10 +245,35 @@
     </script>
 </head>
 <body>
- 
-<div class="dashboard-header">
-    <h1>Products Dashboard</h1>
-</div>
+	<nav>
+	       <div class="logo">ElectroMart</div>
+
+	       <!-- Search Bar in Center -->
+	       <div class="nav-container">
+	           <div class="search-bar">
+	               <form action="${pageContext.request.contextPath}/products/search" method="get">
+	                   <input type="text" name="query" placeholder="Search for specific products..." required>
+	                   <button type="submit">
+	                       <i class="fas fa-search"></i> <!-- Lens icon -->
+	                   </button>
+	               </form>
+	           </div>
+	       </div>
+
+	       <!-- Navigation Links -->
+	       <ul>
+			   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+	           <!-- Shop Dropdown -->
+	           <li class="shop-dropdown">
+	               <a href="#">Shop</a>
+	               <ul class="dropdown-content">
+	                   <li><a href="${pageContext.request.contextPath}/explore-all-categories">Shop by Category</a></li>
+	                   <li><a href="${pageContext.request.contextPath}/products/display1">All Products</a></li>
+	               </ul>
+	           </li>
+	       </ul>
+	   </nav>
+
  
 <div class="controls">
     <div>
@@ -169,7 +284,6 @@
             <option value="priceDesc">High to Low</option>
         </select>
     </div>
-    <a href="<%= request.getContextPath() %>/homepageuser" class="back-home">Back to Home</a>
 </div>
  
 <div class="container">
