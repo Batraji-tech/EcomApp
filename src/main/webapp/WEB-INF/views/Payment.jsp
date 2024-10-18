@@ -52,6 +52,34 @@
     }
 
     window.onload = handlePaymentMethodChange;
+    
+    function validateForm() {
+        const paymentMethod = document.getElementById("paymentMethod").value;
+
+        if (paymentMethod === 'upi') {
+            const upiId = document.getElementById("upiId").value;
+            const upiPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$/;
+
+            if (!upiPattern.test(upiId)) {
+                document.getElementById("upiIdError").style.display = "block";
+                return false; // Prevent form submission
+            } else {
+                document.getElementById("upiIdError").style.display = "none";
+            }
+        }
+
+        return true; // Allow form submission if validation passes
+    }
+
+    // Ensure this runs when the form is submitted
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.onsubmit = function(event) {
+            if (!validateForm()) {
+                event.preventDefault(); // Prevent form submission
+            }
+        };
+    });
 </script>
 
 </head>
@@ -114,10 +142,19 @@
 
 
 				<div id="upiDetails" class="form-group" style="display: none;">
-					<label for="upiId">UPI ID:</label> <input type="text"
-						class="form-control" id="upiId" name="upiId"
-						placeholder="Enter UPI ID">
-				</div>
+    <label for="upiId">UPI ID:</label>
+    <input type="text"
+           class="form-control"
+           id="upiId"
+           name="upiId"
+           placeholder="Enter UPI ID"
+           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$"
+           title="Please enter a valid UPI ID format, e.g., something@ybl"
+           required>
+    <span id="upiIdError" class="error-message text-danger" style="display: none;">Please enter a valid UPI ID.</span>
+</div>
+
+
 
 				<div id="cardDetails" class="form-group" style="display: none;">
 					<label for="cardNumber">Card Number:</label> <input type="text"
