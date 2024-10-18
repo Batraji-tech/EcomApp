@@ -4,36 +4,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/checkout.css">
-<style>
-.address-section {
-	margin-bottom: 20px;
-}
-
-.address-input {
-	width: 100%;
-	height: 100px;
-	padding: 10px;
-	font-size: 16px;
-	box-sizing: border-box;
-}
-
-.address-actions {
-	margin-top: 10px;
-}
-
-.proceed-button, .edit-button {
-	padding: 10px 20px;
-	font-size: 16px;
-	margin-right: 10px;
-	cursor: pointer;
-}
-</style>
-<script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css">
+    <style>
+        .address-section { margin-bottom: 20px; }
+        .address-input { width: 100%; height: 100px; padding: 10px; font-size: 16px; box-sizing: border-box; }
+        .address-actions { margin-top: 10px; }
+        .proceed-button, .edit-button { padding: 10px 20px; font-size: 16px; margin-right: 10px; cursor: pointer; }
+    </style>
+    <script>
 	function makeAddressReadOnly() {
 		document.getElementById('deliveryAddress').readOnly = true;
 	}
@@ -148,10 +129,10 @@
                 %>
             </tbody>
         </table>
-
-        <button onclick="window.location.href='/payments'">Confirm Order</button>
+        <form action="/payment/openPaymentPage" method="get">
+            <input type="hidden" name="totalAmount" value="<%= total %>">
+            <button type="submit">Confirm Order</button>
+        </form>
     </div>
 </body>
-
-
 </html>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ecom.app.dao.ProductDaoImpl;
 import ecom.app.entities.Category;
@@ -169,4 +170,10 @@ public class NavigationController {
 		return "remove_product";
 	}
 
+    @GetMapping("/payment/openPaymentPage")
+    public String openPaymentPage(@RequestParam double totalAmount, Model model) {
+        model.addAttribute("totalAmount", totalAmount);
+        return "Payment"; // JSP file for the payment page
+    }
+	
 }
