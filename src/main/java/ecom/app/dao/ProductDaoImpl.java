@@ -212,20 +212,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
  
 		@Override
 		public List<Category> getAllProductsByCategory() {
-			String sql = "SELECT * FROM category1 LIMIT 3 ";
+			String sql = "SELECT * FROM category LIMIT 3 ";
 		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
 		    return categoryList;
 		}
 	   
 		@Override
 		public List<Category> getAllProductsByCategory1() {
-			String sql = "SELECT * FROM category1";
+			String sql = "SELECT * FROM category";
 		    List<Category> categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
 		    return categoryList;
 		}
 		@Override
 		public List<Category> getAllCategories() {
-		    String sql = "SELECT * FROM category1";
+		    String sql = "SELECT * FROM category";
 		    return jdbcTemplate.query(sql, new CategoryRowMapper()); // Adjust as per your implementation
 		}
 		
