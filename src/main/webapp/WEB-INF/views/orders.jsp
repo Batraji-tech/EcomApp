@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wishlist.css">
     <style>
         body {
             background-color: #F2EED7; /* Soft background */
