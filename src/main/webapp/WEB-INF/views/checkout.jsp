@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout</title>
@@ -219,10 +220,13 @@
                 %>
             </tbody>
         </table>
-
-        <button onclick="window.location.href='/payments'">Confirm Order</button>
+        <form action="/payment/openPaymentPage" method="get">
+            <input type="hidden" name="totalAmount" value="<%= total %>">
+            <button type="submit">Confirm Order</button>
+        </form>
     </div>
 </body>
-
-
 </html>
+
+
+
