@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superadmin Login Page</title>
+    <title>Owner Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -107,7 +107,7 @@
 </head>
 <body>
     <div class="navbar">
-        <h1>Super Admin Portal</h1>
+        <h1>Owner Portal</h1>
     </div>
     <div class="login-container">
         <h2>Login</h2>

@@ -10,9 +10,18 @@
     <title>My Orders</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wishlist.css">
     <style>
+        body {
+            background-color: #F2EED7; /* Soft background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
         .orders-container {
             margin: 20px;
-            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #FF9874; /* Soft orange for headings */
+            margin-bottom: 20px;
         }
         .order {
             border: 1px solid #ccc;
@@ -22,7 +31,7 @@
             background-color: #f9f9f9;
         }
         .order h2 {
-            color: #333;
+            color: #295F98; /* Dark blue for order titles */
         }
         .order-item {
             padding: 10px;
@@ -34,9 +43,16 @@
         .order-total {
             font-weight: bold;
             margin-top: 10px;
+            color: #295F98; /* Dark blue for total */
         }
         .message, .error {
             margin: 10px 0;
+        }
+        .error {
+            color: red;
+        }
+        .message {
+            color: green;
         }
     </style>
 </head>
@@ -49,12 +65,12 @@
 
     if (error != null) {
 %>
-        <div class="error" style="color:red;"><%= error %></div>
+        <div class="error"><%= error %></div>
 <%
     }
     if (message != null) {
 %>
-        <div class="message" style="color:green;"><%= message %></div>
+        <div class="message"><%= message %></div>
 <%
     }
 

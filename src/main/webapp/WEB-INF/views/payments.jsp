@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #cce0f5;
+            background-color: #F2EED7;
             margin: 0;
             padding: 20px;
         }
@@ -27,7 +27,7 @@
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #FF9874;
         }
 
         .payment-options {
@@ -66,19 +66,19 @@
 		    border: 1px solid #ccc;
 		    border-radius: 4px;
 		    width: 100%;
-		    max-width: 150px;
+		    max-width: 130px;
 		}
         button {
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background-color: #28a745;
+            background-color: #295F98;
             color: white;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #1a3a6e;
         }
     </style>
 </head>

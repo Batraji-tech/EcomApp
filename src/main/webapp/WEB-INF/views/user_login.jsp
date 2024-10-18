@@ -16,6 +16,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* Added for button positioning */
         }
 
         .container {
@@ -64,7 +65,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 101%; 
+            width: 100%; 
             font-size: 16px;
             margin-top: 20px; 
         }
@@ -89,7 +90,7 @@
         }
 
         .role-select select {
-            width: 108.5%; 
+            width: 110%; 
             padding: 10px; 
             font-size: 16px; 
             border: 2px solid #295F98; 
@@ -103,9 +104,27 @@
             background-color: #e0f0e0; 
             border-color: #1a3a6e; 
         }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #295F98;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #1a3a6e;
+        }
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="window.location.href='/'">Back to Dashboard</button>
     <div class="container">
         <h2>Login</h2>
         
@@ -120,12 +139,11 @@
             </div>
             <div class="form-group role-select">
                 <label for="role">Select Role:</label>
-               <select id="role" name="role">
-    <option value="">Select a role</option>
-    <option value="customer">Customer</option>
-    <option value="retailer">Retailer</option>
-</select>
-
+                <select id="role" name="role">
+                    <option value="">Select a role</option>
+                    <option value="customer">Customer</option>
+                    <option value="retailer">Retailer</option>
+                </select>
             </div>
             <div>
                 <button type="submit" class="login-button">Login</button>
