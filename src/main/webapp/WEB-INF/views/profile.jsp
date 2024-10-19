@@ -115,6 +115,17 @@ img {
 				onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit
 				Profile</button>
 
+                <label for="address">Address:</label>
+                <input type="text" id="address" value="123 Main St" placeholder="Enter Address" readonly>
+
+                <label for="mobileno">Mobile No:</label>
+                <input type="text" id="mobileno" value="+1234567890" placeholder="Enter Mobile No" readonly>
+
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" value="Male" placeholder="Enter Gender" readonly>
+            </div>
+        </div>
+    </div>
 			<div class="user-details">
 				<%
 				String profileImage = (String) request.getAttribute("profileImage");
