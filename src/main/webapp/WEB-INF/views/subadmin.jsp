@@ -43,6 +43,7 @@
             color: #FF9874;
             font-size: 28px;
             font-weight: bold;
+			margin-left:15px;
         }
 
         .header {
