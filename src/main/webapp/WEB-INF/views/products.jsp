@@ -111,7 +111,7 @@
                     <span id="mrpError" style="color:red"></span>
                 </div>
                 <div class="form-group">
-           <label for="discount">Discount</label>
+           <label for="discount">Discount in Percentage(%)</label>
            <input type="number" step="0.1" placeholder="Enter Discount" name="discount" class="form-control" 
            id="discount" min="0" max="99.9" oninput="validateDiscount(); calculateFinalPrice()" required>
         <span id="discountError" style="color:red" class="error"></span>

@@ -2,6 +2,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="ecom.app.entities.Wishlist"%>
 <%@ page import="ecom.app.entities.Products"%>
+<%@ page import="ecom.app.entities.User"%>
+
 <html>
 <head>
     <title>Your Wishlist</title>
@@ -186,6 +188,13 @@
     </style>
 </head>
 <body>
+
+
+	<%
+		User user = (User) session.getAttribute("user");
+		
+		%>
+
 	<nav>
 			       <div class="logo">ElectroMart</div>
 
@@ -203,8 +212,22 @@
 
 			       <!-- Navigation Links -->
 			       <ul>
-					   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-					   <li><a href="${pageContext.request.contextPath}/cart/view">Cart Item</a></li>
+			       <% 
+			           if (user != null) { %>
+			        	   <li><a href="${pageContext.request.contextPath}/homepageuser">Home</a></li>
+						   <li><a href="${pageContext.request.contextPath}/cart/view">Cart Item</a></li>    
+			<%
+			} else {
+			%>
+			          <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+					   <li><a href="${pageContext.request.contextPath}/user/login">Cart Item</a></li>
+			
+			<%
+			}
+			%>
+			       
+			       
+					   
 			           <li class="shop-dropdown">
 			               <a href="#">Shop</a>
 			               <ul class="dropdown-content">
