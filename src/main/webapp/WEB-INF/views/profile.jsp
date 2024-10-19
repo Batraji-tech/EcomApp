@@ -115,6 +115,7 @@ img {
 				onclick="window.location.href='${pageContext.request.contextPath}/user/editprofile'">Edit
 				Profile</button>
 
+<<<<<<< HEAD
                 <label for="address">Address:</label>
                 <input type="text" id="address" value="123 Main St" placeholder="Enter Address" readonly>
 
