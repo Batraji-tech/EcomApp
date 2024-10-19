@@ -8,104 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Make a Payment</title>
-<style>
-	body {
-	    background-color: #F2EED7; /* Soft background */
-	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	    margin: 0;
-	    padding: 40px;
-	}
-
-	h2 {
-	    color: #FF9874; /* Soft orange */
-	    text-align: center;
-	    margin-bottom: 30px;
-	    font-size: 2em;
-	    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-	}
-
-	.form-container {
-	    background-color: white;
-	    border-radius: 15px;
-	    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-	    padding: 40px;
-	    transition: transform 0.3s;
-	}
-
-	.form-container:hover {
-	    transform: translateY(-5px);
-	}
-
-	.form-group {
-	    margin-bottom: 20px;
-	}
-
-	label {
-	    font-weight: bold;
-	    color: #295F98; /* Dark blue */
-	    display: block;
-	    margin-bottom: 5px;
-	}
-
-	.form-control {
-	    border: 2px solid #ddd; /* Light border */
-	    border-radius: 8px;
-	    padding: 15px;
-	    font-size: 1em;
-	    transition: border-color 0.3s, box-shadow 0.3s;
-		width:20%;
-	}
-
-	.form-control:focus {
-	    border-color: #295F98 ; /* Soft orange */
-	    box-shadow:gray;
-	}
-
-	.btn {
-	    background-color: #295F98; /* Dark blue */
-	    color: white;
-	    border: none;
-	    border-radius: 8px;
-	    padding: 12px 20px;
-	    font-size: 1em;
-	    cursor: pointer;
-	    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-	    display: block;
-	    width: 30%;
-	}
-
-	.btn:hover {
-	    background-color: #1a3a6e; /* Darker blue */
-	    transform: translateY(-3px); /* Lift effect */
-	    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow on hover */
-	}
-
-	.error-message {
-	    display: none; /* Hide error messages by default */
-	    color: #d9534f; /* Bootstrap danger color */
-	    font-size: 0.9em;
-	    margin-top: 5px;
-	}
-
-	#bankTransferDetails,
-	#upiDetails,
-	#cardDetails,
-	#codDetails {
-	    background-color: #f9f9f9; /* Light background for details sections */
-	    padding: 15px;
-	    border-radius: 10px;
-	    border: 1px solid #ddd; /* Light border */
-	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-	}
-
-	#bankTransferDetails input,
-	#upiDetails input,
-	#cardDetails input {
-	    margin-bottom: 15px; /* Space between inputs */
-	}
-
-</style>
-
+<link href="/css/payment.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
 <script>
     <%LocalDate today = LocalDate.now();
     String formattedDate = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));%>

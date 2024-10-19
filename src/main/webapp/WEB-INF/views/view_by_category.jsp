@@ -48,25 +48,12 @@
             object-fit: contain; /* Contain image */
             border-radius: 5px;
         }
-        .home-button {
-            background-color: #295F98; 
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
-        .home-button:hover {
-            background-color: #1a3a6e; /* Darker blue on hover */
-        }
     </style>
 </head>
 <body>
 
     <h1>Shop By Category</h1>
-    <a href="${pageContext.request.contextPath}/home" class="home-button">Home</a>
+
     <div class="products-row">
         <%
             List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
@@ -76,7 +63,7 @@
                 <a href="${pageContext.request.contextPath}/products/category/<%= category.getCategory_id() %>">
                     <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>">
                 </a>
-                <p style="font-weight: bold;"><%= category.getCategory_name() %></p> <!-- Bolded category name -->
+                <p><%= category.getCategory_name() %></p>
             </div>
         <%
             }

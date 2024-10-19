@@ -7,125 +7,70 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Retailer Sales Performance</title>
+    <title>Sub-admin Sales Performance</title>
     <!-- Styles -->
      <style>
-		body {
-		    background-color: #F2EED7; /* Soft background color */
-		    font-family: 'Arial', sans-serif;
-		    padding: 40px; /* Increased padding for better layout */
-		}
-
-		.report-container {
-		    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Subtle gradient */
-		    border-radius: 20px; /* More rounded corners */
-		    padding: 30px;
-		    margin: 0 auto;
-		    max-width: 800px; /* Wider container */
-		    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow */
-		    transition: transform 0.3s ease; /* Smooth scale effect */
-		}
-
-		.report-container:hover {
-		    transform: scale(1.02); /* Slight zoom effect on hover */
-		}
-
-		h2 {
-		    color: #FF9874; /* Soft orange */
-		    margin-bottom: 30px;
-		    text-align: center;
-		    font-size: 28px; /* Increased font size */
-		    text-transform: uppercase; /* Uppercase for emphasis */
-		}
-
-		.form-group {
-		    margin-bottom: 20px; /* Spacing between form groups */
-		}
-
-		label {
-		    display: block; /* Block display for labels */
-		    margin-bottom: 8px; /* Space below labels */
-		    color: #295F98; /* Dark blue for labels */
-		    font-weight: bold; /* Bold labels */
-		}
-
-		input[type="date"] {
-		    width: 97%; /* Full width */
-		    padding: 12px; /* Padding for inputs */
-		    border: 1px solid #ccc; /* Light border */
-		    border-radius: 5px; /* Rounded edges */
-		    transition: border-color 0.3s; /* Smooth transition */
-		}
-
-		input[type="date"]:focus {
-		    border-color: #FF9874; /* Highlight border on focus */
-		    outline: none; /* Remove outline */
-		}
-
-		.btn-submit {
-		    background-color: #295F98; /* Dark blue */
-		    border: none; /* No border */
-		    color: white; /* White text */
-		    font-size: 18px; /* Larger font size */
-		    width: 20%;
-		    border-radius: 5px;
-		    padding: 12px; /* Padding for a better click area */
-		    cursor: pointer;
-		    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-		}
-
-		.btn-submit:hover {
-		    background-color: #1a3a6e; /* Darker blue on hover */
-		    transform: translateY(-2px); /* Lift effect */
-		}
-
-		table {
-		    width: 100%;
-		    border-collapse: collapse; /* Removes gaps between cells */
-		    margin-top: 30px; /* Space above the table */
-		    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for table */
-		}
-
-		th, td {
-		    padding: 15px; /* More padding for cells */
-		    text-align: left;
-		    border-bottom: 2px solid #ddd; /* Bottom border for cells */
-		}
-
-		th {
-		    background-color: #295F98; /* Dark blue for header */
-		    color: white; /* White text */
-		    font-weight: bold; /* Bold text for header */
-		    text-transform: uppercase; /* Uppercase for header */
-		}
-
-		tbody tr {
-		    transition: background-color 0.3s; /* Smooth transition for row hover */
-		}
-
-		tbody tr:hover {
-		    background-color: #FFFCF2; /* Soft highlight color on row hover */
-		}
-
-		td {
-		    color: #333; /* Dark text color */
-		}
-
-		.footer {
-		    text-align: center;
-		    margin-top: 40px; /* Space above footer */
-		    font-size: 14px;
-		    color: #295F98; /* Dark blue text */
-		    padding: 10px; /* Padding for the footer */
-		    border-top: 1px solid #ddd; /* Light grey top border */
-		}
-
-	
+        body {
+            background-color: #F2EED7;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        .report-container {
+            border: 1px solid #295F98;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #FF9874;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn-submit {
+            background-color: #295F98;
+            border-color: #295F98;
+            color: white;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #1a3a6e;
+            border-color: #1a3a6e;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #295F98;
+            color: white;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #295F98;
+        }
     </style>
 </head>
 <body>
     <div class="report-container">
-        <h2>Retailer Sales Performance Report</h2>
+        <h2>Sub-admin Sales Performance Report</h2>
 
         <form action="/user/salesPerformance/subAdmin/${subAdminId}/getSalesData" method="post">
             <div class="form-group">
@@ -192,7 +137,9 @@
         %>
     </div>
 
-   
+    <div class="footer">
+        © 2024 Shopology. All rights reserved.
+    </div>
 
 </body>
 </html>
