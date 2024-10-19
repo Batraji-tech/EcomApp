@@ -233,7 +233,7 @@
             <li class="login-dropdown">
                 <a href="#">Login</a>
                 <ul class="dropdown-content">
-                    <li><a href="/superAdmin/login" onclick="submitLoginForm('super_admin')">Login as Super Admin</a></li>
+                    <li><a href="/superAdmin/login" onclick="submitLoginForm('super_admin')">Login as Owner</a></li>
                     <li><a href="/user/login" onclick="submitLoginForm('retailer')">Login</a></li>
                
                 </ul>
