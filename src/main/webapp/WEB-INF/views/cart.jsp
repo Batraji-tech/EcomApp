@@ -228,7 +228,7 @@
 				       <!-- Navigation Links -->
 				       <ul>
 						<li><a href="${pageContext.request.contextPath}/wishlist/view">Wishlist</a></li>
-						   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+						   <li><a href="${pageContext.request.contextPath}/homepageuser">Home</a></li>
 				           <!-- Shop Dropdown -->
 				           <li class="shop-dropdown">
 				               <a href="#">Shop</a>
