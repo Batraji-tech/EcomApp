@@ -14,7 +14,7 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+ 
 nav {
 	display: flex;
 	justify-content: space-between;
@@ -23,20 +23,20 @@ nav {
 	color: white;
 	padding: 8px;
 }
-
+ 
 .nav-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 }
-
+ 
 nav .logo {
 	font-size: 24px;
 	font-weight: bold;
 	color: #FF9874;
 }
-
+ 
 nav .search-bar {
 	flex-grow: 1;
 	margin: 0 20px;
@@ -44,12 +44,12 @@ nav .search-bar {
 	text-align: center;
 	margin-top: 5px;
 }
-
+ 
 nav .search-bar form {
 	display: inline-block;
 	position: relative;
 }
-
+ 
 nav .search-bar input {
 	width: 400px;
 	padding: 8px 40px 8px 15px; /* Add padding for the search icon */
@@ -57,7 +57,7 @@ nav .search-bar input {
 	border: none;
 	text-align: left;
 }
-
+ 
 nav .search-bar button {
 	position: absolute;
 	right: 5px;
@@ -68,26 +68,26 @@ nav .search-bar button {
 	cursor: pointer;
 	color: #333;
 }
-
+ 
 nav ul {
 	display: flex;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
 }
-
+ 
 nav ul li {
 	margin-left: 0px;
 	position: relative;
 }
-
+ 
 nav ul li a {
 	color: white;
 	text-decoration: none;
 	padding: 10px;
 	display: block;
 }
-
+ 
 /* Dropdown menu for login */
 nav ul li .dropdown-content {
 	display: none;
@@ -97,26 +97,26 @@ nav ul li .dropdown-content {
 	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 }
-
+ 
 nav ul li:hover .dropdown-content {
 	display: block;
 }
-
+ 
 nav ul li .dropdown-content a {
 	color: black;
 	text-decoration: none;
 	display: block;
 	padding: 12px 16px;
 }
-
+ 
 nav ul li .dropdown-content a:hover {
 	background-color: #ddd;
 }
-
+ 
 .shop-dropdown {
 	margin-right: 100px;
 }
-
+ 
 .controls {
 	display: flex;
 	justify-content: space-between;
@@ -128,7 +128,7 @@ nav ul li .dropdown-content a:hover {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 }
-
+ 
 .controls select {
 	padding: 10px;
 	font-size: 16px;
@@ -137,7 +137,7 @@ nav ul li .dropdown-content a:hover {
 	outline: none;
 	cursor: pointer;
 }
-
+ 
 .controls .back-home {
 	text-decoration: none;
 	color: white;
@@ -146,11 +146,11 @@ nav ul li .dropdown-content a:hover {
 	border-radius: 4px;
 	transition: background-color 0.2s ease-in-out;
 }
-
+ 
 .controls .back-home:hover {
 	background-color: #005bb5;
 }
-
+ 
 .container {
 	width: 90%;
 	margin: 0 auto;
@@ -158,7 +158,7 @@ nav ul li .dropdown-content a:hover {
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
-
+ 
 .product-card {
 	background-color: white;
 	border: 1px solid #ddd;
@@ -170,12 +170,12 @@ nav ul li .dropdown-content a:hover {
 	text-align: center;
 	transition: transform 0.2s ease-in-out;
 }
-
+ 
 .product-card:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
-
+ 
 .product-card img {
 	width: 100%;
 	height: 200px;
@@ -183,25 +183,25 @@ nav ul li .dropdown-content a:hover {
 	object-fit: contain;
 	background-color: #f4f4f4;
 }
-
+ 
 .product-card h3 {
 	font-size: 18px;
 	color: #333;
 	margin: 15px 0;
 }
-
+ 
 .product-card p {
 	color: #555;
 	font-size: 16px;
 	margin-bottom: 15px;
 }
-
+ 
 .button-container {
 	display: flex;
 	justify-content: center;
 	margin-top: 10px;
 }
-
+ 
 .product-card a {
 	text-decoration: none;
 	color: white;
@@ -212,23 +212,23 @@ nav ul li .dropdown-content a:hover {
 	margin: 0 5px;
 	white-space: nowrap;
 }
-
+ 
 .product-card .details-btn {
 	background-color: #295F98;
 }
-
+ 
 .product-card .details-btn:hover {
 	background-color: #1a3a6e;
 }
-
+ 
 .product-card .wishlist-btn {
 	background-color: #ffc107;
 }
-
+ 
 .product-card .wishlist-btn:hover {
 	background-color: #e0a800;
 }
-
+ 
 .no-products {
 	text-align: center;
 	font-size: 24px;
@@ -236,20 +236,19 @@ nav ul li .dropdown-content a:hover {
 	margin-top: 100px;
 }
 </style>
-
+ 
 <script>
         function sortProducts() {
             var sortOption = document.getElementById("sortDropdown").value;
-            window.location.href = "<%=request.getContextPath()%>
-	/products?sort="
-				+ sortOption;
-	}
+            window.location.href = "<%=request.getContextPath()%>/products?sort=" + sortOption;
+        }
+    </script>
 </script>
 </head>
 <body>
 	<nav>
 		<div class="logo">ElectroMart</div>
-
+ 
 		<!-- Search Bar in Center -->
 		<div class="nav-container">
 			<div class="search-bar">
@@ -264,10 +263,10 @@ nav ul li .dropdown-content a:hover {
 				</form>
 			</div>
 		</div>
-
+ 
 		<!-- Navigation Links -->
 		<ul>
-
+ 
 			<%
 			User user = (User) session.getAttribute("user");
 			
@@ -296,8 +295,8 @@ nav ul li .dropdown-content a:hover {
 				</ul></li>
 		</ul>
 	</nav>
-
-
+ 
+ 
 	<div class="controls">
 		<div>
 			<label for="sortDropdown">Sort by:</label> <select id="sortDropdown"
@@ -308,11 +307,11 @@ nav ul li .dropdown-content a:hover {
 			</select>
 		</div>
 	</div>
-
+ 
 	<div class="container">
 		<%
 		List<Products> products = (List<Products>) request.getAttribute("products");
-
+ 
 		if (products != null && !products.isEmpty()) {
 			for (Products product : products) {
 		%>
@@ -329,12 +328,12 @@ nav ul li .dropdown-content a:hover {
 				Price: &#8377;<%=product.getFinal_price()%></p>
 			<div class="button-container">
 				<center>
-
+ 
 					<a
 						href="<%=request.getContextPath()%>/products/<%=product.getProduct_id()%>"
 						class="details-btn">More Details</a>
-
-
+ 
+ 
 				</center>
 			</div>
 		</div>
