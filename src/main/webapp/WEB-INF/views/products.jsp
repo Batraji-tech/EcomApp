@@ -8,56 +8,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Product</title>
     <style>
-        /* Styles remain the same */
-        body {
-            background-color: #E6F9E6;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .form-container {
-            border: 1px solid #003366;
-            border-radius: 10px;
-            background-color: #ffffff;
-            padding: 40px;
-            margin: 50px auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-        }
-        h2 {
-            color: #003366;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .message {
-            color: #003366;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        label {
-            font-weight: bold;
-            color: #003366;
-        }
-        .form-control {
-            border-radius: 5px;
-            border: 1px solid #cccccc;
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-        }
-        .btn {
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-        }
-        .btn-danger, .btn-success {
-            background-color: #00ff00;
-            border-color: #00ff00;
-        }
-        .btn-danger:hover, .btn-success:hover {
-            background-color: #00cc00;
-        }
+		body {
+		    background-color: #F2EED7; /* Soft green background */
+		    font-family: Arial, sans-serif;
+		    padding: 20px;
+		}
+
+		.form-container {
+		    border: 1px solid #295F98; /* Dark blue border */
+		    border-radius: 10px;
+		    background-color: #ffffff;
+		    padding: 40px;
+		    margin: 50px auto;
+		    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		    max-width: 800px;
+		}
+
+		h2 {
+		    color: #FF9874; /* Soft orange for headings */
+		    margin-bottom: 20px;
+		    text-align: center;
+		}
+
+		.message {
+		    color: #FF9874; /* Soft orange for messages */
+		    margin-bottom: 20px;
+		    text-align: center;
+		}
+
+		label {
+		    font-weight: bold;
+		    color: #295F98; /* Dark blue for labels */
+			
+		}
+
+		.form-control {
+		    border-radius: 5px;
+		    border: 1px solid #cccccc;
+		    width: 97%;
+		    margin-bottom: 15px;
+		    padding: 10px;
+		}
+
+		.btn {
+		    border-radius: 5px;
+		    font-size: 16px;
+		    margin-top: 10px;
+		    padding: 10px;
+		    width: 100%;
+		    border: none; /* No border for buttons */
+		}
+
+		.btn-danger {
+		    background-color:#295F98 ; /* Soft orange for reset button */
+			color: white; 
+		}
+
+		.btn-danger:hover {
+		    background-color: #1a3a6e; /* Slightly darker orange on hover */
+		}
+
+		.btn-success {
+		    background-color: #295F98; /* Dark blue for submit button */
+		    color: white; /* White text for contrast */
+		}
+
+		.btn-success:hover {
+		    background-color: #1a3a6e; /* Darker blue on hover */
+		}
+
+		.error {
+		    color: red; /* Error messages in red */
+		}
+
     </style>
 </head>
 <body>
