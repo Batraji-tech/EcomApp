@@ -43,7 +43,7 @@
 						           font-size: 24px;
 						           font-weight: bold;
 								color:#FF9874;
-								margin-left:8px;
+								margin-left:15px;
 						       }
 
 						       nav .search-bar {
@@ -85,10 +85,11 @@
 						           margin: 0;
 						       }
 
-						       nav ul li {
-						           margin-left: 0px;
-						           position: relative;
-						       }
+							   nav ul li {
+							       margin-left: 0px;
+							       position: relative;
+							       white-space: nowrap; /* Prevent line break */
+							   }
 
 						       nav ul li a {
 						           color: white;
@@ -288,6 +289,9 @@
                     <form action="${pageContext.request.contextPath}/wishlist/remove" method="post" style="display:inline;">
                         <input type="hidden" name="wishlistId" value="<%= item.getWishlistId() %>">
                         <button type="submit">Remove</button>
+					<form action="${pageContext.request.contextPath}/wishlist/view" method="post" style="display:inline;">
+						 <button type="submit">Go Back</button>
+					</form>
                     </form>
                 </td>
             </tr>
