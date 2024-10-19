@@ -15,7 +15,7 @@ body {
 	padding: 0;
 	color: #333;
 }
-
+ 
 nav {
 		           display: flex;
 		           justify-content: space-between;
@@ -24,21 +24,20 @@ nav {
 		           color: white;
 		           padding: 8px;
 		       }
-
+ 
 		       .nav-container {
 		           display: flex;
 		           justify-content: center;
 		           align-items: center;
 		           width: 100%;
 		       }
-
+ 
 		       nav .logo {
 		           font-size: 24px;
 		           font-weight: bold;
 				color:#FF9874;
-				margin-lef:15px;
 		       }
-
+ 
 		       nav .search-bar {
 		           flex-grow: 1;
 		           margin: 0 20px;
@@ -46,12 +45,12 @@ nav {
 		           text-align: center;
 				   margin-top:5px;
 		       }
-
+ 
 		       nav .search-bar form {
 		           display: inline-block;
 		           position: relative;
 		       }
-
+ 
 		       nav .search-bar input {
 		           width: 400px;
 		           padding: 8px 40px 8px 15px; /* Add padding for the search icon */
@@ -59,7 +58,7 @@ nav {
 		           border: none;
 		           text-align: left;
 		       }
-
+ 
 		       nav .search-bar button {
 		           position: absolute;
 		           right: 5px;
@@ -70,26 +69,26 @@ nav {
 		           cursor: pointer;
 		           color: #333;
 		       }
-
+ 
 		       nav ul {
 		           display: flex;
 		           list-style-type: none;
 		           padding: 0;
 		           margin: 0;
 		       }
-
+ 
 		       nav ul li {
 		           margin-left: 0px;
 		           position: relative;
 		       }
-
+ 
 		       nav ul li a {
 		           color: white;
 		           text-decoration: none;
 		           padding: 10px;
 		           display: block;
 		       }
-
+ 
 		       /* Dropdown menu for login */
 		       nav ul li .dropdown-content {
 		           display: none;
@@ -99,18 +98,18 @@ nav {
 		           box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 		           z-index: 1;
 		       }
-
+ 
 		       nav ul li:hover .dropdown-content {
 		           display: block;
 		       }
-
+ 
 		       nav ul li .dropdown-content a {
 		           color: black;
 		           text-decoration: none;
 		           display: block;
 		           padding: 12px 16px;
 		       }
-
+ 
 		       nav ul li .dropdown-content a:hover {
 		           background-color: #ddd;
 		       }
@@ -118,9 +117,9 @@ nav {
 			.shop-dropdown{
 				margin-right:100px;
 			}
-
  
-
+ 
+ 
 .product-container {
 	max-width: 1200px;
 	margin: 40px auto;
@@ -131,12 +130,12 @@ nav {
 	border-radius: 10px;
 	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .product-image {
 	flex: 1;
 	padding: 20px;
 }
-
+ 
 .product-image img {
 	width: 100%;
 	height: auto;
@@ -144,31 +143,31 @@ nav {
 	object-fit: contain;
 	background-color: #e6e6e6;
 }
-
+ 
 .product-details {
 	flex: 2;
 	padding: 20px;
 }
-
+ 
 .product-details h1 {
 	font-size: 34px;
 	margin-bottom: 20px;
 	color: #444;
 }
-
+ 
 .price-details {
 	font-size: 26px;
 	color: #ff5722;
 	font-weight: bold;
 	margin-bottom: 20px;
 }
-
+ 
 .btn-container {
 	display: flex;
 	gap: 20px;
 	margin-top: 30px;
 }
-
+ 
 .btn-container button {
 	padding: 12px 25px;
 	border-radius: 6px;
@@ -177,27 +176,27 @@ nav {
 	transition: all 0.3s ease;
 	cursor: pointer;
 }
-
+ 
 .add-to-cart {
 	background-color: #295F98;
 	color: white;
 }
-
+ 
 .add-to-cart:hover {
 	background-color: #1a3a6e;
 	transform: translateY(-2px);
 }
-
+ 
 .buy-now {
 	background-color: #295F98;
 	color: white;
 }
-
+ 
 .buy-now:hover {
 	background-color: #1a3a6e;
 	transform: translateY(-2px);
 }
-
+ 
 .back-button {
 	background-color: #295F98;
 	color: white;
@@ -207,11 +206,11 @@ nav {
 	cursor: pointer;
 	transition: background-color 0.3s;
 }
-
+ 
 .back-button:hover {
 	background-color: #1a3a6e;
 }
-
+ 
 .feedback-section {
     margin-top: 40px;
     padding: 20px;
@@ -223,7 +222,7 @@ nav {
 	margin-left:60px;
 	margin-right:60px;
 }
-
+ 
 .feedback-section h2 {
     margin-bottom: 20px;
     font-size: 28px;
@@ -231,7 +230,7 @@ nav {
     border-bottom: 2px solid #295F98; /* Underline */
     padding-bottom: 10px;
 }
-
+ 
 .feedback-section textarea {
     width: 100%;
     height: 100px;
@@ -243,12 +242,12 @@ nav {
     resize: none; /* Prevent resizing */
     transition: border-color 0.3s;
 }
-
+ 
 .feedback-section textarea:focus {
     border-color: #295F98; /* Change border color on focus */
     outline: none; /* Remove outline */
 }
-
+ 
 .feedback-section button {
     padding: 10px 20px;
     background-color: #295F98; /* Button color */
@@ -259,18 +258,18 @@ nav {
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
 }
-
+ 
 .feedback-section button:hover {
     background-color: #1a3a6e; /* Hover color */
     transform: translateY(-2px); /* Lift effect */
 }
-
+ 
 #feedback-list {
     list-style-type: none;
     padding: 0;
     margin-top: 20px; /* Add space above the feedback list */
 }
-
+ 
 #feedback-list li {
     margin-bottom: 10px;
     padding: 12px;
@@ -280,42 +279,27 @@ nav {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
-
+ 
 #feedback-list li:hover {
     transform: scale(1.02); /* Slight scale on hover */
 }
-
+ 
 #feedback-list li strong {
     color: #295F98; /* Color for user name */
 }
-
+ 
 #feedback-list li small {
     display: block;
     color: #999; /* Color for feedback date */
     margin-top: 5px; /* Space above date */
 }
-.product-details {
-    position: relative; /* Make it relative to position the cart icon absolutely */
-    padding: 20px;
-}
-
-.cart-icon {
-    position: absolute;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
-    color: #295F98; /* Cart icon color */
-    font-size: 24px; /* Size of the icon */
-    z-index: 10; /* Ensure it appears above other content */
-}
-
-
-
+ 
 </style>
 </head>
 <body>
 	<nav>
 		       <div class="logo">ElectroMart</div>
-
+ 
 		       <!-- Search Bar in Center -->
 		       <div class="nav-container">
 		           <div class="search-bar">
@@ -327,7 +311,7 @@ nav {
 		               </form>
 		           </div>
 		       </div>
-
+ 
 		       <!-- Navigation Links -->
 		       <ul>
 				   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
@@ -341,11 +325,9 @@ nav {
 		           </li>
 		       </ul>
 		   </nav>
-
-
+ 
+ 
 	<div class="product-container">
-		
-
 		<%
 		User user = (User) session.getAttribute("user");
 		Products product = (Products) session.getAttribute("product");
@@ -353,14 +335,14 @@ nav {
 		List<Feedback> feedbackList = (List<Feedback>) session.getAttribute("feedbackList");
 		String base64Image = product.getBase64ProductImage(); // Get the product image
 		%>
-
-
+ 
+ 
         
 		<!-- Message Display -->
 		<c:if test="${not empty message}">
 			<p style="font-weight: bold; color: green">${message}</p>
 		</c:if>
-
+ 
 		<!-- Product Image Section -->
 		<div class="product-image">
 			<%
@@ -376,14 +358,9 @@ nav {
 			}
 			%>
 		</div>
-
+ 
 		<!-- Product Details Section -->
 		<div class="product-details">
-			<div class="cart-icon">
-			       <a href="${pageContext.request.contextPath}/cart/view">
-			           <i class="fas fa-shopping-cart"></i>
-			       </a>
-			   </div>
 			<h1><%=product.getProduct_name()%></h1>
 			<p>
 				<strong>Description:</strong>
@@ -400,7 +377,7 @@ nav {
 			<!-- Stock Info -->
 			<p class="price-details">
 				Final Price: &#8377;<%=product.getFinal_price()%></p>
-
+ 
 			<div class="btn-container">
 				<!-- Add to Cart Button -->
 				<form action="${pageContext.request.contextPath}/cart/add"
@@ -409,7 +386,7 @@ nav {
 						value="${product.getProduct_id()}">
 					<button type="submit" class="add-to-cart">Add to Cart</button>
 				</form>
-
+ 
 				<!-- Buy Now Button -->
 				<form action="${pageContext.request.contextPath}/cart/buynow"
 					method="GET">
@@ -427,7 +404,7 @@ nav {
 				<button type="submit" class="buy-now">Add to wishlist</button>
 			</form>
 			</div>
-
+ 
 			<!-- Back to Products Button -->
 			<%
 			if (user != null) {
@@ -436,7 +413,7 @@ nav {
 				method="GET" style="margin-top: 20px;">
 				<button type="submit" class="back-button">Back to Products</button>
 			</form>
-
+ 
 			<%
 			} else {
 			%>
@@ -444,15 +421,15 @@ nav {
 				style="margin-top: 20px;">
 				<button type="submit" class="back-button">Back to Products</button>
 			</form>
-
+ 
 			<%
 			}
 			%>
-
-
+ 
+ 
 		</div>
 	</div>
-
+ 
 	<!-- Feedback Section -->
 	<div class="feedback-section">
 		<h2>Leave Feedback</h2>
@@ -466,7 +443,7 @@ nav {
 				value="<%=session.getAttribute("userId") != null ? session.getAttribute("userId") : 0%>">
 			<button type="submit">Submit Feedback</button>
 		</form>
-
+ 
 		<h3>User Feedback</h3>
 		<ul id="feedback-list">
 			<%
@@ -485,6 +462,6 @@ nav {
 			%>
 		</ul>
 	</div>
-
+ 
 </body>
 </html>

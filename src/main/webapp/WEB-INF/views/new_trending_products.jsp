@@ -19,25 +19,6 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        .controls select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            outline: none;
-            cursor: pointer;
-        }
         .products-row {
             display: flex;
             justify-content: center;
@@ -79,52 +60,12 @@
         a:hover {
             background-color: white; /* Darker blue on hover */
         }
-        h3 {
-            font-weight: bold; /* Bold product name */
-        }
-        .price {
-            font-weight: bold; /* Bold price */
-            color: green; /* Green price color */
-        }
-        .home-button {
-            position: absolute; /* Position it at the top right */
-            top: 20px; /* Distance from the top */
-            right: 20px; /* Distance from the right */
-            background-color: #295F98; /* Dark blue */
-            color: white; /* Text color for links */
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none; /* No underline */
-            transition: background-color 0.3s; /* Smooth color transition */
-        }
-        .home-button:hover {
-            background-color: #1a3a6e; /* Darker blue on hover */
-        }
     </style>
-    <script>
-        function sortProducts() {
-            var sortOption = document.getElementById("sortDropdown").value;
-            window.location.href = "<%= request.getContextPath() %>/products?sort=" + sortOption;
-        }
-    </script>
 </head>
 <body>
 
-    <a href="${pageContext.request.contextPath}/home" class="home-button">Home</a>
-    
     <h1>Best Trends</h1>
-    
-    <div class="controls">
-        <div>
-            <label for="sortDropdown">Sort by:</label>
-            <select id="sortDropdown" onchange="sortProducts()">
-                <option value="alphabetical">Price</option>
-                <option value="priceAsc">Low to High</option>
-                <option value="priceDesc">High to Low</option>
-            </select>
-        </div>
-    </div>
-    
+
     <div class="products-row">
         <%
             List<Products> newTrends = (List<Products>) request.getAttribute("newTrends");
@@ -135,7 +76,7 @@
                     <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
                 </a>
                 <h3><%= product.getProduct_name() %></h3>
-                <p class="price">&#8377;<%= product.getFinal_price() %></p>
+                <p>&#8377;<%= product.getFinal_price() %></p>
             </div>
         <%
             }

@@ -175,16 +175,5 @@ public class NavigationController {
         model.addAttribute("totalAmount", totalAmount);
         return "Payment"; // JSP file for the payment page
     }
-    @GetMapping("/contactus")
-	public String contact() {
-		return "contact_us";
-	}
-    
-    @GetMapping("/aboutus")
-  	public String about() {
-  		return "about_us";
-  	}
-      
-    
 	
 }

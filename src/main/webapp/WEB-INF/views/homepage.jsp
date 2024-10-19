@@ -18,9 +18,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://img.freepik.com/free-vector/winter-light-blue-gradient-vector-background_53876-126054.jpg');
-            background-size: cover;
-            background-position: center;
+			background-image: url('https://img.freepik.com/free-vector/winter-light-blue-gradient-vector-background_53876-126054.jpg');
+			background-size: cover; /* Ensures the image covers the entire background */
+			background-position: center;
         }
 
         nav {
@@ -42,14 +42,13 @@
         nav .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #FF9874;
-            margin-left: 15px;
+			color:#FF9874;
         }
 
         nav .search-bar {
             flex-grow: 1;
             margin: 0 20px;
-            position: relative;
+            position: relative; /* Position for icon */
             text-align: center;
         }
 
@@ -60,7 +59,7 @@
 
         nav .search-bar input {
             width: 400px;
-            padding: 8px 40px 8px 15px;
+            padding: 8px 40px 8px 15px; /* Add padding for the search icon */
             border-radius: 5px;
             border: none;
             text-align: left;
@@ -96,6 +95,7 @@
             display: block;
         }
 
+        /* Dropdown menu for login */
         nav ul li .dropdown-content {
             display: none;
             position: absolute;
@@ -119,14 +119,13 @@
         nav ul li .dropdown-content a:hover {
             background-color: #ddd;
         }
-
-        .login-dropdown {
-            margin-right: 10px;
-        }
-
-        .shop-dropdown {
-            margin-right: 100px;
-        }
+		.login-dropdown{
+			margin-right:10px;
+		}
+		
+		.shop-dropdown{
+			margin-right:100px;
+		}
 
         section {
             margin: 20px;
@@ -146,27 +145,25 @@
             display: inline-block;
             padding-bottom: 5px;
         }
-
-        .exp-btn {
-            background-color: #295F98;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            margin-left: 570px;
-        }
-
-        .exp-btn:hover {
-            background-color: #1a3a6e;
-            color: white;
-        }
+		.exp-btn{
+			background-color: #295F98;
+			            color: white;
+			            border: none;
+			            padding: 10px;
+			            border-radius: 5px;
+			            text-align: center;
+			            cursor: pointer;
+			            display: flex;
+			            align-items: center;
+			            justify-content: center;
+			            font-size: 16px;
+			            transition: background-color 0.3s ease;
+						margin-left:570px;
+		}
+		.exp-btn:hover {
+		            background-color: #1a3a6e;
+		            color: white;
+		        }
 
         .products-row {
             display: flex;
@@ -191,17 +188,6 @@
             border-radius: 5px;
         }
 
-        .product-name {
-            font-weight: bold;
-        }
-
-        .product-price {
-            color: green;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
         .explore-button {
             background-color: #295F98;
             color: white;
@@ -221,46 +207,6 @@
             background-color: #1a3a6e;
             color: white;
         }
-
-        .footer {
-            background-color: #295F98;
-            color: white;
-            padding: 5px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5px 0;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #FF9874;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-
-        .contact-info {
-            text-align: left;
-            margin: 0;
-        }
-
-        .footer p {
-            margin: 0;
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -275,7 +221,7 @@
                 <form action="${pageContext.request.contextPath}/products/search" method="get">
                     <input type="text" name="query" placeholder="Search for specific products..." required>
                     <button type="submit">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-search"></i> <!-- Lens icon -->
                     </button>
                 </form>
             </div>
@@ -283,14 +229,17 @@
 
         <!-- Navigation Links -->
         <ul>
+            <!-- Login Dropdown -->
             <li class="login-dropdown">
                 <a href="#">Login</a>
                 <ul class="dropdown-content">
                     <li><a href="/superAdmin/login" onclick="submitLoginForm('super_admin')">Login as Owner</a></li>
                     <li><a href="/user/login" onclick="submitLoginForm('retailer')">Login</a></li>
+               
                 </ul>
             </li>
 
+            <!-- Shop Dropdown -->
             <li class="shop-dropdown">
                 <a href="#">Shop</a>
                 <ul class="dropdown-content">
@@ -303,8 +252,7 @@
 
     <!-- Welcome Section -->
     <section>
-        <p style="font-size: 34px; color: #FF9874; margin: 20px 0;">Welcome to the Electronic Universe</p>
-        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'" class="exp-btn">Explore All Products</button>
+        <button onclick="window.location.href='${pageContext.request.contextPath}/products/display1'"class="exp-btn">Explore All Products</button>
     </section>
    
     <!-- Trends Section -->
@@ -318,10 +266,8 @@
             %>
                 <div class="product">
                     <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                        <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                    </a>
-                    <p class="product-name"><%= product.getProduct_name() %></p>
-                    <p class="product-price">&#8377;<%= product.getFinal_price() %></p>
+                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+                </a><p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>
             <%
                 if ((i + 1) % 3 == 0) {
@@ -334,6 +280,8 @@
         </div>
     </section>
      
+   
+
     <!-- New Arrivals Section -->
     <section>
         <h2>New Arrivals</h2>
@@ -345,10 +293,8 @@
             %>
                 <div class="product">
                     <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                        <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                    </a>
-                    <p class="product-name"><%= product.getProduct_name() %></p>
-                    <p class="product-price">&#8377;<%= product.getFinal_price() %></p>
+                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+                </a><p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>
             <%
                 if ((i + 1) % 3 == 0) {
@@ -371,11 +317,9 @@
                     Products product = discountProducts.get(i);
             %>
                 <div class="product">
-                    <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                        <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                    </a>
-                    <p class="product-name"><%= product.getProduct_name() %></p>
-                    <p class="product-price">&#8377;<%= product.getFinal_price() %></p>
+                  <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
+                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+                </a> <p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>
             <%
                 if ((i + 1) % 3 == 0) {
@@ -398,11 +342,9 @@
                     Products product = bestBrands.get(i);
             %>
                 <div class="product">
-                    <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
-                        <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
-                    </a>
-                    <p class="product-name"><%= product.getProduct_name() %></p>
-                    <p class="product-price">&#8377;<%= product.getFinal_price() %></p>
+                   <a href="${pageContext.request.contextPath}/products/<%= product.getProduct_id() %>">
+                    <img src="data:image/jpeg;base64,<%= product.getBase64ProductImage() %>" alt="<%= product.getProduct_name() %>">
+                </a><p><%= product.getProduct_name() %>  &#8377;<%= product.getFinal_price() %></p>
                 </div>
             <%
                 if ((i + 1) % 3 == 0) {
@@ -415,54 +357,36 @@
         </div>
     </section>
     
-    <!-- Category Section -->
-    <section>
-        <h2>Shop By Category</h2>
-        <div class="products-row">
-            <%
-                List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
-                for (int i = 0; i < categoryList.size(); i++) {
-                    Category category = categoryList.get(i);
-            %>
-                <div class="product">
-                    <a href="<%= request.getContextPath() %>/products/category/<%= category.getCategory_id() %>">
-                        <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>" style="width:200px;height:200px;">
-                    </a>
-                    <p style="font-weight: bold;"><%= category.getCategory_name() %></p> <!-- Bolded category name -->
-                </div>
-            <%
-                if ((i + 1) % 3 == 0) {
-            %>
-                <div class="explore-button" onclick="window.location.href='<%= request.getContextPath() %>/explore-all-categories'">Explore All</div>
-            <%
-                }
+     <!-- Category Section -->
+<section>
+    <h2>Shop By Category</h2>
+    <div class="products-row">
+        <%
+            List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
+            for (int i = 0; i < categoryList.size(); i++) {
+                Category category = categoryList.get(i);
+        %>
+            <div class="product">
+                <!-- Link to the products of the selected category -->
+                <a href="<%= request.getContextPath() %>/products/category/<%= category.getCategory_id() %>">
+                    <!-- Display the category image -->
+                    <img src="data:image/jpeg;base64,<%= category.getBase64CategoryImage() %>" alt="<%= category.getCategory_name() %>" style="width:200px;height:200px;">
+                </a>
+                <!-- Display the category name -->
+                <p><%= category.getCategory_name() %></p>
+            </div>
+        <%
+            if ((i + 1) % 3 == 0) {
+        %>
+            <!-- Explore All button after every 3 categories -->
+            <div class="explore-button" onclick="window.location.href='<%= request.getContextPath() %>/explore-all-categories'">Explore All</div>
+        <%
             }
-            %>
-        </div>
-    </section>
+        }
+        %>
+    </div>
+</section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="${pageContext.request.contextPath}/aboutus">About Us</a>
-                <a href="${pageContext.request.contextPath}/contactus">Contact Us</a>
-                <p style="color: #FF9874; margin:0px 8px;">Payments</p>
-                <p style="color: #FF9874; margin: 0px 8px;">Shipping</p>
-                <p style="color: #FF9874; margin:0px 10px;">Cancellation</p>
-            </div>
-            <div class="contact-info">
-                <p><strong>Address:</strong>  ElectroMart Pvt. Ltd.<br>
-                    Bagmane Constellation Business Park Block-7,<br>
-                    Bagmane Constellation Service Rd,<br>
-                    Ferns City, Doddanekkundi,<br>
-                    Bengaluru, Karnataka 560048,<br>
-                    India</p>
-                <p><strong>Mail Us:</strong> electromart@example.com</p>
-            </div>
-        </div>
-        <p>© 2024 ElectroMart. All rights reserved.</p>
-    </footer>
 
     <script>
         // JavaScript function for handling login dropdown selection

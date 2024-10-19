@@ -9,86 +9,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     <style>
-		body {
-		    background-color: #F2EED7; /* Soft background */
-		    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		    margin: 0;
-		    padding: 40px;
-		}
-
-		.orders-container {
-		    margin: 20px auto;
-		    max-width: 800px;
-		    padding: 20px;
-		    background-color: white;
-		    border-radius: 10px;
-		    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-		}
-
-		h1 {
-		    color: #FF9874; /* Soft orange for headings */
-		    margin-bottom: 30px;
-		    text-align: center;
-		    font-size: 2.5em;
-		    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-		}
-
-		.order {
-		    border: 1px solid #ddd;
-		    border-radius: 10px;
-		    padding: 15px;
-		    margin-bottom: 20px;
-		    background-color: #f9f9f9;
-		    transition: transform 0.2s, box-shadow 0.2s;
-		}
-
-		.order:hover {
-		    transform: translateY(-5px);
-		    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-		}
-
-		.order h2 {
-		    color: #295F98; /* Dark blue for order titles */
-		    font-size: 1.5em;
-		}
-
-		.order-item {
-		    padding: 10px;
-		    border: 1px solid #ddd;
-		    border-radius: 5px;
-		    margin-top: 10px;
-		    background-color: #fff;
-		    transition: background-color 0.2s;
-		}
-
-		.order-item:hover {
-		    background-color: #f1f1f1; /* Light gray on hover */
-		}
-
-		.order-total {
-		    font-weight: bold;
-		    margin-top: 10px;
-		    color: #295F98; /* Dark blue for total */
-		    font-size: 1.2em;
-		}
-
-		.message, .error {
-		    margin: 15px 0;
-		    text-align: center;
-		    padding: 10px;
-		    border-radius: 5px;
-		}
-
-		.error {
-		    color: 	#ff0000;
-		    background-color: #d9534f; /* Bootstrap danger color */
-		}
-
-		.message {
-		    color: 	#ff0000;
-		    background-color: #5cb85c; /* Bootstrap success color */
-		}
-
+        body {
+            background-color: #F2EED7; /* Soft background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .orders-container {
+            margin: 20px;
+        }
+        h1 {
+            color: #FF9874; /* Soft orange for headings */
+            margin-bottom: 20px;
+        }
+        .order {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .order h2 {
+            color: #295F98; /* Dark blue for order titles */
+        }
+        .order-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #fff;
+        }
+        .order-total {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #295F98; /* Dark blue for total */
+        }
+        .message, .error {
+            margin: 10px 0;
+        }
+        .error {
+            color: red;
+        }
+        .message {
+            color: green;
+        }
     </style>
 </head>
 <body>

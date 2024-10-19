@@ -6,135 +6,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css">
 <style>
-	body {
-	    background: linear-gradient(to bottom right, #F2EED7, #e1d4b7); /* Gradient background */
-	    font-family: 'Arial', sans-serif;
-	    margin: 0;
-	    padding: 20px;
-	}
+    body {
+        background-color: #F2EED7;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
 
-	h1, h2 {
-	    color: #FF9874; /* Soft orange */
-	    text-align: center;
-	    margin: 10px 0;
-	    font-weight: 700; /* Bold font */
-	    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-	}
+    h1, h2 {
+        color: #FF9874;
+        text-align: center;
+        margin: 10px 0;
+    }
 
-	.address-section, .order-summary {
-	    background-color: #ffffff; /* White background for sections */
-	    padding: 25px;
-	    border-radius: 12px;
-	    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2); /* Deeper shadow */
-	    margin-bottom: 30px;
-	    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
-	}
+    .address-section, .order-summary {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
 
-	.address-section:hover, .order-summary:hover {
-	    transform: translateY(-4px); /* Lift effect on hover */
-	    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
-	}
+    .address-input {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-	.address-input {
-	    width: 100%; /* Full width */
-	    height: 150px; /* Increased height for more space */
-	    padding: 15px; /* Adjusted padding for better spacing */
-	    font-size: 18px; /* Font size for readability */
-	    box-sizing: border-box; /* Ensures padding and border are included in total width */
-	    border-radius: 8px; /* Rounded corners */
-	    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
-	    resize: vertical; /* Allow vertical resizing */
-	}
+    .address-actions {
+        margin-top: 10px;
+        text-align: center;
+    }
 
+    .proceed-button, .edit-button, .confirm-button {
+        background-color: #295F98;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-right: 10px;
+    }
 
-	.address-input:focus {
-	    box-shadow: 0 0 5px rgba(255, 152, 116, 0.5); /* Subtle glow */
-	    outline: none; /* Remove default outline */
-	}
+    .proceed-button:hover, .edit-button:hover, .confirm-button:hover {
+        background-color: #1a3a6e;
+        transform: scale(1.05);
+    }
 
-	.address-actions {
-	    margin-top: 15px;
-	    text-align: center;
-	}
+    .confirm-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
 
-	.proceed-button, .edit-button, .confirm-button {
-	    background-color: #295F98; /* Dark blue */
-	    color: white;
-	    border: none;
-	    padding: 12px 25px;
-	    font-size: 16px;
-	    border-radius: 6px;
-	    cursor: pointer;
-	    transition: background-color 0.3s, transform 0.2s;
-	    margin: 5px; /* Space between buttons */
-	    font-weight: 600; /* Bold button text */
-	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-	}
+    .order-summary table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 
-	.proceed-button:hover, .edit-button:hover, .confirm-button:hover {
-	    background-color: #1a3a6e; /* Darker blue */
-	    transform: scale(1.05); /* Slightly enlarge on hover */
-	    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-	}
+    thead {
+        background-color: #295F98;
+        color: white;
+    }
 
-	.confirm-button:disabled {
-	    background-color: #ccc; /* Disabled button color */
-	    cursor: not-allowed;
-	}
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-	.order-summary table {
-	    width: 100%;
-	    border-collapse: collapse;
-	    margin-top: 20px;
-	}
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
 
-	thead {
-	    background-color: #295F98; /* Dark blue */
-	    color: white;
-	}
+    .total {
+        font-weight: bold;
+    }
 
-	th, td {
-	    padding: 15px;
-	    text-align: left;
-	    border-bottom: 1px solid #ddd;
-	}
+    button {
+        background-color: #295F98;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
 
-	tbody tr:hover {
-	    background-color: rgba(255, 152, 116, 0.1); /* Light hover effect */
-	}
-
-	.total {
-	    font-weight: bold; /* Bold for total */
-	    color: #295F98; /* Use primary color for emphasis */
-	}
-
-	button {
-	    background-color: #295F98; /* Dark blue */
-	    color: white;
-	    border: none;
-	    padding: 12px 20px;
-	    border-radius: 6px;
-	    cursor: pointer;
-	    margin-top: 20px;
-	    transition: background-color 0.3s;
-	}
-
-	button:hover {
-	    background-color: #1a3a6e; /* Darker blue */
-	}
-
-	/* Responsive styling */
-	@media (max-width: 768px) {
-	    .address-input {
-	        font-size: 14px; /* Smaller font for mobile */
-	    }
-	    .proceed-button, .edit-button, .confirm-button {
-	        font-size: 14px; /* Smaller button text */
-	        padding: 10px 15px; /* Adjust button padding */
-	    }
-	}
-
+    button:hover {
+        background-color: #1a3a6e;
+    }
 </style>
 <script>
     function makeAddressReadOnly() {
