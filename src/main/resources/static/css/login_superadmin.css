@@ -60,3 +60,18 @@ button:hover {
     background-color: #003366; /* Updated color */
 }
  
+.reset_password a {
+        color: #00ff00; /* Change to your desired color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .reset_password a:hover {
+        color: #00ff00; /* Change color on hover */
+        text-decoration: underline; /* Add underline on hover */
+    }
+	
+.error {
+	           color: red;
+	           font-weight: bold;
+	           margin-top: 10px;
+	       }
