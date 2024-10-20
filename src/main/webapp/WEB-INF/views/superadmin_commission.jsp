@@ -6,6 +6,51 @@
 <html>
 <head>
     <title>Order Commissions</title>
+    <style>
+        body {
+            background-color: #F2EED7; /* Soft background */
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        h2 {
+            color: #FF9874; /* Soft orange */
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="date"], input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #295F98; /* Dark blue */
+        }
+        input[type="submit"] {
+            background-color: #295F98; /* Dark blue */
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #1a3a6e; /* Darker blue */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background-color: #295F98; /* Dark blue */
+            color: white; /* White text */
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1; /* Light gray for row hover */
+        }
+    </style>
 </head>
 <body>
     <h2>Order Commissions</h2>

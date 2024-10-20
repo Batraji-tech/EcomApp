@@ -10,60 +10,97 @@
     <title>Sales Performance Report</title>
     <style>
         body {
-            background-color: #F2EED7;
+            background-color: #F2EED7; /* Soft background */
             font-family: 'Arial', sans-serif;
-            padding: 20px;
+            padding: 0;
+            margin: 0;
         }
         .report-container {
-            border: 1px solid #295F98;
+            border: 1px solid #295F98; /* Dark blue */
             border-radius: 10px;
-            background-color: #ffffff;
+            background-color: #ffffff; /* White */
             padding: 40px;
-            margin: 0 auto;
-            max-width: 600px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
         }
         h2 {
-            color: #FF9874;
+            color: #FF9874; /* Soft orange */
             margin-bottom: 20px;
-            text-align: center;
+            text-align: center; /* Left-align heading */
+            font-size: 28px;
+            width: 100%; /* Full width for left alignment */
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #295F98; /* Dark blue */
+        }
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #295F98; /* Dark blue */
+            border-radius: 5px;
+            font-size: 16px;
         }
         .btn-submit {
-            background-color: #295F98;
-            border-color: #295F98;
+            background-color: #295F98; /* Dark blue */
+            border: none;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
+            padding: 12px;
             width: 100%;
             border-radius: 5px;
-            margin-top: 20px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         .btn-submit:hover {
-            background-color: #1a3a6e;
-            border-color: #1a3a6e;
+            background-color: #1a3a6e; /* Darker blue */
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
+        th {
+            background-color: #295F98; /* Dark blue */
+            color: white; /* White text */
+            padding: 12px;
+            text-align: left;
+        }
+        td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #295F98;
-            color: white;
+            font-size: 16px;
         }
         tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f9f9f9; /* Light gray for row hover */
         }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #295F98;
+       
+        @media (max-width: 600px) {
+            .report-container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .btn-submit {
+                font-size: 16px;
+            }
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -137,9 +174,7 @@
         %>
     </div>
 
-    <div class="footer">
-        © 2024 Shopology. All rights reserved.
-    </div>
+   
 
 </body>
 </html>

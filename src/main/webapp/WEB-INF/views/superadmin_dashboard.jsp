@@ -203,12 +203,12 @@
     <ul>
         <li><a href="/superAdmin/viewProfile">View Profile</a></li>
         <li><a href="/superAdmin/resetPassword">Reset Password</a></li>
-        <li><a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a></li>
+        <li><a href="/superAdmin/viewAllSubAdmins">View All Retailers</a></li>
         <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
         <li><a href="/category/add">Add Category</a></li>
           <li><a href="/superAdmin/salesPerformance">Total Sales Report</a></li>
           <li> <a href="/superAdmin/commissions">View Commission</a></li>
-        <li><a href="/superAdmin/viewSubadminRequests">View Subadmin Requests</a></li> 
+        <li><a href="/superAdmin/viewSubadminRequests">View Retailers Requests</a></li> 
         <li class="logout">
             <form method="POST" style="margin: 0;">
                 <li><a href="/superAdmin/logout">Logout</a></li>
