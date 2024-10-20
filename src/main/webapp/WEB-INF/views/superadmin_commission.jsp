@@ -1,11 +1,105 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ecom.app.entities.Order" %>
-<%@ page import="java.util.Iterator" %>
-
+ 
 <html>
 <head>
     <title>Order Commissions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2EEDE; /* Light beige background */
+            margin: 0;
+            padding: 20px;
+        }
+ 
+        h2 {
+            text-align: center;
+            color: #295F98; /* Dark blue color */
+        }
+ 
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+ 
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #295F98; /* Dark blue for labels */
+        }
+ 
+        input[type="date"] {
+            padding: 5px;
+            margin-right: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+ 
+        input[type="submit"] {
+            background-color: #295F98; /* Dark blue for the button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+ 
+        input[type="submit"]:hover {
+            background-color: #1a3a6d; /* Darker blue on hover */
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+ 
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+ 
+        th {
+            background-color: #295F98; /* Dark blue header */
+            color: white;
+        }
+ 
+        tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+ 
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+ 
+        h3 {
+            margin-top: 20px;
+            text-align: center;
+            color: #295F98; /* Dark blue */
+        }
+ 
+        /* Style for the back button */
+        .back-button {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #295F98; /* Dark blue */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+ 
+        .back-button:hover {
+            background-color: #1a3a6d; /* Darker blue on hover */
+        }
+    </style>
 </head>
 <body>
     <h2>Order Commissions</h2>
@@ -18,8 +112,8 @@
         
         <input type="submit" value="Filter">
     </form>
-
-    <table border="1">
+ 
+    <table>
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -50,7 +144,7 @@
             %>
         </tbody>
     </table>
-
+ 
     <%
         Double totalCommissions = (Double) request.getAttribute("totalCommissions");
         if (totalCommissions != null) {
@@ -59,5 +153,7 @@
     <%
         }
     %>
+ 
+    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
 </body>
 </html>

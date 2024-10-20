@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ecom.app.entities.Products" %>
+<%@ page import="ecom.app.entities.User"%>
 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Best Trends - ElectroMart</title>
+    <title>New Trends - ElectroMart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,22 +104,38 @@
         }
     </style>
     <script>
-        function sortProducts() {
-            var sortOption = document.getElementById("sortDropdown").value;
-            window.location.href = "<%= request.getContextPath() %>/products?sort=" + sortOption;
-        }
+    function sortProducts1() {
+        var sortOption = document.getElementById("sortDropdown").value;
+               
+        window.location.href = "<%= request.getContextPath() %>/explore-new-trends?sort=" + sortOption;
+    }
     </script>
 </head>
 <body>
 
-    <a href="${pageContext.request.contextPath}/home" class="home-button">Home</a>
+
+ 
+ 
+ <%
+		User user = (User) session.getAttribute("user");
+		%>
+		
+	<% if(user!=null){ %>	
+		
+		    <a href="${pageContext.request.contextPath}/homepageuser" class="home-button">Home</a>
+		
+		<% }else{ %>
+		    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
+		
+		<% }%>
+ 
     
-    <h1>Best Trends</h1>
+    <h1>New Trends</h1>
     
     <div class="controls">
         <div>
             <label for="sortDropdown">Sort by:</label>
-            <select id="sortDropdown" onchange="sortProducts()">
+            <select id="sortDropdown" onchange="sortProducts1()">
                 <option value="alphabetical">Price</option>
                 <option value="priceAsc">Low to High</option>
                 <option value="priceDesc">High to Low</option>
@@ -141,6 +159,6 @@
             }
         %>
     </div>
-
+ 
 </body>
 </html>

@@ -206,6 +206,8 @@
         <li><a href="/superAdmin/viewAllSubAdmins">View All Sub Admins</a></li>
         <li><a href="/superAdmin/viewAllCustomers">View All Customers</a></li>
         <li><a href="/category/add">Add Category</a></li>
+                 <li><a href="/category/view">View All Categories</a></li>
+         
           <li><a href="/superAdmin/salesPerformance">Total Sales Report</a></li>
           <li> <a href="/superAdmin/commissions">View Commission</a></li>
         <li><a href="/superAdmin/viewSubadminRequests">View Subadmin Requests</a></li> 

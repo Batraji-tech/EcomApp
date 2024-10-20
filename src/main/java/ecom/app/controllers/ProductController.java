@@ -257,10 +257,26 @@ public class ProductController {
     
 
     @GetMapping("/category/{id}")
-    public String viewProductDetailsByCategory(@PathVariable("id") int categoryId, Model model) throws IOException, SQLException {
+    public String viewProductDetailsByCategory(
+            @PathVariable("id") int categoryId,
+            @RequestParam(value = "sort", required = false) String sort,
+            Model model) throws IOException, SQLException {
+ 
+        // Fetch products by category ID
         List<Products> products = productDaoImpl.fetchProductsByCategory(categoryId);
+ 
+        // Apply sorting if the sort parameter is provided
+        if ("priceAsc".equals(sort)) {
+            products.sort(Comparator.comparing(Products::getFinal_price));
+        } else if ("priceDesc".equals(sort)) {
+            products.sort(Comparator.comparing(Products::getFinal_price).reversed());
+        }
+ 
+        // Add products and categoryId to the model
         model.addAttribute("products", products);
-        return "product_by_category"; // JSP page
+        model.addAttribute("categoryId", categoryId);
+ 
+        return "product_by_category"; // Return the JSP page
     }
     
     @GetMapping("/addProductForm")
@@ -279,18 +295,7 @@ public class ProductController {
     }
     
 
-	
-    
-    /*@GetMapping("/{productName}")
-    public String viewProductDetails(@PathVariable("productName") String productName, Model model) {
-        Products product = productDaoImpl.getProductByName(productName); // Fetch product by ID
-        if (product != null) {
-            model.addAttribute("product", product);
-            return "product_details"; // This is the JSP page for displaying product details
-        } else {
-            return "redirect:/product"; // Redirect if the product is not found
-        }
-    }*/
+
     
  
 }
