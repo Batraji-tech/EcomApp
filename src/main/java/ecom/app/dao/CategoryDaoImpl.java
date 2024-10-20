@@ -22,7 +22,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public int insertCategory(Category category) throws IOException, SQLException {
-        String query = "INSERT INTO category (category_name, description, category_image) VALUES (?, ?, ?)"; 
+        String query = "INSERT INTO category1 (category_name, description, category_image) VALUES (?, ?, ?)"; 
         return jdbcTemplate.update(query,
             category.getCategory_name(),
             category.getDescription(),
