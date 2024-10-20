@@ -289,8 +289,7 @@
                     <form action="${pageContext.request.contextPath}/wishlist/remove" method="post" style="display:inline;">
                         <input type="hidden" name="wishlistId" value="<%= item.getWishlistId() %>">
                         <button type="submit">Remove</button>
-					<form action="${pageContext.request.contextPath}/wishlist/view" method="post" style="display:inline;">
-						 <button type="submit">Go Back</button>
+					
 					</form>
                     </form>
                 </td>

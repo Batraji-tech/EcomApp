@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ecom.app.entities.Products" %>
+ <%@ page import="ecom.app.entities.User"%>
 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +89,7 @@
             color: green; /* Green price color */
         }
 		.home-button {
-		           background-color: #295F98; 
+		           background-color: #295F98;
 		           color: white;
 		           padding: 10px 15px;
 		           border-radius: 5px;
@@ -103,14 +105,30 @@
     <script>
         function sortProducts() {
             var sortOption = document.getElementById("sortDropdown").value;
-            window.location.href = "<%= request.getContextPath() %>/products?sort=" + sortOption;
+            window.location.href = "<%= request.getContextPath() %>/explore-best-brands?sort=" + sortOption;
         }
     </script>
 </head>
 <body>
-
+ 
+ 
+ 
+ 
+ <%
+		User user = (User) session.getAttribute("user");
+		%>
+		
+	<% if(user!=null){ %>	
+		
+		    <a href="${pageContext.request.contextPath}/homepageuser" class="home-button">Home</a>
+		
+		<% }else{ %>
+		    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
+		
+		<% }%>
+ 
+ 
     <h1>Best Brands</h1>
-	<a href="${pageContext.request.contextPath}/home" class="home-button">Home</a>
     <div class="controls">
         <div>
             <label for="sortDropdown">Sort by:</label>
@@ -121,7 +139,7 @@
             </select>
         </div>
     </div>
-
+ 
     <div class="products-row">
         <%
             List<Products> bestBrands = (List<Products>) request.getAttribute("bestBrands");
@@ -138,6 +156,6 @@
             }
         %>
     </div>
-
+ 
 </body>
 </html>

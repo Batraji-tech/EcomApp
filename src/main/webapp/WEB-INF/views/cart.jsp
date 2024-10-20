@@ -288,8 +288,8 @@
 	        <button type="submit" class="proceed-checkout">Proceed to Checkout</button>
 	    </form>
 	    <!-- Go Back Button -->
-	    <form action="${pageContext.request.contextPath}/home" method="get">
-	        <button type="submit" class="go-back">Go Back</button>
+	    <form action="${pageContext.request.contextPath}/products/display1" method="get">
+	        <button type="submit" class="go-back">Go to Products Page</button>
 	    </form>
 	</div>
 

@@ -53,12 +53,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 		public Products updateProduct(Products product) throws IOException, SQLException {
 		    Blob productImage = getBlob(product.getProduct_image());
 
-		    String query = "UPDATE product SET description = ?, mrp = ?, discount = ?, delivery_charge = ?, "
+		    String query = "UPDATE product SET  product_name = ? ,description = ?, mrp = ?, discount = ?, delivery_charge = ?, "
 		                 + "final_price = ?, stock = ?, product_image = ? WHERE product_id = ?";
 
 		    try {
 		        int rowsAffected = jdbcTemplate.update(query, 
-		                product.getDescription(),
+			            product.getProduct_name(),
+		        		product.getDescription(),
 		                product.getMrp(),
 		                product.getDiscount(),
 		                product.getDelivery_charge(),
