@@ -459,7 +459,7 @@
 				    Ferns City, Doddanekkundi,<br>
 				    Bengaluru, Karnataka 560048,<br>
 				    India</p>
-				    <p><strong>Mail Us:</strong> electromart@example.com</p>
+				    <p><strong>Mail Us:</strong> electromart@gmail.com</p>
 				</div>
 	        </div>
 	    </div>

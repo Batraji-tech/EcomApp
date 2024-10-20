@@ -90,7 +90,7 @@
     <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#">Contact Us</a>
+            <a href="/contactus">Contact Us</a>
             <a href="#">Payments</a>
             <a href="#">Shipping</a>
             <a href="#">Cancellation</a>
