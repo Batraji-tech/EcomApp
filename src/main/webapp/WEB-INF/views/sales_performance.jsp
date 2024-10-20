@@ -68,29 +68,29 @@
     </style>
 </head>
 <body>
-
+ 
     <div class="report-container">
         <h2>Sales Performance Report</h2>
-
+ 
         <form action="/superAdmin/salesPerformance/getSalesData" method="post">
             <div class="form-group">
                 <label for="startDate">Start Date:</label>
-                <input type="date" name="startDate" id="startDate" required 
+                <input type="date" name="startDate" id="startDate" required
                        value="<%= request.getParameter("startDate") != null ? request.getParameter("startDate") : "" %>">
             </div>
             <div class="form-group">
                 <label for="endDate">End Date:</label>
-                <input type="date" name="endDate" id="endDate" required 
+                <input type="date" name="endDate" id="endDate" required
                        value="<%= request.getParameter("endDate") != null ? request.getParameter("endDate") : "" %>">
             </div>
             <button type="submit" class="btn-submit">Get Sales Data</button>
         </form>
-
+ 
         <%
             List<Order> salesData = (List<Order>) request.getAttribute("orders");
             Double totalSales = (Double) request.getAttribute("totalSales");
         %>
-
+ 
         <table>
             <thead>
                 <tr>
@@ -127,7 +127,7 @@
                 %>
             </tbody>
         </table>
-
+ 
         <%
             if (totalSales != null) {
         %>
@@ -136,10 +136,10 @@
             }
         %>
     </div>
-
+ 
     <div class="footer">
         © 2024 Shopology. All rights reserved.
     </div>
-
+ 
 </body>
 </html>

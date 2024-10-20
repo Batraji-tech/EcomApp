@@ -78,15 +78,12 @@
     <div class="login-container">
         <h2>Forgot Password?</h2>
 
-        <%-- Display error if email is not found --%>
-        <% if (request.getAttribute("error") != null) { %>
-            <div class="error"><%= request.getAttribute("error") %></div>
-        <% } %>
+   
 
        <form action="${pageContext.request.contextPath}/user/verifyemail" method="post">
     <div>
         <label for="email">Enter your email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required placeholder="example@gmail.com">
     </div>
     <button type="submit">Verify Email</button>
     <% if (request.getAttribute("error") != null) { %>

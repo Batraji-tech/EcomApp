@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ecom.app.entities.Category" %>
+    <%@ page import="ecom.app.entities.User"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +68,19 @@
 <body>
 
     <h1>Shop By Category</h1>
-    <a href="${pageContext.request.contextPath}/home" class="home-button">Home</a>
+
+		<%
+		User user = (User) session.getAttribute("user");
+		%>
+		
+		<%if(user!=null){ %>
+		    <a href="${pageContext.request.contextPath}/homepageuser" class="home-button">Home</a>
+		
+		<%}else{ %>
+		    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
+		
+		<% }%>
+		
     <div class="products-row">
         <%
             List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");

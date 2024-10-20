@@ -2,6 +2,7 @@ package ecom.app.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecom.app.dao.CategoryDao;
+import ecom.app.dao.ProductDaoImpl;
 import ecom.app.entities.Category;
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +26,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryDao categoryDao;
+    
+    @Autowired
+	private ProductDaoImpl productDaoImpl;
 
     @GetMapping("/add")
     public String showAddCategoryForm() {
@@ -60,4 +65,12 @@ public class CategoryController {
         
         return "superadmin_dashboard"; 
     }
+    
+    @GetMapping("/view")
+    public String viewcategory(Model model) {
+    	List<Category> categories = productDaoImpl.getAllCategories(); // Fetch all categories
+        model.addAttribute("categories", categories);
+        return "display_category"; // This should return your JSP file name
+    }
+    
 }

@@ -1,5 +1,8 @@
 package ecom.app.controllers;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,43 +67,103 @@ public class NavigationController {
 	}
 
 	@GetMapping("/explore-new-arrivals")
-	public String explorenewarrivals(Model model) {
+	public String explorenewarrivals(
+             
+            @RequestParam(value = "sort", required = false) String sort,
+            Model model) throws IOException, SQLException {
+ 
+        // Fetch products by category ID
 		List<Products> newArrivals = productDaoImpl.getAllNewArrivalProducts1();
-		model.addAttribute("newArrivals", newArrivals);
-		return "new_arrivals_products"; // JSP page
-	}
-
+ 
+        // Apply sorting if the sort parameter is provided
+        if ("priceAsc".equals(sort)) {
+        	 newArrivals.sort(Comparator.comparing(Products::getFinal_price));
+        } else if ("priceDesc".equals(sort)) {
+        	 newArrivals.sort(Comparator.comparing(Products::getFinal_price).reversed());
+        }
+ 
+        
+        model.addAttribute("newArrivals", newArrivals);
+ 
+        return "new_arrivals_products"; // Return the JSP page
+    }
+	
 	@GetMapping("/explore-discount-products")
-	public String explorediscountproducts(Model model) {
-
+	public String explorediscountproducts(
+             
+            @RequestParam(value = "sort", required = false) String sort,
+            Model model) throws IOException, SQLException {
+ 
+        // Fetch products by category ID
 		List<Products> discountProducts = productDaoImpl.getAllDiscountProducts1();
-		model.addAttribute("discountProducts", discountProducts);
-		return "discount_products"; // JSP page
-	}
-
+ 
+        // Apply sorting if the sort parameter is provided
+        if ("priceAsc".equals(sort)) {
+        	discountProducts.sort(Comparator.comparing(Products::getFinal_price));
+        } else if ("priceDesc".equals(sort)) {
+        	discountProducts.sort(Comparator.comparing(Products::getFinal_price).reversed());
+        }
+ 
+        
+        model.addAttribute("discountProducts", discountProducts);
+ 
+        return "discount_products"; // Return the JSP page
+    }
+	
 	@GetMapping("/explore-best-brands")
-	public String explorebestbrands(Model model) {
-		List<Products> bestBrands = productDaoImpl.getAllBestBrandProducts1();
-		model.addAttribute("bestBrands", bestBrands);
-		return "best_brand_products"; // JSP page
-	}
-
+	public String explorebestbrands(
+             
+            @RequestParam(value = "sort", required = false) String sort,
+            Model model) throws IOException, SQLException {
+ 
+        // Fetch products by category ID
+		List<Products> bestBrands = productDaoImpl.getAllBestBrandProducts1();;
+ 
+        // Apply sorting if the sort parameter is provided
+        if ("priceAsc".equals(sort)) {
+        	bestBrands.sort(Comparator.comparing(Products::getFinal_price));
+        } else if ("priceDesc".equals(sort)) {
+        	bestBrands.sort(Comparator.comparing(Products::getFinal_price).reversed());
+        }
+ 
+        
+        model.addAttribute("bestBrands", bestBrands);
+ 
+        return "best_brand_products"; // Return the JSP page
+    }
+	
+ 
 	@GetMapping("/explore-new-trends")
-	public String exploretrendingproducts(Model model) {
-
+	public String exploretrendingproducts(
+             
+            @RequestParam(value = "sort", required = false) String sort,
+            Model model) throws IOException, SQLException {
+ 
+        // Fetch products by category ID
 		List<Products> newTrends = productDaoImpl.getAllNewTrendingProducts1();
-		model.addAttribute("newTrends", newTrends);
-		return "new_trending_products";
-
-	}
-
+ 
+        // Apply sorting if the sort parameter is provided
+        if ("priceAsc".equals(sort)) {
+        	newTrends.sort(Comparator.comparing(Products::getFinal_price));
+        } else if ("priceDesc".equals(sort)) {
+        	newTrends.sort(Comparator.comparing(Products::getFinal_price).reversed());
+        }
+ 
+        
+        model.addAttribute("newTrends", newTrends);
+ 
+        return  "new_trending_products"; // Return the JSP page
+    }
+ 
+	
 	@GetMapping("/explore-all-categories")
 	public String exploreallcategories(Model model) {
-
+ 
 		List<Category> categoryList = productDaoImpl.getAllProductsByCategory1();
 		model.addAttribute("categoryList", categoryList);
 		return "view_by_category"; // JSP page
 	}
+ 
 
 	@GetMapping("/login")
 	public String Login() {

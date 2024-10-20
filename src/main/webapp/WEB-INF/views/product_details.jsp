@@ -346,6 +346,8 @@ nav {
 	<div class="product-container">
 		
 
+<%@ page import="ecom.app.entities.User"%>
+
 		<%
 		User user = (User) session.getAttribute("user");
 		Products product = (Products) session.getAttribute("product");
@@ -380,7 +382,15 @@ nav {
 		<!-- Product Details Section -->
 		<div class="product-details">
 			<div class="cart-icon">
-			       <a href="${pageContext.request.contextPath}/cart/view">
+			
+			<%if(user!=null) {%>
+			   <a href="${pageContext.request.contextPath}/cart/view">
+			 
+			<%}else{ %>
+			
+			 <a href="${pageContext.request.contextPath}/">
+			<%} %>
+			
 			           <i class="fas fa-shopping-cart"></i>
 			       </a>
 			   </div>

@@ -273,116 +273,143 @@ public class UserController {
 	 
 
 	 
-	  @GetMapping("/resetPassword")
-	    public String showResetPasswordForm(Model model) {
-	        return "user_reset_pswd"; 
-	    }
-	 
-	  private boolean isValidUsername(String username) {
-	    	user = userDaoImpl.fetchUser(username);
-	        return username != null && !username.trim().isEmpty() && user.getUsername().equals(username);
-	    }
-	  
-	  private boolean isValidPassword(String password) {
-	        return password != null && password.length() >= 8 && password.length() <= 15 && !password.contains(" ");
-	    }
-	  
-	  
-	  
-	  @PostMapping("/resetPassword")
-	    public String resetPassword(@RequestParam("username") String username,
-	                                @RequestParam("newPassword") String newPassword,
-	                                @RequestParam("confirmPassword") String confirmPassword,
-	                                RedirectAttributes redirectAttributes) {
-	    	
-	    	  user = userDaoImpl.fetchUser(username);
-	    	    if (user == null) {
-	    	        redirectAttributes.addFlashAttribute("error", "Username does not exist.");
-	    	        return "redirect:/user/resetPassword";
-	    	    }
-	    	if (!isValidUsername(username)) {
-	            redirectAttributes.addFlashAttribute("error", "Invalid username. Username must match an existing one.");
-	            return "redirect:/user/resetPassword";
-	        }
+	@GetMapping("/resetPassword")
+    public String showResetPasswordForm(Model model) {
+        return "user_reset_pswd";
+    }
 
-	        if (!newPassword.equals(confirmPassword)) {
-	            redirectAttributes.addFlashAttribute("error", "Passwords do not match.");
-	            return "redirect:/user/resetPassword";
-	        }
+  private boolean isValidUsername(String username) {
+    	user = userDaoImpl.fetchUser(username);
+        return username != null && !username.trim().isEmpty() && user.getUsername().equals(username);
+    }
+  
+  private boolean isValidPassword(String password) {
+	    // Regex patterns
+	    String specialCharPattern = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"; // At least one special character
+	    String lowerCasePattern = ".*[a-z].*"; // At least one lowercase letter
+	    String upperCasePattern = ".*[A-Z].*"; // At least one uppercase letter
 
-	        if (!isValidPassword(newPassword)) {
-	            redirectAttributes.addFlashAttribute("error", "Invalid password. It should be 8-15 characters long without spaces.");
-	            return "redirect:/user/resetPassword";
-	        }
+	    return password != null
+	        && password.length() >= 8
+	        && password.length() <= 15
+	        && !password.contains(" ")
+	        && password.matches(specialCharPattern) // Check for special character
+	        && password.matches(lowerCasePattern) // Check for lowercase letter
+	        && password.matches(upperCasePattern); // Check for uppercase letter
+	}
 
-	        String passwordSalt = Password.generatePwdSalt(10);
-	        String passwordHash1 = newPassword + passwordSalt;
+  
+  
+  
+  @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam("username") String username,
+                                @RequestParam("newPassword") String newPassword,
+                                @RequestParam("confirmPassword") String confirmPassword,
+                                RedirectAttributes redirectAttributes) {
+    	
+    	  user = userDaoImpl.fetchUser(username);
+    	    if (user == null) {
+    	        redirectAttributes.addFlashAttribute("error", "Username does not exist.");
+    	        return "redirect:/user/resetPassword";
+    	    }
+    	if (!isValidUsername(username)) {
+            redirectAttributes.addFlashAttribute("error", "Invalid username. Username must match an existing one.");
+            return "redirect:/user/resetPassword";
+        }
 
-	        String passwordHash = Password.generatePwdHash(passwordHash1);
-	       
-	        int result = userDaoImpl.resetUserPassword(username,passwordHash,passwordSalt);
-	        if (result > 0) {
-	            redirectAttributes.addFlashAttribute("message", "New password set successfully.");
-	        } else {
-	            redirectAttributes.addFlashAttribute("error", "Username does not exist.");
-	        }
-	        
-	        return "subadmin";
-	    }
-	  
-	  @GetMapping("/forgotpassword1")
-	    public String showforgotpasswordpage() {
-	        return "user_forgot_password"; // JSP page for entering email
-	    }
+        if (!newPassword.equals(confirmPassword)) {
+            redirectAttributes.addFlashAttribute("error", "Passwords do not match.");
+            return "redirect:/user/resetPassword";
+        }
 
-	    @PostMapping("/verifyemail")
-	    public String verifyEmail(@RequestParam("email") String email, Model model) {
-	        User user = userDaoImpl.findByEmail(email);
-	        if (user != null) {
-	            model.addAttribute("email", email); // Pass email to next page
-	            return "reset2_password"; // Redirect to the reset password page
-	        } else {
-	            model.addAttribute("error", "Email not found. Please try again.");
-	            return "user_forgot_password"; // Stay on the same page with error message
-	        }
-	    }
+        if (!isValidPassword(newPassword)) {
+            redirectAttributes.addFlashAttribute("error", "Invalid password. It should be 8-15 characters long without spaces.");
+            return "redirect:/user/resetPassword";
+        }
+
+        String passwordSalt = Password.generatePwdSalt(10);
+        String passwordHash1 = newPassword + passwordSalt;
+
+        String passwordHash = Password.generatePwdHash(passwordHash1);
+       
+        int result = userDaoImpl.resetUserPassword(username,passwordHash,passwordSalt);
+        if (result > 0) {
+            redirectAttributes.addFlashAttribute("message", "New password set successfully.");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Username does not exist.");
+        }
+        
+        return "subadmin";
+    }
+  
+  @GetMapping("/forgotpassword1")
+    public String showforgotpasswordpage() {
+        return "user_forgot_password"; // JSP page for entering email
+    }
+
+		  @PostMapping("/verifyemail")
+	public String verifyEmail(@RequestParam("email") String email, Model model) {
+	    // Email format validation to accept only @gmail.com emails
+	    String emailRegex = "^[\\w-\\.]+@gmail\\.com$";
 	    
-
-	    @PostMapping("/resetpassword1")
-	    public String resetPassword(
-	            @RequestParam("newPassword") String newPassword,
-	            @RequestParam("confirmPassword") String confirmPassword,
-	            @RequestParam("email") String email,
-	            Model model) {
-
-	        // Validate passwords
-	        if (!newPassword.equals(confirmPassword)) {
-	            model.addAttribute("error1", "Passwords do not match.");
-	            model.addAttribute("email", email); // Keep email in case of error
-	            return "reset2_password"; // Return to reset password page with error
-	        }
-
-	        if (!isValidPassword(newPassword)) {
-	            model.addAttribute("error1", "Invalid password. It should be 8-15 characters long without spaces.");
-	            model.addAttribute("email", email); // Keep email in case of error
-	            return "reset2_password"; // Return to reset password page with error
-	        }
-
-	        // Proceed with password reset
-	        String passwordSalt = Password.generatePwdSalt(10);
-	        String passwordHash = Password.generatePwdHash(newPassword + passwordSalt);
-
-	        // Update the password in the database
-	        int result = userDaoImpl.forgotUserPassword(email, passwordHash, passwordSalt);
-	        if (result > 0) {
-	            model.addAttribute("message", "New password set successfully.");
-	            return "user_login"; // Redirect to login page after success
-	        } else {
-	            model.addAttribute("error1", "Error updating password. Please try again.");
-	            model.addAttribute("email", email); // Keep email in case of error
-	            return "reset2_password"; // Return to reset password page with error
-	        }
+	    // Check email length
+	    if (email.length() < 5 || email.length() > 25) {
+	        model.addAttribute("error", "Email must be between 5 and 25 characters.");
+	        return "user_forgot_password"; // Stay on the same page with error message
 	    }
+
+	    if (!email.matches(emailRegex)) {
+	        model.addAttribute("error", "Invalid email format. Please enter a valid Gmail address.");
+	        return "user_forgot_password"; // Stay on the same page with error message
+	    }
+
+	    User user = userDaoImpl.findByEmail(email);
+	    if ( user != null) {
+	        model.addAttribute("email", email); // Pass email to next page
+	        return "reset2_password"; // Redirect to the reset password page
+	    } else {
+	        model.addAttribute("error", "Email not found. Please try again.");
+	        return "user_forgot_password"; // Stay on the same page with error message
+	    }
+	}
+
+    
+
+    @PostMapping("/resetpassword1")
+    public String resetPassword(
+            @RequestParam("newPassword") String newPassword,
+            @RequestParam("confirmPassword") String confirmPassword,
+            @RequestParam("email") String email,
+            Model model) {
+
+        // Validate passwords
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error1", "Passwords do not match.");
+            model.addAttribute("email", email); // Keep email in case of error
+            return "reset2_password"; // Return to reset password page with error
+        }
+
+        if (!isValidPassword(newPassword)) {
+            model.addAttribute("error1", "Invalid password. It should be 8-15 characters long without spaces.");
+            model.addAttribute("email", email); // Keep email in case of error
+            return "reset2_password"; // Return to reset password page with error
+        }
+
+        // Proceed with password reset
+        String passwordSalt = Password.generatePwdSalt(10);
+        String passwordHash = Password.generatePwdHash(newPassword + passwordSalt);
+
+        // Update the password in the database
+        int result = userDaoImpl.forgotUserPassword(email, passwordHash, passwordSalt);
+        if (result > 0) {
+            model.addAttribute("message", "New password set successfully.");
+            return "user_login"; // Redirect to login page after success
+        } else {
+            model.addAttribute("error1", "Error updating password. Please try again.");
+            model.addAttribute("email", email); // Keep email in case of error
+            return "reset2_password"; // Return to reset password page with error
+        }
+    }
 
 	 // Display all product sales for a specific sub-admin
 	    @GetMapping("/salesPerformance/subAdmin/{subAdminId}")

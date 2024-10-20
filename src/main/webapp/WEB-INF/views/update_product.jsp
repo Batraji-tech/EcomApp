@@ -188,7 +188,7 @@
                 <span id="stockError" class="error-message"></span>
 
                 <label for="image">Product Image</label>
-    <input type="file" name="product_image" class="form-control" id="image" required accept="image/*" 
+    <input type="file" name="product_image" class="form-control" id="image"  accept="image/*" 
            title="Only JPG, JPEG, PNG formats are allowed." onchange="validateImageFile()">
     <span id="imageError" style="color:red" class="error"></span>
 
