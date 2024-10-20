@@ -36,6 +36,7 @@ nav {
 		           font-size: 24px;
 		           font-weight: bold;
 				color:#FF9874;
+				margin-lef:15px;
 		       }
 
 		       nav .search-bar {
@@ -293,6 +294,21 @@ nav {
     color: #999; /* Color for feedback date */
     margin-top: 5px; /* Space above date */
 }
+.product-details {
+    position: relative; /* Make it relative to position the cart icon absolutely */
+    padding: 20px;
+}
+
+.cart-icon {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    color: #295F98; /* Cart icon color */
+    font-size: 24px; /* Size of the icon */
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+
 
 </style>
 </head>
@@ -328,6 +344,8 @@ nav {
 
 
 	<div class="product-container">
+		
+
 		<%
 		User user = (User) session.getAttribute("user");
 		Products product = (Products) session.getAttribute("product");
@@ -361,6 +379,11 @@ nav {
 
 		<!-- Product Details Section -->
 		<div class="product-details">
+			<div class="cart-icon">
+			       <a href="${pageContext.request.contextPath}/cart/view">
+			           <i class="fas fa-shopping-cart"></i>
+			       </a>
+			   </div>
 			<h1><%=product.getProduct_name()%></h1>
 			<p>
 				<strong>Description:</strong>

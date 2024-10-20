@@ -34,7 +34,7 @@
 							           font-size: 24px;
 							           font-weight: bold;
 									color:#FF9874;
-									margin-left:8px;
+									margin-left:15px;
 							       }
 
 							       nav .search-bar {
@@ -171,6 +171,7 @@
 								    cursor: pointer;
 								    margin-right: 10px; /* Space between buttons */
 								    transition: background-color 0.3s, transform 0.2s; /* Add transition for hover effect */
+									margin-left:10px;
 								}
 
 								form button:hover {
@@ -182,6 +183,27 @@
 								    text-align: center;
 								    color: #333; /* Dark text color for visibility */
 								}
+								.go-back {
+								    background-color: #295F98; /* Dark blue */
+								    color: white;
+								    border: none;
+								    padding: 10px 15px;
+								    border-radius: 5px;
+								    cursor: pointer;
+								    margin-left: 10px; /* Space between buttons */
+								    transition: background-color 0.3s, transform 0.2s; /* Add transition for hover effect */
+								}
+
+								.go-back:hover {
+								    background-color: #1a3a6e; /* Darker blue */
+								    transform: scale(1.05); /* Slightly enlarge on hover */
+								}
+								.button-container {
+								    display: inline-flex; /* Align buttons in a row */
+								    margin-left: 2px; /* Space above the buttons */
+								}
+
+
 
 
 					
@@ -206,7 +228,7 @@
 				       <!-- Navigation Links -->
 				       <ul>
 						<li><a href="${pageContext.request.contextPath}/wishlist/view">Wishlist</a></li>
-						   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+						   <li><a href="${pageContext.request.contextPath}/homepageuser">Home</a></li>
 				           <!-- Shop Dropdown -->
 				           <li class="shop-dropdown">
 				               <a href="#">Shop</a>
@@ -259,13 +281,18 @@
 		</table>
 		<button type="submit">Remove Selected</button>
 	</form>
+	<!-- Button Container for Checkout and Go Back -->
+	<div class="button-container">
+	    <!-- Proceed to Checkout Button -->
+	    <form action="${pageContext.request.contextPath}/cart/checkout" method="get">
+	        <button type="submit" class="proceed-checkout">Proceed to Checkout</button>
+	    </form>
+	    <!-- Go Back Button -->
+	    <form action="${pageContext.request.contextPath}/home" method="get">
+	        <button type="submit" class="go-back">Go Back</button>
+	    </form>
+	</div>
 
-	<!-- Proceed to Checkout Button -->
-	<form action="${pageContext.request.contextPath}/cart/checkout"
-		method="get">
-		<button type="submit" class="proceed-checkout">Proceed to
-			Checkout</button>
-	</form>
 
 
 	<%

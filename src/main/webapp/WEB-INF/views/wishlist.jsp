@@ -2,6 +2,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="ecom.app.entities.Wishlist"%>
 <%@ page import="ecom.app.entities.Products"%>
+<%@ page import="ecom.app.entities.User"%>
+
 <html>
 <head>
     <title>Your Wishlist</title>
@@ -41,7 +43,7 @@
 						           font-size: 24px;
 						           font-weight: bold;
 								color:#FF9874;
-								margin-left:8px;
+								margin-left:15px;
 						       }
 
 						       nav .search-bar {
@@ -83,10 +85,11 @@
 						           margin: 0;
 						       }
 
-						       nav ul li {
-						           margin-left: 0px;
-						           position: relative;
-						       }
+							   nav ul li {
+							       margin-left: 0px;
+							       position: relative;
+							       white-space: nowrap; /* Prevent line break */
+							   }
 
 						       nav ul li a {
 						           color: white;
@@ -185,6 +188,13 @@
     </style>
 </head>
 <body>
+
+
+	<%
+		User user = (User) session.getAttribute("user");
+		
+		%>
+
 	<nav>
 			       <div class="logo">ElectroMart</div>
 
@@ -202,8 +212,22 @@
 
 			       <!-- Navigation Links -->
 			       <ul>
-					   <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-					   <li><a href="${pageContext.request.contextPath}/cart/view">Cart Item</a></li>
+			       <% 
+			           if (user != null) { %>
+			        	   <li><a href="${pageContext.request.contextPath}/homepageuser">Home</a></li>
+						   <li><a href="${pageContext.request.contextPath}/cart/view">Cart Item</a></li>    
+			<%
+			} else {
+			%>
+			          <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+					   <li><a href="${pageContext.request.contextPath}/user/login">Cart Item</a></li>
+			
+			<%
+			}
+			%>
+			       
+			       
+					   
 			           <li class="shop-dropdown">
 			               <a href="#">Shop</a>
 			               <ul class="dropdown-content">
@@ -265,6 +289,9 @@
                     <form action="${pageContext.request.contextPath}/wishlist/remove" method="post" style="display:inline;">
                         <input type="hidden" name="wishlistId" value="<%= item.getWishlistId() %>">
                         <button type="submit">Remove</button>
+					<form action="${pageContext.request.contextPath}/wishlist/view" method="post" style="display:inline;">
+						 <button type="submit">Go Back</button>
+					</form>
                     </form>
                 </td>
             </tr>
