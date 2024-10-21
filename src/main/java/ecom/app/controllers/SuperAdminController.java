@@ -147,7 +147,7 @@ public class SuperAdminController {
 	@PostMapping("/updateProfile")
 	public String updateProfile(@ModelAttribute SuperAdmin updateSuperAdmin, RedirectAttributes redirectAttributes) {
 		List<String> errors = new ArrayList<>();
-		// superAdmin = superAdminDaoImpl.findByUsername(username);
+
 
 		// Validate first name
 		if (updateSuperAdmin.getFirstName() == null || !updateSuperAdmin.getFirstName().matches("[a-zA-Z]{3,20}")) {
@@ -181,9 +181,37 @@ public class SuperAdminController {
 			return "redirect:/superAdmin/viewProfile";
 		}
 
+		
+		  // Fetch the original super admin by username
+	    SuperAdmin originalSuperAdmin = superAdminDaoImpl.getSuperAdminDetails();
+	    
+	    System.out.println("Superadmin : "+originalSuperAdmin);
+
+	    // Compare fields to check for changes
+	    boolean isChanged = false;
+	    
+	    if (!originalSuperAdmin.getFirstName().equals(updateSuperAdmin.getFirstName()) ||
+	        !originalSuperAdmin.getLastName().equals(updateSuperAdmin.getLastName()) ||
+	        !originalSuperAdmin.getEmailId().equals(updateSuperAdmin.getEmailId()) ||
+	        !originalSuperAdmin.getMobileNo().equals(updateSuperAdmin.getMobileNo()) ||
+	        !originalSuperAdmin.getUsername().equals(updateSuperAdmin.getUsername())) {
+	        
+	        isChanged = true; // There are changes in the profile
+	    }
+
+	    // If no changes were made, set a flag for the front-end
+	    if (!isChanged) {
+	        redirectAttributes.addFlashAttribute("noChangesMade", true);
+	        return "redirect:/superAdmin/viewProfile";
+	    }
+
+	    // Save the updated super admin information
+	    superAdminDaoImpl.updateSuperAdminProfile(updateSuperAdmin);
 		// Save updated super admin information (you may need to implement this)
 		superAdmin = superAdminDaoImpl.updateSuperAdminProfile(updateSuperAdmin);
+		
 
+		
 		redirectAttributes.addFlashAttribute("message", "Profile updated successfully!");
 		return "redirect:/superAdmin/viewProfile";
 
@@ -244,7 +272,8 @@ public class SuperAdminController {
 	    // Regex patterns
 	    String specialCharPattern = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"; // At least one special character
 	    String lowerCasePattern = ".*[a-z].*"; // At least one lowercase letter
-	    String upperCasePattern = ".*[A-Z].*"; // At least one uppercase letter
+	    String upperCasePattern = ".*[A-Z].*";
+	    String hasNumbers = ".*[0-9].*"; // At least one uppercase letter
  
 	    return password != null
 	        && password.length() >= 8
@@ -252,9 +281,10 @@ public class SuperAdminController {
 	        && !password.contains(" ")
 	        && password.matches(specialCharPattern) // Check for special character
 	        && password.matches(lowerCasePattern) // Check for lowercase letter
-	        && password.matches(upperCasePattern); // Check for uppercase letter
+	        && password.matches(upperCasePattern)
+	        && password.matches(hasNumbers); // Check for uppercase letter
 	}
-
+	
 	@GetMapping("/viewAllCustomers")
 	public String viewAllCustomers(Model model) {
 		List<User> customers = userDaoImpl.findAllCustomers();
@@ -325,7 +355,7 @@ public class SuperAdminController {
 			}
 	 
 			if (!isValidPassword(newPassword)) {
-				model.addAttribute("error1", "Invalid password. It should be 8-15 characters long without spaces.");
+				model.addAttribute("error1", "Invalid password. It should be 8-15 characters long without spaces, contains atleast one lowercase alphabet, uppercase alphabet and  digit.");
 				model.addAttribute("email", email); // Keep email in case of error
 				return "reset1_password"; // Return to reset password page with error
 			}

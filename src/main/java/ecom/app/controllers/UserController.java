@@ -85,17 +85,17 @@ public class UserController {
 	                    RedirectAttributes attributes,
 	                    HttpSession session) {
 
+	    String usernameError = null;
+	    String passwordError = null;
+
 	    try {
 	        user = userDaoImpl.fetchUser(username);
-	        
-	        System.out.println("user ststus" + user.getStatus());
+
 	        if (!"ACTIVE".equals(user.getStatus())) {
 	            attributes.addFlashAttribute("message", "Your account is not active. Status: " + user.getStatus());
 	            return "redirect:/user/login";
-        }
+	        }
 
-	        
-	        System.out.println("user in login controller " + user);
 	        String pwdSalt = user.getPasswordSalt();
 	        String oldPwdHash = user.getPasswordHash();
 	        String newPassword = password + pwdSalt;
@@ -105,33 +105,40 @@ public class UserController {
 	            model.addAttribute("user", user);
 	            int roleId = user.getRole().getRoleId();
 	            attributes.addFlashAttribute("user", user); // Pass the user object
-	          session.setAttribute("user", user); // Store user in session
+	            session.setAttribute("user", user); // Store user in session
 
-	            
 	            if (role.equalsIgnoreCase("Retailer")) {
 	                if (roleId == 2) {
-	                	session.setAttribute("subAdminId", user.getUserId());
+	                    session.setAttribute("subAdminId", user.getUserId());
 	                    return "subadmin"; 
 	                } else {
-	                    attributes.addFlashAttribute("message", "No Retailer found with this username");
+	                    usernameError = "No Retailer found with this username";
 	                }
 	            } else if (role.equalsIgnoreCase("Customer")) {
 	                if (roleId == 3) {
 	                    return "redirect:/homepageuser"; // Redirect to customer page
 	                } else {
-	                    attributes.addFlashAttribute("message", "No Customer found with this username");
+	                    usernameError = "No Customer found with this username";
 	                }
 	            }
 	        } else {
-	            attributes.addFlashAttribute("message", "Incorrect Password");
+	            passwordError = "Incorrect Password";
 	        }
 	    } catch (EmptyResultDataAccessException e) {
-	        attributes.addFlashAttribute("message", "Incorrect Username");
+	        usernameError = "Incorrect Username";
+	    }
+
+	    // Add error messages to the attributes
+	    if (usernameError != null && passwordError != null) {
+	        attributes.addFlashAttribute("error", "Both " + usernameError + " and " + passwordError);
+	    } else if (usernameError != null) {
+	        attributes.addFlashAttribute("error", usernameError);
+	    } else if (passwordError != null) {
+	        attributes.addFlashAttribute("error", passwordError);
 	    }
 
 	    return "redirect:/user/login"; // Redirect back to login on failure
 	}
-
 
 	
 	@PostMapping("/register")
@@ -163,7 +170,7 @@ public class UserController {
 	            user.setStatus("ACTIVE"); // Set status to active for customers
 	        }
 	    } else {
-	        attributes.addFlashAttribute("message", "Please select a role.");
+	        attributes.addFlashAttribute("error", "Please select a role.");
 	        return "redirect:/user/openRegistrationPage";
 	    }
 
@@ -173,7 +180,7 @@ public class UserController {
 	        attributes.addFlashAttribute("message", "Registration Successful");
 	        return "redirect:/user/login";
 	    } else {
-	        attributes.addFlashAttribute("message", "Registration Failed");
+	        attributes.addFlashAttribute("error", "Registration Failed");
 	        return "redirect:/user/openRegistrationPage";
 	    }
 	}
@@ -263,7 +270,7 @@ public class UserController {
 	        userDaoImpl.modifyUser(updatedUser);
 	        attributes.addFlashAttribute("message", "Profile updated successfully");
 	    } catch (Exception e) {
-	        attributes.addFlashAttribute("message", "Updation failed. Please try again later");
+	        attributes.addFlashAttribute("error", "Updation failed. Please try again later");
 	    }
 
 	    // Use the username from the current user for redirection
@@ -287,7 +294,8 @@ public class UserController {
 	    // Regex patterns
 	    String specialCharPattern = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"; // At least one special character
 	    String lowerCasePattern = ".*[a-z].*"; // At least one lowercase letter
-	    String upperCasePattern = ".*[A-Z].*"; // At least one uppercase letter
+	    String upperCasePattern = ".*[A-Z].*";
+	    String hasNumbers = ".*[0-9].*"; // At least one uppercase letter
 
 	    return password != null
 	        && password.length() >= 8
@@ -295,7 +303,8 @@ public class UserController {
 	        && !password.contains(" ")
 	        && password.matches(specialCharPattern) // Check for special character
 	        && password.matches(lowerCasePattern) // Check for lowercase letter
-	        && password.matches(upperCasePattern); // Check for uppercase letter
+	        && password.matches(upperCasePattern)
+	        && password.matches(hasNumbers); // Check for uppercase letter
 	}
 
   
@@ -323,7 +332,7 @@ public class UserController {
         }
 
         if (!isValidPassword(newPassword)) {
-            redirectAttributes.addFlashAttribute("error", "Invalid password. It should be 8-15 characters long without spaces.");
+            redirectAttributes.addFlashAttribute("error", "Invalid password. It should be 8-15 characters long without spaces, contains atleast one lowercase alphabet, uppercase alphabet and digit.");
             return "redirect:/user/resetPassword";
         }
 

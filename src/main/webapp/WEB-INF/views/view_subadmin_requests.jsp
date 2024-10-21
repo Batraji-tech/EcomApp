@@ -180,7 +180,7 @@
         </tbody>
     </table>
 
-    <h3>Active Retailer</h3>
+    <h3>Active Retailers</h3>
 
     <table>
         <thead>

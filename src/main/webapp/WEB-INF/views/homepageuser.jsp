@@ -444,8 +444,8 @@
 	<footer class="footer">
 	    <div class="footer-content">
 	        <div class="footer-links">
-	            <a href="${pageContext.request.contextPath}/about">About Us</a>
-	            <a href="${pageContext.request.contextPath}/contact">Contact Us</a>
+	            <a href="${pageContext.request.contextPath}/aboutus">About Us</a>
+                <a href="${pageContext.request.contextPath}/contactus">Contact Us</a>
 				<p style="color: #FF9874; margin:0px 8px;">Payments</p>
 				<p style="color: #FF9874; margin: 0px 8px;">Shipping</p>
 				<p style="color: #FF9874; margin:0 px 10px;">Cancellation</p>
@@ -459,7 +459,7 @@
 				    Ferns City, Doddanekkundi,<br>
 				    Bengaluru, Karnataka 560048,<br>
 				    India</p>
-				    <p><strong>Mail Us:</strong> electromart@example.com</p>
+				    <p><strong>Mail Us:</strong> electromart@gmail.com</p>
 				</div>
 	        </div>
 	    </div>

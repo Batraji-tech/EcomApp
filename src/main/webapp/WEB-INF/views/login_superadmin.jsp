@@ -126,7 +126,7 @@
 <body>
 
     <div class="navbar">
-        <h1>Owner Portal</h1>
+        <h1>Owner Login</h1>
     </div>
    
     <div class="login-container">

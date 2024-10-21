@@ -66,7 +66,16 @@ public class SuperAdminDaoImpl implements SuperAdminDao{
     }
     
     
-    
+    @Override
+    public SuperAdmin getSuperAdminDetails() {
+    	try {
+        String sql = "SELECT * FROM super_admin";
+        return jdbcTemplate.queryForObject(sql, new SuperAdminRowMapper());
+        
+    }  catch (EmptyResultDataAccessException e) {
+        return null; // Username not found
+    }
+    }
     
     
     private final class SuperAdminRowMapper implements RowMapper<SuperAdmin> {

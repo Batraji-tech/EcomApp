@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="ecom.app.entities.User"%>
+
+		
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +79,26 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">ElectroMart</div>
+        <%
+		User user = (User) session.getAttribute("user");
+		
+		%>
+
+		<!-- Navigation Links -->
+		<ul>
+			<%
+			if (user != null) {
+			%>
+        <a href="${pageContext.request.contextPath}/homepageuser" class="home-link">Home</a>
+
+			<%
+			} else {
+			%>
         <a href="${pageContext.request.contextPath}/" class="home-link">Home</a>
+
+			<%
+			}
+			%>
     </nav>
 
     <!-- Contact Us Section -->

@@ -15,6 +15,8 @@ public interface SuperAdminDao {
 	    
 
 	   SuperAdmin findByEmail(String email);
+
+	SuperAdmin getSuperAdminDetails();
       
 
 }

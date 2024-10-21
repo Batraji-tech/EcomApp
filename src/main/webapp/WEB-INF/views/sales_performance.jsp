@@ -65,9 +65,32 @@
             font-size: 14px;
             color: #295F98;
         }
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px;
+            background-color: #295F98; 
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute; /* Positioning */
+            top: 20px; /* Distance from top */
+            right: 20px; /* Distance from right */
+        }
+
+        .back-button:hover {
+            background-color: #1a3a6e; 
+        }
+        
     </style>
 </head>
 <body>
+ 
+ 
+       <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a> <!-- Positioned at top right -->
+   
  
     <div class="report-container">
         <h2>Sales Performance Report</h2>
@@ -98,7 +121,6 @@
                     <th>User ID</th>
                     <th>Total Amount</th>
                     <th>Payment Method</th>
-                    <th>Status</th>
                     <th>Order Date</th>
                 </tr>
             </thead>
@@ -112,7 +134,6 @@
                         <td><%= order.getUserId() %></td>
                         <td><%= order.getTotalAmount() %></td>
                         <td><%= order.getPaymentMethod() %></td>
-                        <td><%= order.getStatus() %></td>
                         <td><%= order.getOrderDate().toLocalDate() %></td>
                     </tr>
                 <%
@@ -137,9 +158,7 @@
         %>
     </div>
  
-    <div class="footer">
-        © 2024 Shopology. All rights reserved.
-    </div>
+    
  
 </body>
 </html>

@@ -82,27 +82,32 @@
             color: #295F98; /* Dark blue */
         }
  
-        /* Style for the back button */
-        .back-button {
+      .back-button {
             display: block;
-            width: 150px;
+            width: 200px;
             margin: 20px auto;
-            padding: 10px;
             text-align: center;
-            background-color: #295F98; /* Dark blue */
+            padding: 10px;
+            background-color: #295F98; 
             color: white;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            border-radius: 5px;
+            position: absolute; /* Positioning */
+            top: 20px; /* Distance from top */
+            right: 20px; /* Distance from right */
         }
- 
+
         .back-button:hover {
-            background-color: #1a3a6d; /* Darker blue on hover */
+            background-color: #1a3a6e; 
         }
+
     </style>
 </head>
 <body>
     <h2>Order Commissions</h2>
+    
+        <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
+    
     <form action="/superAdmin/commissions/getCommissionsData" method="post">
         <label for="startDate">Start Date:</label>
         <input type="date" id="startDate" name="startDate" required>
@@ -121,7 +126,6 @@
                 <th>Total Amount</th>
                 <th>Commission (1%)</th>
                 <th>Payment Method</th>
-                <th>Status</th>
                 <th>Order Date</th>
             </tr>
         </thead>
@@ -136,7 +140,6 @@
                     <td><%= order.getTotalAmount() %></td>
                     <td><%= order.getTotalAmount() * 0.01 %></td> <!-- Calculate commission directly -->
                     <td><%= order.getPaymentMethod() %></td>
-                    <td><%= order.getStatus() %></td>
                     <td><%= order.getOrderDate() %></td>
                 </tr>
             <%
@@ -154,6 +157,5 @@
         }
     %>
  
-    <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
 </body>
 </html>

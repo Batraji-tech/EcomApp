@@ -78,7 +78,6 @@ import ecom.app.entities.SuperAdmin;
 		    public List<User> getPendingSubadminRequests() {
 		        String sql = "SELECT * FROM user WHERE status = 'PENDING' AND role_id = 2"; // Ensure correct query
 		        List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
-		        System.out.println("Pending Users: " + users); // Log the retrieved users
 		        return users;
 		    }
 
@@ -105,13 +104,7 @@ import ecom.app.entities.SuperAdmin;
 
 		}
 		 
-//		 
-//		 public User fetchUser(String username) {
-//			    String sql = "SELECT * FROM user WHERE username = ?";
-//			    User user = jdbcTemplate.queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
-//			    System.out.println("Fetched user: " + user); // Debugging output
-//			    return user;
-//			}
+
 
 		
 
