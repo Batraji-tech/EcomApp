@@ -244,10 +244,9 @@ nav ul li .dropdown-content a:hover {
     function sortProducts1() {
         var sortOption = document.getElementById("sortDropdown").value;
         var categoryId = "<%=request.getAttribute("categoryId")%>";
-        window.location.href = "<%=request.getContextPath()%>
-	/products/category/"
-				+ categoryId + "?sort=" + sortOption;
-	}
+        window.location.href = "<%=request.getContextPath()%>/products/category/"+ categoryId + "?sort=" + sortOption;}
+
+    
 </script>
 </head>
 <body>

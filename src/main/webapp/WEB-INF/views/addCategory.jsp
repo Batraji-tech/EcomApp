@@ -37,7 +37,7 @@
         }
         .form-control {
             border-radius: 5px;
-            border: 2px solid #295F98; 
+            border: 2px solid #295F98;
             width: 94%;
             margin-bottom: 15px;
             padding: 12px;
@@ -84,29 +84,83 @@
         .back-button:hover {
             background-color: #1a3a6e; /* Darker blue */
         }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none; /* Hide error messages by default */
+        }
     </style>
+    <script>
+        function validateCategoryName() {
+            const categoryName = document.getElementById('categoryName');
+            const categoryNameError = document.getElementById('categoryNameError');
+            const regex = /^[A-Za-z]{1,15}$/;
+            if (!regex.test(categoryName.value)) {
+                categoryNameError.textContent = 'Invalid category name. Only alphabets allowed (max 15 characters).';
+                categoryNameError.style.display = 'block';
+            } else {
+                categoryNameError.style.display = 'none';
+            }
+        }
+ 
+        function validateDescription() {
+            const description = document.getElementById('description');
+            const descriptionError = document.getElementById('descriptionError');
+            if (description.value.length > 30) {
+                descriptionError.textContent = 'Description must be at most 30 characters.';
+                descriptionError.style.display = 'block';
+            } else {
+                descriptionError.style.display = 'none';
+            }
+        }
+ 
+        function validateImage() {
+            const image = document.getElementById('image').files[0];
+            const imageError = document.getElementById('imageError');
+            const validImageTypes = ['image/jpeg', 'image/png'];
+            if (image && !validImageTypes.includes(image.type)) {
+                imageError.textContent = 'Image must be in jpg, jpeg, or png format.';
+                imageError.style.display = 'block';
+            } else {
+                imageError.style.display = 'none';
+            }
+        }
+ 
+        function validateForm() {
+            // Validate all fields before submission
+            validateCategoryName();
+            validateDescription();
+            validateImage();
+            
+            // Check if any error messages are visible
+            return !document.querySelector('.error-message[style*="block"]');
+        }
+    </script>
 </head>
 <body>
-
+ 
     <a href="/superAdmin/dashboard" class="back-button">Back to Dashboard</a>
-
+ 
     <div class="container">
         <div class="row">
-            <form class="form-container" enctype="multipart/form-data" method="post" action="/category/add">
+            <form class="form-container" enctype="multipart/form-data" method="post" action="/category/add" onsubmit="return validateForm()">
                 <div class="text-center">
                     <h2>Add Category</h2>
                 </div>
                 <div class="form-group">
                     <label for="categoryName">Category Name</label>
-                    <input type="text" placeholder="Enter Category Name" name="category_name" class="form-control" id="categoryName" required>
+                    <input type="text" placeholder="Enter Category Name" name="category_name" class="form-control" id="categoryName" required oninput="validateCategoryName()">
+                    <span id="categoryNameError" class="error-message"></span> <!-- Error message -->
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" placeholder="Enter Category Description" class="form-control" id="description" required></textarea>
+                    <textarea name="description" placeholder="Enter Category Description" class="form-control" id="description" required oninput="validateDescription()"></textarea>
+                    <span id="descriptionError" class="error-message"></span> <!-- Error message -->
                 </div>
                 <div class="form-group">
                     <label for="image">Product Image</label>
-                    <input type="file" name="category_image" class="form-control" id="image" required>
+                    <input type="file" name="category_image" class="form-control" id="image" required onchange="validateImage()">
+                    <span id="imageError" class="error-message"></span> <!-- Error message -->
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -119,6 +173,6 @@
             </form>
         </div>
     </div>
-
+ 
 </body>
 </html>

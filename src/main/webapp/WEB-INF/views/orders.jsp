@@ -88,6 +88,22 @@
 		    color: 	#ff0000;
 		    background-color: #5cb85c; /* Bootstrap success color */
 		}
+		
+		.back-button {
+            position: absolute; /* Position it in the top right */
+            right: 20px;
+            top: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            background-color: #295F98; /* Soft orange */
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #1a3a6e; /* Darker orange on hover */
+        }
+		
 
     </style>
 </head>
@@ -114,6 +130,8 @@
 
 <div class="orders-container">
     <h1>My Orders</h1>
+        <a href="/homepageuser" class="back-button">Back to Dashboard</a>
+
 
 <%
     if (orders != null && !orders.isEmpty()) {

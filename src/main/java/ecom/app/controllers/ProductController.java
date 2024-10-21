@@ -105,7 +105,6 @@ public class ProductController {
 
 	    List<Category> categories = productDaoImpl.getAllCategories();
 	    model.addAttribute("categories", categories);
-	    System.out.println("Fetched Products: " + listOfProducts);
 	    model.addAttribute("products", listOfProducts);
 	    return "view_productbycategoryname"; // Ensure this matches your JSP filename
 	}
@@ -114,7 +113,6 @@ public class ProductController {
 	@GetMapping("/remove_product/{id}")
 	public String removeProduct(@PathVariable("id") int id, RedirectAttributes attributes) {
 		try {
-			System.out.println("Attempting to delete product with ID: " + id);
 
 			productDaoImpl.deleteProduct(id);
 			attributes.addFlashAttribute("message", "Product removed successfully!");
@@ -183,7 +181,7 @@ public class ProductController {
 
 	    if (subAdminId != null) {
 	        // Retrieve the existing product from the database
-	        Products currentProduct = productDaoImpl.getProductById(updatedProduct.getProduct_id()); // Pass the subAdminId
+	        Products currentProduct = productDaoImpl.getProductById(updatedProduct.getProduct_id()); 
 
 	        if (currentProduct == null || currentProduct.getSubAdminId() == null || !currentProduct.getSubAdminId().equals(subAdminId)) {
 	            attributes.addFlashAttribute("error", "Product not found or you do not have permission to edit this product.");

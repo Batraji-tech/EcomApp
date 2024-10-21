@@ -13,6 +13,10 @@ public class FeedbackDaoImpl implements FeedbackDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void addFeedback(Feedback feedback) {

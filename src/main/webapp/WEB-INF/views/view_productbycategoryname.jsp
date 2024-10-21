@@ -111,7 +111,20 @@
 		    border-radius: 5px; /* More pronounced rounded corners */
 		}
 
-	
+	 .back-button {
+            position: absolute; /* Position it in the top right */
+            right: 20px;
+            top: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            background-color: #295F98; /* Soft orange */
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #1a3a6e; /* Darker orange on hover */
+        }
 
     </style>
 </head>
@@ -120,7 +133,10 @@
     <div class="container">
         <div class="search-container">
             <h2>Search by Category Name</h2>
-
+ 
+                 <a href="/subadmin" class="back-button">Back to Dashboard</a>
+        
+       
             <form action="/products/view_productbycategoryname" method="get">
         <div class="form-group">
             <label for="categoryName">Select Category:</label>

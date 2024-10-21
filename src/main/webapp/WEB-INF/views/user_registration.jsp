@@ -1,14 +1,95 @@
 <%@page import="ecom.app.entities.Role"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
-    <script src="../js/registerPageValidation.js"></script>
+    <script>
+        function validateFirstName() {
+            const firstName = document.getElementById('firstname');
+            if (firstName.value.length < 3 || firstName.value.length > 20 || !/^[A-Za-z]+$/.test(firstName.value)) {
+                document.getElementById('firstNameError').textContent = 'First Name must be 3-20 characters long and contain only alphabets.';
+            } else {
+                document.getElementById('firstNameError').textContent = '';
+            }
+        }
+
+        function validateLastName() {
+            const lastName = document.getElementById('lastname');
+            if (lastName.value.length < 3 || lastName.value.length > 20 || !/^[A-Za-z]+$/.test(lastName.value)) {
+                document.getElementById('lastNameError').textContent = 'Last Name must be 3-20 characters long and contain only alphabets.';
+            } else {
+                document.getElementById('lastNameError').textContent = '';
+            }
+        }
+
+        function validateMobileNo() {
+            const mobileNo = document.getElementById('mobileNo');
+            if (!/^\d{10}$/.test(mobileNo.value)) {
+                document.getElementById('mobileError').textContent = 'Mobile No must be exactly 10 digits.';
+            } else {
+                document.getElementById('mobileError').textContent = '';
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email');
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!emailRegex.test(email.value)) {
+                document.getElementById('emailError').textContent = 'Email must be a valid format.';
+            } else {
+                document.getElementById('emailError').textContent = '';
+            }
+        }
+
+        function validateDOB() {
+            const dob = document.getElementById('dob');
+            const birthDate = new Date(dob.value);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+
+            if (age < 13 || (age === 13 && m < 0)) {
+                document.getElementById('dobError').textContent = 'You must be at least 13 years old.';
+            } else if (age > 100 || (age === 100 && m > 0)) {
+                document.getElementById('dobError').textContent = 'You must be at most 100 years old.';
+            } else {
+                document.getElementById('dobError').textContent = '';
+            }
+        }
+
+        function validateUsername() {
+            const username = document.getElementById('username');
+            if (username.value.length < 7 || username.value.length > 15 || !/^[A-Za-z0-9]+$/.test(username.value)) {
+                document.getElementById('usernameError').textContent = 'Username must be 7-15 characters long and can contain only alphabets and numbers.';
+            } else {
+                document.getElementById('usernameError').textContent = '';
+            }
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password');
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+            if (!passwordRegex.test(password.value)) {
+                document.getElementById('passwordError').textContent = 'Password must be 8-15 characters long and include at least one letter, one number, and one special character.';
+            } else {
+                document.getElementById('passwordError').textContent = '';
+            }
+        }
+
+        function validateProfileImage() {
+            const profileImage = document.getElementById('profileImage');
+            const validExtensions = /(.jpg|.jpeg|.png)$/i;
+            if (!validExtensions.exec(profileImage.value)) {
+                document.getElementById('imageError').textContent = 'Profile image must be in .jpg, .jpeg, or .png format.';
+            } else {
+                document.getElementById('imageError').textContent = '';
+            }
+        }
+    </script>
     <style>
         * {
             margin: 0;
@@ -34,13 +115,13 @@
             text-align: left;
             display: flex;
             flex-direction: column;
-            height: 600px; 
+            height: 600px;
         }
 
         h2 {
             margin-bottom: 15px;
             text-align: center;
-            color:#FF9874;
+            color: #FF9874;
         }
 
         .form-group {
@@ -63,6 +144,11 @@
             color: black;
         }
 
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
         .radio-group {
             display: flex;
             justify-content: center;
@@ -79,7 +165,7 @@
         }
 
         input[type="radio"] {
-            appearance: none; 
+            appearance: none;
             width: 20px;
             height: 20px;
             border: 2px solid #295F98;
@@ -122,44 +208,52 @@
 
     <div class="container">
         <h2>Registration</h2>
-        <form action="/user/register" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
+        <form action="/user/register" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstname" name="firstName" required>
+                <input type="text" id="firstname" name="firstName" required oninput="validateFirstName()">
+                <div id="firstNameError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastname" name="lastName" required>
+                <input type="text" id="lastname" name="lastName" required oninput="validateLastName()">
+                <div id="lastNameError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="mobile">Mobile No:</label>
-                <input type="tel" id="mobileNo" name="mobileNo" required>
+                <input type="tel" id="mobileNo" name="mobileNo" required oninput="validateMobileNo()">
+                <div id="mobileError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="emailId" required>
+                <input type="email" id="email" name="emailId" required oninput="validateEmail()">
+                <div id="emailError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dateOfBirth" required>
+                <input type="date" id="dob" name="dateOfBirth" required oninput="validateDOB()">
+                <div id="dobError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required oninput="validateUsername()">
+                <div id="usernameError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required oninput="validatePassword()">
+                <div id="passwordError" class="error-message"></div>
             </div>
             <div class="file-input-group">
                 <label for="profileImage">Profile Image:</label>
-                <input type="file" id="profileImage" name="profileImage" accept=".jpg, .jpeg, .png" required>
+                <input type="file" id="profileImage" name="profileImage" accept=".jpg, .jpeg, .png" required onchange="validateProfileImage()">
+                <div id="imageError" class="error-message"></div>
             </div>
             <div class="radio-group">
                 <label>Select Role:</label>
                 <% for (Role role : rolesList) { %>
                     <label>
-                        <input type="radio" name="roleId" value="<%=role.getRoleId()%>" />
+                        <input type="radio" name="roleId" value="<%=role.getRoleId()%>" required />
                         <%= role.getRoleName() %>
                     </label>
                 <% } %>

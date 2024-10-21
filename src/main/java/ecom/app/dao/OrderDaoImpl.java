@@ -141,7 +141,6 @@ public class OrderDaoImpl implements OrderDao {
 			String status = rs.getString("status");
 			Timestamp orderDate = rs.getTimestamp("order_date");
  
-			// Fetch order items. Be cautious about performance if this returns many items.
 			List<CartItems> orderItems = getOrderItems(orderId);
  
 			// Ensure the Order constructor matches the parameters
@@ -206,6 +205,5 @@ public class OrderDaoImpl implements OrderDao {
         });
     }
  
-	
  
 }
